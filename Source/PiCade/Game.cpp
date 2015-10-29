@@ -64,7 +64,7 @@ int Game::play(){
     //////////////////////////////////////////////////////////////////////
     
     //create a ship for the player
-    PlayerShip player = PlayerShip("/home/pi/piCade/Projects/PiCade/Assets/ship 1 obj.obj", "/home/pi/piCade/Projects/PiCade/Assets/ship 1 obj.mtl", smgr, driver);
+    PlayerShip player = PlayerShip("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
     //add the boxes into the collibeable vector
     player.addCollideable(boxNode1);
