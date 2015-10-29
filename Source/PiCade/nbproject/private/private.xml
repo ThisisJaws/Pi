@@ -7,13 +7,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pi/piCade/Projects/PiCade/Object.cpp</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/Object.h</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/PlayerShip.cpp</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/Game.h</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/main.cpp</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/PlayerShip.h</file>
-            <file>file:/home/pi/piCade/Projects/PiCade/Game.cpp</file>
+            <file>file:/home/pi/git-repo/Pi/Source/PiCade/Game.h</file>
+            <file>file:/home/pi/git-repo/Pi/Source/PiCade/Testing.cpp</file>
+            <file>file:/home/pi/git-repo/Pi/Source/PiCade/main.cpp</file>
+            <file>file:/home/pi/git-repo/Pi/Source/PiCade/Testing.h</file>
+            <file>file:/home/pi/git-repo/Pi/Source/PiCade/Game.cpp</file>
         </group>
     </open-files>
 </project-private>
