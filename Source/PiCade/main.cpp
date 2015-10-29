@@ -5,7 +5,7 @@
  * make sure to include all source files in the makefile!!!
  */
 
-//header to use the engine
+//header to play the game
 #include "Game.h"
 
 #pragma comment(lib, "Irrlicht.lib")
