@@ -78,6 +78,10 @@ int Game::play(){
     irr::scene::ICameraSceneNode *camera = smgr->addCameraSceneNode();
     player.addCamera(camera);
     
+    //used to make checking fps slight more effecient
+    int lastFPS = -1;
+    int fps;
+    
     //set up for frame independent movement
     irr::u32 then = device->getTimer()->getTime();
     
@@ -109,6 +113,16 @@ int Game::play(){
         smgr->drawAll();
         
         driver->endScene();
+        
+        //add fps to window name (because gui isnt set up yet)
+        fps = driver->getFPS();
+        if (lastFPS != fps){
+            irr::core::stringw tmp(L"Pi Cade ");
+            tmp += L" FPS: ";
+            tmp += fps;
+            device->setWindowCaption(tmp.c_str());
+            lastFPS = fps;
+        }
     }
     
     return EXIT_SUCCESS;
