@@ -83,7 +83,7 @@ void PlayerShip::turnRight(){
 
 void PlayerShip::shoot(){
     if(currentMode == shooting){
-        bullet.fire(objectPosition);
+        //bullet.fire(objectPosition);
     }
 }
 
