@@ -24,6 +24,9 @@ protected:
     //a vector of collideable objects
     std::vector<irr::scene::ISceneNode*> collideables;
     
+    //vector to handle object positioning
+    irr::core::vector3df objectPosition;
+    
     //FUNCTIONS
 public:
     //constructor

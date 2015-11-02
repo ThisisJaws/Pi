@@ -11,7 +11,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path& pathOfMesh
     currDeltaTime = 0;
     moveSpeed = 30.0f;
     turnSpeed = moveSpeed + 10.0f;
-    shipPosition = objectNode->getPosition();
     
     this->eReceiver = eReceiver;
     
@@ -23,21 +22,23 @@ void PlayerShip::tick(float deltaTime){
     currDeltaTime = deltaTime;
     
     //make the player constantly move forward
-    shipPosition.X += moveSpeed * currDeltaTime;
+    objectPosition.X += moveSpeed * currDeltaTime;
     
-    //check for input
+    //check for movement input
     if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
         turnLeft();
     }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
         turnRight();
     }
-    if(eReceiver->isKeyDown(irr::KEY_SPACE)){
+    
+    //temp, changing mode will not be handled by user input
+    if(eReceiver->isKeyDown(irr::KEY_KEY_G)){
         changeMode();
     }
     
     //apply all position changes
     if(!checkCollision()){
-        objectNode->setPosition(shipPosition);
+        objectNode->setPosition(objectPosition);
         
         //perform camera updates
         updateCameraPositions();
@@ -50,14 +51,14 @@ void PlayerShip::turnLeft(){
         return;
     }
     //update the ship position to go to the left
-    shipPosition.Z += turnSpeed * currDeltaTime;
+    objectPosition.Z += turnSpeed * currDeltaTime;
 }
 void PlayerShip::turnRight(){
     if(currentMode == shooting){
         return;
     }
     //update the ship position to go to the right
-    shipPosition.Z -= turnSpeed * currDeltaTime;
+    objectPosition.Z -= turnSpeed * currDeltaTime;
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
@@ -73,13 +74,13 @@ void PlayerShip::changeMode(){
 }
 
 void PlayerShip::updateCameraPositions(){
-    thirdPersonPosition.X = shipPosition.X - 100;
-    thirdPersonPosition.Y = shipPosition.Y + 50;
-    thirdPersonPosition.Z = shipPosition.Z;
+    thirdPersonPosition.X = objectPosition.X - 100;
+    thirdPersonPosition.Y = objectPosition.Y + 50;
+    thirdPersonPosition.Z = objectPosition.Z;
     
-    sideViewPosition.X = shipPosition.X;
-    sideViewPosition.Y = shipPosition.Y;
-    sideViewPosition.Z = shipPosition.Z - 150;
+    sideViewPosition.X = objectPosition.X;
+    sideViewPosition.Y = objectPosition.Y;
+    sideViewPosition.Z = objectPosition.Z - 150;
 }
 
 void PlayerShip::updateCamera(){
@@ -89,5 +90,5 @@ void PlayerShip::updateCamera(){
         camera->setPosition(sideViewPosition);
     }
     
-    camera->setTarget(shipPosition);
+    camera->setTarget(objectPosition);
 }

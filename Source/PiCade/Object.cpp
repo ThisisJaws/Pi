@@ -16,6 +16,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     objectNode->setTriangleSelector(selector);
     selector->drop();
     
+    objectPosition = objectNode->getPosition();
 }
 
 Object::~Object(){

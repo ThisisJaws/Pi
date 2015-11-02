@@ -5,7 +5,8 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
-#include "irrlicht.h"
+#include "Object.h"
+#include "EventReceiver.h"
 
 class PlayerShip : public Object{
     //VARIABLES
@@ -19,9 +20,6 @@ private:
     
     //to be able to receive events
     EventReceiver *eReceiver;
-    
-    //vector to handle player positioning
-    irr::core::vector3df shipPosition;
     
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;
