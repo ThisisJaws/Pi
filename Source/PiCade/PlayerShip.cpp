@@ -46,9 +46,17 @@ void PlayerShip::tick(float deltaTime){
 }
 
 void PlayerShip::turnLeft(){
+    if(currentMode == shooting){
+        return;
+    }
+    //update the ship position to go to the left
     shipPosition.Z += turnSpeed * currDeltaTime;
 }
 void PlayerShip::turnRight(){
+    if(currentMode == shooting){
+        return;
+    }
+    //update the ship position to go to the right
     shipPosition.Z -= turnSpeed * currDeltaTime;
 }
 
