@@ -2,8 +2,10 @@
 
 #include <iostream>
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference) 
-    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
+PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
+    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference),
+    bullet("Assets/Laser_bullet.obj", "Assets/Lasr_bullet_purple.bmp", sceneManagerReference, driverReference){
+    
     //set the object to not need lighting (for now)
     objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     
@@ -11,14 +13,19 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path& pathOfMesh
     currDeltaTime = 0;
     moveSpeed = 30.0f;
     turnSpeed = moveSpeed + 10.0f;
-    
     this->eReceiver = eReceiver;
     
     //set the ship's default mode
     currentMode = flying;
 }
 
-void PlayerShip::tick(float deltaTime){
+void PlayerShip::tick(float deltaTime){  
+    //updated global deltatime for other functions
+    currDeltaTime = deltaTime;
+    
+    //update bullet
+    bullet.tick(deltaTime);
+    
     //make the player constantly move forward
     objectPosition.X += moveSpeed * deltaTime;
     
@@ -27,6 +34,11 @@ void PlayerShip::tick(float deltaTime){
         turnLeft();
     }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
         turnRight();
+    }
+    
+    //check if fire key was pressed
+    if(eReceiver->isKeyDown(irr::KEY_SPACE)){
+        shoot();
     }
     
     //temp, changing mode will not be handled by user input
@@ -44,21 +56,6 @@ void PlayerShip::tick(float deltaTime){
     }
 }
 
-void PlayerShip::turnLeft(){
-    if(currentMode == shooting){
-        return;
-    }
-    //update the ship position to go to the left
-    objectPosition.Z += turnSpeed * currDeltaTime;
-}
-void PlayerShip::turnRight(){
-    if(currentMode == shooting){
-        return;
-    }
-    //update the ship position to go to the right
-    objectPosition.Z -= turnSpeed * currDeltaTime;
-}
-
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
 }
@@ -68,6 +65,25 @@ void PlayerShip::changeMode(){
         currentMode = shooting;
     }else{
         currentMode = flying;
+    }
+}
+
+void PlayerShip::turnLeft(){
+    if(currentMode == flying){
+        //update the ship position to go to the left
+        objectPosition.Z += turnSpeed * currDeltaTime;
+    }
+}
+void PlayerShip::turnRight(){
+    if(currentMode == flying){
+        //update the ship position to go to the right
+        objectPosition.Z -= turnSpeed * currDeltaTime;
+    }
+}
+
+void PlayerShip::shoot(){
+    if(currentMode == shooting){
+        bullet.fire(objectPosition);
     }
 }
 

@@ -2,7 +2,7 @@
 
 //pass everythig through the constructor
 Bullet::Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-                : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
+    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
     fired = false;
     moveSpeed = 50.0f;

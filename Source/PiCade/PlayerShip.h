@@ -7,6 +7,9 @@
 
 #include "Object.h"
 #include "EventReceiver.h"
+#include "Bullet.h"
+
+#include <stdio.h>
 
 class PlayerShip : public Object{
     //VARIABLES
@@ -17,6 +20,9 @@ private:
     float moveSpeed;
     //controls the player's turn speed
     float turnSpeed;
+    
+    //bullets the player will fire
+    Bullet bullet;
     
     //to be able to receive events
     EventReceiver *eReceiver;
@@ -40,10 +46,6 @@ public:
     //overriding tick function
     virtual void tick(float deltaTime);
     
-    //turns the player left or right
-    void turnLeft();
-    void turnRight();
-    
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);
     
@@ -51,6 +53,13 @@ public:
     void changeMode();
     
 private:
+    //turns the player left or right
+    void turnLeft();
+    void turnRight();
+    
+    //makes the player shoot
+    void shoot();
+    
     //updates the two camera positions
     void updateCameraPositions();
     
