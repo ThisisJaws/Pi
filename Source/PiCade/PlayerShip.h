@@ -6,6 +6,8 @@
 #define	PLAYERSHIP_H
 
 #include "Object.h"
+#include "EventReceiver.h"
+#include "irrlicht.h"
 
 class PlayerShip : public Object{
     //VARIABLES
@@ -16,6 +18,9 @@ private:
     float moveSpeed;
     //controls the player's turn speed
     float turnSpeed;
+    
+    //to be able to receive events
+    EventReceiver *eReceiver;
     
     //vector to handle player positioning
     irr::core::vector3df shipPosition;
@@ -34,7 +39,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    PlayerShip(EventReceiver *eReceiver, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     
     //overriding tick function
     virtual void tick(float deltaTime);

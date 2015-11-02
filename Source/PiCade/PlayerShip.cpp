@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-PlayerShip::PlayerShip(const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference) 
+PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference) 
     : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     //set the object to not need lighting (for now)
     objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -13,6 +13,8 @@ PlayerShip::PlayerShip(const irr::io::path& pathOfMesh, const irr::io::path& pat
     turnSpeed = moveSpeed + 10.0f;
     shipPosition = objectNode->getPosition();
     
+    this->eReceiver = eReceiver;
+    
     //set the ship's default mode
     currentMode = flying;
 }
@@ -22,6 +24,16 @@ void PlayerShip::tick(float deltaTime){
     
     //make the player constantly move forward
     shipPosition.X += moveSpeed * currDeltaTime;
+    
+    //check for input
+    if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
+        turnLeft();
+    }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
+        turnRight();
+    }
+    if(eReceiver->isKeyDown(irr::KEY_SPACE)){
+        changeMode();
+    }
     
     //apply all position changes
     if(!checkCollision()){

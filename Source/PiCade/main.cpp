@@ -16,10 +16,10 @@
 int main(int argc, char** argv) {
     //create a game object - everything gets initialised in the constructor
     Game currentGame = Game();
-    
+
     //call the play function
     int r = currentGame.play();
-    
+
     //once the loop breaks go straight to clean up (for now)
     currentGame.cleanUp();
     

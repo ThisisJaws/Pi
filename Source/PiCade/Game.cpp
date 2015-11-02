@@ -64,7 +64,7 @@ int Game::play(){
     //////////////////////////////////////////////////////////////////////
     
     //create a ship for the player
-    PlayerShip player = PlayerShip("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
+    PlayerShip player = PlayerShip(&eReceiver, "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
     //add the boxes into the collibeable vector
     player.addCollideable(boxNode1);
@@ -95,16 +95,6 @@ int Game::play(){
         //tick(update) all objects
         for(int i = 0; i < objectsToUpdate.size(); i++){
             objectsToUpdate[i]->tick(frameDeltaTime);
-        }
-        
-        //read player input
-        if(eReceiver.isKeyDown(irr::KEY_KEY_A)){
-            player.turnLeft();
-        }else if(eReceiver.isKeyDown(irr::KEY_KEY_D)){
-            player.turnRight();
-        }
-        if(eReceiver.isKeyDown(irr::KEY_SPACE)){
-            player.changeMode();
         }
         
         //tell irlicht to draw/updates scenes
