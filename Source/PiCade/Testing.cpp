@@ -11,24 +11,26 @@ int Testing::runTest(){
     IVideoDriver *driver = device->getVideoDriver();
     ISceneManager *smgr = device->getSceneManager();
     
-    IAnimatedMesh *shipMesh = smgr->getMesh("/home/pi/piCade/Projects/PiCade/Assets/ship 1 obj.obj");
+    IAnimatedMesh *shipMesh = smgr->getMesh("Assets/LowestPolyShip.obj");
     if(!shipMesh){
         device->drop();
         return 1;
     }
-    
+        
     int a = 0;
-    int arraySize = 0; //CHANGE THIS TO ADD SHIPS TO THE SCENE
-    vector3df shipPosition = vector3df(0, 0, 50);
+    int arraySize = 20; //CHANGE THIS TO ADD SHIPS TO THE SCENE
+    int xOffSet = 3;
+    int zOffSet = 3;
+    vector3df shipPosition = vector3df(0, 0, zOffSet);
     IAnimatedMeshSceneNode *shipNodes[arraySize];
     for(int i = 0; i < arraySize; i++){
         shipNodes[i] = smgr->addAnimatedMeshSceneNode(shipMesh);
         shipNodes[i]->setMaterialFlag(EMF_LIGHTING, false);
         if(a > 0){
-            shipPosition.X += 80;
+            shipPosition.X += xOffSet;
             if(a > 7){
                 shipPosition.X = 0;
-                shipPosition.Z -= 50;
+                shipPosition.Z -= zOffSet;
                 a = 0;
             }
         }
@@ -36,7 +38,7 @@ int Testing::runTest(){
         a++;
     }
     
-    smgr->addCameraSceneNode(0, vector3df(-100, 50, 0), vector3df(0, -5, 0));
+    smgr->addCameraSceneNode(0, vector3df(-12, 8, 0), vector3df(0, 0, 0));
     
     int lastFPS = -1;
     int fps;
