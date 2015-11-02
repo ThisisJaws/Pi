@@ -19,8 +19,8 @@ int Testing::runTest(){
         
     int a = 0;
     int arraySize = 20; //CHANGE THIS TO ADD SHIPS TO THE SCENE
-    int xOffSet = 3;
-    int zOffSet = 3;
+    int xOffSet = 3;    //CHANGE THIS TO THE LENGTH OF THE SHIPS
+    int zOffSet = 3;    //CHNAGE THIS TO THE WIDTH OF THE SHIPS
     vector3df shipPosition = vector3df(0, 0, zOffSet);
     IAnimatedMeshSceneNode *shipNodes[arraySize];
     for(int i = 0; i < arraySize; i++){
