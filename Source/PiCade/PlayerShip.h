@@ -5,8 +5,6 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
-#include "Object.h"
-#include "EventReceiver.h"
 #include "irrlicht.h"
 
 class PlayerShip : public Object{
