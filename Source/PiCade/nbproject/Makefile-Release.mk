@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Bullet.o \
 	${OBJECTDIR}/EventReceiver.o \
 	${OBJECTDIR}/Game.o \
 	${OBJECTDIR}/Object.o \
@@ -68,6 +69,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpicade.a: ${OBJECTFILES}
 	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpicade.a
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpicade.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpicade.a
+
+${OBJECTDIR}/Bullet.o: Bullet.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
 
 ${OBJECTDIR}/EventReceiver.o: EventReceiver.cpp 
 	${MKDIR} -p ${OBJECTDIR}

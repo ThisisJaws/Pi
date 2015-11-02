@@ -19,10 +19,8 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path& pathOfMesh
 }
 
 void PlayerShip::tick(float deltaTime){
-    currDeltaTime = deltaTime;
-    
     //make the player constantly move forward
-    objectPosition.X += moveSpeed * currDeltaTime;
+    objectPosition.X += moveSpeed * deltaTime;
     
     //check for movement input
     if(eReceiver->isKeyDown(irr::KEY_KEY_A)){

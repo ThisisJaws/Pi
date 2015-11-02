@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Bullet.h</itemPath>
       <itemPath>EventReceiver.h</itemPath>
       <itemPath>Game.h</itemPath>
       <itemPath>Object.h</itemPath>
@@ -17,6 +18,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Bullet.cpp</itemPath>
       <itemPath>EventReceiver.cpp</itemPath>
       <itemPath>Game.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
@@ -54,6 +56,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="Bullet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Bullet.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="EventReceiver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EventReceiver.h" ex="false" tool="3" flavor2="0">
@@ -99,6 +105,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="Bullet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Bullet.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="EventReceiver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EventReceiver.h" ex="false" tool="3" flavor2="0">

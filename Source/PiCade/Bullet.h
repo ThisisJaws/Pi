@@ -10,7 +10,7 @@
 class Bullet : public Object{
     //VARIABLES
 private:
-    float maxSpeed;
+    float moveSpeed;
     bool fired;
     
     //FUNCTIONS
@@ -22,7 +22,7 @@ public:
     void tick(float deltatime);
     
     //call to fire the bullet
-    void fire();
+    void fire(irr::core::vector3df firePos);
 };
 
 #endif	/* BULLET_H */
