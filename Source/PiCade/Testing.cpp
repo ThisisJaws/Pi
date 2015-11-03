@@ -11,34 +11,35 @@ int Testing::runTest(){
     IVideoDriver *driver = device->getVideoDriver();
     ISceneManager *smgr = device->getSceneManager();
     
-    IAnimatedMesh *shipMesh = smgr->getMesh("Assets/LowestPolyShip.obj");
-    if(!shipMesh){
+    IAnimatedMesh *testMesh = smgr->getMesh("Assets/Laser bulletsix.obj");
+    if(!testMesh){
         device->drop();
         return 1;
     }
         
-    int a = 0;
-    int arraySize = 20; //CHANGE THIS TO ADD SHIPS TO THE SCENE
+    int arraySize = 1; //CHANGE THIS TO ADD SHIPS TO THE SCENE
     int xOffSet = 3;    //CHANGE THIS TO THE LENGTH OF THE SHIPS
     int zOffSet = 3;    //CHNAGE THIS TO THE WIDTH OF THE SHIPS
-    vector3df shipPosition = vector3df(0, 0, zOffSet);
-    IAnimatedMeshSceneNode *shipNodes[arraySize];
+    
+    int a = 0;
+    vector3df nodePosition = vector3df(0, 0, zOffSet);
+    IAnimatedMeshSceneNode *testMeshNodes[arraySize];
     for(int i = 0; i < arraySize; i++){
-        shipNodes[i] = smgr->addAnimatedMeshSceneNode(shipMesh);
-        shipNodes[i]->setMaterialFlag(EMF_LIGHTING, false);
+        testMeshNodes[i] = smgr->addAnimatedMeshSceneNode(testMesh);
+        testMeshNodes[i]->setMaterialFlag(EMF_LIGHTING, false);
         if(a > 0){
-            shipPosition.X += xOffSet;
+            nodePosition.X += xOffSet;
             if(a > 7){
-                shipPosition.X = 0;
-                shipPosition.Z -= zOffSet;
+                nodePosition.X = 0;
+                nodePosition.Z -= zOffSet;
                 a = 0;
             }
         }
-        shipNodes[i]->setPosition(shipPosition);
+        testMeshNodes[i]->setPosition(nodePosition);
         a++;
     }
     
-    smgr->addCameraSceneNode(0, vector3df(-12, 8, 0), vector3df(0, 0, 0));
+    smgr->addCameraSceneNode(0, vector3df(-8, 5, 0), vector3df(0, 0, 0));
     
     int lastFPS = -1;
     int fps;
