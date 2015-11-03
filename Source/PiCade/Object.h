@@ -52,6 +52,9 @@ public:
 protected:
     //returns true if the object has collided with an object contained within the vector
     bool checkCollision();
+    
+    //call to update an objects position
+    void updatePosition(irr::core::vector3df newPosition);
 };
 
 #endif	/* OBJECT_H */

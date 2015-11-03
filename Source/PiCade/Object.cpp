@@ -62,3 +62,7 @@ bool Object::checkCollision(){
     
     return false;
 }
+
+void Object::updatePosition(irr::core::vector3df newPosition){
+    objectNode->setPosition(newPosition);
+}
