@@ -5,13 +5,17 @@ Bullet::Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
     fired = false;
-    moveSpeed = 50.0f;
+    moveSpeed = 100.0f;
+    
+    //temp - set scale of bullet
+    objectNode->setScale(irr::core::vector3df(30, 30, 30));
 }
 
 void Bullet::tick(float deltaTime){
-    //if the bulet has been fired then move it forward
+    //if the bullet has been fired then move it forward
     if(fired){
         objectPosition.X += moveSpeed * deltaTime;
+        updatePosition(objectPosition);
     }
 }
 

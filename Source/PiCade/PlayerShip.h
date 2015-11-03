@@ -9,8 +9,6 @@
 #include "EventReceiver.h"
 #include "Bullet.h"
 
-#include <stdio.h>
-
 class PlayerShip : public Object{
     //VARIABLES
 private:

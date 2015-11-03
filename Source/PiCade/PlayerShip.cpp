@@ -4,7 +4,7 @@
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference),
-    bullet("Assets/Laser_bullet.obj", "Assets/Lasr_bullet_purple.bmp", sceneManagerReference, driverReference){
+    bullet("Assets/LaserBulletSix.obj", "Assets/Lasr_bullet_purple.bmp", sceneManagerReference, driverReference){
     
     //set the object to not need lighting (for now)
     objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -48,7 +48,7 @@ void PlayerShip::tick(float deltaTime){
     
     //apply all position changes
     if(!checkCollision()){
-        objectNode->setPosition(objectPosition);
+        updatePosition(objectPosition);
         
         //perform camera updates
         updateCameraPositions();
@@ -83,7 +83,7 @@ void PlayerShip::turnRight(){
 
 void PlayerShip::shoot(){
     if(currentMode == shooting){
-        //bullet.fire(objectPosition);
+        bullet.fire(objectPosition);
     }
 }
 

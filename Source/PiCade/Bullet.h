@@ -7,6 +7,8 @@
 
 #include "Object.h"
 
+#include <iostream>
+
 class Bullet : public Object{
     //VARIABLES
 private:
