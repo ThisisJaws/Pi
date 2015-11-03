@@ -32,6 +32,10 @@ irr::scene::IAnimatedMeshSceneNode* Object::getSceneNode(){
     return objectNode;
 }
 
+void Object::removeFromScene(){
+    objectNode->remove();
+}
+
 void Object::addCollideable(irr::scene::ISceneNode *collideable){
     collideables.push_back(collideable);
 }

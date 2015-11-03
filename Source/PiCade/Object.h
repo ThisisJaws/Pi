@@ -43,6 +43,9 @@ public:
     //get the object's scene node
     irr::scene::IAnimatedMeshSceneNode* getSceneNode();
     
+    //removes the object from the scene
+    void removeFromScene();
+    
     //adds a collideable object into the vector
     void addCollideable(irr::scene::ISceneNode *collideable);
     
