@@ -11,13 +11,13 @@ int Testing::runTest(){
     IVideoDriver *driver = device->getVideoDriver();
     ISceneManager *smgr = device->getSceneManager();
     
-    IAnimatedMesh *testMesh = smgr->getMesh("Assets/Laser bulletsix.obj");
+    IAnimatedMesh *testMesh = smgr->getMesh("Assets/LowestPolyShip.obj");
     if(!testMesh){
         device->drop();
         return 1;
     }
         
-    int arraySize = 1; //CHANGE THIS TO ADD SHIPS TO THE SCENE
+    int arraySize = 15; //CHANGE THIS TO ADD SHIPS TO THE SCENE
     int xOffSet = 3;    //CHANGE THIS TO THE LENGTH OF THE SHIPS
     int zOffSet = 3;    //CHNAGE THIS TO THE WIDTH OF THE SHIPS
     
