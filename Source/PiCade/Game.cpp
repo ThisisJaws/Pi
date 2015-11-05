@@ -3,7 +3,7 @@
 //init all the global variables
 Game::Game(){
     //create the devie - make sure to pass the address of eReceiver 
-    device = irr::createDevice(irr::video::EDT_OPENGL,
+    device = irr::createDevice(irr::video::EDT_BURNINGSVIDEO,
                                irr::core::dimension2d<irr::u32>(800, 600),
                                16, false, false, false, &eReceiver);
     

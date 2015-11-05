@@ -8,8 +8,6 @@
 //header to play the game
 #include "Game.h"
 
-#pragma comment(lib, "Irrlicht.lib")
-
 /*
  * program entry point
  */
