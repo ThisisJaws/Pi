@@ -3,7 +3,7 @@
 #include "Testing.h"
 
 int Testing::runTest(){
-    IrrlichtDevice *device = createDevice(EDT_OPENGL, dimension2d<u32>(800, 600), 16, false, false, false, 0);
+    IrrlichtDevice *device = createDevice(EDT_BURNINGSVIDEO, dimension2d<u32>(800, 600), 16, false, false, false, 0);
     if(!device){
         return 1;
     }
@@ -11,15 +11,15 @@ int Testing::runTest(){
     IVideoDriver *driver = device->getVideoDriver();
     ISceneManager *smgr = device->getSceneManager();
     
-    IAnimatedMesh *testMesh = smgr->getMesh("Assets/LowestPolyShip.obj");
+    IAnimatedMesh *testMesh = smgr->getMesh("Assets/ship 1 obj.obj");
     if(!testMesh){
         device->drop();
         return 1;
     }
         
-    int arraySize = 15; //CHANGE THIS TO ADD SHIPS TO THE SCENE
-    int xOffSet = 3;    //CHANGE THIS TO THE LENGTH OF THE SHIPS
-    int zOffSet = 3;    //CHNAGE THIS TO THE WIDTH OF THE SHIPS
+    int arraySize = 1;      //CHANGE THIS TO ADD SHIPS TO THE SCENE
+    int xOffSet = 80;       //CHANGE THIS TO THE LENGTH OF THE SHIPS
+    int zOffSet = 80;       //CHNAGE THIS TO THE WIDTH OF THE SHIPS
     
     int a = 0;
     vector3df nodePosition = vector3df(0, 0, zOffSet);
@@ -39,7 +39,7 @@ int Testing::runTest(){
         a++;
     }
     
-    smgr->addCameraSceneNode(0, vector3df(-8, 5, 0), vector3df(0, 0, 0));
+    smgr->addCameraSceneNode(0, vector3df(-130, 50, 0), vector3df(0, 0, 0));
     
     int lastFPS = -1;
     int fps;
