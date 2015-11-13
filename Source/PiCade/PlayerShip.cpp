@@ -35,6 +35,12 @@ void PlayerShip::tick(float deltaTime){
     }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
         turnRight();
     }
+    if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
+        moveUp();
+    }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
+        moveDown();
+    }
+    
     
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE)){
@@ -79,6 +85,12 @@ void PlayerShip::turnRight(){
         //update the ship position to go to the right
         objectPosition.Z -= turnSpeed * currDeltaTime;
     }
+}
+void PlayerShip::moveUp(){
+    objectPosition.Y += turnSpeed * currDeltaTime;
+}
+void PlayerShip::moveDown(){
+    objectPosition.Y -= turnSpeed * currDeltaTime;
 }
 
 void PlayerShip::shoot(){

@@ -54,6 +54,8 @@ private:
     //turns the player left or right
     void turnLeft();
     void turnRight();
+    void moveUp();
+    void moveDown();
     
     //makes the player shoot
     void shoot();
