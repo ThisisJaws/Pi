@@ -15,10 +15,6 @@
 
 class Object{
     //VARIABLES
-private:
-    //kep track if the object has been spawned or not
-    bool objectSpawned;
-    
 protected:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
@@ -29,6 +25,10 @@ protected:
     
     //vector to handle object positioning
     irr::core::vector3df objectPosition;
+    
+private:
+    //kep track if the object has been spawned or not
+    bool objectSpawned;
     
     //FUNCTIONS
 public:
