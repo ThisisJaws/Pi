@@ -14,8 +14,11 @@
 #include <vector>
 
 class Object{
-    
     //VARIABLES
+private:
+    //kep track if the object has been spawned or not
+    bool objectSpawned;
+    
 protected:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
@@ -30,7 +33,7 @@ protected:
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
     //destructor
     ~Object();
     
@@ -58,6 +61,9 @@ protected:
     
     //call to update an objects position
     void updatePosition(irr::core::vector3df newPosition);
+    
+    //spawns the object into the scene if it hasn't happened already
+    void spawnObject(const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
 };
 
 #endif	/* OBJECT_H */
