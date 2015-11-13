@@ -1,14 +1,15 @@
 #include "Bullet.h"
 
 //pass everythig through the constructor
-Bullet::Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct) 
-    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct){
+Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
+    : Object("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
     
     fired = false;
     moveSpeed = 100.0f;
     
-    //temp - set scale of bullet
-    //objectNode->setScale(irr::core::vector3df(30, 30, 30));
+    //store the variables so it can be spawned later
+    sceneMRef = sceneManagerReference;
+    drvrRef = driverReference;
 }
 
 void Bullet::tick(float deltaTime){
@@ -20,6 +21,20 @@ void Bullet::tick(float deltaTime){
 }
 
 void Bullet::fire(irr::core::vector3df firePos){
+    //spawn the object into the scene
+    spawnObject("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
+    //temp - set scale of bullet
+    objectNode->setScale(irr::core::vector3df(30, 30, 30));
+    
+    //set the position
     objectPosition = firePos;
+    //bullet has now been fired
     fired = true;
+    
+    //delete pointers
+    sceneMRef = 0;
+    delete sceneMRef;
+    
+    drvrRef = 0;
+    delete drvrRef;
 }

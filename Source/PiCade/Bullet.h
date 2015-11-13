@@ -12,13 +12,19 @@
 class Bullet : public Object{
     //VARIABLES
 private:
+    //move speed of the bullet
     float moveSpeed;
+    //check if it has been fired
     bool fired;
+    
+    //bellow variables are for if the object wasnt spawned on construct
+    irr::scene::ISceneManager *sceneMRef;
+    irr::video::IVideoDriver *drvrRef;
     
     //FUNCTIONS
 public:
     //constructor
-    Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
+    Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     
     //override
     void tick(float deltatime);

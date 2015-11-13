@@ -2,12 +2,9 @@
 
 #include <iostream>
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct) 
-    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct),
-    bullet("Assets/LaserBulletSix.obj", "Assets/Lasr_bullet_purple.bmp", sceneManagerReference, driverReference, false){
-    
-    //set the object to not need lighting (for now)
-    objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
+    : Object("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference),
+    bullet(sceneManagerReference, driverReference){
     
     //init variables
     currDeltaTime = 0;

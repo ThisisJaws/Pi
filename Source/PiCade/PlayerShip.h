@@ -39,7 +39,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(EventReceiver *eReceiver, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
+    PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     
     //overriding tick function
     virtual void tick(float deltaTime);

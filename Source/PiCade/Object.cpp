@@ -7,12 +7,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     //default this to false, no object has been spawned yet
     objectSpawned = false;
     
-    //load the mesh
-    objectMesh = sceneManagerReference->getMesh(pathOfMesh);
-    
     //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
     if(spawnOnConstruct){
-        spawnObject(pathOfTexture, sceneManagerReference, driverReference);
+        spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference);
     }
 }
 
@@ -68,17 +65,23 @@ void Object::updatePosition(irr::core::vector3df newPosition){
     objectNode->setPosition(newPosition);
 }
 
-void Object::spawnObject(const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference){
+void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference){
     //if the object hasnt been spawned then place it into the scene
     if(!objectSpawned){
+        //load the mesh
+        objectMesh = sceneManagerReference->getMesh(pathOfMesh);
+        
         //create the scene node using loaded mesh
         objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh);
-        objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
+        //objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
     
         //create a triangle selector for collision
         irr::scene::ITriangleSelector *selector = sceneManagerReference->createTriangleSelector(objectNode);
         objectNode->setTriangleSelector(selector);
         selector->drop();
+        
+        //set the object to not need lighting
+        objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         
         //set up the object node
         objectPosition = objectNode->getPosition();
