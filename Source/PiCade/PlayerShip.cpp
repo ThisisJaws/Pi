@@ -52,7 +52,7 @@ void PlayerShip::tick(float deltaTime){
         
         //perform camera updates
         updateCameraPositions();
-        updateCamera();
+        updateCamera(camera);
     }
 }
 
@@ -92,17 +92,23 @@ void PlayerShip::updateCameraPositions(){
     thirdPersonPosition.Y = objectPosition.Y + 50;
     thirdPersonPosition.Z = objectPosition.Z;
     
-    sideViewPosition.X = objectPosition.X;
+    sideViewPosition.X = objectPosition.X + 100;
     sideViewPosition.Y = objectPosition.Y;
-    sideViewPosition.Z = objectPosition.Z - 150;
+    sideViewPosition.Z = objectPosition.Z - 200;
 }
 
-void PlayerShip::updateCamera(){
+void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
     if(currentMode == flying){
-        camera->setPosition(thirdPersonPosition);
+        //set pos of camera
+        sceneCamera->setPosition(thirdPersonPosition);
+        //set the target for the camera to look at
+        sceneCamera->setTarget(objectPosition);
     }else if(currentMode == shooting){
-        camera->setPosition(sideViewPosition);
+        //set pos of camera
+        sceneCamera->setPosition(sideViewPosition);
+        //set the target for thecamera to look at
+        irr::core::vector3df lookAtPos = objectPosition;
+        lookAtPos.X += 100;
+        sceneCamera->setTarget(lookAtPos);
     }
-    
-    camera->setTarget(objectPosition);
 }

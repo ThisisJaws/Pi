@@ -62,7 +62,7 @@ private:
     void updateCameraPositions();
     
     //updates the camera based on the current mode
-    void updateCamera();
+    void updateCamera(irr::scene::ICameraSceneNode* sceneCamera);
 };
 
 #endif	/* PLAYERSHIP_H */
