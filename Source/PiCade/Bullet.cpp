@@ -1,14 +1,14 @@
 #include "Bullet.h"
 
 //pass everythig through the constructor
-Bullet::Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
+Bullet::Bullet(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct) 
+    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct){
     
     fired = false;
     moveSpeed = 100.0f;
     
     //temp - set scale of bullet
-    objectNode->setScale(irr::core::vector3df(30, 30, 30));
+    //objectNode->setScale(irr::core::vector3df(30, 30, 30));
 }
 
 void Bullet::tick(float deltaTime){
