@@ -97,7 +97,7 @@ int Game::play(){
             objectsToUpdate[i]->tick(frameDeltaTime);
         }
         
-        //tell irlicht to draw/updates scenes
+        //tell irrlicht to draw/updates scenes
         driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
         
         smgr->drawAll();
