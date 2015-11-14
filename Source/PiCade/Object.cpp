@@ -48,10 +48,12 @@ void Object::clearCollideables(){
 }
 
 bool Object::checkCollision(){
+    //if we dont have any collideables then return straight away
     if(collideables.size() <= 0){
         return false;
     }
     
+    //loop through and return true if any object has collided
     for(int i = 0; i < collideables.size(); i++){
         if(objectNode->getTransformedBoundingBox().intersectsWithBox(collideables[i]->getTransformedBoundingBox())){
             return true;
