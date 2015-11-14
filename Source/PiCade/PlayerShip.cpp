@@ -30,7 +30,7 @@ PlayerShip::~PlayerShip(){
     delete bullet;
 }
 
-void PlayerShip::tick(float deltaTime){  
+void PlayerShip::tick(irr::f32 deltaTime){  
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
     

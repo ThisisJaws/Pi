@@ -38,7 +38,7 @@ public:
     virtual ~Object();
     
     //this will be called every update of the main game loop
-    virtual void tick(float deltaTime) = 0;
+    virtual void tick(irr::f32 deltaTime) = 0;
     
     //get the object's mesh
     irr::scene::IAnimatedMesh* getMesh();

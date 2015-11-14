@@ -16,8 +16,10 @@ private:
     float moveSpeed;
     //check if it has been fired
     bool fired;
+    //how long the bullet is around for
+    irr::u32 lifeTime;
     
-    //bellow variables are for if the object wasnt spawned on construct
+    //bellow variables are for constructing the bullet later
     irr::scene::ISceneManager *sceneMRef;
     irr::video::IVideoDriver *drvrRef;
     
@@ -29,7 +31,7 @@ public:
     ~Bullet();
     
     //override
-    void tick(float deltatime);
+    void tick(irr::f32 deltatime);
     
     //call to fire the bullet
     void fire(irr::core::vector3df firePos);

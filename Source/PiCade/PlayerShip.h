@@ -15,7 +15,7 @@ class PlayerShip : public Object{
     //VARIABLES
 private:
     //stores the current delta time
-    float currDeltaTime;
+    irr::f32 currDeltaTime;
     //controls how fast the player can move
     float moveSpeed;
     //controls the player's turn speed
@@ -51,7 +51,7 @@ public:
     ~PlayerShip();
     
     //overriding tick function
-    virtual void tick(float deltaTime);
+    virtual void tick(irr::f32 deltaTime);
     
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);

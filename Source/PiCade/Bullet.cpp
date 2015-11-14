@@ -10,19 +10,22 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
     drvrRef = driverReference;
+    
+    //set how long the bullet is 'alive' for
+    
 }
 
 Bullet::~Bullet(){
-    //clear the pointers reference
+    //clear the pointers reference (will get properly deleted elsewhere)
     sceneMRef = 0;
     drvrRef = 0;
     
-    //delete the pointer
+    //delete the pointers
     delete sceneMRef;
     delete drvrRef;
 }
 
-void Bullet::tick(float deltaTime){
+void Bullet::tick(irr::f32 deltaTime){
     //if the bullet has been fired then move it forward
     if(fired){
         objectPosition.X += moveSpeed * deltaTime;
