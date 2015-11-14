@@ -5,6 +5,8 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
+#include <vector>
+
 #include "Object.h"
 #include "EventReceiver.h"
 #include "Bullet.h"
@@ -19,8 +21,13 @@ private:
     //controls the player's turn speed
     float turnSpeed;
     
-    //bullets the player will fire
-    Bullet bullet;
+    //the bullets the player will fire
+    Bullet *bullet;
+    std::vector<Bullet> firedBullets;
+    
+    //needed to construct new bullets
+    irr::scene::ISceneManager *smgr;
+    irr::video::IVideoDriver *drv;
     
     //to be able to receive events
     EventReceiver *eReceiver;
@@ -40,6 +47,8 @@ private:
 public:
     //constructor
     PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    //destructor
+    ~PlayerShip();
     
     //overriding tick function
     virtual void tick(float deltaTime);

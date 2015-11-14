@@ -25,6 +25,8 @@ private:
 public:
     //constructor
     Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    //destructor
+    ~Bullet();
     
     //override
     void tick(float deltatime);

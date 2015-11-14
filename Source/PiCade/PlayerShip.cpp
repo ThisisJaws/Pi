@@ -3,8 +3,7 @@
 #include <iostream>
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference),
-    bullet(sceneManagerReference, driverReference){
+    : Object("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference){
     
     //init variables
     currDeltaTime = 0;
@@ -12,17 +11,34 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *scen
     turnSpeed = moveSpeed + 10.0f;
     this->eReceiver = eReceiver;
     
+    //store the pointers to be able to fire new bullets
+    smgr = sceneManagerReference;
+    drv = driverReference;
+    
     //set the ship's default mode
     currentMode = flying;
+}
+
+PlayerShip::~PlayerShip(){
+    //clear references (these get deleted properly elsewhere)
+    smgr = 0;
+    drv = 0;
+    
+    //delete the pointers
+    delete smgr;
+    delete drv;
+    delete bullet;
 }
 
 void PlayerShip::tick(float deltaTime){  
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
     
-    //update bullet
-    bullet.tick(deltaTime);
-    
+    //iterate through the vector of fire bullets and update them
+    for(int i = 0; i < firedBullets.size(); i ++){
+        firedBullets[i].tick(deltaTime);
+    }
+        
     //make the player constantly move forward
     objectPosition.X += moveSpeed * deltaTime;
     
@@ -92,7 +108,16 @@ void PlayerShip::moveDown(){
 
 void PlayerShip::shoot(){
     if(currentMode == shooting){
-        bullet.fire(objectPosition);
+        //construct a new bullet
+        bullet = new Bullet(smgr, drv);
+        //fire it
+        bullet->fire(objectPosition);
+        
+        //add it onto the vector to be updated
+        firedBullets.push_back(*bullet);
+        
+        //clear the pointer to prevent memory leaks
+        bullet = 0;
     }
 }
 
