@@ -12,6 +12,16 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     drvrRef = driverReference;
 }
 
+Bullet::~Bullet(){
+    //clear the pointers reference
+    sceneMRef = 0;
+    drvrRef = 0;
+    
+    //delete the pointer
+    delete sceneMRef;
+    delete drvrRef;
+}
+
 void Bullet::tick(float deltaTime){
     //if the bullet has been fired then move it forward
     if(fired){
@@ -30,11 +40,4 @@ void Bullet::fire(irr::core::vector3df firePos){
     objectPosition = firePos;
     //bullet has now been fired
     fired = true;
-    
-    //delete pointers
-    sceneMRef = 0;
-    delete sceneMRef;
-    
-    drvrRef = 0;
-    delete drvrRef;
 }

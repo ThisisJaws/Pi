@@ -35,7 +35,7 @@ public:
     //constructor
     Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
     //destructor
-    ~Object();
+    virtual ~Object();
     
     //this will be called every update of the main game loop
     virtual void tick(float deltaTime) = 0;
