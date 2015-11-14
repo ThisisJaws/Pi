@@ -35,7 +35,7 @@ void Object::addCollideable(irr::scene::ISceneNode *collideable){
 }
 
 void Object::clearCollideables(){
-    //make sure the pointers a cleared
+    //make sure the pointers are deleted
     for(int i = 0; i < collideables.size(); i++){
         delete collideables[i];
     }
