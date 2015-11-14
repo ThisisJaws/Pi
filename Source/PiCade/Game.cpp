@@ -83,12 +83,12 @@ int Game::play(){
     int fps;
     
     //set up for frame independent movement
-    irr::u32 then = device->getTimer()->getTime();
+    irr::u32 then = device->getTimer()->getRealTime();
     
     //main loop
     while(device->run()){
         //work out frame delta time
-        const irr::u32 now = device->getTimer()->getTime();
+        const irr::u32 now = device->getTimer()->getRealTime();
         const irr::f32 frameDeltaTime = (irr::f32)(now - then) / 1000.0f;
         then = now;
         
