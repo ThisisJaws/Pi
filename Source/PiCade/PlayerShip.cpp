@@ -2,14 +2,20 @@
 
 #include <iostream>
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
+PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Object("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference){
     
     //init variables
     currDeltaTime = 0;
     moveSpeed = 30.0f;
     turnSpeed = moveSpeed + 10.0f;
+    canFire = true;
+    timeSinceLastFire = 0;
+    timeBetweenShots = 250;
     this->eReceiver = eReceiver;
+    
+    //store the timer pointer so time between each shot can be fired
+    timerReference = timer;
     
     //store the pointers to be able to fire new bullets
     smgr = sceneManagerReference;
@@ -54,7 +60,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
         moveDown();
     }
     
-    
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE)){
         shoot();
@@ -72,6 +77,13 @@ void PlayerShip::tick(irr::f32 deltaTime){
         //perform camera updates
         updateCameraPositions();
         updateCamera(camera);
+    }
+    
+    //check how long is left before the player can fire again
+    if(!canFire){
+        if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){
+            canFire = true;
+        }
     }
 }
 
@@ -107,7 +119,7 @@ void PlayerShip::moveDown(){
 }
 
 void PlayerShip::shoot(){
-    if(currentMode == shooting){
+    if(currentMode == shooting && canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
         //fire it
@@ -118,6 +130,12 @@ void PlayerShip::shoot(){
         
         //clear the pointer to prevent memory leaks
         bullet = 0;
+        
+        //stop the ship firing immediately after
+        canFire = false;
+        
+        //update the time since last fire variables
+        timeSinceLastFire = timerReference->getRealTime();
     }
 }
 

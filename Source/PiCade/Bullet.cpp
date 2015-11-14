@@ -10,9 +10,6 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
     drvrRef = driverReference;
-    
-    //set how long the bullet is 'alive' for
-    
 }
 
 Bullet::~Bullet(){

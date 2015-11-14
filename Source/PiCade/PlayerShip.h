@@ -20,6 +20,11 @@ private:
     float moveSpeed;
     //controls the player's turn speed
     float turnSpeed;
+    //make sure bullets aren't fired too fast
+    bool canFire;
+    irr::u32 timeSinceLastFire;
+    irr::ITimer *timerReference;
+    int timeBetweenShots; //time between each bullet firing 1000 = 1 second
     
     //the bullets the player will fire
     Bullet *bullet;
@@ -46,7 +51,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(EventReceiver *eReceiver, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     //destructor
     ~PlayerShip();
     

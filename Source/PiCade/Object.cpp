@@ -48,7 +48,7 @@ void Object::clearCollideables(){
 }
 
 bool Object::checkCollision(){
-    //if we dont have any collideables then return straight away
+    //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
         return false;
     }
@@ -68,7 +68,7 @@ void Object::updatePosition(irr::core::vector3df newPosition){
 }
 
 void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference){
-    //if the object hasnt been spawned then place it into the scene
+    //if the object hasn't been 'spawned' then place it into the scene
     if(!objectSpawned){
         //load the mesh
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);

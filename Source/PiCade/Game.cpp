@@ -64,7 +64,7 @@ int Game::play(){
     //////////////////////////////////////////////////////////////////////
     
     //create a ship for the player
-    PlayerShip player = PlayerShip(&eReceiver, smgr, driver);
+    PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
     
     //add the boxes into the collibeable vector
     player.addCollideable(boxNode1);

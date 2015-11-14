@@ -16,8 +16,6 @@ private:
     float moveSpeed;
     //check if it has been fired
     bool fired;
-    //how long the bullet is around for
-    irr::u32 lifeTime;
     
     //bellow variables are for constructing the bullet later
     irr::scene::ISceneManager *sceneMRef;
