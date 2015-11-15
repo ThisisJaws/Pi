@@ -40,7 +40,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
     
-    //iterate through the vector of fire bullets and update them
+    //iterate through the vector of fired bullets and update them
     for(int i = 0; i < firedBullets.size(); i ++){
         firedBullets[i].tick(deltaTime);
     }
