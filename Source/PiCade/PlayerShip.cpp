@@ -39,10 +39,20 @@ PlayerShip::~PlayerShip(){
 void PlayerShip::tick(irr::f32 deltaTime){  
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
-    
-    //iterate through the vector of fired bullets and update them
-    for(int i = 0; i < firedBullets.size(); i ++){
-        firedBullets[i].tick(deltaTime);
+     
+    //iterate through the list of fired bullets and update them
+    for(std::list<Bullet*>::iterator bulletIterator = firedBullets.begin(); bulletIterator != firedBullets.end(); ++bulletIterator){
+        if((*bulletIterator)->checkLifeTime()){
+            //store the current iterator object
+            Bullet *toDelete = *bulletIterator;
+            //erase the object from the list
+            bulletIterator = firedBullets.erase(bulletIterator);
+            //delete the data stored in memory and invoke the destructor
+            delete toDelete;
+        }else{
+            //call update function
+            (*bulletIterator)->tick(deltaTime);
+        }
     }
         
     //make the player constantly move forward
@@ -125,8 +135,8 @@ void PlayerShip::shoot(){
         //fire it
         bullet->fire(objectPosition);
         
-        //add it onto the vector to be updated
-        firedBullets.push_back(*bullet);
+        //add it onto the list to be updated
+        firedBullets.push_back(bullet);
         
         //clear the pointer to prevent memory leaks
         bullet = 0;

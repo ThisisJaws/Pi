@@ -17,6 +17,10 @@ private:
     //check if it has been fired
     bool fired;
     
+    //how long the bullet is 'alive' for before despawning
+    float currentLifeTime;
+    float maxLifeTime;
+    
     //bellow variables are for constructing the bullet later
     irr::scene::ISceneManager *sceneMRef;
     irr::video::IVideoDriver *drvrRef;
@@ -33,6 +37,9 @@ public:
     
     //call to fire the bullet
     void fire(irr::core::vector3df firePos);
+    
+    //returns true if the bullet has reached its max lifetime
+    bool checkLifeTime();
 };
 
 #endif	/* BULLET_H */

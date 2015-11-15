@@ -5,7 +5,7 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
-#include <vector>
+#include <list>
 
 #include "Object.h"
 #include "EventReceiver.h"
@@ -28,7 +28,7 @@ private:
     
     //the bullets the player will fire
     Bullet *bullet;
-    std::vector<Bullet> firedBullets;
+    std::list<Bullet*> firedBullets;
     
     //needed to construct new bullets
     irr::scene::ISceneManager *smgr;

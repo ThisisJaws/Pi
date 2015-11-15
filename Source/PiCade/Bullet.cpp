@@ -7,6 +7,9 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     fired = false;
     moveSpeed = 250.0f;
     
+    currentLifeTime = 0;
+    maxLifeTime = 1;
+    
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
     drvrRef = driverReference;
@@ -23,10 +26,13 @@ Bullet::~Bullet(){
 }
 
 void Bullet::tick(irr::f32 deltaTime){
-    //if the bullet has been fired then move it forward
     if(fired){
+        //move the bullet forward
         objectPosition.X += moveSpeed * deltaTime;
         updatePosition(objectPosition);
+        
+        //update lifetime
+        currentLifeTime += deltaTime;
     }
 }
 
@@ -40,4 +46,8 @@ void Bullet::fire(irr::core::vector3df firePos){
     objectPosition = firePos;
     //bullet has now been fired
     fired = true;
+}
+
+bool Bullet::checkLifeTime(){
+    return currentLifeTime >= maxLifeTime;
 }
