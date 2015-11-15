@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Bullet.o \
+	${OBJECTDIR}/EnemyShip.o \
 	${OBJECTDIR}/EventReceiver.o \
 	${OBJECTDIR}/Game.o \
 	${OBJECTDIR}/Object.o \
@@ -74,6 +75,11 @@ ${OBJECTDIR}/Bullet.o: Bullet.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
+
+${OBJECTDIR}/EnemyShip.o: EnemyShip.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemyShip.o EnemyShip.cpp
 
 ${OBJECTDIR}/EventReceiver.o: EventReceiver.cpp 
 	${MKDIR} -p ${OBJECTDIR}
