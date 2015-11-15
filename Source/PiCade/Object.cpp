@@ -16,6 +16,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 Object::~Object(){
     //free memory when the object is deallocated
     clearCollideables();
+    
+    //remove from scene
+    objectNode->remove();
 }
 
 irr::scene::IAnimatedMesh* Object::getMesh(){
