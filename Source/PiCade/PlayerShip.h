@@ -25,6 +25,11 @@ private:
     irr::u32 timeSinceLastFire;
     irr::ITimer *timerReference;
     int timeBetweenShots; //time between each bullet firing 1000 = 1 second
+    //variables to control the camera pos
+    int tpDistance;
+    int tpOffset;
+    int sideViewDistance;
+    int sideViewOffset;
     
     //the bullets the player will fire
     Bullet *bullet;

@@ -14,6 +14,12 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene:
     timeBetweenShots = 250;
     this->eReceiver = eReceiver;
     
+    //init the camera variables
+    tpDistance = 150;
+    tpOffset = tpDistance / 2;
+    sideViewDistance = 300;
+    sideViewOffset = sideViewDistance / 2;
+    
     //store the timer pointer so time between each shot can be fired
     timerReference = timer;
     
@@ -150,13 +156,13 @@ void PlayerShip::shoot(){
 }
 
 void PlayerShip::updateCameraPositions(){
-    thirdPersonPosition.X = objectPosition.X - 100;
-    thirdPersonPosition.Y = objectPosition.Y + 50;
+    thirdPersonPosition.X = objectPosition.X - tpDistance;
+    thirdPersonPosition.Y = objectPosition.Y + tpOffset;
     thirdPersonPosition.Z = objectPosition.Z;
     
-    sideViewPosition.X = objectPosition.X + 100;
+    sideViewPosition.X = objectPosition.X + sideViewOffset;
     sideViewPosition.Y = objectPosition.Y;
-    sideViewPosition.Z = objectPosition.Z - 200;
+    sideViewPosition.Z = objectPosition.Z - sideViewDistance;
 }
 
 void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
@@ -164,13 +170,15 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
         //set pos of camera
         sceneCamera->setPosition(thirdPersonPosition);
         //set the target for the camera to look at
+        irr::core::vector3df lookAtPos = objectPosition;
+        lookAtPos.X += tpOffset;
         sceneCamera->setTarget(objectPosition);
     }else if(currentMode == shooting){
         //set pos of camera
         sceneCamera->setPosition(sideViewPosition);
-        //set the target for thecamera to look at
+        //set the target for the camera to look at
         irr::core::vector3df lookAtPos = objectPosition;
-        lookAtPos.X += 100;
+        lookAtPos.X += sideViewOffset;
         sceneCamera->setTarget(lookAtPos);
     }
 }
