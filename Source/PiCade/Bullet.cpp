@@ -5,7 +5,7 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     : Object("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
     
     fired = false;
-    moveSpeed = 100.0f;
+    moveSpeed = 250.0f;
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
