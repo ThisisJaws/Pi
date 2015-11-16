@@ -4,5 +4,5 @@ EnemyShip::EnemyShip(irr::core::vector3df spawnPosition, float movementSpeed, in
         : Ship(movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
     //set the position
-    updatePosition(spawnPosition);
+    objectPosition = spawnPosition;
 }
