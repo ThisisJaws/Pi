@@ -1,8 +1,6 @@
 /* 
- * File:   EnemyShip.h
- * Author: pi
- *
- * Created on 15 November 2015, 13:16
+ * This is the class the enemies will use and will
+ * controll all the AI that the enemies will need
  */
 
 #ifndef ENEMYSHIP_H

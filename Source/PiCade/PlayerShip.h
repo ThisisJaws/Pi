@@ -1,5 +1,6 @@
 /* 
- * Contains all the functionality for the player/player's ship
+ * Contains all the functionality for 
+ * the player/player's ship
  */
 
 #ifndef PLAYERSHIP_H
