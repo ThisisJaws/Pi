@@ -46,6 +46,9 @@ public:
     //get the object's scene node
     irr::scene::IAnimatedMeshSceneNode* getSceneNode();
     
+    //get the position of the object
+    irr::core::vector3df getPosition();
+    
     //removes the object from the scene
     void removeFromScene();
     

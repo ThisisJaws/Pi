@@ -29,6 +29,10 @@ irr::scene::IAnimatedMeshSceneNode* Object::getSceneNode(){
     return objectNode;
 }
 
+irr::core::vector3df Object::getPosition(){
+    return objectNode->getPosition();
+}
+
 void Object::removeFromScene(){
     objectNode->remove();
 }
