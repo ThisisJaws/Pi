@@ -17,28 +17,12 @@ class PlayerShip : public Ship{
 private:
     //stores the current delta time
     irr::f32 currDeltaTime;
-    //controls how fast the player can move
-    //float moveSpeed;
-    //controls the player's turn speed
-    //float turnSpeed;
-    //make sure bullets aren't fired too fast
-    //bool canFire;
-    //irr::u32 timeSinceLastFire;
-    //irr::ITimer *timerReference;
-    //int timeBetweenShots; //time between each bullet firing 1000 = 1 second
+    
     //variables to control the camera pos
     int tpDistance;
     int tpOffset;
     int sideViewDistance;
     int sideViewOffset;
-    
-    //the bullets the player will fire
-    //Bullet *bullet;
-    //std::list<Bullet*> firedBullets;
-    
-    //needed to construct new bullets
-    //irr::scene::ISceneManager *smgr;
-    //irr::video::IVideoDriver *drv;
     
     //to be able to receive events
     EventReceiver *eReceiver;
