@@ -15,6 +15,7 @@
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
+#include "EnemyShip.h"
 
 class Game{
     //VARIABLES
