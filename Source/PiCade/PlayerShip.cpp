@@ -1,7 +1,5 @@
 #include "PlayerShip.h"
 
-#include <iostream>
-
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Ship(30.0f, 250, 1, timerReference, "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference){
     

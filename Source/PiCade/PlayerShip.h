@@ -6,11 +6,8 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
-//#include <list>
-
 #include "Ship.h"
 #include "EventReceiver.h"
-//#include "Bullet.h"
 
 class PlayerShip : public Ship{
     //VARIABLES
