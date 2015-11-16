@@ -12,6 +12,9 @@ class EnemyShip : public Ship{
     //VARIABLES
     
     //FUNCTIONS
+public:
+    //constructor
+    EnemyShip(irr::core::vector3df spawnPos, float movementSpeed, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
 };
 
 #endif	/* ENEMYSHIP_H */
