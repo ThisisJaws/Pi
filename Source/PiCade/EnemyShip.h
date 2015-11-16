@@ -6,15 +6,12 @@
 #ifndef ENEMYSHIP_H
 #define	ENEMYSHIP_H
 
-#include "Object.h"
+#include "Ship.h"
 
-class EnemyShip : public Object{
+class EnemyShip : public Ship{
     //VARIABLES
     
     //FUNCTIONS
-public:
-    //override
-    virtual void tick(irr::f32 deltaTime);
 };
 
 #endif	/* ENEMYSHIP_H */
