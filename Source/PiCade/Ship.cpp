@@ -32,6 +32,16 @@ Ship::~Ship(){
 }
 
 void Ship::tick(irr::f32 deltaTime){
+    //make the ship constantly move forward or backwards
+    objectPosition.X += (moveSpeed * deltaTime) * moveDir;
+    
+    //check how long is left before the ship can fire again
+    if(!canFire){
+        if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){
+            canFire = true;
+        }
+    }
+    
     //iterate through the list of fired bullets and update them
     for(std::list<Bullet*>::iterator bulletIterator = firedBullets.begin(); bulletIterator != firedBullets.end(); ++bulletIterator){
         if((*bulletIterator)->checkLifeTime()){
@@ -47,11 +57,9 @@ void Ship::tick(irr::f32 deltaTime){
         }
     }
     
-    //check how long is left before the ship can fire again
-    if(!canFire){
-        if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){
-            canFire = true;
-        }
+    //commit position changes
+    if(!checkCollision()){
+        updatePosition(objectPosition);
     }
 }
 
