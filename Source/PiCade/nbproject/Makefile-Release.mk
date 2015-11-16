@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Game.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/PlayerShip.o \
+	${OBJECTDIR}/Ship.o \
 	${OBJECTDIR}/Testing.o \
 	${OBJECTDIR}/main.o
 
@@ -100,6 +101,11 @@ ${OBJECTDIR}/PlayerShip.o: PlayerShip.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayerShip.o PlayerShip.cpp
+
+${OBJECTDIR}/Ship.o: Ship.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
 
 ${OBJECTDIR}/Testing.o: Testing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
