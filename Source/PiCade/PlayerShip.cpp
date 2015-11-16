@@ -2,16 +2,11 @@
 
 #include <iostream>
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference){
+PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
+    : Ship(30.0f, 250, 1, timerReference, "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", sceneManagerReference, driverReference){
     
     //init variables
     currDeltaTime = 0;
-    moveSpeed = 30.0f;
-    turnSpeed = moveSpeed + 10.0f;
-    canFire = true;
-    timeSinceLastFire = 0;
-    timeBetweenShots = 250;
     this->eReceiver = eReceiver;
     
     //init the camera variables
@@ -21,45 +16,18 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene:
     sideViewOffset = sideViewDistance / 2;
     
     //store the timer pointer so time between each shot can be fired
-    timerReference = timer;
-    
-    //store the pointers to be able to fire new bullets
-    smgr = sceneManagerReference;
-    drv = driverReference;
+    timerReference = timerReference;
     
     //set the ship's default mode
     currentMode = flying;
 }
 
-PlayerShip::~PlayerShip(){
-    //clear references (these get deleted properly elsewhere)
-    smgr = 0;
-    drv = 0;
-    
-    //delete the pointers
-    delete smgr;
-    delete drv;
-    delete bullet;
-}
-
 void PlayerShip::tick(irr::f32 deltaTime){  
+    //call base class function to handle shooting/movement
+    Ship::tick(deltaTime);
+    
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
-     
-    //iterate through the list of fired bullets and update them
-    for(std::list<Bullet*>::iterator bulletIterator = firedBullets.begin(); bulletIterator != firedBullets.end(); ++bulletIterator){
-        if((*bulletIterator)->checkLifeTime()){
-            //store the current iterator object
-            Bullet *toDelete = *bulletIterator;
-            //erase the object from the list
-            bulletIterator = firedBullets.erase(bulletIterator);
-            //delete the data stored in memory and invoke the destructor
-            delete toDelete;
-        }else{
-            //call update function
-            (*bulletIterator)->tick(deltaTime);
-        }
-    }
         
     //make the player constantly move forward
     objectPosition.X += moveSpeed * deltaTime;
@@ -94,13 +62,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
         updateCameraPositions();
         updateCamera(camera);
     }
-    
-    //check how long is left before the player can fire again
-    if(!canFire){
-        if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){
-            canFire = true;
-        }
-    }
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
@@ -132,27 +93,6 @@ void PlayerShip::moveUp(){
 }
 void PlayerShip::moveDown(){
     objectPosition.Y -= turnSpeed * currDeltaTime;
-}
-
-void PlayerShip::shoot(){
-    if(currentMode == shooting && canFire){
-        //construct a new bullet
-        bullet = new Bullet(smgr, drv);
-        //fire it
-        bullet->fire(objectPosition);
-        
-        //add it onto the list to be updated
-        firedBullets.push_back(bullet);
-        
-        //clear the pointer to prevent memory leaks
-        bullet = 0;
-        
-        //stop the ship firing immediately after
-        canFire = false;
-        
-        //update the time since last fire variables
-        timeSinceLastFire = timerReference->getRealTime();
-    }
 }
 
 void PlayerShip::updateCameraPositions(){

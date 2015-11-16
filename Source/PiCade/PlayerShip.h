@@ -6,26 +6,26 @@
 #ifndef PLAYERSHIP_H
 #define	PLAYERSHIP_H
 
-#include <list>
+//#include <list>
 
-#include "Object.h"
+#include "Ship.h"
 #include "EventReceiver.h"
-#include "Bullet.h"
+//#include "Bullet.h"
 
-class PlayerShip : public Object{
+class PlayerShip : public Ship{
     //VARIABLES
 private:
     //stores the current delta time
     irr::f32 currDeltaTime;
     //controls how fast the player can move
-    float moveSpeed;
+    //float moveSpeed;
     //controls the player's turn speed
-    float turnSpeed;
+    //float turnSpeed;
     //make sure bullets aren't fired too fast
-    bool canFire;
-    irr::u32 timeSinceLastFire;
-    irr::ITimer *timerReference;
-    int timeBetweenShots; //time between each bullet firing 1000 = 1 second
+    //bool canFire;
+    //irr::u32 timeSinceLastFire;
+    //irr::ITimer *timerReference;
+    //int timeBetweenShots; //time between each bullet firing 1000 = 1 second
     //variables to control the camera pos
     int tpDistance;
     int tpOffset;
@@ -33,12 +33,12 @@ private:
     int sideViewOffset;
     
     //the bullets the player will fire
-    Bullet *bullet;
-    std::list<Bullet*> firedBullets;
+    //Bullet *bullet;
+    //std::list<Bullet*> firedBullets;
     
     //needed to construct new bullets
-    irr::scene::ISceneManager *smgr;
-    irr::video::IVideoDriver *drv;
+    //irr::scene::ISceneManager *smgr;
+    //irr::video::IVideoDriver *drv;
     
     //to be able to receive events
     EventReceiver *eReceiver;
@@ -58,9 +58,7 @@ private:
 public:
     //constructor
     PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
-    //destructor
-    ~PlayerShip();
-    
+
     //overriding tick function
     virtual void tick(irr::f32 deltaTime);
     
@@ -78,7 +76,7 @@ private:
     void moveDown();
     
     //makes the player shoot
-    void shoot();
+    //void shoot();
     
     //updates the two camera positions
     void updateCameraPositions();
