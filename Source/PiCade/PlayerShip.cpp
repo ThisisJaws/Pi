@@ -47,7 +47,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
     }
     
     //check if fire key was pressed
-    if(eReceiver->isKeyDown(irr::KEY_SPACE)){
+    if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
         shoot();
     }
     
