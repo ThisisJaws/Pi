@@ -23,9 +23,6 @@ protected:
     //a vector of collideable objects
     std::vector<irr::scene::ISceneNode*> collideables;
     
-    //vector to handle object positioning
-    irr::core::vector3df objectPosition;
-    
 private:
     //kep track if the object has been spawned or not
     bool objectSpawned;
@@ -54,7 +51,6 @@ public:
     
     //adds a collideable object into the vector
     void addCollideable(irr::scene::ISceneNode *collideable);
-    
     //clears the vector containing collideable objects
     void clearCollideables();
     
@@ -62,8 +58,12 @@ protected:
     //returns true if the object has collided with an object contained within the vector
     bool checkCollision();
     
-    //call to update an objects position
+    //call to update the current position with the direction
     void updatePosition(irr::core::vector3df newPosition);
+    void updatePosition(float x, float y, float z);
+    
+    //call to completely change the object position (see update pos to move the object)
+    void changePosition(irr::core::vector3df newPosition);
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);

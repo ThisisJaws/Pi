@@ -4,7 +4,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
         : Ship(movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
     //set the spawn position
-    objectPosition = spawnPosition;
+    changePosition(spawnPosition);
     
     //set the player
     playerTarget = player;

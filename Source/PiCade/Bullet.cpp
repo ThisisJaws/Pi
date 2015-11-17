@@ -28,8 +28,7 @@ Bullet::~Bullet(){
 void Bullet::tick(irr::f32 deltaTime){
     if(fired){
         //move the bullet forward
-        objectPosition.X += moveSpeed * deltaTime;
-        updatePosition(objectPosition);
+        updatePosition(moveSpeed * deltaTime, 0.0f, 0.0f);
         
         //update lifetime
         currentLifeTime += deltaTime;
@@ -43,7 +42,7 @@ void Bullet::fire(irr::core::vector3df firePos){
     objectNode->setScale(irr::core::vector3df(30, 30, 30));
     
     //set the position
-    objectPosition = firePos;
+    changePosition(firePos);
     //bullet has now been fired
     fired = true;
 }

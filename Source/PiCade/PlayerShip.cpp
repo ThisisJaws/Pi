@@ -27,16 +27,23 @@ void PlayerShip::tick(irr::f32 deltaTime){
     //updated global deltatime for other functions
     currDeltaTime = deltaTime;
     
-    //check for movement input
-    if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
-        turnLeft();
-    }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-        turnRight();
-    }
-    if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
-        moveUp();
-    }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
-        moveDown();
+    //check for and apply all position changes
+    if(!checkCollision()){
+        //check for movement input
+        if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
+            turnLeft();
+        }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
+            turnRight();
+        }
+        if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
+            moveUp();
+        }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
+            moveDown();
+        }
+        
+        //perform camera updates
+        updateCameraPositions();
+        updateCamera(camera);
     }
     
     //check if fire key was pressed
@@ -47,13 +54,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
     //temp, changing mode will not be handled by user input
     if(eReceiver->isKeyDown(irr::KEY_KEY_G)){
         changeMode();
-    }
-    
-    //apply all position changes
-    if(!checkCollision()){
-        //perform camera updates
-        updateCameraPositions();
-        updateCamera(camera);
     }
 }
 
@@ -72,30 +72,30 @@ void PlayerShip::changeMode(){
 void PlayerShip::turnLeft(){
     if(currentMode == flying){
         //update the ship position to go to the left
-        objectPosition.Z += turnSpeed * currDeltaTime;
+        updatePosition(0.0f, 0.0f, turnSpeed * currDeltaTime);
     }
 }
 void PlayerShip::turnRight(){
     if(currentMode == flying){
         //update the ship position to go to the right
-        objectPosition.Z -= turnSpeed * currDeltaTime;
+        updatePosition(0.0f, 0.0f, (turnSpeed * currDeltaTime) * -1);
     }
 }
 void PlayerShip::moveUp(){
-    objectPosition.Y += turnSpeed * currDeltaTime;
+    updatePosition(0.0f, turnSpeed * currDeltaTime, 0.0f);
 }
 void PlayerShip::moveDown(){
-    objectPosition.Y -= turnSpeed * currDeltaTime;
+    updatePosition(0.0f, (turnSpeed * currDeltaTime) * -1, 0.0f);
 }
 
 void PlayerShip::updateCameraPositions(){
-    thirdPersonPosition.X = objectPosition.X - tpDistance;
-    thirdPersonPosition.Y = objectPosition.Y + tpOffset;
-    thirdPersonPosition.Z = objectPosition.Z;
+    thirdPersonPosition.X = getPosition().X - tpDistance;
+    thirdPersonPosition.Y = getPosition().Y + tpOffset;
+    thirdPersonPosition.Z = getPosition().Z;
     
-    sideViewPosition.X = objectPosition.X + sideViewOffset;
-    sideViewPosition.Y = objectPosition.Y;
-    sideViewPosition.Z = objectPosition.Z - sideViewDistance;
+    sideViewPosition.X = getPosition().X + sideViewOffset;
+    sideViewPosition.Y = getPosition().Y;
+    sideViewPosition.Z = getPosition().Z - sideViewDistance;
 }
 
 void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
@@ -103,14 +103,14 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
         //set pos of camera
         sceneCamera->setPosition(thirdPersonPosition);
         //set the target for the camera to look at
-        irr::core::vector3df lookAtPos = objectPosition;
+        irr::core::vector3df lookAtPos = getPosition();
         lookAtPos.X += tpOffset;
-        sceneCamera->setTarget(objectPosition);
+        sceneCamera->setTarget(lookAtPos);
     }else if(currentMode == shooting){
         //set pos of camera
         sceneCamera->setPosition(sideViewPosition);
         //set the target for the camera to look at
-        irr::core::vector3df lookAtPos = objectPosition;
+        irr::core::vector3df lookAtPos = getPosition();
         lookAtPos.X += sideViewOffset;
         sceneCamera->setTarget(lookAtPos);
     }

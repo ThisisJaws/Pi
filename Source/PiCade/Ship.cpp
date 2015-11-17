@@ -32,8 +32,11 @@ Ship::~Ship(){
 }
 
 void Ship::tick(irr::f32 deltaTime){
-    //make the ship constantly move forward or backwards
-    objectPosition.X += (moveSpeed * deltaTime) * moveDir;
+    //commit position changes based on collision
+    if(!checkCollision()){
+        //make the ship constantly move forward or backwards
+        updatePosition((moveSpeed * deltaTime) * moveDir, 0.0f, 0.0f);
+    }
     
     //check how long is left before the ship can fire again
     if(!canFire){
@@ -55,12 +58,7 @@ void Ship::tick(irr::f32 deltaTime){
             //call update function
             (*bulletIterator)->tick(deltaTime);
         }
-    }
-    
-    //commit position changes
-    if(!checkCollision()){
-        updatePosition(objectPosition);
-    }
+    } 
 }
 
 void Ship::shoot(){
@@ -68,7 +66,7 @@ void Ship::shoot(){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
         //fire it
-        bullet->fire(objectPosition);
+        bullet->fire(getPosition());
         
         //add it onto the list to be updated
         firedBullets.push_back(bullet);

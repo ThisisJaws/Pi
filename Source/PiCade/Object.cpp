@@ -71,6 +71,15 @@ bool Object::checkCollision(){
 }
 
 void Object::updatePosition(irr::core::vector3df newPosition){
+    objectNode->setPosition(getPosition() + newPosition);
+}
+
+void Object::updatePosition(float x, float y, float z){
+    irr::core::vector3df temp = irr::core::vector3df(x, y, z);
+    updatePosition(temp);
+}
+
+void Object::changePosition(irr::core::vector3df newPosition){
     objectNode->setPosition(newPosition);
 }
 
@@ -91,9 +100,6 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         
         //set the object to not need lighting
         objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-        
-        //set up the object node
-        objectPosition = objectNode->getPosition();
         
         objectSpawned = true;
     }
