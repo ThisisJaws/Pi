@@ -15,15 +15,14 @@
 
 class Object{
     //VARIABLES
-protected:
+private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
     //a vector of collideable objects
     std::vector<irr::scene::ISceneNode*> collideables;
-    
-private:
+
     //kep track if the object has been spawned or not
     bool objectSpawned;
     
