@@ -39,7 +39,7 @@ void Bullet::fire(irr::core::vector3df firePos){
     //spawn the object into the scene
     spawnObject("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     //temp - set scale of bullet
-    objectNode->setScale(irr::core::vector3df(30, 30, 30));
+    getSceneNode()->setScale(irr::core::vector3df(30, 30, 30));
     
     //set the position
     changePosition(firePos);
