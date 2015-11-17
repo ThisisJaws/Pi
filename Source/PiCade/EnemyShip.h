@@ -9,8 +9,6 @@
 #include "Ship.h"
 #include "PlayerShip.h"
 
-#include <cmath>
-
 class EnemyShip : public Ship{
     //VARIABLES
 private:
@@ -29,10 +27,6 @@ public:
     
     //override
     virtual void tick(irr::f32 deltaTime);
-    
-private:
-    //computes the distance between two objects
-    float computeDistance(irr::core::vector3df positionA, irr::core::vector3df positionB);
 };
 
 #endif	/* ENEMYSHIP_H */

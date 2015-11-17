@@ -24,13 +24,9 @@ EnemyShip::~EnemyShip(){
 void EnemyShip::tick(irr::f32 deltaTime){
     //call the base class function
     Ship::tick(deltaTime);
-    
+
     //check the distance of the player
-    if(computeDistance(getPosition(), playerTarget->getPosition()) <= combatDistance){
+    if(getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
         shoot();
     }
-}
-
-float EnemyShip::computeDistance(irr::core::vector3df positionA, irr::core::vector3df positionB){
-    return sqrt((pow(positionB.X, 2) - pow(positionA.X, 2)) + (pow(positionB.Y, 2) - pow(positionA.Y, 2)) + (pow(positionB.Z, 2) - pow(positionA.Z, 2)));
 }
