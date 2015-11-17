@@ -28,18 +28,21 @@ Bullet::~Bullet(){
 void Bullet::tick(irr::f32 deltaTime){
     if(fired){
         //move the bullet forward
-        updatePosition(moveSpeed * deltaTime, 0.0f, 0.0f);
+        updatePosition(direction * (moveSpeed * deltaTime));
         
         //update lifetime
         currentLifeTime += deltaTime;
     }
 }
 
-void Bullet::fire(irr::core::vector3df firePos){
+void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
     //spawn the object into the scene
     spawnObject("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     //temp - set scale of bullet
     getSceneNode()->setScale(irr::core::vector3df(30, 30, 30));
+    
+    //set the direction
+    this->direction = direction;
     
     //set the position
     changePosition(firePos);

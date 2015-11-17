@@ -13,7 +13,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
     playerTarget = player;
     
     //init variables
-    combatDistance = 100.0f;
+    combatDistance = 300.0f;
 }
 
 EnemyShip::~EnemyShip(){
@@ -30,6 +30,6 @@ void EnemyShip::tick(irr::f32 deltaTime){
 
     //check the distance of the player
     if(getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
-        shoot();
+        shoot(irr::core::vector3df(moveDir, 0, 0));
     }
 }

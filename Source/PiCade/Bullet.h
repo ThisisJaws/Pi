@@ -21,6 +21,9 @@ private:
     float currentLifeTime;
     float maxLifeTime;
     
+    //when fired a direction is given and stored
+    irr::core::vector3df direction;
+    
     //bellow variables are for constructing the bullet later
     irr::scene::ISceneManager *sceneMRef;
     irr::video::IVideoDriver *drvrRef;
@@ -36,7 +39,7 @@ public:
     void tick(irr::f32 deltatime);
     
     //call to fire the bullet
-    void fire(irr::core::vector3df firePos);
+    void fire(irr::core::vector3df firePos, irr::core::vector3df direction);
     
     //returns true if the bullet has reached its max lifetime
     bool checkLifeTime();

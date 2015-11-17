@@ -61,12 +61,12 @@ void Ship::tick(irr::f32 deltaTime){
     } 
 }
 
-void Ship::shoot(){
+void Ship::shoot(irr::core::vector3df direction){
     if(canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
         //fire it
-        bullet->fire(getPosition());
+        bullet->fire(getPosition(), direction);
         
         //add it onto the list to be updated
         firedBullets.push_back(bullet);

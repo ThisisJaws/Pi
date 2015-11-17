@@ -49,7 +49,7 @@ public:
     
 protected:
     //makes the ship shoot
-    void shoot();    
+    void shoot(irr::core::vector3df direction);    
 };
 
 #endif	/* SHIP_H */
