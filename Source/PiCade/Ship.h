@@ -19,7 +19,7 @@ protected:
     //how quickly the ship will move up/down/left/right
     float turnSpeed;
     //the direction to move in (will be +1 or -1)
-    short moveDir;
+    signed char moveDir;
     
 private:
     //if the ship is able to fire
