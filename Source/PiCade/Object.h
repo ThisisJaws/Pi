@@ -20,8 +20,8 @@ private:
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
-    //a vector of collideable objects
-    static std::list<irr::scene::ISceneNode*> collideables;
+    //a list of objects that are collideable
+    static std::list<Object*> collideables;
 
     //kep track if the object has been spawned or not
     bool objectSpawned;

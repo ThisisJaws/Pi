@@ -4,7 +4,7 @@
 #include "Object.h"
 
 //static variables need to be defined outside of the class so the lniker knows where to allocate the memory
-std::list<irr::scene::ISceneNode*> Object::collideables;
+std::list<Object*> Object::collideables;
 
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct){
     //default this to false, no object has been spawned yet
@@ -18,8 +18,8 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 Object::~Object(){
     //remove the object from the collideables list
-    for(std::list<irr::scene::ISceneNode*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
-        if((*nodeIterator) == objectNode){
+    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
+        if((*nodeIterator) == this){
             nodeIterator = collideables.erase(nodeIterator);
         }
     }
@@ -56,9 +56,9 @@ bool Object::checkCollision(){
     }
 
     //loop through and return true if any object has collided
-    for(std::list<irr::scene::ISceneNode*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
-        if(*nodeIterator != objectNode){
-            if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getTransformedBoundingBox())){
+    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
+        if(*nodeIterator != this){
+            if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getSceneNode()->getTransformedBoundingBox())){
                 return true;
             } 
         }
@@ -99,7 +99,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         
         //let other objects collision test against this object
-        collideables.push_back(objectNode);
+        collideables.push_back(this);
         
         objectSpawned = true;
     }
