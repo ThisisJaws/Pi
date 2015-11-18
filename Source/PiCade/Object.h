@@ -11,17 +11,17 @@
 //reference to the engine 
 #include "irrlicht.h"
 
-#include <vector>
+#include <list>
 
 class Object{
-    //VARIABLES  
+    //VARIABLES
 private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
     //a vector of collideable objects
-    static std::vector<irr::scene::ISceneNode*> collideables;
+    static std::list<irr::scene::ISceneNode*> collideables;
 
     //kep track if the object has been spawned or not
     bool objectSpawned;
@@ -50,8 +50,6 @@ public:
     
     //adds a collideable object into the vector
     static void addCollideable(irr::scene::ISceneNode *collideable);
-    //clears the vector containing collideable objects
-    void clearCollideables();
     
 protected:
     //returns true if the object has collided with an object contained within the vector

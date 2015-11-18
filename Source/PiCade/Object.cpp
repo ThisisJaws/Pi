@@ -3,8 +3,8 @@
 
 #include "Object.h"
 
-//static variables need to be defined outside of the class so the lniker knows where to allocate memory
-std::vector<irr::scene::ISceneNode*> Object::collideables;
+//static variables need to be defined outside of the class so the lniker knows where to allocate the memory
+std::list<irr::scene::ISceneNode*> Object::collideables;
 
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct){
     //default this to false, no object has been spawned yet
@@ -17,11 +17,20 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 }
 
 Object::~Object(){
-    //free memory when the object is deallocated
-    //clearCollideables();
+    //remove the object from the collideables list
+    for(std::list<irr::scene::ISceneNode*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
+        if((*nodeIterator) == objectNode){
+            nodeIterator = collideables.erase(nodeIterator);
+        }
+    }
+    
     
     //remove from scene
     objectNode->remove();
+    
+    //delete pointers
+    //delete objectNode;
+    //delete objectMesh;
 }
 
 irr::scene::IAnimatedMesh* Object::getMesh(){
@@ -44,29 +53,18 @@ void Object::addCollideable(irr::scene::ISceneNode *collideable){
     collideables.push_back(collideable);
 }
 
-void Object::clearCollideables(){
-    //make sure the pointers are deleted
-    for(int i = 0; i < collideables.size(); i++){
-        delete collideables[i];
-    }
-    
-    //then clear the vector
-    collideables.clear();
-    if(collideables.size() > 0){
-        collideables.resize(0);
-    }
-}
-
 bool Object::checkCollision(){
     //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
         return false;
     }
-    
+
     //loop through and return true if any object has collided
-    for(int i = 0; i < collideables.size(); i++){
-        if(objectNode->getTransformedBoundingBox().intersectsWithBox(collideables[i]->getTransformedBoundingBox())){
-            return true;
+    for(std::list<irr::scene::ISceneNode*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
+        if(*nodeIterator != objectNode){
+            if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getTransformedBoundingBox())){
+                return true;
+            } 
         }
     }
     
@@ -103,6 +101,9 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         
         //set the object to not need lighting
         objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+        
+        //let other objects collision test against this object
+        addCollideable(objectNode);
         
         objectSpawned = true;
     }
