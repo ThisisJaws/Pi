@@ -49,22 +49,22 @@ void Object::removeFromScene(){
     objectNode->remove();
 }
 
-bool Object::checkCollision(){
+Object* Object::checkCollision(){
     //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
-        return false;
+        return NULL;
     }
 
     //loop through and return true if any object has collided
     for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
         if(*nodeIterator != this){
             if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getSceneNode()->getTransformedBoundingBox())){
-                return true;
+                return *nodeIterator;
             } 
         }
     }
     
-    return false;
+    return NULL;
 }
 
 void Object::updatePosition(irr::core::vector3df newPosition){

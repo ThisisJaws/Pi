@@ -50,7 +50,7 @@ public:
 
 protected:
     //returns true if the object has collided with an object contained within the vector
-    bool checkCollision();
+    Object* checkCollision();
     
     //call to update the current position with the direction
     void updatePosition(irr::core::vector3df newPosition);
