@@ -65,8 +65,12 @@ void Ship::shoot(irr::core::vector3df direction){
     if(canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
-        //fire it
-        bullet->fire(getPosition(), direction);
+        
+        //figure out the front of the ship
+        irr::core::vector3df front = getPosition();
+        front.X += 65 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
+        //then fire the bullet
+        bullet->fire(front, direction);
         
         //add it onto the list to be updated
         firedBullets.push_back(bullet);
