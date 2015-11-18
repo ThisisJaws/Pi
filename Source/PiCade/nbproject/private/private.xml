@@ -10,13 +10,13 @@
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Bullet.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/EnemyShip.cpp</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Game.cpp</file>
-            <file>file:/home/pi/git-repos/Pi/Source/PiCade/Ship.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Bullet.cpp</file>
+            <file>file:/home/pi/git-repos/Pi/Source/PiCade/Ship.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Game.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Object.cpp</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/PlayerShip.h</file>
-            <file>file:/home/pi/git-repos/Pi/Source/PiCade/Object.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/Ship.cpp</file>
+            <file>file:/home/pi/git-repos/Pi/Source/PiCade/Object.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/EnemyShip.h</file>
             <file>file:/home/pi/git-repos/Pi/Source/PiCade/PlayerShip.cpp</file>
         </group>

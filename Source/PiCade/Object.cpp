@@ -49,10 +49,6 @@ void Object::removeFromScene(){
     objectNode->remove();
 }
 
-void Object::addCollideable(irr::scene::ISceneNode *collideable){
-    collideables.push_back(collideable);
-}
-
 bool Object::checkCollision(){
     //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
@@ -103,7 +99,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         
         //let other objects collision test against this object
-        addCollideable(objectNode);
+        collideables.push_back(objectNode);
         
         objectSpawned = true;
     }

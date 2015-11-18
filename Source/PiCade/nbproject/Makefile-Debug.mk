@@ -75,47 +75,47 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpicade.a: ${OBJECTFILES}
 ${OBJECTDIR}/Bullet.o: Bullet.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
 
 ${OBJECTDIR}/EnemyShip.o: EnemyShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemyShip.o EnemyShip.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemyShip.o EnemyShip.cpp
 
 ${OBJECTDIR}/EventReceiver.o: EventReceiver.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EventReceiver.o EventReceiver.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EventReceiver.o EventReceiver.cpp
 
 ${OBJECTDIR}/Game.o: Game.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Game.o Game.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Game.o Game.cpp
 
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Object.o Object.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Object.o Object.cpp
 
 ${OBJECTDIR}/PlayerShip.o: PlayerShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayerShip.o PlayerShip.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayerShip.o PlayerShip.cpp
 
 ${OBJECTDIR}/Ship.o: Ship.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
 
 ${OBJECTDIR}/Testing.o: Testing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Testing.o Testing.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Testing.o Testing.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I../../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

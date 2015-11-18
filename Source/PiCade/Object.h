@@ -47,10 +47,7 @@ public:
     
     //removes the object from the scene
     void removeFromScene();
-    
-    //adds a collideable object into the vector
-    static void addCollideable(irr::scene::ISceneNode *collideable);
-    
+
 protected:
     //returns true if the object has collided with an object contained within the vector
     bool checkCollision();

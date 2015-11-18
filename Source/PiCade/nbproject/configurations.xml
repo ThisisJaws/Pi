@@ -52,7 +52,6 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <standard>8</standard>
           <incDir>
             <pElem>../../irrlicht-1.8.3/include</pElem>
           </incDir>
