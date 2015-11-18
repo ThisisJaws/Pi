@@ -14,14 +14,14 @@
 #include <vector>
 
 class Object{
-    //VARIABLES
+    //VARIABLES  
 private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
     //a vector of collideable objects
-    std::vector<irr::scene::ISceneNode*> collideables;
+    static std::vector<irr::scene::ISceneNode*> collideables;
 
     //kep track if the object has been spawned or not
     bool objectSpawned;
@@ -49,7 +49,7 @@ public:
     void removeFromScene();
     
     //adds a collideable object into the vector
-    void addCollideable(irr::scene::ISceneNode *collideable);
+    static void addCollideable(irr::scene::ISceneNode *collideable);
     //clears the vector containing collideable objects
     void clearCollideables();
     

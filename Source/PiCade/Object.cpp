@@ -3,6 +3,9 @@
 
 #include "Object.h"
 
+//static variables need to be defined outside of the class so the lniker knows where to allocate memory
+std::vector<irr::scene::ISceneNode*> Object::collideables;
+
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct){
     //default this to false, no object has been spawned yet
     objectSpawned = false;
@@ -15,7 +18,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 Object::~Object(){
     //free memory when the object is deallocated
-    clearCollideables();
+    //clearCollideables();
     
     //remove from scene
     objectNode->remove();
