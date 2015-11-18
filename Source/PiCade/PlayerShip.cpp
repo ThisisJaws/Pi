@@ -40,10 +40,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
         }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
             moveDown();
         }
-        
-        //perform camera updates
-        updateCameraPositions();
-        updateCamera(camera);
     }
     
     //check if fire key was pressed
@@ -55,6 +51,10 @@ void PlayerShip::tick(irr::f32 deltaTime){
     if(eReceiver->isKeyDown(irr::KEY_KEY_G)){
         changeMode();
     }
+    
+    //perform camera updates
+    updateCameraPositions();
+    updateCamera(camera);
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
