@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/PlayerShip.o \
 	${OBJECTDIR}/Ship.o \
+	${OBJECTDIR}/StaticObject.o \
 	${OBJECTDIR}/Testing.o \
 	${OBJECTDIR}/main.o
 
@@ -106,6 +107,11 @@ ${OBJECTDIR}/Ship.o: Ship.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
+
+${OBJECTDIR}/StaticObject.o: StaticObject.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StaticObject.o StaticObject.cpp
 
 ${OBJECTDIR}/Testing.o: Testing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
