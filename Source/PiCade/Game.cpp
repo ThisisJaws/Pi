@@ -68,11 +68,6 @@ int Game::play(){
     //create the enemies
     EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(500, 50, 0), 30.0f, 250, device->getTimer(), "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
-    //add the boxes into the collibeable vector
-    //Object::addCollideable(boxNode1);
-    //Object::addCollideable(boxNode2);
-    //Object::addCollideable(boxNode3);
-    
     //add all objects into the vector
     objectsToUpdate.push_back(&player);
     objectsToUpdate.push_back(&enemyTest);
