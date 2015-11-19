@@ -70,8 +70,7 @@ int Game::play(){
     EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
     //add a camera to render the scene and give it to the player
-    irr::scene::ICameraSceneNode *camera = smgr->addCameraSceneNode();
-    player.addCamera(camera);
+    player.addCamera(smgr->addCameraSceneNode());
     
     //add all objects into the vector
     objectsToUpdate.push_back(&player);
@@ -92,8 +91,8 @@ int Game::play(){
         then = now;
         
         //tick(update) all objects
-        for(int i = 0; i < objectsToUpdate.size(); i++){
-            objectsToUpdate[i]->tick(frameDeltaTime);
+        for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+            (*objectIterator)->tick(frameDeltaTime);
         }
         
         //tell irrlicht to draw/updates scenes
@@ -129,8 +128,9 @@ void Game::cleanUp(){
     delete selector;
     
     //loop through object vector and delete all pointers
-    for(int i = 0; i < objectsToUpdate.size(); i++){
-        delete objectsToUpdate[i];
+    for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+        Object *toDelete = *objectIterator;
+        delete toDelete;
     }
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
