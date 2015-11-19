@@ -63,8 +63,14 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
 
 void PlayerShip::changeMode(){
     if(currentMode == flying){
+        //switch the enum
         currentMode = shooting;
+        //reset Z pos so player is aligned properly
+        irr::core::vector3df newPos = getPosition();
+        newPos.Z = 0;
+        changePosition(newPos);
     }else{
+        //switch the enum
         currentMode = flying;
     }
 }
