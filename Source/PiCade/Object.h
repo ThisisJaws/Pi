@@ -20,6 +20,7 @@ private:
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
+    
     //a list of objects that are collideable
     static std::list<Object*> collideables;
 

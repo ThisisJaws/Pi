@@ -2,7 +2,7 @@
 
 //pass everythig through the constructor
 Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
+    : Object("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
     
     fired = false;
     moveSpeed = 250.0f;
@@ -38,7 +38,7 @@ void Bullet::tick(irr::f32 deltaTime){
 
 void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
     //spawn the object into the scene
-    spawnObject("Assets/LaserBulletSix.obj", "Assets/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
+    spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
     //temp - set scale of bullet
     getSceneNode()->setScale(irr::core::vector3df(30, 30, 30));

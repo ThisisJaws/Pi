@@ -7,9 +7,9 @@ Target := ChangeMeToGameName
 # List of source files, separated by spaces
 Sources := main.cpp EventReceiver.cpp Object.cpp PlayerShip.cpp Game.cpp Testing.cpp Bullet.cpp EnemyShip.cpp Ship.cpp
 # Path to Irrlicht directory, should contain include/ and lib/
-IrrlichtHome := /home/pi/piCade/irrlicht-1.8.3
+IrrlichtHome := ../irrlicht-1.8.3
 # Path for the executable. Note that Irrlicht.dll should usually also be there for win32 systems
-BinPath = /home/pi/git-repos/Pi/Source/PiCade
+BinPath = ./
 
 # general compiler settings (might need to be set when compiling the lib, too)
 # preprocessor flags, e.g. defines and include paths

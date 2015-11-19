@@ -67,7 +67,7 @@ int Game::play(){
     PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
     
     //create the enemies
-    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
+    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
     
     //add a camera to render the scene and give it to the player
     player.addCamera(smgr->addCameraSceneNode());
