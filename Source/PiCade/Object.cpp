@@ -24,13 +24,8 @@ Object::~Object(){
         }
     }
     
-    
     //remove from scene
     objectNode->remove();
-    
-    //delete pointers
-    //delete objectNode;
-    //delete objectMesh;
 }
 
 irr::scene::IAnimatedMesh* Object::getMesh(){

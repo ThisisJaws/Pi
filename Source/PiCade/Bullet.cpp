@@ -19,10 +19,6 @@ Bullet::~Bullet(){
     //clear the pointers reference (will get properly deleted elsewhere)
     sceneMRef = 0;
     drvrRef = 0;
-    
-    //delete the pointers
-    delete sceneMRef;
-    delete drvrRef;
 }
 
 void Bullet::tick(irr::f32 deltaTime){

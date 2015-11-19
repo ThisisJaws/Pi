@@ -26,8 +26,6 @@ Ship::~Ship(){
     drv = 0;
     
     //delete the pointers
-    delete smgr;
-    delete drv;
     delete bullet;
 }
 

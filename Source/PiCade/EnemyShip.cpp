@@ -21,9 +21,6 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
 EnemyShip::~EnemyShip(){
     //clear the pointer, data gets deleted elsewhere
     playerTarget = 0;
-    
-    //delete pointers
-    delete playerTarget;
 }
 
 void EnemyShip::tick(irr::f32 deltaTime){
