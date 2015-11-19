@@ -65,16 +65,17 @@ int Game::play(){
     
     //create a ship for the player
     PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
-    //create the enemies
-    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(500, 50, 0), 30.0f, 250, device->getTimer(), "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
-    //add all objects into the vector
-    objectsToUpdate.push_back(&player);
-    objectsToUpdate.push_back(&enemyTest);
+    //create the enemies
+    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/ship 1 obj.obj", "Assets/ship 1 obj.mtl", smgr, driver);
     
     //add a camera to render the scene and give it to the player
     irr::scene::ICameraSceneNode *camera = smgr->addCameraSceneNode();
     player.addCamera(camera);
+    
+    //add all objects into the vector
+    objectsToUpdate.push_back(&player);
+    objectsToUpdate.push_back(&enemyTest);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
