@@ -15,8 +15,11 @@ private:
     //the player, the enemy's target
     PlayerShip *playerTarget;
     
-    //how far the player needs to be for the enemy to engage
+    //how far the player needs to be for the enemy to start shooting
     float combatDistance;
+    //how far the player has to be for the enemy to start moving
+    float activeDistance;
+    bool canMove;
     
     //FUNCTIONS
 public:
