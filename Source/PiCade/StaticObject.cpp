@@ -5,3 +5,5 @@ StaticObject::StaticObject(irr::core::vector3df spawnPosition, const irr::io::pa
     
     changePosition(spawnPosition);
 }
+
+void StaticObject::tick(irr::f32 deltaTime){}

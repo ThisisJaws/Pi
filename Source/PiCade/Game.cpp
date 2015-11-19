@@ -16,58 +16,21 @@ Game::Game(){
 }
 
 int Game::play(){
-    //TEMPORARY JUST TO GIVE THE PLAYER SOMETHING TO COLLIDE WITH
-    //add a box to our scene for something to collide with
-    irr::scene::ISceneNode *boxNode1 = smgr->addCubeSceneNode();
-    //set up the box
-    if(boxNode1){
-        boxNode1->setPosition(irr::core::vector3df(160, 0, 0));
-        boxNode1->setScale(irr::core::vector3df(3, 3, 3));
-        //set up a triangle selector for the box
-        selector = smgr->createTriangleSelectorFromBoundingBox(boxNode1);
-        boxNode1->setTriangleSelector(selector);
-        selector->drop();
-    }else{
-        cleanUp();
-        return EXIT_FAILURE;
-    }
-    
-    //add a box to our scene for something to collide with
-    irr::scene::ISceneNode *boxNode2 = smgr->addCubeSceneNode();
-    //set up the box
-    if(boxNode2){
-        boxNode2->setPosition(irr::core::vector3df(370, 0, 60));
-        boxNode2->setScale(irr::core::vector3df(3, 3, 3));
-        //set up a triangle selector for the box
-        selector = smgr->createTriangleSelectorFromBoundingBox(boxNode1);
-        boxNode2->setTriangleSelector(selector);
-        selector->drop();
-    }else{
-        cleanUp();
-        return EXIT_FAILURE;
-    }
-    
-    //add a box to our scene for something to collide with
-    irr::scene::ISceneNode *boxNode3 = smgr->addCubeSceneNode();
-    //set up the box
-    if(boxNode3){
-        boxNode3->setPosition(irr::core::vector3df(350, 0, -70));
-        boxNode3->setScale(irr::core::vector3df(3, 3, 3));
-        //set up a triangle selector for the box
-        selector = smgr->createTriangleSelectorFromBoundingBox(boxNode1);
-        boxNode3->setTriangleSelector(selector);
-        selector->drop();
-    }else{
-        cleanUp();
-        return EXIT_FAILURE;
-    }
-    //////////////////////////////////////////////////////////////////////
-    
     //create a ship for the player
     PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
     
     //create the enemies
     EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+    
+    //create the static objects - these wont get added onto the update vector
+    StaticObject testCube1 = StaticObject(irr::core::vector3df(160, 0, 0), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    StaticObject testCube2 = StaticObject(irr::core::vector3df(370, 0, 60), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    StaticObject testCube3 = StaticObject(irr::core::vector3df(350, 0, -70), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    
+    //temp - resize
+    testCube1.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
+    testCube2.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
+    testCube3.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
     
     //add a camera to render the scene and give it to the player
     player.addCamera(smgr->addCameraSceneNode());
