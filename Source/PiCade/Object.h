@@ -8,13 +8,28 @@
 #ifndef OBJECT_H
 #define	OBJECT_H
 
-//reference to the engine 
-#include "irrlicht.h"
+/* 
+ * these defines are used in collision
+ * when colliding with an object you can use
+ * these defines to check what the derived class
+ * is, think of it as an ID
+ */
+#define TYPE_UNDEFINED_TYPE = 0;
+#define TYPE_PLAYER = 1;
+#define TYPE_ENEMY = 2;
+#define TYPE_COLLECTABLE = 3;
+#define TYPE_STATIC = 4;
+#define TYPE_MODE_CHANGER = 5;
 
+#include "irrlicht.h"
 #include <list>
 
 class Object{
     //VARIABLES
+protected:
+    //to store the type of the object
+    int typeID;
+    
 private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
@@ -36,6 +51,9 @@ public:
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
+    
+    //get thew type of the object
+    int getTypeID();
     
     //get the object's mesh
     irr::scene::IAnimatedMesh* getMesh();
