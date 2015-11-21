@@ -1,6 +1,3 @@
-#include <ISceneManager.h>
-#include <IAnimatedMeshSceneNode.h>
-
 #include "Object.h"
 
 //static variables need to be defined outside of the class so the lniker knows where to allocate the memory
