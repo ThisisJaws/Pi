@@ -9,6 +9,7 @@
       <itemPath>EventReceiver.h</itemPath>
       <itemPath>Game.h</itemPath>
       <itemPath>Object.h</itemPath>
+      <itemPath>ObjectTypes.h</itemPath>
       <itemPath>PlayerShip.h</itemPath>
       <itemPath>Ship.h</itemPath>
       <itemPath>StaticObject.h</itemPath>
@@ -81,6 +82,8 @@
       </item>
       <item path="Object.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="ObjectTypes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="PlayerShip.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="PlayerShip.h" ex="false" tool="3" flavor2="0">
@@ -141,6 +144,8 @@
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Object.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ObjectTypes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PlayerShip.cpp" ex="false" tool="1" flavor2="0">
       </item>
