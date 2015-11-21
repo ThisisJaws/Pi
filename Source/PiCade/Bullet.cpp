@@ -3,6 +3,8 @@
 //pass everythig through the constructor
 Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Object("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
+    //change the object type
+    typeID = TYPE_BULLET;
     
     fired = false;
     moveSpeed = 250.0f;

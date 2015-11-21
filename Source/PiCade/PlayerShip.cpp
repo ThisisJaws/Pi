@@ -3,6 +3,9 @@
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Ship(30.0f, 250, 1, timerReference, "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", sceneManagerReference, driverReference){
     
+    //change the object type
+    typeID = TYPE_PLAYER;
+    
     //init variables
     currDeltaTime = 0;
     this->eReceiver = eReceiver;

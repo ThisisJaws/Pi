@@ -7,6 +7,9 @@
 std::list<Object*> Object::collideables;
 
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct){
+    //set the default object type to undefined
+    typeID = TYPE_UNDEFINED_TYPE;
+    
     //default this to false, no object has been spawned yet
     objectSpawned = false;
     

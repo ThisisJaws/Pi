@@ -3,6 +3,9 @@
 EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
         : Ship(movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
+    //change the type of the object
+    typeID = TYPE_ENEMY;
+    
     //set the spawn position
     changePosition(spawnPosition);
     
