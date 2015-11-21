@@ -31,7 +31,7 @@ void Bullet::tick(irr::f32 deltaTime){
         //update lifetime
         currentLifeTime += deltaTime;
         
-        //bullets get deleted based off of lifetime, so when thy collide increase their life time to forcea deletion
+        //bullets get deleted based off of lifetime, so when thy collide increase their life time to force a deletion
         if(checkCollision()){
             currentLifeTime = maxLifeTime;
         }
