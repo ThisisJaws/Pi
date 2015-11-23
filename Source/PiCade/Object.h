@@ -27,8 +27,11 @@ private:
     //a list of objects that are collideable
     static std::list<Object*> collideables;
 
-    //kep track if the object has been spawned or not
+    //keep track if the object has been spawned or not
     bool objectSpawned;
+    
+    //mark an object for delete to remove it o update
+    bool markedForDelete;
     
     //FUNCTIONS
 public:
@@ -39,6 +42,11 @@ public:
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
+    
+    //check if the object needs to be deleted
+    bool isMarkedForDelete();
+    //mark the object for deletion
+    void markForDelete();
     
     //get thew type of the object
     int getTypeID();

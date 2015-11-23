@@ -10,6 +10,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     //default this to false, no object has been spawned yet
     objectSpawned = false;
     
+    //dont want it to get deleted straight away
+    markedForDelete = false;
+    
     //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
     if(spawnOnConstruct){
         spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference);
@@ -26,6 +29,14 @@ Object::~Object(){
     
     //remove from scene
     objectNode->remove();
+}
+
+bool Object::isMarkedForDelete(){
+    return markedForDelete;
+}
+
+void Object::markForDelete(){
+    markedForDelete = true;
 }
 
 int Object::getTypeID(){
