@@ -40,9 +40,6 @@ public:
     
     //call to fire the bullet
     void fire(irr::core::vector3df firePos, irr::core::vector3df direction);
-    
-    //returns true if the bullet has reached its max lifetime
-    bool checkLifeTime();
 };
 
 #endif	/* BULLET_H */

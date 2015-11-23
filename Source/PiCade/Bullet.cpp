@@ -31,9 +31,27 @@ void Bullet::tick(irr::f32 deltaTime){
         //update lifetime
         currentLifeTime += deltaTime;
         
-        //bullets get deleted based off of lifetime, so when thy collide increase their life time to force a deletion
-        if(checkCollision()){
-            currentLifeTime = maxLifeTime;
+        if(currentLifeTime >= maxLifeTime){
+            markForDelete();
+        }
+        
+        //check the type of collision
+        Object *collidedObject = checkCollision();
+        if(collidedObject != NULL){
+            switch(collidedObject->getTypeID()){
+                case TYPE_PLAYER:
+                    //player logic goes here
+                    break;
+                
+                case TYPE_ENEMY:
+                    collidedObject->markForDelete();
+                    markForDelete();
+                    break;
+                
+                default:
+                    markForDelete();
+                    break;
+            }
         }
     }
 }
@@ -53,8 +71,4 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
     
     //bullet has now been fired
     fired = true;
-}
-
-bool Bullet::checkLifeTime(){
-    return currentLifeTime >= maxLifeTime;
 }
