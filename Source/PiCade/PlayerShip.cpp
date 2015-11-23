@@ -65,6 +65,10 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
 }
 
+void PlayerShip::addChangeModePoints(int xPoints[]){
+    modeChangePoints = xPoints;
+}
+
 void PlayerShip::turnLeft(){
     if(currentMode == flying){
         //update the ship position to go to the left
