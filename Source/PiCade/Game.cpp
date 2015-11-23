@@ -26,7 +26,7 @@ int Game::play(){
     player.addChangeModePoints(changePoints);
     
     //create the enemies
-    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1200, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1600, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
     
     //create the static objects - these wont get added onto the update vector
     StaticObject testCube1 = StaticObject(irr::core::vector3df(160, 0, 0), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
@@ -59,7 +59,7 @@ int Game::play(){
         //tick(update) all objects
         for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
             if(*objectIterator == NULL){
-                //remove any destroyed or dleted objects
+                //remove any destroyed or deleted objects
                 objectIterator = objectsToUpdate.erase(objectIterator);
             }else{
                 //update the object
