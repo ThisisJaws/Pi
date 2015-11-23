@@ -66,7 +66,8 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
 }
 
 void PlayerShip::addChangeModePoints(int xPoints[6]){
-    modeChangePoints = xPoints;
+    //copy the array
+    std::copy(xPoints, xPoints+6, modeChangePoints);
 }
 
 void PlayerShip::turnLeft(){
