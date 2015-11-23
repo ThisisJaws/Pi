@@ -65,7 +65,7 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
 }
 
-void PlayerShip::addChangeModePoints(int xPoints[]){
+void PlayerShip::addChangeModePoints(int xPoints[6]){
     modeChangePoints = xPoints;
 }
 

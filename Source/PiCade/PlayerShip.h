@@ -33,6 +33,7 @@ private:
     //vectors to switch between the two camera positions
     irr::core::vector3df thirdPersonPosition;
     irr::core::vector3df sideViewPosition;
+    
     //enum to store the payer's mode
     enum modes{
         flying,
@@ -51,7 +52,7 @@ public:
     void addCamera(irr::scene::ICameraSceneNode *camera);
     
     //adds the array of made changes points
-    void addChangeModePoints(int xPoints[]);
+    void addChangeModePoints(int xPoints[6]);
     
 private:
     //turns the player left or right
