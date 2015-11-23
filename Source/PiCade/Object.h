@@ -52,9 +52,6 @@ public:
     //get the position of the object
     irr::core::vector3df getPosition();
     
-    //removes the object from the scene
-    void removeFromScene();
-
 protected:
     //returns true if the object has collided with an object contained within the vector
     Object* checkCollision();

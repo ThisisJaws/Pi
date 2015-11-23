@@ -44,10 +44,6 @@ irr::core::vector3df Object::getPosition(){
     return objectNode->getPosition();
 }
 
-void Object::removeFromScene(){
-    objectNode->remove();
-}
-
 Object* Object::checkCollision(){
     //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
