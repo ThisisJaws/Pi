@@ -24,6 +24,10 @@ private:
     //to be able to receive events
     EventReceiver *eReceiver;
     
+    //keep track of all the points where the mode changes (these will be a point along the X axis)
+    int modeChangePoints[6];    //there will be 3 levels with 2 changes
+    int modeChangeIteration;
+    
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;
     //vectors to switch between the two camera positions
@@ -46,8 +50,8 @@ public:
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);
     
-    //changes the player/camera between modes
-    void changeMode();
+    //adds the array of made changes points
+    void addChangeModePoints(int xPoints[6]);
     
 private:
     //turns the player left or right
@@ -56,8 +60,8 @@ private:
     void moveUp();
     void moveDown();
     
-    //makes the player shoot
-    //void shoot();
+    //changes the player/camera between modes
+    void changeMode();
     
     //updates the two camera positions
     void updateCameraPositions();

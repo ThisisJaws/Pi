@@ -15,6 +15,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     tpOffset = tpDistance / 2;
     sideViewDistance = 300;
     sideViewOffset = sideViewDistance / 2;
+    modeChangeIteration = 0;
     
     //store the timer pointer so time between each shot can be fired
     timerReference = timerReference;
@@ -45,37 +46,23 @@ void PlayerShip::tick(irr::f32 deltaTime){
         }
     }
     
+    //perform camera updates
+    updateCameraPositions();
+    updateCamera(camera);
+    
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
         shoot(irr::core::vector3df(moveDir, 0, 0));
     }
     
-    //temp, changing mode will not be handled by user input
-    if(eReceiver->isKeyDown(irr::KEY_KEY_G)){
+    if(modeChangePoints[modeChangeIteration] < 0 && getPosition().X >= modeChangePoints[modeChangeIteration]){
+        //if we have a point that is greater than 0 and player the player's X is past that then change modes
         changeMode();
     }
-    
-    //perform camera updates
-    updateCameraPositions();
-    updateCamera(camera);
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
-}
-
-void PlayerShip::changeMode(){
-    if(currentMode == flying){
-        //switch the enum
-        currentMode = shooting;
-        //reset Z pos so player is aligned properly
-        irr::core::vector3df newPos = getPosition();
-        newPos.Z = 0;
-        changePosition(newPos);
-    }else{
-        //switch the enum
-        currentMode = flying;
-    }
 }
 
 void PlayerShip::turnLeft(){
@@ -95,6 +82,23 @@ void PlayerShip::moveUp(){
 }
 void PlayerShip::moveDown(){
     updatePosition(0.0f, (turnSpeed * currDeltaTime) * -1, 0.0f);
+}
+
+void PlayerShip::changeMode(){
+    if(currentMode == flying){
+        //switch the enum
+        currentMode = shooting;
+        //reset Z pos so player is aligned properly
+        irr::core::vector3df newPos = getPosition();
+        newPos.Z = 0;
+        changePosition(newPos);
+    }else{
+        //switch the enum
+        currentMode = flying;
+    }
+    
+    //move the mode iterator along one after the change
+    modeChangeIteration++;
 }
 
 void PlayerShip::updateCameraPositions(){
