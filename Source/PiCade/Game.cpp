@@ -18,6 +18,12 @@ Game::Game(){
 int Game::play(){
     //create a ship for the player
     PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
+    //add a camera to render the scene and give it to the player
+    player.addCamera(smgr->addCameraSceneNode());
+    
+    //create the points in where the modes will change - TEST
+    int changePoints[6] = {100, 200, 300, 400, 500, 600};
+    player.addChangeModePoints(changePoints);
     
     //create the enemies
     EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1000, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
@@ -31,9 +37,6 @@ int Game::play(){
     testCube1.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
     testCube2.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
     testCube3.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
-    
-    //add a camera to render the scene and give it to the player
-    player.addCamera(smgr->addCameraSceneNode());
     
     //add all objects into the vector
     objectsToUpdate.push_back(&player);
