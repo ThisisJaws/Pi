@@ -55,7 +55,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
         shoot(irr::core::vector3df(moveDir, 0, 0));
     }
     
-    if(modeChangePoints[modeChangeIteration] < 0 && getPosition().X >= modeChangePoints[modeChangeIteration]){
+    if(modeChangePoints[modeChangeIteration] > 0 && getPosition().X >= modeChangePoints[modeChangeIteration]){
         //if we have a point that is greater than 0 and player the player's X is past that then change modes
         changeMode();
     }
