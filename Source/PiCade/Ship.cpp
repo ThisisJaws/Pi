@@ -45,7 +45,7 @@ void Ship::tick(irr::f32 deltaTime){
     
     //iterate through the list of fired bullets and update them
     for(std::list<Bullet*>::iterator bulletIterator = firedBullets.begin(); bulletIterator != firedBullets.end(); ++bulletIterator){
-        if((*bulletIterator)->checkLifeTime()){
+        if((*bulletIterator)->isMarkedForDelete()){
             //store the current iterator object
             Bullet *toDelete = *bulletIterator;
             //erase the object from the list
