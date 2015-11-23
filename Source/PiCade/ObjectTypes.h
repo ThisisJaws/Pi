@@ -14,7 +14,6 @@
 #define TYPE_BULLET         3
 #define TYPE_COLLECTABLE    4
 #define TYPE_STATIC_OBJECT  5
-#define TYPE_MODE_CHANGER   6
 
 #endif	/* OBJECTTYPES_H */
 
