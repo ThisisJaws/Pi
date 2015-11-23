@@ -17,16 +17,16 @@ Game::Game(){
 
 int Game::play(){
     //create a ship for the player
-    PlayerShip *player = new PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
+    PlayerShip player = PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
     //add a camera to render the scene and give it to the player
-    player->addCamera(smgr->addCameraSceneNode());
+    player.addCamera(smgr->addCameraSceneNode());
     
     //create the points in where the modes will change - TEST
     int changePoints[6] = {1000, 2000, 3000, 4000, 5000, 6000};
-    player->addChangeModePoints(changePoints);
+    player.addChangeModePoints(changePoints);
     
     //create the enemies
-    EnemyShip *enemyTest = new EnemyShip(player, irr::core::vector3df(1600, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+    EnemyShip enemyTest = EnemyShip(&player, irr::core::vector3df(1600, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
     
     //create the static objects - these wont get added onto the update vector
     StaticObject testCube1 = StaticObject(irr::core::vector3df(160, 0, 0), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
@@ -39,8 +39,8 @@ int Game::play(){
     testCube3.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
     
     //add all objects into the vector
-    objectsToUpdate.push_back(player);
-    objectsToUpdate.push_back(enemyTest);
+    objectsToUpdate.push_back(&player);
+    objectsToUpdate.push_back(&enemyTest);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -58,9 +58,11 @@ int Game::play(){
         
         //tick(update) all objects
         for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-            if(*objectIterator == NULL){
-                //remove any destroyed or deleted objects
-                objectIterator = objectsToUpdate.erase(objectIterator);
+            if((*objectIterator)->isMarkedForDelete()){
+                //remove any marked objects
+                //Object *toDelete = *objectIterator;
+                //objectIterator = objectsToUpdate.erase(objectIterator);
+                //delete toDelete;
             }else{
                 //update the object
                 (*objectIterator)->tick(frameDeltaTime);
@@ -84,10 +86,6 @@ int Game::play(){
             lastFPS = fps;
         }
     }
-    
-    //clean up
-    delete player;
-    delete enemyTest;
     
     return EXIT_SUCCESS;
 }
