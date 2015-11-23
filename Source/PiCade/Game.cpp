@@ -58,7 +58,13 @@ int Game::play(){
         
         //tick(update) all objects
         for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-            (*objectIterator)->tick(frameDeltaTime);
+            if(*objectIterator == NULL){
+                //remove any destroyed or dleted objects
+                objectIterator = objectsToUpdate.erase(objectIterator);
+            }else{
+                //update the object
+                (*objectIterator)->tick(frameDeltaTime);
+            }
         }
         
         //tell irrlicht to draw/updates scenes
