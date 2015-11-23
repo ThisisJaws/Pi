@@ -22,7 +22,7 @@ int Game::play(){
     player.addCamera(smgr->addCameraSceneNode());
     
     //create the points in where the modes will change - TEST
-    int changePoints[6] = {100, 200, 300, 400, 500, 600};
+    int changePoints[6] = {1000, 2000, 3000, 4000, 5000, 6000};
     player.addChangeModePoints(changePoints);
     
     //create the enemies
