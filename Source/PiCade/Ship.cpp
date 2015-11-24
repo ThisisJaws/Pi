@@ -24,9 +24,7 @@ Ship::~Ship(){
     //clear references (these get deleted properly elsewhere)
     smgr = 0;
     drv = 0;
-    
-    //delete the pointers
-    delete bullet;
+    bullet = 0;
 }
 
 void Ship::tick(irr::f32 deltaTime){
