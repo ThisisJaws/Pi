@@ -26,12 +26,12 @@ int Game::play(){
     player->addChangeModePoints(changePoints);
     
     //create the enemies
-    EnemyShip *enemyTest = new EnemyShip(player, irr::core::vector3df(1600, 50, 0), 30.0f, 250, device->getTimer(), "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+    EnemyShip *enemyTest = new EnemyShip(player, irr::core::vector3df(0, 50, 1600), 30.0f, 250, device->getTimer(), "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
     
     //create the static objects - these wont get added onto the update vector
-    StaticObject testCube1 = StaticObject(irr::core::vector3df(160, 0, 0), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
-    StaticObject testCube2 = StaticObject(irr::core::vector3df(370, 0, 60), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
-    StaticObject testCube3 = StaticObject(irr::core::vector3df(350, 0, -70), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    StaticObject testCube1 = StaticObject(irr::core::vector3df(0, 0, 160), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    StaticObject testCube2 = StaticObject(irr::core::vector3df(60, 0, 370), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    StaticObject testCube3 = StaticObject(irr::core::vector3df(-70, 0, 350), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     
     //temp - resize
     testCube1.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));

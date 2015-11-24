@@ -31,7 +31,7 @@ void Ship::tick(irr::f32 deltaTime){
     //commit position changes based on collision
     if(!checkCollision()){
         //make the ship constantly move forward or backwards
-        updatePosition((moveSpeed * deltaTime) * moveDir, 0.0f, 0.0f);
+        updatePosition(0.0f, 0.0f, (moveSpeed * deltaTime) * moveDir);
     }
     
     //check how long is left before the ship can fire again
@@ -64,7 +64,7 @@ void Ship::shoot(irr::core::vector3df direction){
         
         //figure out the front of the ship
         irr::core::vector3df front = getPosition();
-        front.X += 65 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
+        front.Z += 65 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
         //then fire the bullet
         bullet->fire(front, direction);
         

@@ -10,7 +10,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
     changePosition(spawnPosition);
     
     //rotate to the right position
-    getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
+    //getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
     
     //set the player
     playerTarget = player;
@@ -37,6 +37,6 @@ void EnemyShip::tick(irr::f32 deltaTime){
         canMove = true;
     }
     if(playerTarget != NULL && getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
-        shoot(irr::core::vector3df(moveDir, 0, 0));
+        shoot(irr::core::vector3df(0, 0, moveDir));
     }
 }

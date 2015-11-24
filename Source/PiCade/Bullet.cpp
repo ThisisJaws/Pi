@@ -60,8 +60,9 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
     //spawn the object into the scene
     spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
-    //temp - set scale of bullet
+    //temp - set scale of bullet and rotation
     getSceneNode()->setScale(irr::core::vector3df(30, 30, 30));
+    getSceneNode()->setRotation(irr::core::vector3df(0, 90, 0));
     
     //set the direction
     this->direction = direction;

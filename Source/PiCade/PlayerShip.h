@@ -52,7 +52,7 @@ public:
     void addCamera(irr::scene::ICameraSceneNode *camera);
     
     //adds the array of made changes points
-    void addChangeModePoints(int xPoints[6]);
+    void addChangeModePoints(int zPoints[6]);
     
 private:
     //turns the player left or right

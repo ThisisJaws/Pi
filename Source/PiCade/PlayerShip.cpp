@@ -1,7 +1,10 @@
 #include "PlayerShip.h"
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Ship(30.0f, 250, 1, timerReference, "Assets/PlaceHolders/ship 1 obj.obj", "Assets/PlaceHolders/ship 1 obj.mtl", sceneManagerReference, driverReference){
+    : Ship(30.0f, 250, 1, timerReference, "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", sceneManagerReference, driverReference){
+    
+    //temp - rotate
+    getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
     
     //change the object type
     typeID = TYPE_PLAYER;
@@ -52,10 +55,10 @@ void PlayerShip::tick(irr::f32 deltaTime){
     
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
-        shoot(irr::core::vector3df(moveDir, 0, 0));
+        shoot(irr::core::vector3df(0, 0, moveDir));
     }
     
-    if(modeChangePoints[modeChangeIteration] > 0 && getPosition().X >= modeChangePoints[modeChangeIteration]){
+    if(modeChangePoints[modeChangeIteration] > 0 && getPosition().Z >= modeChangePoints[modeChangeIteration]){
         //if we have a point that is greater than 0 and player the player's X is past that then change modes
         changeMode();
     }
@@ -65,21 +68,21 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
 }
 
-void PlayerShip::addChangeModePoints(int xPoints[6]){
+void PlayerShip::addChangeModePoints(int zPoints[6]){
     //copy the array
-    std::copy(xPoints, xPoints+6, modeChangePoints);
+    std::copy(zPoints, zPoints+6, modeChangePoints);
 }
 
 void PlayerShip::turnLeft(){
     if(currentMode == flying){
         //update the ship position to go to the left
-        updatePosition(0.0f, 0.0f, turnSpeed * currDeltaTime);
+        updatePosition((turnSpeed * currDeltaTime) * -1, 0.0f, 0.0f);
     }
 }
 void PlayerShip::turnRight(){
     if(currentMode == flying){
         //update the ship position to go to the right
-        updatePosition(0.0f, 0.0f, (turnSpeed * currDeltaTime) * -1);
+        updatePosition(turnSpeed * currDeltaTime, 0.0f, 0.0f);
     }
 }
 void PlayerShip::moveUp(){
@@ -93,9 +96,9 @@ void PlayerShip::changeMode(){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;
-        //reset Z pos so player is aligned properly
+        //reset X pos so player is aligned properly
         irr::core::vector3df newPos = getPosition();
-        newPos.Z = 0;
+        newPos.X = 0;
         changePosition(newPos);
     }else{
         //switch the enum
@@ -107,13 +110,13 @@ void PlayerShip::changeMode(){
 }
 
 void PlayerShip::updateCameraPositions(){
-    thirdPersonPosition.X = getPosition().X - tpDistance;
+    thirdPersonPosition.X = getPosition().X;
     thirdPersonPosition.Y = getPosition().Y + tpOffset;
-    thirdPersonPosition.Z = getPosition().Z;
+    thirdPersonPosition.Z = getPosition().Z - tpDistance;
     
-    sideViewPosition.X = getPosition().X + sideViewOffset;
+    sideViewPosition.X = getPosition().X + sideViewDistance;
     sideViewPosition.Y = getPosition().Y;
-    sideViewPosition.Z = getPosition().Z - sideViewDistance;
+    sideViewPosition.Z = getPosition().Z + sideViewOffset;
 }
 
 void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
@@ -122,14 +125,14 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
         sceneCamera->setPosition(thirdPersonPosition);
         //set the target for the camera to look at
         irr::core::vector3df lookAtPos = getPosition();
-        lookAtPos.X += tpOffset;
+        lookAtPos.Z += tpOffset;
         sceneCamera->setTarget(lookAtPos);
     }else if(currentMode == shooting){
         //set pos of camera
         sceneCamera->setPosition(sideViewPosition);
         //set the target for the camera to look at
         irr::core::vector3df lookAtPos = getPosition();
-        lookAtPos.X += sideViewOffset;
+        lookAtPos.Z += sideViewOffset;
         sceneCamera->setTarget(lookAtPos);
     }
 }
