@@ -34,8 +34,8 @@ private:
     //object to receive keyboard input
     EventReceiver eReceiver;
     
-    //all objects to get drawn/updated will get placed in this vector
-    std::list<Object*> objectsToUpdate;
+    //all objects to get drawn/updated will get placed in this list
+    static std::list<Object*> objectsToUpdate;
     
     //FUNCTIONS
 public:
@@ -50,6 +50,9 @@ public:
     
     //call before exiting porgram
     void cleanUp();
+    
+    //adds objects onto the static list
+    static void addObjectToUpdate(Object *toAdd);
 };
 
 #endif	/* GAME_H */

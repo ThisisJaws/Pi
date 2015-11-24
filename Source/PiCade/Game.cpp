@@ -1,5 +1,8 @@
 #include "Game.h"
 
+//declaring the static member
+std::list<Object*> Game::objectsToUpdate;
+
 //init all the global variables
 Game::Game(){
     //create the devie - make sure to pass the address of eReceiver 
@@ -39,8 +42,8 @@ int Game::play(){
     testCube3.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
     
     //add all objects into the vector
-    objectsToUpdate.push_back(player);
-    objectsToUpdate.push_back(enemyTest);
+    addObjectToUpdate(player);
+    addObjectToUpdate(enemyTest);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -108,4 +111,8 @@ void Game::cleanUp(){
     }
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
+}
+
+void Game::addObjectToUpdate(Object* toAdd){
+    objectsToUpdate.push_back(toAdd);
 }

@@ -29,9 +29,8 @@ private:
     irr::ITimer *timerReference;
     int timeBetweenShots;
     
-    //the bullets the ship will fire
+    //the bullet the ship will fire
     Bullet *bullet;
-    std::list<Bullet*> firedBullets;
     
     //needed to construct new bullets
     irr::scene::ISceneManager *smgr;

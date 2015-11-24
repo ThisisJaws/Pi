@@ -1,4 +1,5 @@
 #include "Ship.h"
+#include "Game.h"
 
 Ship::Ship(float movementSpeed, int firingSpeed, int movementDirection, irr::ITimer *timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference, bool spawnOnConstruct)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct){
@@ -40,21 +41,6 @@ void Ship::tick(irr::f32 deltaTime){
             canFire = true;
         }
     }
-    
-    //iterate through the list of fired bullets and update them
-    for(std::list<Bullet*>::iterator bulletIterator = firedBullets.begin(); bulletIterator != firedBullets.end(); ++bulletIterator){
-        if((*bulletIterator)->isMarkedForDelete()){
-            //store the current iterator object
-            Bullet *toDelete = *bulletIterator;
-            //erase the object from the list
-            bulletIterator = firedBullets.erase(bulletIterator);
-            //delete the data stored in memory and invoke the destructor
-            delete toDelete;
-        }else{
-            //call update function
-            (*bulletIterator)->tick(deltaTime);
-        }
-    } 
 }
 
 void Ship::shoot(irr::core::vector3df direction){
@@ -69,7 +55,7 @@ void Ship::shoot(irr::core::vector3df direction){
         bullet->fire(front, direction);
         
         //add it onto the list to be updated
-        firedBullets.push_back(bullet);
+        Game::addObjectToUpdate(bullet);
         
         //clear the pointer to prevent memory leaks
         bullet = 0;
