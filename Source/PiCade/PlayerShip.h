@@ -16,10 +16,10 @@ private:
     irr::f32 currDeltaTime;
     
     //variables to control the camera pos
-    int tpDistance;
-    int tpOffset;
-    int sideViewDistance;
-    int sideViewOffset;
+    int tpDistance;         //distance behind the player
+    int tpOffset;           //offset above player
+    int sideViewDistance;   //distance from the side of the player
+    int sideViewOffset;     //offset infront of the player
     
     //to be able to receive events
     EventReceiver *eReceiver;

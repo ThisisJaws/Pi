@@ -15,9 +15,11 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     
     //init the camera variables
     tpDistance = 150;
-    tpOffset = tpDistance / 2;
+    tpOffset = tpDistance / 2; 
+    
     sideViewDistance = 300;
     sideViewOffset = sideViewDistance / 2;
+    
     modeChangeIteration = 0;
     
     //store the timer pointer so time between each shot can be fired
@@ -125,7 +127,7 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
         sceneCamera->setPosition(thirdPersonPosition);
         //set the target for the camera to look at
         irr::core::vector3df lookAtPos = getPosition();
-        lookAtPos.Z += tpOffset;
+        lookAtPos.Y += tpOffset;
         sceneCamera->setTarget(lookAtPos);
     }else if(currentMode == shooting){
         //set pos of camera
