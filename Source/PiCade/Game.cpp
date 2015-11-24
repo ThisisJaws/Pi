@@ -40,7 +40,7 @@ int Game::play(){
     
     //add all objects into the vector
     objectsToUpdate.push_back(&player);
-    objectsToUpdate.push_back(enemyTest);
+    objectsToUpdate.push_back(&enemyTest);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
