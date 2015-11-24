@@ -11,7 +11,7 @@
 
 //other includes
 #include <cstdlib>
-#include <vector>
+#include <list>
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
@@ -35,7 +35,7 @@ private:
     EventReceiver eReceiver;
     
     //all objects to get drawn/updated will get placed in this vector
-    std::vector<Object*> objectsToUpdate;
+    std::list<Object*> objectsToUpdate;
     
     //FUNCTIONS
 public:

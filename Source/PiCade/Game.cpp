@@ -40,7 +40,7 @@ int Game::play(){
     
     //add all objects into the vector
     objectsToUpdate.push_back(&player);
-    objectsToUpdate.push_back(&enemyTest);
+    objectsToUpdate.push_back(enemyTest);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -57,12 +57,12 @@ int Game::play(){
         then = now;
         
         //tick(update) all objects
-        for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+        for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
             if((*objectIterator)->isMarkedForDelete()){
                 //remove any marked objects
-                //Object *toDelete = *objectIterator;
-                //objectIterator = objectsToUpdate.erase(objectIterator);
-                //delete toDelete;
+                Object *toDelete = *objectIterator;
+                objectIterator = objectsToUpdate.erase(objectIterator);
+                delete toDelete;
             }else{
                 //update the object
                 (*objectIterator)->tick(frameDeltaTime);
@@ -102,7 +102,7 @@ void Game::cleanUp(){
     delete selector;
     
     //loop through object vector and delete all pointers
-    for(std::vector<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+    for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
         Object *toDelete = *objectIterator;
         delete toDelete;
     }
