@@ -33,10 +33,10 @@ void EnemyShip::tick(irr::f32 deltaTime){
     }
 
     //check the distance of the player
-    if(!canMove &&getPosition().getDistanceFrom(playerTarget->getPosition()) <= activeDistance){
+    if(!canMove && getPosition().getDistanceFrom(playerTarget->getPosition()) <= activeDistance){
         canMove = true;
     }
-    if(getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
+    if(playerTarget != NULL && getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
         shoot(irr::core::vector3df(moveDir, 0, 0));
     }
 }
