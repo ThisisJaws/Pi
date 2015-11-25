@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=libpicade.a
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/libpicade.a
+CND_ARTIFACT_NAME_Debug=libsourcecode.a
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/libsourcecode.a
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=PiCade.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/PiCade.tar
+CND_PACKAGE_NAME_Debug=SourceCode.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/SourceCode.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=libpicade.a
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/libpicade.a
+CND_ARTIFACT_NAME_Release=libsourcecode.a
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/libsourcecode.a
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=PiCade.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/PiCade.tar
+CND_PACKAGE_NAME_Release=SourceCode.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/SourceCode.tar
 #
 # include compiler specific variables
 #
