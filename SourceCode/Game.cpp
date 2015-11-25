@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <stdlib.h>
+
 //declaring the static member
 std::list<Object*> Game::objectsToUpdate;
 
@@ -24,26 +26,51 @@ int Game::play(){
     //add a camera to render the scene and give it to the player
     player->addCamera(smgr->addCameraSceneNode());
     
+    //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     //create the points in where the modes will change - TEST
-    int changePoints[6] = {1000, 2000, 3000, 4000, 5000, 6000};
+    int changePoints[6] = {3000, 7500, 9000, 12000, 15000, 6000};
     player->addChangeModePoints(changePoints);
     
-    //create the enemies
-    EnemyShip *enemyTest = new EnemyShip(player, irr::core::vector3df(0, 50, 1600), 30.0f, 250, device->getTimer(), "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+    srand(1);
     
-    //create the static objects - these wont get added onto the update vector
-    StaticObject testCube1 = StaticObject(irr::core::vector3df(0, 0, 160), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
-    StaticObject testCube2 = StaticObject(irr::core::vector3df(60, 0, 370), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
-    StaticObject testCube3 = StaticObject(irr::core::vector3df(-70, 0, 350), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    //array of test cubes
+    int x, y, z = 500;
+    StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    for(int i = 0; i < 20; i++){
+        cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
+        cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
+        
+        y = rand() % 200 + 1;
+        y -= 100;
+        
+        x = rand() % 200 + 1;
+        x -= 100;
+        
+        int check = rand() % 2;
+        if(check > 0){
+            z += 200;
+        }
+    }
     
-    //temp - resize
-    testCube1.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
-    testCube2.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
-    testCube3.getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
+    //array of test enemies
+    z = 3600;
+    y = 0;
+    x = 0;
+    for(int i = 0; i < 10; i++){
+        EnemyShip *test  = new EnemyShip(player, irr::core::vector3df(0, 50, 1600), 30.0f, 250, device->getTimer(), "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
+        test->changePosition(irr::core::vector3df(x,y,z));
+        addObjectToUpdate(test);
+        
+        y = rand() % 200 + 1;
+        y -= 100;
+        
+        z += 400;
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     //add all objects into the vector
     addObjectToUpdate(player);
-    addObjectToUpdate(enemyTest);
+    //addObjectToUpdate(enemyTest1);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
