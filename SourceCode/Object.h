@@ -60,16 +60,16 @@ public:
     //get the position of the object
     irr::core::vector3df getPosition();
     
-protected:
-    //returns true if the object has collided with an object contained within the vector
-    Object* checkCollision();
-    
     //call to update the current position with the direction
     void updatePosition(irr::core::vector3df newPosition);
     void updatePosition(float x, float y, float z);
     
     //call to completely change the object position (see update pos to move the object)
     void changePosition(irr::core::vector3df newPosition);
+    
+protected:
+    //returns true if the object has collided with an object contained within the vector
+    Object* checkCollision();
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
