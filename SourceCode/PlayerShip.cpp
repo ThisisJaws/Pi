@@ -1,7 +1,7 @@
 #include "PlayerShip.h"
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Ship(30.0f, 250, 1, timerReference, "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", sceneManagerReference, driverReference){
+    : Ship(125.0f, 250, 1, timerReference, "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", sceneManagerReference, driverReference){
     
     //temp - rotate
     getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
