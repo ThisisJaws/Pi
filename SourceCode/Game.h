@@ -17,6 +17,8 @@
 #include "PlayerShip.h"
 #include "EnemyShip.h"
 #include "BasicEnemy.h"
+#include "StrongEnemy.h"
+#include "FastEnemy.h"
 #include "StaticObject.h"
 
 class Game{
