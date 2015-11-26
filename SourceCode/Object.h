@@ -44,32 +44,32 @@ public:
     virtual void tick(irr::f32 deltaTime) = 0;
     
     //check if the object needs to be deleted
-    bool isMarkedForDelete();
+    virtual bool isMarkedForDelete();
     //mark the object for deletion
-    void markForDelete();
+    virtual void markForDelete();
     
     //get thew type of the object
-    int getTypeID();
+    virtual int getTypeID();
     
     //get the object's mesh
-    irr::scene::IAnimatedMesh* getMesh();
+    virtual irr::scene::IAnimatedMesh* getMesh();
     
     //get the object's scene node
-    irr::scene::IAnimatedMeshSceneNode* getSceneNode();
+    virtual irr::scene::IAnimatedMeshSceneNode* getSceneNode();
     
     //get the position of the object
-    irr::core::vector3df getPosition();
+    virtual irr::core::vector3df getPosition();
     
     //call to update the current position with the direction
-    void updatePosition(irr::core::vector3df newPosition);
-    void updatePosition(float x, float y, float z);
+    virtual void updatePosition(irr::core::vector3df newPosition);
+    virtual void updatePosition(float x, float y, float z);
     
     //call to completely change the object position (see update pos to move the object)
-    void changePosition(irr::core::vector3df newPosition);
+    virtual void changePosition(irr::core::vector3df newPosition);
     
 protected:
     //returns true if the object has collided with an object contained within the vector
-    Object* checkCollision();
+    virtual Object* checkCollision();
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
