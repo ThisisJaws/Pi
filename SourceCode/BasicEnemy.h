@@ -8,6 +8,10 @@
 #include "EnemyShip.h"
 
 class BasicEnemy : public EnemyShip{
+    //FUNCTIONS
+public:
+    //constructor
+    BasicEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference);
     
 };
 
