@@ -35,14 +35,17 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/BasicEnemy.o \
 	${OBJECTDIR}/Bullet.o \
 	${OBJECTDIR}/EnemyShip.o \
 	${OBJECTDIR}/EventReceiver.o \
+	${OBJECTDIR}/FastEnemy.o \
 	${OBJECTDIR}/Game.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/PlayerShip.o \
 	${OBJECTDIR}/Ship.o \
 	${OBJECTDIR}/StaticObject.o \
+	${OBJECTDIR}/StrongEnemy.o \
 	${OBJECTDIR}/Testing.o \
 	${OBJECTDIR}/main.o
 
@@ -73,6 +76,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a
 
+${OBJECTDIR}/BasicEnemy.o: BasicEnemy.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BasicEnemy.o BasicEnemy.cpp
+
 ${OBJECTDIR}/Bullet.o: Bullet.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -87,6 +95,11 @@ ${OBJECTDIR}/EventReceiver.o: EventReceiver.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EventReceiver.o EventReceiver.cpp
+
+${OBJECTDIR}/FastEnemy.o: FastEnemy.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FastEnemy.o FastEnemy.cpp
 
 ${OBJECTDIR}/Game.o: Game.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -112,6 +125,11 @@ ${OBJECTDIR}/StaticObject.o: StaticObject.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StaticObject.o StaticObject.cpp
+
+${OBJECTDIR}/StrongEnemy.o: StrongEnemy.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StrongEnemy.o StrongEnemy.cpp
 
 ${OBJECTDIR}/Testing.o: Testing.cpp 
 	${MKDIR} -p ${OBJECTDIR}

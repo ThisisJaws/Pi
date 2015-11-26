@@ -4,15 +4,18 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>BasicEnemy.h</itemPath>
       <itemPath>Bullet.h</itemPath>
       <itemPath>EnemyShip.h</itemPath>
       <itemPath>EventReceiver.h</itemPath>
+      <itemPath>FastEnemy.h</itemPath>
       <itemPath>Game.h</itemPath>
       <itemPath>Object.h</itemPath>
       <itemPath>ObjectTypes.h</itemPath>
       <itemPath>PlayerShip.h</itemPath>
       <itemPath>Ship.h</itemPath>
       <itemPath>StaticObject.h</itemPath>
+      <itemPath>StrongEnemy.h</itemPath>
       <itemPath>Testing.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -22,14 +25,17 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>BasicEnemy.cpp</itemPath>
       <itemPath>Bullet.cpp</itemPath>
       <itemPath>EnemyShip.cpp</itemPath>
       <itemPath>EventReceiver.cpp</itemPath>
+      <itemPath>FastEnemy.cpp</itemPath>
       <itemPath>Game.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
       <itemPath>PlayerShip.cpp</itemPath>
       <itemPath>Ship.cpp</itemPath>
       <itemPath>StaticObject.cpp</itemPath>
+      <itemPath>StrongEnemy.cpp</itemPath>
       <itemPath>Testing.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -62,6 +68,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="BasicEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BasicEnemy.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Bullet.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Bullet.h" ex="false" tool="3" flavor2="0">
@@ -73,6 +83,10 @@
       <item path="EventReceiver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EventReceiver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FastEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FastEnemy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Game.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -95,6 +109,10 @@
       <item path="StaticObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="StaticObject.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StrongEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StrongEnemy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Testing.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -125,6 +143,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="BasicEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BasicEnemy.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Bullet.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Bullet.h" ex="false" tool="3" flavor2="0">
@@ -136,6 +158,10 @@
       <item path="EventReceiver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EventReceiver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FastEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FastEnemy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Game.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -158,6 +184,10 @@
       <item path="StaticObject.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="StaticObject.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="StrongEnemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="StrongEnemy.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Testing.cpp" ex="false" tool="1" flavor2="0">
       </item>
