@@ -56,10 +56,31 @@ int Game::play(){
     z = 3600;
     y = 0;
     x = 0;
-    for(int i = 0; i < 10; i++){
-        EnemyShip *test  = new EnemyShip(player, irr::core::vector3df(0, 50, 1600), 30.0f, 250, device->getTimer(), "Assets/Ships/EnemyShips/EnemyShip1.obj", "Assets/PlaceHolders/ship 1 obj.mtl", smgr, driver);
-        test->changePosition(irr::core::vector3df(x,y,z));
-        addObjectToUpdate(test);
+    for(int i = 0; i < 3; i++){
+        //basic
+        BasicEnemy *test1  = new BasicEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
+        test1->changePosition(irr::core::vector3df(x,y,z));
+        addObjectToUpdate(test1);
+        
+        y = rand() % 200 + 1;
+        y -= 100;
+        
+        z += 400;
+        
+        //strong
+        StrongEnemy *test2  = new StrongEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
+        test2->changePosition(irr::core::vector3df(x,y,z));
+        addObjectToUpdate(test2);
+        
+        y = rand() % 200 + 1;
+        y -= 100;
+        
+        z += 400;
+        
+        //fast
+        FastEnemy *test3  = new FastEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
+        test3->changePosition(irr::core::vector3df(x,y,z));
+        addObjectToUpdate(test3);
         
         y = rand() % 200 + 1;
         y -= 100;
