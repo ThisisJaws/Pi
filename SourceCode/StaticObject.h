@@ -1,7 +1,8 @@
 /* 
  * this class is for all the static objects
  * trees, rocks, asteriods ect. that are just there
- * for collision
+ * for collision - these objects wont get put into the update
+ * list
  */
 
 #ifndef STATICOBJECT_H
