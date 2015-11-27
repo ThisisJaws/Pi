@@ -2,7 +2,7 @@
 
 //pass everythig through the constructor
 Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneManagerReference, driverReference, false){
+    : Object("Assets/PlaceHolders/LaserBulletSix.obj", "", sceneManagerReference, driverReference, false){
     //change the object type
     typeID = TYPE_BULLET;
     
@@ -61,7 +61,7 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
     spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
     //temp - set scale of bullet and rotation
-    getSceneNode()->setScale(irr::core::vector3df(30, 30, 30));
+    getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
     getSceneNode()->setRotation(irr::core::vector3df(0, 90, 0));
     
     //set the direction
