@@ -32,7 +32,7 @@ void Ship::tick(irr::f32 deltaTime){
     //commit position changes based on collision
     if(!checkCollision()){
         //make the ship constantly move forward or backwards
-        updatePosition(0.0f, 0.0f, (moveSpeed * deltaTime) * moveDir);
+        updatePosition(0.0f, 0.0f, moveSpeed * deltaTime);
     }
     
     //check how long is left before the ship can fire again
