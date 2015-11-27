@@ -16,8 +16,8 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
     playerTarget = player;
     
     //init variables
-    combatDistance = 300.0f;
-    activeDistance = combatDistance + 100;
+    combatDistance = 100.0f;
+    activeDistance = combatDistance + 50;
     canMove = false;
 }
 
