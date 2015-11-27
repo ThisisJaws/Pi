@@ -50,7 +50,7 @@ void Ship::shoot(irr::core::vector3df direction){
         
         //figure out the front of the ship
         irr::core::vector3df front = getPosition();
-        front.Z += 30 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
+        front.Z += 5 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
         //then fire the bullet
         bullet->fire(front, direction);
         
