@@ -3,9 +3,6 @@
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Ship(150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.bmp", sceneManagerReference, driverReference){
     
-    //temp - rotate
-    getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
-    
     //change the object type
     typeID = TYPE_PLAYER;
     
@@ -14,10 +11,10 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     this->eReceiver = eReceiver;
     
     //init the camera variables
-    tpDistance = 150;
+    tpDistance = 50;
     tpOffset = tpDistance / 2; 
     
-    sideViewDistance = 300;
+    sideViewDistance = 150;
     sideViewOffset = sideViewDistance / 2;
     
     modeChangeIteration = 0;
