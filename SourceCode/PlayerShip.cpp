@@ -11,11 +11,11 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     this->eReceiver = eReceiver;
     
     //init the camera variables
-    tpDistance = 25;
-    tpOffset = tpDistance / 2; 
+    tpDistance = 15;
+    tpOffset = 7;
     
     sideViewDistance = 75;
-    sideViewOffset = sideViewDistance / 2;
+    sideViewOffset = 60;
     
     modeChangeIteration = 0;
     
