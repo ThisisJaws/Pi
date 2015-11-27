@@ -1,5 +1,5 @@
 /* 
- * this class is for everything that wil be draw/updated 
+ * this class is for everything that will be drawn/updated 
  * with in the game - like the player/enemies/pick ups ect...
  * All object classes should inherit from this and not be created
  * from this class
