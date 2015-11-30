@@ -109,29 +109,37 @@ void PlayerShip::changeMode(){
 }
 
 void PlayerShip::updateCameraPositions(){
+    //third person view update
     thirdPersonPosition.X = getPosition().X;
     thirdPersonPosition.Y = getPosition().Y + tpOffset;
     thirdPersonPosition.Z = getPosition().Z - tpDistance;
     
+    //side view update
     sideViewPosition.X = getPosition().X + sideViewDistance;
     sideViewPosition.Y = getPosition().Y;
     sideViewPosition.Z = getPosition().Z + sideViewOffset;
 }
 
-void PlayerShip::updateCamera(irr::scene::ICameraSceneNode* sceneCamera){
+void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
+    irr::core::vector3df cameraLookAt;
+    
+    //update the camera's position
     if(currentMode == flying){
-        //set pos of camera
+        //update position
         sceneCamera->setPosition(thirdPersonPosition);
-        //set the target for the camera to look at
-        irr::core::vector3df lookAtPos = getPosition();
-        lookAtPos.Y += tpOffset;
-        sceneCamera->setTarget(lookAtPos);
+        
+        //update look at
+        cameraLookAt = sceneCamera->getPosition();
+        cameraLookAt.Z += 1;
     }else if(currentMode == shooting){
-        //set pos of camera
+        //update position
         sceneCamera->setPosition(sideViewPosition);
-        //set the target for the camera to look at
-        irr::core::vector3df lookAtPos = getPosition();
-        lookAtPos.Z += sideViewOffset;
-        sceneCamera->setTarget(lookAtPos);
+        
+        //update look at
+        cameraLookAt = sceneCamera->getPosition();
+        cameraLookAt.X -= 1;
     }
+    
+    //apply look at change
+    sceneCamera->setTarget(cameraLookAt);
 }
