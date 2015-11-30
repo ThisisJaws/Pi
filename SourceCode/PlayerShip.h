@@ -19,7 +19,7 @@ private:
     int sideViewOffset;     //offset in front of the player
     
     //camera position gets adjusted by these offsets
-    float cameraYOffset, maxYOffset;
+    float cameraYOffset, maxYOffset, minYOffset;
     float cameraXOffset, maxXOffset;
     
     //to control the camera being used in the scene

@@ -16,10 +16,12 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     sideViewDistance = 75;
     sideViewOffset = 60;
     
+    //set up the offsets for flying mode
     cameraYOffset = 0;
-    cameraXOffset = 0;
-    maxYOffset = 100;
-    maxXOffset = 100;
+    maxYOffset = 10;
+    minYOffset = -2;
+    cameraXOffset = 0;    
+    maxXOffset = 10;
     
     modeChangeIteration = 0;
     
@@ -75,7 +77,7 @@ void PlayerShip::addChangeModePoints(int zPoints[6]){
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        if(cameraXOffset < maxXOffset){
+        if(getPosition().X > -maxXOffset){
             float moveBy = speed * deltaTime;
     
             //move the ship to the left
@@ -87,7 +89,7 @@ void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        if(cameraXOffset > -maxXOffset){
+        if(getPosition().X < maxXOffset){
             float moveBy = speed * deltaTime;
     
             //move the ship to the right
@@ -99,7 +101,7 @@ void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
     //if ship is still inside screen
-    if(cameraYOffset > -maxYOffset){
+    if(getPosition().Y < maxYOffset){
         float moveBy = speed * deltaTime;
         
         //move the ship up
@@ -110,7 +112,7 @@ void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
     //if ship is still inside screen
-    if(cameraYOffset < maxYOffset){
+    if(getPosition().Y > minYOffset){
         float moveBy = speed * deltaTime;
         
         //move the ship down
@@ -124,14 +126,24 @@ void PlayerShip::changeMode(){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;
+        
         //reset X pos so player is aligned properly
         irr::core::vector3df newPos = getPosition();
         newPos.X = 0;
         changePosition(newPos);
         cameraXOffset = 0;
+        
+        //update the offsets
+        maxYOffset = 50;
+        minYOffset = -maxYOffset;
+        
     }else{
         //switch the enum
         currentMode = flying;
+        
+        //update the offsets
+        maxYOffset = 10;
+        minYOffset = -2;
     }
     
     //move the mode iterator along one after the change
