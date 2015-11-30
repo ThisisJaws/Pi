@@ -16,7 +16,7 @@ private:
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
     int sideViewDistance;   //distance from the side of the player
-    int sideViewOffset;     //offset infront of the player
+    int sideViewOffset;     //offset in front of the player
     
     //camera position gets adjusted by these offsets
     float cameraYOffset, maxYOffset;
