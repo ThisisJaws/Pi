@@ -3,7 +3,7 @@
 # and be sure that CXX is set to a valid compiler
 
 # Name of the executable created (.exe will be added automatically if necessary)
-Target := ChangeMeToGameName
+Target := linuxBuild
 # List of source files, separated by spaces
 Sources := main.cpp EventReceiver.cpp Object.cpp PlayerShip.cpp Game.cpp Testing.cpp Bullet.cpp EnemyShip.cpp Ship.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp
 # Path to Irrlicht directory, should contain include/ and lib/
