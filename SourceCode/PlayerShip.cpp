@@ -7,7 +7,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     typeID = TYPE_PLAYER;
     
     //init variables
-    currDeltaTime = 0;
     this->eReceiver = eReceiver;
     
     //init the camera variables
@@ -16,6 +15,11 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     
     sideViewDistance = 75;
     sideViewOffset = 60;
+    
+    cameraYOffset = 0;
+    cameraXOffset = 0;
+    maxYOffset = 100;
+    maxXOffset = 100;
     
     modeChangeIteration = 0;
     
@@ -30,21 +34,18 @@ void PlayerShip::tick(irr::f32 deltaTime){
     //call base class function to handle shooting/movement
     Ship::tick(deltaTime);
     
-    //updated global deltatime for other functions
-    currDeltaTime = deltaTime;
-    
     //check for and apply all position changes
     if(!checkCollision()){
         //check for movement input
         if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
-            turnLeft();
+            turnLeft(turnSpeed, deltaTime);
         }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-            turnRight();
+            turnRight(turnSpeed, deltaTime);
         }
         if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
-            moveUp();
+            moveUp(turnSpeed, deltaTime);
         }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
-            moveDown();
+            moveDown(turnSpeed, deltaTime);
         }
     }
     
@@ -72,23 +73,23 @@ void PlayerShip::addChangeModePoints(int zPoints[6]){
     std::copy(zPoints, zPoints+6, modeChangePoints);
 }
 
-void PlayerShip::turnLeft(){
+void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
         //update the ship position to go to the left
-        updatePosition((turnSpeed * currDeltaTime) * -1, 0.0f, 0.0f);
+        updatePosition(-speed * deltaTime, 0.0f, 0.0f);
     }
 }
-void PlayerShip::turnRight(){
+void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
         //update the ship position to go to the right
-        updatePosition(turnSpeed * currDeltaTime, 0.0f, 0.0f);
+        updatePosition(speed * deltaTime, 0.0f, 0.0f);
     }
 }
-void PlayerShip::moveUp(){
-    updatePosition(0.0f, turnSpeed * currDeltaTime, 0.0f);
+void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
+    updatePosition(0.0f, speed * deltaTime, 0.0f);
 }
-void PlayerShip::moveDown(){
-    updatePosition(0.0f, (turnSpeed * currDeltaTime) * -1, 0.0f);
+void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
+    updatePosition(0.0f, -speed * deltaTime, 0.0f);
 }
 
 void PlayerShip::changeMode(){

@@ -12,14 +12,21 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
-    //stores the current delta time
-    irr::f32 currDeltaTime;
-    
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
     int sideViewDistance;   //distance from the side of the player
     int sideViewOffset;     //offset infront of the player
+    
+    //camera position gets adjusted by these offsets
+    float cameraYOffset, maxYOffset;
+    float cameraXOffset, maxXOffset;
+    
+    //to control the camera being used in the scene
+    irr::scene::ICameraSceneNode *camera;
+    //vectors to switch between the two camera positions
+    irr::core::vector3df thirdPersonPosition;
+    irr::core::vector3df sideViewPosition;
     
     //to be able to receive events
     EventReceiver *eReceiver;
@@ -27,12 +34,6 @@ private:
     //keep track of all the points where the mode changes (these will be a point along the X axis)
     int modeChangePoints[6];    //there will be 3 levels with 2 changes
     int modeChangeIteration;
-    
-    //to control the camera being used in the scene
-    irr::scene::ICameraSceneNode *camera;
-    //vectors to switch between the two camera positions
-    irr::core::vector3df thirdPersonPosition;
-    irr::core::vector3df sideViewPosition;
     
     //enum to store the payer's mode
     enum modes{
@@ -56,10 +57,10 @@ public:
     
 private:
     //turns the player left or right
-    void turnLeft();
-    void turnRight();
-    void moveUp();
-    void moveDown();
+    void turnLeft(float speed, irr::f32 deltaTime);
+    void turnRight(float speed, irr::f32 deltaTime);
+    void moveUp(float speed, irr::f32 deltaTime);
+    void moveDown(float speed, irr::f32 deltaTime);
     
     //changes the player/camera between modes
     void changeMode();
