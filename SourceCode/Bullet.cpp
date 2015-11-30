@@ -44,11 +44,13 @@ void Bullet::tick(irr::f32 deltaTime){
                     break;
                 
                 case TYPE_ENEMY:
+                    //enemys will get marked for delete
                     collidedObject->markForDelete();
                     markForDelete();
                     break;
                 
                 default:
+                    //if it hits anything
                     markForDelete();
                     break;
             }
