@@ -6,7 +6,7 @@ Ship::Ship(float movementSpeed, int firingSpeed, int movementDirection, irr::ITi
     
     //set up variables
     moveSpeed = movementSpeed;
-    turnSpeed = moveSpeed + 10.0f;
+    turnSpeed = moveSpeed / 2;
     //direction of movement +1 is along the positive X axis, -1 is along the negative X axis
     moveDir = movementDirection;
     
