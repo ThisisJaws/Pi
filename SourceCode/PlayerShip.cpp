@@ -75,21 +75,49 @@ void PlayerShip::addChangeModePoints(int zPoints[6]){
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        //update the ship position to go to the left
-        updatePosition(-speed * deltaTime, 0.0f, 0.0f);
+        if(cameraXOffset < maxXOffset){
+            float moveBy = speed * deltaTime;
+    
+            //move the ship to the left
+            updatePosition(-moveBy, 0.0f, 0.0f);
+            //move the camera to the right
+            cameraXOffset += moveBy;
+        }
     }
 }
 void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        //update the ship position to go to the right
-        updatePosition(speed * deltaTime, 0.0f, 0.0f);
+        if(cameraXOffset > -maxXOffset){
+            float moveBy = speed * deltaTime;
+    
+            //move the ship to the right
+            updatePosition(moveBy, 0.0f, 0.0f);
+            //move the camera to the left
+            cameraXOffset -= moveBy;
+        }
     }
 }
 void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
-    updatePosition(0.0f, speed * deltaTime, 0.0f);
+    //if ship is still inside screen
+    if(cameraYOffset > -maxYOffset){
+        float moveBy = speed * deltaTime;
+        
+        //move the ship up
+        updatePosition(0.0f, moveBy, 0.0f);
+        //move the camera down
+        cameraYOffset -= moveBy;
+    }
 }
 void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
-    updatePosition(0.0f, -speed * deltaTime, 0.0f);
+    //if ship is still inside screen
+    if(cameraYOffset < maxYOffset){
+        float moveBy = speed * deltaTime;
+        
+        //move the ship down
+        updatePosition(0.0f, -moveBy, 0.0f);
+        //move the camera up
+        cameraYOffset += moveBy;
+    }
 }
 
 void PlayerShip::changeMode(){
@@ -100,6 +128,7 @@ void PlayerShip::changeMode(){
         irr::core::vector3df newPos = getPosition();
         newPos.X = 0;
         changePosition(newPos);
+        cameraXOffset = 0;
     }else{
         //switch the enum
         currentMode = flying;
@@ -123,24 +152,30 @@ void PlayerShip::updateCameraPositions(){
 
 void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
     irr::core::vector3df cameraLookAt;
+    irr::core::vector3df cameraPosition;
     
     //update the camera's position
     if(currentMode == flying){
         //update position
-        sceneCamera->setPosition(thirdPersonPosition);
+        cameraPosition = thirdPersonPosition;
+        cameraPosition.Y += cameraYOffset;
+        cameraPosition.X += cameraXOffset;
         
         //update look at
-        cameraLookAt = sceneCamera->getPosition();
+        cameraLookAt = cameraPosition;
         cameraLookAt.Z += 1;
     }else if(currentMode == shooting){
         //update position
-        sceneCamera->setPosition(sideViewPosition);
+        cameraPosition = sideViewPosition;
+        cameraPosition.Y += cameraYOffset;
+        cameraPosition.X += cameraXOffset;
         
         //update look at
-        cameraLookAt = sceneCamera->getPosition();
+        cameraLookAt = cameraPosition;
         cameraLookAt.X -= 1;
     }
-    
-    //apply look at change
+
+    //apply look at and position changes
     sceneCamera->setTarget(cameraLookAt);
+    sceneCamera->setPosition(cameraPosition);
 }
