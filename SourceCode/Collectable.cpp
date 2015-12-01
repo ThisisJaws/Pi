@@ -21,7 +21,7 @@ void Collectable::tick(irr::f32 deltaTime){
     if(collidedObject != NULL){
         if(collidedObject->getTypeID() == TYPE_PLAYER){
             //if we collide with the player then activate the power up
-            activate();
+            activate(collidedObject);
             //then remove from the scene
             markForDelete();
         }

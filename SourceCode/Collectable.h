@@ -9,6 +9,7 @@
 #define	COLLLECTABLE_H
 
 #include "Object.h"
+#include "PlayerShip.h"
 
 class Collectable : public Object{
     //VARIABLES
@@ -26,7 +27,7 @@ public:
     
 protected:
     //pure virtual function which gets called when the player player collides
-    virtual void activate() = 0;
+    virtual void activate(PlayerShip *player) = 0;
 };
 
 #endif	/* COLLLECTABLE_H */
