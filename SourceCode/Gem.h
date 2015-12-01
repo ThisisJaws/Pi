@@ -19,7 +19,7 @@ public:
     Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
  
 protected:
-    virtual void activate() override;
+    virtual void activate(PlayerShip *player) override;
 };
 
 #endif	/* GEM_H */
