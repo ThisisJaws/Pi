@@ -47,7 +47,7 @@ DESTPATH = $(BinPath)/$(Target)$(SUF)
 
 all_linux all_win32 static_win32:
 	$(warning Building...)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(Sources) -o $(DESTPATH) $(LDFLAGS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(Sources) -std=c++11 -o $(DESTPATH) $(LDFLAGS)
 
 clean: clean_linux clean_win32
 	$(warning Cleaning...)
