@@ -34,7 +34,7 @@ int Game::play(){
     srand(1);
     
     //array of test cubes
-    int x, y, z = 500;
+    int x = 0, y = 0, z = 500;
     StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     for(int i = 0; i < 20; i++){
         cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
