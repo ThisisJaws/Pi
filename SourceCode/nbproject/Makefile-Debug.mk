@@ -15,8 +15,8 @@ NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
 CC=gcc
-CCC=g++
-CXX=g++
+CCC=g++-4.6
+CXX=g++-4.6
 FC=gfortran
 AS=as
 
@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/BasicEnemy.o \
 	${OBJECTDIR}/Bullet.o \
+	${OBJECTDIR}/Collectable.o \
 	${OBJECTDIR}/EnemyShip.o \
 	${OBJECTDIR}/EventReceiver.o \
 	${OBJECTDIR}/FastEnemy.o \
@@ -79,67 +80,72 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a: ${OBJECTFILES}
 ${OBJECTDIR}/BasicEnemy.o: BasicEnemy.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BasicEnemy.o BasicEnemy.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BasicEnemy.o BasicEnemy.cpp
 
 ${OBJECTDIR}/Bullet.o: Bullet.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
+
+${OBJECTDIR}/Collectable.o: Collectable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Collectable.o Collectable.cpp
 
 ${OBJECTDIR}/EnemyShip.o: EnemyShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemyShip.o EnemyShip.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemyShip.o EnemyShip.cpp
 
 ${OBJECTDIR}/EventReceiver.o: EventReceiver.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EventReceiver.o EventReceiver.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EventReceiver.o EventReceiver.cpp
 
 ${OBJECTDIR}/FastEnemy.o: FastEnemy.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FastEnemy.o FastEnemy.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FastEnemy.o FastEnemy.cpp
 
 ${OBJECTDIR}/Game.o: Game.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Game.o Game.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Game.o Game.cpp
 
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Object.o Object.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Object.o Object.cpp
 
 ${OBJECTDIR}/PlayerShip.o: PlayerShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayerShip.o PlayerShip.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PlayerShip.o PlayerShip.cpp
 
 ${OBJECTDIR}/Ship.o: Ship.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ship.o Ship.cpp
 
 ${OBJECTDIR}/StaticObject.o: StaticObject.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StaticObject.o StaticObject.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StaticObject.o StaticObject.cpp
 
 ${OBJECTDIR}/StrongEnemy.o: StrongEnemy.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StrongEnemy.o StrongEnemy.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/StrongEnemy.o StrongEnemy.cpp
 
 ${OBJECTDIR}/Testing.o: Testing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Testing.o Testing.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Testing.o Testing.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I../irrlicht-1.8.3/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

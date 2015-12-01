@@ -15,8 +15,8 @@ NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
 CC=gcc
-CCC=g++
-CXX=g++
+CCC=g++-4.6
+CXX=g++-4.6
 FC=gfortran
 AS=as
 
@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/BasicEnemy.o \
 	${OBJECTDIR}/Bullet.o \
+	${OBJECTDIR}/Collectable.o \
 	${OBJECTDIR}/EnemyShip.o \
 	${OBJECTDIR}/EventReceiver.o \
 	${OBJECTDIR}/FastEnemy.o \
@@ -85,6 +86,11 @@ ${OBJECTDIR}/Bullet.o: Bullet.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bullet.o Bullet.cpp
+
+${OBJECTDIR}/Collectable.o: Collectable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Collectable.o Collectable.cpp
 
 ${OBJECTDIR}/EnemyShip.o: EnemyShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
