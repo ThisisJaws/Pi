@@ -38,7 +38,7 @@ int Game::play(){
     StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     for(int i = 0; i < 20; i++){
         cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
-        cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(20, 20, 20));
+        cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
         
         y = rand() % 200 + 1;
         y -= 100;
@@ -62,8 +62,8 @@ int Game::play(){
         test1->changePosition(irr::core::vector3df(x,y,z));
         addObjectToUpdate(test1);
         
-        y = rand() % 200 + 1;
-        y -= 100;
+        y = rand() % 100 + 1;
+        y -= 50;
         
         z += 400;
         
