@@ -1,7 +1,8 @@
 /* 
  * The base class for all the collectables
  * all the individual properties for the collectables
- * will be in classes that inherit from this 
+ * will be in classes that inherit from this, this class
+ * will just check for collisions
  */
 
 #ifndef COLLLECTABLE_H
