@@ -26,5 +26,4 @@ void Collectable::tick(irr::f32 deltaTime){
             markForDelete();
         }
     }
-    
 }
