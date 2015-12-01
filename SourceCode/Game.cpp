@@ -15,6 +15,7 @@ Game::Game(){
     //get the neccessary pointers
     driver = device->getVideoDriver();
     smgr = device->getSceneManager();
+    guienv = device->getGUIEnvironment();
     
     //make the address of selector 0 for now
     selector = 0;
@@ -91,7 +92,9 @@ int Game::play(){
     
     //add all objects into the vector
     addObjectToUpdate(player);
-    //addObjectToUpdate(enemyTest1);
+    
+    //setup the user ammo count - test
+    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 10, 200, 22), false);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -120,14 +123,20 @@ int Game::play(){
             }
         }
         
+        //update the ammo text
+        irr::core::stringw ammoCount(L"Ammo: ");
+        ammoCount += player->getAmmo();
+        ammoText->setText(ammoCount.c_str());
+        
         //tell irrlicht to draw/updates scenes
         driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
         
         smgr->drawAll();
+        guienv->drawAll();
         
         driver->endScene();
         
-        //add fps to window name (because gui isnt set up yet)
+        //add fps to window name
         fps = driver->getFPS();
         if (lastFPS != fps){
             irr::core::stringw tmp(L"Pi Cade ");
@@ -150,6 +159,7 @@ void Game::cleanUp(){
     delete device;
     delete driver;
     delete smgr;
+    delete guienv;
     delete selector;
     
     //loop through object vector and delete all pointers

@@ -30,6 +30,8 @@ private:
     irr::video::IVideoDriver *driver;
     //a pointer to the scene manager
     irr::scene::ISceneManager *smgr;
+    //a pointer to the gui iterface
+    irr::gui::IGUIEnvironment *guienv;
     
     //set up a selector for collision purposes
     irr::scene::ITriangleSelector *selector;
