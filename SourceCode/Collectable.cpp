@@ -20,8 +20,10 @@ void Collectable::tick(irr::f32 deltaTime){
     Object *collidedObject = checkCollision();
     if(collidedObject != NULL){
         if(collidedObject->getTypeID() == TYPE_PLAYER){
-            //if we collide with the player then activate the power up
-            activate(collidedObject);
+            //dynamic cast to the player
+            PlayerShip *player = dynamic_cast<PlayerShip *>(collidedObject);
+            //then activate the collectable
+            activate(player);
             //then remove from the scene
             markForDelete();
         }
