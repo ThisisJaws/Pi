@@ -15,10 +15,12 @@ BinPath = .
 # preprocessor flags, e.g. defines and include paths
 USERCPPFLAGS = 
 # compiler flags such as optimization flags
-USERCXXFLAGS = -O3 -ffast-math
-#USERCXXFLAGS = -g -Wall
+#USERCXXFLAGS = -O3 -ffast-math
+USERCXXFLAGS = -g -Wall
 # linker flags such as additional libraries and link paths
 USERLDFLAGS =
+
+CXX = g++-4.6
 
 ####
 #no changes necessary below this line
