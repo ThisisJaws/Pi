@@ -7,7 +7,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
     changePosition(spawnPosition);
     
     //set the movement speeds
-    rotSpeed = 5.0f;
+    rotSpeed = 50.0f;
 }
 
 void Collectable::tick(irr::f32 deltaTime){
@@ -26,4 +26,5 @@ void Collectable::tick(irr::f32 deltaTime){
             markForDelete();
         }
     }
+    
 }
