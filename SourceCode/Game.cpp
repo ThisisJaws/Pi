@@ -90,7 +90,7 @@ int Game::play(){
     }
     
     //testing ammo
-    Ammo *ammo = new Ammo(irr::core::vector3df(0, 0, 9100), smgr, driver);
+    Ammo *ammo = new Ammo(irr::core::vector3df(0, 0, 8000), smgr, driver);
     addObjectToUpdate(ammo);
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
