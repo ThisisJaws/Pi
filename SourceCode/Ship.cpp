@@ -1,8 +1,8 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(float movementSpeed, int firingSpeed, int movementDirection, irr::ITimer *timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference, bool spawnOnConstruct)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct){
+Ship::Ship(irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, int movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct)
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct, spawnPosition){
     
     //set up variables
     moveSpeed = movementSpeed;

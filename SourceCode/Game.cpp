@@ -88,6 +88,11 @@ int Game::play(){
         
         z += 400;
     }
+    
+    //testing ammo
+    Ammo *ammo = new Ammo(irr::core::vector3df(0, 0, 9100), smgr, driver);
+    addObjectToUpdate(ammo);
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     //add all objects into the vector

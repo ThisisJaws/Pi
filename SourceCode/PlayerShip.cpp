@@ -1,7 +1,7 @@
 #include "PlayerShip.h"
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Ship(150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.bmp", sceneManagerReference, driverReference){
+    : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.bmp", sceneManagerReference, driverReference){
     
     //change the object type
     typeID = TYPE_PLAYER;

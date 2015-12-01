@@ -20,6 +20,7 @@
 #include "StrongEnemy.h"
 #include "FastEnemy.h"
 #include "StaticObject.h"
+#include "Ammo.h"
 
 class Game{
     //VARIABLES
