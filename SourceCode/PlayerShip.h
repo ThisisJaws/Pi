@@ -12,6 +12,9 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
+    //how many bullets the player can shoot
+    int ammo;
+    
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
@@ -54,6 +57,10 @@ public:
     //adds the array of made changes points
     void addChangeModePoints(int zPoints[6]);
     
+    //getters and setters for ammo
+    int getAmmo();
+    void increaseAmmo(int amount);
+      
 private:
     //turns the player left or right
     void turnLeft(float speed, irr::f32 deltaTime);

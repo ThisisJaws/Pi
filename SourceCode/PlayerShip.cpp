@@ -7,6 +7,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     typeID = TYPE_PLAYER;
     
     //init variables
+    ammo = 20;
     this->eReceiver = eReceiver;
     
     //init the camera variables
@@ -57,7 +58,13 @@ void PlayerShip::tick(irr::f32 deltaTime){
     
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
-        shoot(irr::core::vector3df(0, 0, moveDir));
+        //check the ammo count
+        if(ammo > 0){
+            if(shoot(irr::core::vector3df(0, 0, moveDir))){
+                //if the ship successfully shot then take away 1 ammo
+                ammo--;
+            }
+        }
     }
     
     if(modeChangePoints[modeChangeIteration] > 0 && getPosition().Z >= modeChangePoints[modeChangeIteration]){
@@ -73,6 +80,14 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
 void PlayerShip::addChangeModePoints(int zPoints[6]){
     //copy the array
     std::copy(zPoints, zPoints+6, modeChangePoints);
+}
+
+int PlayerShip::getAmmo(){
+    return ammo;
+}
+
+void PlayerShip::increaseAmmo(int amount){
+    ammo += amount;
 }
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
