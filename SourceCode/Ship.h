@@ -46,8 +46,8 @@ public:
     virtual void tick(irr::f32 deltaTime) override;
     
 protected:
-    //makes the ship shoot
-    virtual void shoot(irr::core::vector3df direction);    
+    //makes the ship shoot, returns true if it fired
+    bool shoot(irr::core::vector3df direction);    
 };
 
 #endif	/* _SHIP_H */

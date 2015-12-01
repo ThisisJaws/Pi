@@ -45,7 +45,7 @@ void Ship::tick(irr::f32 deltaTime){
     }
 }
 
-void Ship::shoot(irr::core::vector3df direction){
+bool Ship::shoot(irr::core::vector3df direction){
     if(canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
@@ -67,5 +67,11 @@ void Ship::shoot(irr::core::vector3df direction){
         
         //update the time since last fire variables
         timeSinceLastFire = timerReference->getRealTime();
+        
+        //return true if the fire was successful
+        return true;
+    }else{
+        //return false if the ship didn't shoot
+        return false;
     }
 }
