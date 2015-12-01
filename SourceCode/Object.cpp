@@ -3,9 +3,12 @@
 //static variables need to be defined outside of the class so the lniker knows where to allocate the memory
 std::list<Object*> Object::collideables;
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos){
     //set the default object type to undefined
     typeID = TYPE_UNDEFINED_TYPE;
+    
+    //set the spawn position
+    this->spawnPos = spawnPos;
     
     //default this to false, no object has been spawned yet
     objectSpawned = false;
@@ -93,7 +96,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);
         
         //create the scene node using loaded mesh
-        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh);
+        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, 0, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
         
         //set the object to not need lighting

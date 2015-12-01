@@ -26,6 +26,9 @@ private:
     
     //a list of objects that are collideable
     static std::list<Object*> collideables;
+    
+    //the spawn position of the Object
+    irr::core::vector3df spawnPos;
 
     //keep track if the object has been spawned or not
     bool objectSpawned;
@@ -36,7 +39,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0));
     //destructor
     virtual ~Object();
     
