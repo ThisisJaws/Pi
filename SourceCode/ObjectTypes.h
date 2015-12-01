@@ -8,6 +8,7 @@
 #ifndef OBJECTTYPES_H
 #define	OBJECTTYPES_H
 
+#define NO_COLLISION       -1
 #define TYPE_UNDEFINED_TYPE 0
 #define TYPE_PLAYER         1
 #define TYPE_ENEMY          2
