@@ -127,12 +127,6 @@ void PlayerShip::changeMode(){
         //switch the enum
         currentMode = shooting;
         
-        //reset X pos so player is aligned properly
-        irr::core::vector3df newPos = getPosition();
-        newPos.X = 0;
-        changePosition(newPos);
-        cameraXOffset = 0;
-        
         //update the offsets
         maxYOffset = 50;
         minYOffset = -maxYOffset;
@@ -145,6 +139,15 @@ void PlayerShip::changeMode(){
         maxYOffset = 10;
         minYOffset = -2;
     }
+    
+    //reset X and Y pos so player is aligned properly
+    irr::core::vector3df newPos = getPosition();
+    newPos.X = 0;
+    newPos.Y = 0;
+    changePosition(newPos);
+    //make sure the offsets are reset
+    cameraXOffset = 0;
+    cameraYOffset = 0;
     
     //move the mode iterator along one after the change
     modeChangeIteration++;
