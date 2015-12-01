@@ -35,8 +35,7 @@ public:
     //destructor
     ~Bullet();
     
-    //override
-    void tick(irr::f32 deltatime);
+    void tick(irr::f32 deltatime) override;
     
     //call to fire the bullet
     void fire(irr::core::vector3df firePos, irr::core::vector3df direction);

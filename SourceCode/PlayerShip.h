@@ -46,8 +46,7 @@ public:
     //constructor
     PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
 
-    //overriding tick function
-    virtual void tick(irr::f32 deltaTime);
+    virtual void tick(irr::f32 deltaTime) override;
     
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);

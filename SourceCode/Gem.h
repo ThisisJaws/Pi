@@ -15,7 +15,7 @@ private:
     
     //FUNCTIONS
 protected:
-    virtual void activate();
+    virtual void activate() override;
 };
 
 #endif	/* GEM_H */

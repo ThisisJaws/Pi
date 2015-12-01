@@ -43,8 +43,7 @@ public:
     //destructor
     ~Ship();
     
-    //override
-    virtual void tick(irr::f32 deltaTime);
+    virtual void tick(irr::f32 deltaTime) override;
     
 protected:
     //makes the ship shoot

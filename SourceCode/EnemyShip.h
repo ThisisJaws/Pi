@@ -28,8 +28,7 @@ public:
     //destructor
     ~EnemyShip();
     
-    //override
-    virtual void tick(irr::f32 deltaTime);
+    virtual void tick(irr::f32 deltaTime) override;
 };
 
 #endif	/* ENEMYSHIP_H */

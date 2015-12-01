@@ -18,8 +18,7 @@ public:
     //constructor
     StrongEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference);
     
-    //override
-    void markForDelete();
+    void markForDelete() override;
 };
 
 #endif	/* STRONGENEMY_H */

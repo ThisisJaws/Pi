@@ -22,7 +22,7 @@ public:
     Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     
     //tick function will check for collision
-    virtual void tick(irr::f32 deltaTime);
+    virtual void tick(irr::f32 deltaTime) override;
     
 protected:
     //pure virtual function which gets called when the player player collides

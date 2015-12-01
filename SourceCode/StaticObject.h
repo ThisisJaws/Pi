@@ -18,8 +18,8 @@ public:
     //constructor
     StaticObject(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
 
-    //overload so it compiles
-    virtual void tick(irr::f32 deltaTime);
+    //override so it compiles
+    virtual void tick(irr::f32 deltaTime) override;
 };
 
 #endif	/* STATICOBJECT_H */

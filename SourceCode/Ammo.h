@@ -15,7 +15,7 @@ protected:
     
     //FUNCTIONS
 protected:
-    virtual void activate();
+    virtual void activate() override;
 };
 
 #endif	/* AMMO_H */
