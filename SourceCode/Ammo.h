@@ -14,6 +14,10 @@ protected:
     int ammoIncrease;
     
     //FUNCTIONS
+public:
+    //constructor
+    Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    
 protected:
     virtual void activate() override;
 };
