@@ -25,7 +25,7 @@ public:
     
 protected:
     //pure virtual function which gets called when the player player collides
-    void activate() = 0;
+    virtual void activate() = 0;
 };
 
 #endif	/* COLLLECTABLE_H */
