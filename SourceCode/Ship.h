@@ -3,8 +3,8 @@
  * this class will contain all shared functionality
  */
 
-#ifndef SHIP_H
-#define	SHIP_H
+#ifndef _SHIP_H
+#define	_SHIP_H
 
 #include <list>
 
@@ -50,5 +50,5 @@ protected:
     void shoot(irr::core::vector3df direction);    
 };
 
-#endif	/* SHIP_H */
+#endif	/* _SHIP_H */
 
