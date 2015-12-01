@@ -10,7 +10,22 @@
 #include "Object.h"
 
 class Collectable : public Object{
+    //VARIABLES
+ private:
+     //variables to rate and move up and down
+     float rotSpeed;
+
+    //FUNCTIONS
+public:
+    //constructor
+    Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     
+    //tick function will check for collision
+    void tick(irr::f32 deltaTime);
+    
+protected:
+    //pure virtual function which gets called when the player player collides
+    void activate() = 0;
 };
 
 #endif	/* COLLLECTABLE_H */
