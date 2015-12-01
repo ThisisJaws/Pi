@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Ammo.o \
 	${OBJECTDIR}/BasicEnemy.o \
 	${OBJECTDIR}/Bullet.o \
 	${OBJECTDIR}/Collectable.o \
@@ -42,6 +43,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EventReceiver.o \
 	${OBJECTDIR}/FastEnemy.o \
 	${OBJECTDIR}/Game.o \
+	${OBJECTDIR}/Gem.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/PlayerShip.o \
 	${OBJECTDIR}/Ship.o \
@@ -77,6 +79,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsourcecode.a
 
+${OBJECTDIR}/Ammo.o: Ammo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ammo.o Ammo.cpp
+
 ${OBJECTDIR}/BasicEnemy.o: BasicEnemy.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -111,6 +118,11 @@ ${OBJECTDIR}/Game.o: Game.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Game.o Game.cpp
+
+${OBJECTDIR}/Gem.o: Gem.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Gem.o Gem.cpp
 
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
