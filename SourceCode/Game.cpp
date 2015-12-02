@@ -169,7 +169,7 @@ void Game::cleanUp(){
     delete driver;
     delete smgr;
     delete guienv;
-    delete selector;
+    //delete selector;
     
     //loop through object vector and delete all pointers
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
