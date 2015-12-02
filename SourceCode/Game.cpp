@@ -36,10 +36,17 @@ int Game::play(){
     
     //array of test cubes
     int x = 0, y = 0, z = 500;
+    int colChance;
     StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     for(int i = 0; i < 20; i++){
-        cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
-        cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
+        colChance = rand() % 5 + 1;
+        if(colChance == 1){
+            Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
+            addObjectToUpdate(ap);
+        }else{
+            cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
+            cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
+        }
         
         y = rand() % 50 + 1;
         y -= 20;
@@ -88,11 +95,6 @@ int Game::play(){
         
         z += 400;
     }
-    
-    //testing ammo
-    Ammo *ammo = new Ammo(irr::core::vector3df(0, 0, 8000), smgr, driver);
-    addObjectToUpdate(ammo);
-    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     //add all objects into the vector
