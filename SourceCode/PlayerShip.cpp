@@ -11,18 +11,18 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     this->eReceiver = eReceiver;
     
     //init the camera variables
-    tpDistance = 15;
+    tpDistance = 30;
     tpOffset = 7;
     
     sideViewDistance = 75;
     sideViewOffset = 60;
     
-    //set up the offsets for flying mode
+    //set up the current offsets as the flying mode ones for the camera
     cameraYOffset = 0;
-    maxYOffset = 10;
-    minYOffset = -2;
+    maxYOffset = 20;
+    minYOffset = -8;
     cameraXOffset = 0;    
-    maxXOffset = 10;
+    maxXOffset = 20;
     
     modeChangeIteration = 0;
     
