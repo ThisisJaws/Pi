@@ -5,10 +5,15 @@
 # Name of the executable created (.exe will be added automatically if necessary)
 Target := linuxBuild
 #Target := windowsBuild
+
 # List of source files, separated by spaces
 Sources := main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp
+# for g++ 4.7, comment out for widows builds
+Sources += -std=c++11
+
 # Path to Irrlicht directory, should contain include/ and lib/
 IrrlichtHome := ../irrlicht-1.8.3
+
 # Path for the executable. Note that Irrlicht.dll should usually also be there for win32 systems
 BinPath = .
 
@@ -50,7 +55,7 @@ DESTPATH = $(BinPath)/$(Target)$(SUF)
 
 all_linux all_win32 static_win32:
 	$(warning Building...)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(Sources) -std=c++11 -o $(DESTPATH) $(LDFLAGS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(Sources) -o $(DESTPATH) $(LDFLAGS)
 
 clean: clean_linux clean_win32
 	$(warning Cleaning...)
