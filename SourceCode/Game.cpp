@@ -164,13 +164,6 @@ void Game::cleanUp(){
     device->drop();
     //selector->drop();
     
-    //delete all poiters
-    delete device;
-    delete driver;
-    delete smgr;
-    delete guienv;
-    //delete selector;
-    
     //loop through object vector and delete all pointers
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
         Object *toDelete = *objectIterator;
