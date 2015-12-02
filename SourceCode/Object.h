@@ -69,6 +69,9 @@ public:
     
     //call to completely change the object position (see update pos to move the object)
     virtual void changePosition(irr::core::vector3df newPosition);
+
+	//call the remove the object's mesh from the scene
+	void removeFromScene();
     
 protected:
     //returns true if the object has collided with an object contained within the vector

@@ -122,6 +122,7 @@ int Game::play(){
                 //remove any marked objects
                 Object *toDelete = *objectIterator;
                 objectIterator = objectsToUpdate.erase(objectIterator);
+				toDelete->removeFromScene();
                 delete toDelete;
             }else{
                 //update the object

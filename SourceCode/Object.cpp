@@ -31,9 +31,6 @@ Object::~Object(){
 			++nodeIterator;
 		}
     }
-    
-    //remove from scene
-    objectNode->remove();
 }
 
 bool Object::isMarkedForDelete(){
@@ -89,6 +86,10 @@ void Object::updatePosition(float x, float y, float z){
 
 void Object::changePosition(irr::core::vector3df newPosition){
     objectNode->setPosition(newPosition);
+}
+
+void Object::removeFromScene(){
+	objectNode->remove();
 }
 
 void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference){
