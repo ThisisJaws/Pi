@@ -12,13 +12,17 @@
 
 class StaticObject : public Object{
     //VARIABLES
+private:
+    //used to rotate the object
+    bool rotate;
+    float rotSpeed;
+    irr::core::vector3df rotAxis;
     
     //FUNCTIONS
 public:
     //constructor
-    StaticObject(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    StaticObject(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool rotate = true);
 
-    //override so it compiles
     virtual void tick(irr::f32 deltaTime) override;
 };
 
