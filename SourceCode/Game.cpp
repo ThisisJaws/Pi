@@ -38,7 +38,6 @@ int Game::play(){
     int x = 0, y = 0, z = 500;
     int colChanceA;
     int colChanceB;
-    //StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     for(int i = 0; i < 20; i++){
         colChanceA = rand() % 5 + 1;
         colChanceB = rand() % 2 + 1;
@@ -51,9 +50,9 @@ int Game::play(){
                 addObjectToUpdate(gp);
             }
         }else{
-            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/Asteroid1Texture.bmp", smgr, driver);
             cube->changePosition(irr::core::vector3df(x,y,z));
-            cube->getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
+            //cube->getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
             addObjectToUpdate(cube);
         }
         
