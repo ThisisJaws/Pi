@@ -5,11 +5,14 @@
  * make sure to include all source files in the makefile!!!
  */
 
-//so it can work on windows
-#pragma comment(lib, "Irrlicht.lib")
-
 //header to play the game
 #include "Game.h"
+
+//so it can work on windows
+#ifdef _IRR_WINDOWS_
+#pragma comment(lib, "Irrlicht.lib")
+#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+#endif
 
 /*
  * program entry point
