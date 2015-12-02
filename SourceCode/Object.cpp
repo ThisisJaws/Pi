@@ -89,7 +89,7 @@ void Object::changePosition(irr::core::vector3df newPosition){
 }
 
 void Object::removeFromScene(){
-	objectNode->remove();
+    objectNode->remove();
 }
 
 void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference){
