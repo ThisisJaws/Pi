@@ -29,7 +29,7 @@ int Game::play(){
     
     //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     //create the points in where the modes will change - TEST
-    int changePoints[6] = {3000, 7500, 9000, 12000, 15000, 6000};
+    int changePoints[6] = {4400, 8900, 11000, 13000, 16000, 6000};
     player->addChangeModePoints(changePoints);
     
     srand(1);
@@ -48,25 +48,22 @@ int Game::play(){
             cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
         }
         
-        y = rand() % 50 + 1;
-        y -= 20;
+        y = rand() % 30 + 1;
+        y -= 10;
         
-        x = rand() % 50 + 1;
+        x = rand() % 40 + 1;
         x -= 20;
-        
-        int check = rand() % 2;
-        if(check > 0){
-            z += 200;
-        }
+       
+        z += 200;        
     }
     
     //array of test enemies
-    z = 3600;
+    z = changePoints[0] + 600;
     y = 0;
     x = 0;
     for(int i = 0; i < 3; i++){
         //basic
-        BasicEnemy *test1  = new BasicEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
+        BasicEnemy *test1 = new BasicEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
         test1->changePosition(irr::core::vector3df(x,y,z));
         addObjectToUpdate(test1);
         
