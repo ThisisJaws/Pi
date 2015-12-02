@@ -117,7 +117,7 @@ int Game::play(){
         then = now;
         
         //tick(update) all objects
-        for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+        for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); /*removed increment here because it will crash when iterator is changed*/){
             if((*objectIterator)->isMarkedForDelete()){
                 //remove any marked objects
                 Object *toDelete = *objectIterator;
@@ -126,6 +126,9 @@ int Game::play(){
             }else{
                 //update the object
                 (*objectIterator)->tick(frameDeltaTime);
+
+				//increment iterator
+				++objectIterator;
             }
         }
         
