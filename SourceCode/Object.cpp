@@ -24,10 +24,12 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 Object::~Object(){
     //remove the object from the collideables list
-    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
+    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); /*incremented in 'else' to stop crashes*/){
         if((*nodeIterator) == this){
             nodeIterator = collideables.erase(nodeIterator);
-        }
+		}else {
+			++nodeIterator;
+		}
     }
     
     //remove from scene
