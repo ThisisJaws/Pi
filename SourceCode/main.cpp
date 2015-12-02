@@ -5,6 +5,9 @@
  * make sure to include all source files in the makefile!!!
  */
 
+//so it can work on windows
+#pragma comment(lib, "Irrlicht.lib")
+
 //header to play the game
 #include "Game.h"
 
