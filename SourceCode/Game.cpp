@@ -128,8 +128,8 @@ int Game::play(){
                 //update the object
                 (*objectIterator)->tick(frameDeltaTime);
 
-				//increment iterator
-				++objectIterator;
+		//increment iterator
+		++objectIterator;
             }
         }
         
@@ -163,8 +163,7 @@ int Game::play(){
 void Game::cleanUp(){
     //anything made with create needs to be 'droped'
     device->drop();
-    //selector->drop();
-    
+
     //loop through object vector and delete all pointers
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
         Object *toDelete = *objectIterator;

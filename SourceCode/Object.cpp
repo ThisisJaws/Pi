@@ -27,9 +27,9 @@ Object::~Object(){
     for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); /*incremented in 'else' to stop crashes*/){
         if((*nodeIterator) == this){
             nodeIterator = collideables.erase(nodeIterator);
-		}else {
-			++nodeIterator;
-		}
+	}else {
+            ++nodeIterator;
+	}
     }
 }
 
