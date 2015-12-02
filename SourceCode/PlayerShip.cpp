@@ -151,8 +151,8 @@ void PlayerShip::changeMode(){
         currentMode = flying;
         
         //update the offsets
-        maxYOffset = 10;
-        minYOffset = -2;
+        maxYOffset = 20;
+        minYOffset = -8;
     }
     
     //reset X and Y pos so player is aligned properly
