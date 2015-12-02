@@ -21,6 +21,7 @@
 #include "FastEnemy.h"
 #include "StaticObject.h"
 #include "Ammo.h"
+#include "Gem.h"
 
 class Game{
     //VARIABLES

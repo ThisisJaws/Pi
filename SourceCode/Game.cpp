@@ -36,18 +36,25 @@ int Game::play(){
     
     //array of test cubes
     int x = 0, y = 0, z = 500;
-    int colChance;
-	//StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+    int colChanceA;
+    int colChanceB;
+    //StaticObject cubeArray[20] = StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
     for(int i = 0; i < 20; i++){
-        colChance = rand() % 5 + 1;
-        if(colChance == 1){
-            Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
-            addObjectToUpdate(ap);
+        colChanceA = rand() % 5 + 1;
+        colChanceB = rand() % 2 + 1;
+        if(colChanceA == 1){
+            if(colChanceB == 1){
+                Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
+                addObjectToUpdate(ap);
+            }else{
+                Gem *gp = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
+                addObjectToUpdate(gp);
+            }
         }else{
-			StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
+            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/PlaceHolders/HeightCube.obj", "", smgr, driver);
             cube->changePosition(irr::core::vector3df(x,y,z));
             cube->getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
-			addObjectToUpdate(cube);
+            addObjectToUpdate(cube);
         }
         
         y = rand() % 30 + 1;
