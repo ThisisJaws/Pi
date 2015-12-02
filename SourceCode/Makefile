@@ -4,6 +4,7 @@
 
 # Name of the executable created (.exe will be added automatically if necessary)
 Target := linuxBuild
+#Target := windowsBuild
 # List of source files, separated by spaces
 Sources := main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp
 # Path to Irrlicht directory, should contain include/ and lib/
@@ -20,7 +21,9 @@ USERCXXFLAGS = -g -Wall
 # linker flags such as additional libraries and link paths
 USERLDFLAGS =
 
+# the compiler to use
 CXX = g++-4.7
+#CXX = i586-mingw32msvc-g++
 
 ####
 #no changes necessary below this line
