@@ -41,11 +41,11 @@ int Game::play(){
         cubeArray[i].changePosition(irr::core::vector3df(x,y,z));
         cubeArray[i].getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
         
-        y = rand() % 200 + 1;
-        y -= 100;
+        y = rand() % 50 + 1;
+        y -= 20;
         
-        x = rand() % 200 + 1;
-        x -= 100;
+        x = rand() % 50 + 1;
+        x -= 20;
         
         int check = rand() % 2;
         if(check > 0){
