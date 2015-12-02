@@ -35,7 +35,7 @@ private:
     irr::gui::IGUIEnvironment *guienv;
     
     //set up a selector for collision purposes
-    irr::scene::ITriangleSelector *selector;
+    //irr::scene::ITriangleSelector *selector;
     
     //object to receive keyboard input
     EventReceiver eReceiver;

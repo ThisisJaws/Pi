@@ -18,7 +18,7 @@ Game::Game(){
     guienv = device->getGUIEnvironment();
     
     //make the address of selector 0 for now
-    selector = 0;
+    //selector = 0;
 }
 
 int Game::play(){
@@ -162,7 +162,7 @@ int Game::play(){
 void Game::cleanUp(){
     //anything made with create needs to be 'droped'
     device->drop();
-    selector->drop();
+    //selector->drop();
     
     //delete all poiters
     delete device;
