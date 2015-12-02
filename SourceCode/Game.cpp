@@ -38,7 +38,7 @@ int Game::play(){
     int x = 0, y = 0, z = 500;
     int colChanceA;
     int colChanceB;
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < 40; i++){
         colChanceA = rand() % 5 + 1;
         colChanceB = rand() % 2 + 1;
         if(colChanceA == 1){
@@ -52,7 +52,6 @@ int Game::play(){
         }else{
             StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/Asteroid1Texture.bmp", smgr, driver);
             cube->changePosition(irr::core::vector3df(x,y,z));
-            //cube->getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
             addObjectToUpdate(cube);
         }
         
@@ -62,7 +61,7 @@ int Game::play(){
         x = rand() % 40 + 1;
         x -= 20;
        
-        z += 200;        
+        z += 100;        
     }
     
     //array of test enemies
