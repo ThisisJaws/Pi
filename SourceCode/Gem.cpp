@@ -7,5 +7,5 @@ Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneMan
 }
 
 void Gem::activate(PlayerShip* player){
-    //increase score
+    player->increaseScore(scoreIncrease);
 }

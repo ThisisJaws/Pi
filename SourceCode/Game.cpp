@@ -29,7 +29,7 @@ int Game::play(){
     
     //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     //create the points in where the modes will change - TEST
-    int changePoints[6] = {4400, 8900, 11000, 13000, 16000, 6000};
+    int changePoints[6] = {4500, 9000, 11000, 13000, 16000, 6000};
     player->addChangeModePoints(changePoints);
     
     srand(1);
@@ -104,8 +104,9 @@ int Game::play(){
     //add all objects into the vector
     addObjectToUpdate(player);
     
-    //setup the user ammo count - test
-    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 10, 200, 22), false);
+    //setup the user ammo count and score - test
+    irr::gui::IGUIStaticText *scoreText = guienv->addStaticText(L"Score not set", irr::core::rect<irr::s32>(10, 10, 200, 22), false);
+    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 32, 200, 54), false);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -137,6 +138,11 @@ int Game::play(){
 		++objectIterator;
             }
         }
+        
+        //update score
+        irr::core::stringw scoreCount(L"Score: ");
+        scoreCount += player->getScore();
+        scoreText->setText(scoreCount.c_str());
         
         //update the ammo text
         irr::core::stringw ammoCount(L"Ammo: ");

@@ -7,6 +7,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     typeID = TYPE_PLAYER;
     
     //init variables
+    score = 0;
     ammo = 20;
     this->eReceiver = eReceiver;
     
@@ -82,12 +83,20 @@ void PlayerShip::addChangeModePoints(int zPoints[6]){
     std::copy(zPoints, zPoints+6, modeChangePoints);
 }
 
-int PlayerShip::getAmmo(){
+unsigned short PlayerShip::getAmmo(){
     return ammo;
 }
 
-void PlayerShip::increaseAmmo(int amount){
+void PlayerShip::increaseAmmo(unsigned short amount){
     ammo += amount;
+}
+
+unsigned short PlayerShip::getScore(){
+    return score;
+}
+
+void PlayerShip::increaseScore(unsigned short amount){
+    score += amount;
 }
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){

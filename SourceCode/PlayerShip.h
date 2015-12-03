@@ -12,8 +12,11 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
+    //the player's score
+    unsigned short score;
+    
     //how many bullets the player can shoot
-    int ammo;
+    unsigned short ammo;
     
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
@@ -57,9 +60,12 @@ public:
     //adds the array of made changes points
     void addChangeModePoints(int zPoints[6]);
     
-    //getters and setters for ammo
-    int getAmmo();
-    void increaseAmmo(int amount);
+    //getters and setters for ammo and score
+    unsigned short getAmmo();
+    void increaseAmmo(unsigned short amount);
+    
+    unsigned short getScore();
+    void increaseScore(unsigned short amount);
       
 private:
     //turns the player left or right
