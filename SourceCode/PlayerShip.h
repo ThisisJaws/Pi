@@ -12,6 +12,9 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
+    //the player's score
+    int score;
+    
     //how many bullets the player can shoot
     int ammo;
     
@@ -57,9 +60,12 @@ public:
     //adds the array of made changes points
     void addChangeModePoints(int zPoints[6]);
     
-    //getters and setters for ammo
+    //getters and setters for ammo and score
     int getAmmo();
     void increaseAmmo(int amount);
+    
+    int getScore();
+    void increaseScore(int amount);
       
 private:
     //turns the player left or right

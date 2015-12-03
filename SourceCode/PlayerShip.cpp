@@ -7,6 +7,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     typeID = TYPE_PLAYER;
     
     //init variables
+    score = 0;
     ammo = 20;
     this->eReceiver = eReceiver;
     
@@ -88,6 +89,14 @@ int PlayerShip::getAmmo(){
 
 void PlayerShip::increaseAmmo(int amount){
     ammo += amount;
+}
+
+int PlayerShip::getScore(){
+    return score;
+}
+
+void PlayerShip::increaseScore(int amount){
+    score += amount;
 }
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
