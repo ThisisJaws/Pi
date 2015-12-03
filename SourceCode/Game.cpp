@@ -29,7 +29,7 @@ int Game::play(){
     
     //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     //create the points in where the modes will change - TEST
-    int changePoints[6] = {4400, 8900, 11000, 13000, 16000, 6000};
+    int changePoints[6] = {4500, 9000, 11000, 13000, 16000, 6000};
     player->addChangeModePoints(changePoints);
     
     srand(1);
