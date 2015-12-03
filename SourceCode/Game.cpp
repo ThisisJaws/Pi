@@ -106,7 +106,7 @@ int Game::play(){
     
     //setup the user ammo count and score - test
     irr::gui::IGUIStaticText *scoreText = guienv->addStaticText(L"Score not set", irr::core::rect<irr::s32>(10, 10, 200, 22), false);
-    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 32, 200, 22), false);
+    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 32, 200, 54), false);
     
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -139,15 +139,15 @@ int Game::play(){
             }
         }
         
+        //update score
+        irr::core::stringw scoreCount(L"Score: ");
+        scoreCount += player->getScore();
+        scoreText->setText(scoreCount.c_str());
+        
         //update the ammo text
         irr::core::stringw ammoCount(L"Ammo: ");
         ammoCount += player->getAmmo();
         ammoText->setText(ammoCount.c_str());
-        
-        //update score
-        irr::core::stringw scoreCount(L"Score: ");
-        scoreCount += player->getScore();
-        scoreText->setText(ammoCount.c_str());
         
         //tell irrlicht to draw/updates scenes
         driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
