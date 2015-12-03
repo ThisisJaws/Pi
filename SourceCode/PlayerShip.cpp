@@ -83,19 +83,19 @@ void PlayerShip::addChangeModePoints(int zPoints[6]){
     std::copy(zPoints, zPoints+6, modeChangePoints);
 }
 
-int PlayerShip::getAmmo(){
+unsigned short PlayerShip::getAmmo(){
     return ammo;
 }
 
-void PlayerShip::increaseAmmo(int amount){
+void PlayerShip::increaseAmmo(unsigned short amount){
     ammo += amount;
 }
 
-int PlayerShip::getScore(){
+unsigned short PlayerShip::getScore(){
     return score;
 }
 
-void PlayerShip::increaseScore(int amount){
+void PlayerShip::increaseScore(unsigned short amount){
     score += amount;
 }
 
