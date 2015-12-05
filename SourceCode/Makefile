@@ -4,7 +4,7 @@
 Target = linuxBuilds
 Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp
 #for use with g++ 4.7
-Source += -std=c++11
+Sources += -std=c++11
 
 #location of irrlicht lib and include folders
 IrrlichtHome = ../Irrlicht_1.9.0_OGL-ES
