@@ -159,6 +159,11 @@ int Game::play(){
 
         driver->endScene();
 
+        //check for escape key
+        if(eReceiver.isKeyDown(irr::KEY_ESCAPE)){
+            device->closeDevice();
+        }
+
         //add fps to window name
         fps = driver->getFPS();
         if (lastFPS != fps){
