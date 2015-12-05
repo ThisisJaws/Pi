@@ -8,7 +8,7 @@ std::list<Object*> Game::objectsToUpdate;
 //init all the global variables
 Game::Game(){
     //create the devie - make sure to pass the address of eReceiver 
-    device = irr::createDevice(irr::video::EDT_BURNINGSVIDEO,
+    device = irr::createDevice(irr::video::EDT_OGLES1,
                                irr::core::dimension2d<irr::u32>(800, 600),
                                32, false, false, false, &eReceiver);
     
