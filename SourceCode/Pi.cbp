@@ -3,6 +3,7 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="Pi" />
+		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -17,6 +18,14 @@
 					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
+				<MakeCommands>
+					<Build command="make" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="make clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="make &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Pi" prefix_auto="1" extension_auto="1" />
@@ -34,9 +43,38 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Ammo.cpp" />
+		<Unit filename="Ammo.h" />
+		<Unit filename="BasicEnemy.cpp" />
+		<Unit filename="BasicEnemy.h" />
+		<Unit filename="Bullet.cpp" />
+		<Unit filename="Bullet.h" />
+		<Unit filename="Collectable.cpp" />
+		<Unit filename="Collectable.h" />
+		<Unit filename="EnemyShip.cpp" />
+		<Unit filename="EnemyShip.h" />
+		<Unit filename="EventReceiver.cpp" />
+		<Unit filename="EventReceiver.h" />
+		<Unit filename="FastEnemy.cpp" />
+		<Unit filename="FastEnemy.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="Gem.cpp" />
+		<Unit filename="Gem.h" />
+		<Unit filename="Object.cpp" />
+		<Unit filename="Object.h" />
+		<Unit filename="ObjectTypes.h" />
+		<Unit filename="PlayerShip.cpp" />
+		<Unit filename="PlayerShip.h" />
+		<Unit filename="Ship.cpp" />
+		<Unit filename="Ship.h" />
+		<Unit filename="StaticObject.cpp" />
+		<Unit filename="StaticObject.h" />
+		<Unit filename="StrongEnemy.cpp" />
+		<Unit filename="StrongEnemy.h" />
+		<Unit filename="Testing.cpp" />
+		<Unit filename="Testing.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
