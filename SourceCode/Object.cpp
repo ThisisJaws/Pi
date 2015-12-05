@@ -6,16 +6,16 @@ std::list<Object*> Object::collideables;
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos){
     //set the default object type to undefined
     typeID = TYPE_UNDEFINED_TYPE;
-    
+
     //set the spawn position
     this->spawnPos = spawnPos;
-    
+
     //default this to false, no object has been spawned yet
     objectSpawned = false;
-    
+
     //dont want it to get deleted straight away
     markedForDelete = false;
-    
+
     //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
     if(spawnOnConstruct){
         spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference);
@@ -68,10 +68,10 @@ Object* Object::checkCollision(){
         if(*nodeIterator != this){
             if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getSceneNode()->getTransformedBoundingBox())){
                 return *nodeIterator;
-            } 
+            }
         }
     }
-    
+
     return NULL;
 }
 
@@ -97,17 +97,17 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
     if(!objectSpawned){
         //load the mesh
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);
-        
+
         //create the scene node using loaded mesh
         objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, 0, spawnPos);
-        objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
-        
+        //objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
+
         //set the object to not need lighting
-        objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-        
+        //objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+
         //let other objects collision test against this object
         collideables.push_back(this);
-        
+
         objectSpawned = true;
     }
 }
