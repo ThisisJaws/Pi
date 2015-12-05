@@ -107,8 +107,11 @@ int Game::play(){
     addObjectToUpdate(player);
 
     //setup the user ammo count and score - test
-    irr::gui::IGUIStaticText *scoreText = guienv->addStaticText(L"Score not set", irr::core::rect<irr::s32>(10, 10, 200, 22), false);
-    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 32, 200, 54), false);
+    irr::gui::IGUIStaticText *scoreText = guienv->addStaticText(L"Score not set", irr::core::rect<irr::s32>(10, 10, 200, 22));
+    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"Ammo text not set", irr::core::rect<irr::s32>(10, 32, 200, 54));
+
+    //Text for fps
+    irr::gui::IGUIStaticText *fpsText = guienv->addStaticText(L"FPS Counter not set", irr::core::rect<irr::s32>(10, 700, 200, 722));
 
     //used to make checking fps slight more effecient
     int lastFPS = -1;
@@ -136,8 +139,8 @@ int Game::play(){
                 //update the object
                 (*objectIterator)->tick(frameDeltaTime);
 
-		//increment iterator
-		++objectIterator;
+                //increment iterator
+                ++objectIterator;
             }
         }
 
@@ -151,14 +154,6 @@ int Game::play(){
         ammoCount += player->getAmmo();
         ammoText->setText(ammoCount.c_str());
 
-        //tell irrlicht to draw/updates scenes
-        driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
-
-        smgr->drawAll();
-        guienv->drawAll();
-
-        driver->endScene();
-
         //check for escape key
         if(eReceiver.isKeyDown(irr::KEY_ESCAPE)){
             device->closeDevice();
@@ -167,12 +162,19 @@ int Game::play(){
         //add fps to window name
         fps = driver->getFPS();
         if (lastFPS != fps){
-            irr::core::stringw tmp(L"Pi Cade ");
-            tmp += L" FPS: ";
+            irr::core::stringw tmp(L"FPS: ");
             tmp += fps;
-            device->setWindowCaption(tmp.c_str());
+            fpsText->setText(tmp.c_str());
             lastFPS = fps;
         }
+
+        //tell irrlicht to draw/updates scenes
+        driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
+
+        smgr->drawAll();
+        guienv->drawAll();
+
+        driver->endScene();
     }
 
     return EXIT_SUCCESS;
