@@ -1,8 +1,9 @@
 # Makefile for Irrlicht Examples
 # It's usually sufficient to change just the target name and source file list
 # and be sure that CXX is set to a valid compiler
-Target = linuxBuilds
+Target = linuxBuild
 Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp
+
 #for use with g++ 4.7
 Sources += -std=c++11
 
@@ -11,6 +12,9 @@ IrrlichtHome = ../Irrlicht_1.9.0_OGL-ES
 
 #use g++-4.7
 CXX = g++-4.7
+
+#where to compile the file to
+Bin = .
 
 # general compiler settings
 CPPFLAGS = -I$(IrrlichtHome)/include -I/usr/X11R6/include
@@ -26,13 +30,13 @@ endif
 
 OGLESLIBS := -L$(HOME)/irrlicht/SDKPackage-ogles1/Builds/OGLES/LinuxPC/Lib -L/opt/vc/lib -lGLESv1_CM -lGLESv2 -lEGL -lGL -lbcm_host
 # target specific settings
-all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L.$(IrrlichtHome)/lib/Linux -lIrrlicht $(OGLESLIBS) -lXxf86vm -lXext -lX11 -lXcursor
+all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L$(IrrlichtHome)/lib/Linux -lIrrlicht $(OGLESLIBS) -lXxf86vm -lXext -lX11 -lXcursor
 all_linux clean_linux: SYSTEM=Linux
 all_win32: LDFLAGS = -L../../lib/Win32-gcc -lIrrlicht -lopengl32 -lm
 all_win32 clean_win32: SYSTEM=Win32-gcc
 all_win32 clean_win32: SUF=.exe
 # name of the binary - only valid for targets which set SYSTEM
-DESTPATH = ../../bin/$(SYSTEM)/$(Target)$(SUF)
+DESTPATH = $(Bin)/$(Target)$(SUF)
 
 all_linux all_win32:
 	$(warning Building...)
