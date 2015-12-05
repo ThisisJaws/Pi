@@ -76,7 +76,9 @@
 		<Unit filename="Testing.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
-			<code_completion />
+			<code_completion>
+				<search_path add="../Irrlicht_1.9.0_OGL-ES/include" />
+			</code_completion>
 			<debugger />
 		</Extensions>
 	</Project>
