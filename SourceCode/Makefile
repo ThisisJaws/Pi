@@ -6,11 +6,14 @@ Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp 
 #for use with g++ 4.7
 Source += -std=c++11
 
+#location of irrlicht lib and include folders
+IrrlichtHome = ../Irrlicht_1.9.0_OGL-ES
+
 #use g++-4.7
 CXX = g++-4.7
 
 # general compiler settings
-CPPFLAGS = -I../Irrlicht_1.9.0_OGL-ES -I/usr/X11R6/include
+CPPFLAGS = -I$(IrrlichtHome)/include -I/usr/X11R6/include
 CXXFLAGS = -O3 -ffast-math
 #CXXFLAGS = -g -Wall
 
@@ -23,7 +26,7 @@ endif
 
 OGLESLIBS := -L$(HOME)/irrlicht/SDKPackage-ogles1/Builds/OGLES/LinuxPC/Lib -L/opt/vc/lib -lGLESv1_CM -lGLESv2 -lEGL -lGL -lbcm_host
 # target specific settings
-all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L../../lib/Linux -lIrrlicht $(OGLESLIBS) -lXxf86vm -lXext -lX11 -lXcursor
+all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L.$(IrrlichtHome)/lib/Linux -lIrrlicht $(OGLESLIBS) -lXxf86vm -lXext -lX11 -lXcursor
 all_linux clean_linux: SYSTEM=Linux
 all_win32: LDFLAGS = -L../../lib/Win32-gcc -lIrrlicht -lopengl32 -lm
 all_win32 clean_win32: SYSTEM=Win32-gcc
