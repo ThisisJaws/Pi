@@ -38,6 +38,9 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	if(collidedObject == NULL){
 		//call base class function to handle shootingg/movement
 		Ship::tick(deltaTime);
+
+		//increase score
+		score++;
 	}else{
 		if(collidedObject->getTypeID() != TYPE_BULLET && collidedObject->getTypeID() != TYPE_COLLECTABLE){
 			markForDelete();
