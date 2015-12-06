@@ -41,6 +41,8 @@ void Bullet::tick(irr::f32 deltaTime){
             switch(collidedObject->getTypeID()){
                 case TYPE_SHIP_PLAYER:
                     //player logic goes here
+					collidedObject->markForDelete();
+					markForDelete();
                     break;
                 
                 case TYPE_SHIP_ENEMY:
