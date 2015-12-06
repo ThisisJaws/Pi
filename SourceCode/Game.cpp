@@ -52,7 +52,7 @@ int Game::play(){
                 addObjectToUpdate(gp);
             }
         }else{
-            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/Asteroid1Texture.bmp", smgr, driver);
+            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/Asteroid1Texture.jpg", smgr, driver);
             cube->changePosition(irr::core::vector3df(x,y,z));
             addObjectToUpdate(cube);
         }
