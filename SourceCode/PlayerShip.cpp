@@ -35,8 +35,15 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){  
-    //call base class function to handle shooting/movement
-    Ship::tick(deltaTime);
+	Object *collidedObject = checkCollision();
+	if(collidedObject == NULL){
+		//call base class function to handle shootingg/movement
+		Ship::tick(deltaTime);
+	}else{
+		if(collidedObject != TYPE_BULLET){
+			markForDelete();
+		}
+	}
     
     //check for and apply all position changes
     if(!checkCollision()){
