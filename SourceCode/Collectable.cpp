@@ -16,7 +16,7 @@ void Collectable::tick(irr::f32 deltaTime){
     //check for collision
     Object *collidedObject = checkCollision();
     if(collidedObject != NULL){
-        if(collidedObject->getTypeID() == TYPE_PLAYER){
+        if(collidedObject->getTypeID() == TYPE_SHIP_PLAYER){
             //dynamic cast to the player
             PlayerShip *player = dynamic_cast<PlayerShip *>(collidedObject);
             //then activate the collectable
