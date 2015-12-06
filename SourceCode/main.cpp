@@ -25,15 +25,12 @@ int main(int argc, char** argv) {
 
 	do{
 		bool exit = currentGame.play();
-	} while(exit);
-
-    //call the play function
-    int r = currentGame.play();
+	} while(!exit);
 
     //once the loop breaks go straight to clean up (for now)
     currentGame.cleanUp();
     
     //once the 'play' loop has ended then exit program
-    return r;
+    return 0;
 }
 
