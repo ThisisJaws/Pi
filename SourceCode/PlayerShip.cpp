@@ -4,13 +4,8 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, driverReference){
 
     //change the object type
-<<<<<<< HEAD
-    typeID = TYPE_PLAYER;
-
-=======
     typeID = TYPE_SHIP_PLAYER;
-    
->>>>>>> d9676d6398e7165c4425ef771930f94d68084046
+
     //init variables
     score = 0;
     ammo = 20;
@@ -37,7 +32,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     timerReference = timerReference;
 
 =======
-    
+
 >>>>>>> d9676d6398e7165c4425ef771930f94d68084046
     //set the ship's default mode
     currentMode = flying;
@@ -45,13 +40,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	lost = false;
 }
 
-<<<<<<< HEAD
 void PlayerShip::tick(irr::f32 deltaTime){
-    //call base class function to handle shooting/movement
-    Ship::tick(deltaTime);
-
-=======
-void PlayerShip::tick(irr::f32 deltaTime){  
 	Object *collidedObject = checkCollision();
 	if(collidedObject == NULL){
 		//call base class function to handle shootingg/movement
@@ -64,8 +53,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 			markForDelete();
 		}
 	}
-    
->>>>>>> d9676d6398e7165c4425ef771930f94d68084046
+
     //check for and apply all position changes
     if(!checkCollision()){
         //check for movement input
