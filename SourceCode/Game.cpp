@@ -12,7 +12,7 @@ Game::Game(){
     irr::core::dimension2d<irr::u32> deskres = nullDevice->getVideoModeList()->getDesktopResolution();
 
     //create the device - make sure to pass the address of eReceiver
-    device = irr::createDevice(irr::video::EDT_BURNINGSVIDEO, deskres, 32, true, false, true, &eReceiver);
+    device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &eReceiver);
 
     //get the neccessary pointers
     driver = device->getVideoDriver();
@@ -60,7 +60,7 @@ bool Game::play(){
                 addObjectToUpdate(gp);
             }
         }else{
-            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/Asteroid1Texture.jpg", smgr, driver);
+            StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", smgr, driver);
             cube->changePosition(irr::core::vector3df(x,y,z));
             addObjectToUpdate(cube);
         }
@@ -135,7 +135,7 @@ bool Game::play(){
 	irr::core::stringw textForMenu(L"Press Enter to start, Previous Score: ");
 	textForMenu += previousScore;
 	irr::gui::IGUIStaticText *menuText = guienv->addStaticText(textForMenu.c_str(), irr::core::rect<irr::s32>(500, 500, 700, 522));
-	
+
 	camera->setPosition(irr::core::vector3df(0, 50, 0));
 	camera->setTarget(irr::core::vector3df(0, 51, 0));
 
