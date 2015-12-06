@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 	bool exit = false;
 
 	do{
-		bool exit = currentGame.play();
+		exit = currentGame.play();
 	} while(!exit);
 
     //once the loop breaks go straight to clean up (for now)

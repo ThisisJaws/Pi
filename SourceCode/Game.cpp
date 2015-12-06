@@ -144,7 +144,7 @@ bool Game::play(){
 		//check for escape key
 		if(eReceiver.isKeyDown(irr::KEY_ESCAPE)){
 			device->closeDevice();
-			return true;
+			//return true;
 		}
 
 		if(eReceiver.isKeyDown(irr::KEY_RETURN) && playGame == false){
@@ -229,7 +229,7 @@ bool Game::play(){
 		}
     }
 
-    return false;
+    return true;
 }
 
 void Game::cleanUp(){
