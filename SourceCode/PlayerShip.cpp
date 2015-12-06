@@ -32,6 +32,8 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     
     //set the ship's default mode
     currentMode = flying;
+
+	lost = false;
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){  
@@ -40,7 +42,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		//call base class function to handle shootingg/movement
 		Ship::tick(deltaTime);
 	}else{
-		if(collidedObject->getTypeID() != TYPE_BULLET){
+		if(collidedObject->getTypeID() != TYPE_BULLET && collidedObject->getTypeID() != TYPE_COLLECTABLE){
 			markForDelete();
 		}
 	}
@@ -107,7 +109,11 @@ void PlayerShip::increaseScore(unsigned short amount){
 }
 
 void PlayerShip::markForDelete(){
-	//TODO: Fill
+	lost = true;
+}
+
+bool PlayerShip::playerLost(){
+	return lost;
 }
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
