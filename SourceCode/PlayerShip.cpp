@@ -40,7 +40,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		//call base class function to handle shootingg/movement
 		Ship::tick(deltaTime);
 	}else{
-		if(collidedObject->getTypeID != TYPE_BULLET){
+		if(collidedObject->getTypeID() != TYPE_BULLET){
 			markForDelete();
 		}
 	}
