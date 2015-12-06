@@ -47,6 +47,8 @@ private:
 	//temp, just to add in a 'menu'
 	bool playGame;
     
+	unsigned short previousScore;
+
     //FUNCTIONS
 public:
     //constructor

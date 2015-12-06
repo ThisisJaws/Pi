@@ -23,6 +23,8 @@ Game::Game(){
     //selector = 0;
 
 	playGame = false;
+
+	previousScore = 0;
 }
 
 bool Game::play(){
@@ -130,7 +132,9 @@ bool Game::play(){
     irr::u32 then = device->getTimer()->getRealTime();
 
 	//set up the variables for the menu screen
-	irr::gui::IGUIStaticText *menuText = guienv->addStaticText(L"Press Enter to start", irr::core::rect<irr::s32>(500, 500, 700, 522));
+	irr::core::stringw textForMenu(L"Press Enter to start, Previous Score: ");
+	textForMenu += previousScore;
+	irr::gui::IGUIStaticText *menuText = guienv->addStaticText(textForMenu.c_str(), irr::core::rect<irr::s32>(500, 500, 700, 522));
 	
 	camera->setPosition(irr::core::vector3df(0, 50, 0));
 	camera->setTarget(irr::core::vector3df(0, 51, 0));
@@ -205,6 +209,8 @@ bool Game::play(){
 		if(player->playerLost()){
 			//device->closeDevice();
 
+			previousScore = player->getScore();
+
 			for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
 				Object *toDelete = *objectIterator;
 				toDelete->getSceneNode()->remove();
@@ -213,6 +219,10 @@ bool Game::play(){
 
 			objectsToUpdate.clear();
 			objectsToUpdate.resize(0);
+
+			scoreText->remove();
+			ammoText->remove();
+			fpsText->remove();
 
 			playGame = false;
 			return false;
