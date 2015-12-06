@@ -5,7 +5,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
         : Ship(spawnPosition, movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
     
     //change the type of the object
-    typeID = TYPE_ENEMY;
+    typeID = TYPE_SHIP_ENEMY;
     
     //rotate to the right position
     getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
