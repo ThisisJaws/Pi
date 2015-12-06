@@ -46,6 +46,8 @@ private:
         flying,
         shooting,
     } currentMode;
+
+	bool lost;
     
     //FUNCTIONS
 public:
@@ -68,6 +70,8 @@ public:
 
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;
+
+	bool playerLost();
 
 private:
     //turns the player left or right
