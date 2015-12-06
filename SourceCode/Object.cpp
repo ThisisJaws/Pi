@@ -27,9 +27,9 @@ Object::~Object(){
     for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); /*incremented in 'else' to stop crashes*/){
         if((*nodeIterator) == this){
             nodeIterator = collideables.erase(nodeIterator);
-	}else{
+        }else{
             ++nodeIterator;
-	}
+        }
     }
 }
 
@@ -100,10 +100,10 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
 
         //create the scene node using loaded mesh
         objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, 0, spawnPos);
-        //objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
+        objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
 
         //set the object to not need lighting
-        //objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+        objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
         //let other objects collision test against this object
         collideables.push_back(this);
