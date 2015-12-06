@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 27.11.2015 15:33:02
+# File Created: 06.12.2015 20:54:36
 
 mtllib Strong Fast Ship OBJ file.mtl
 
@@ -2357,7 +2357,7 @@ vt 0.5545 0.3148 0.0000
 # 1325 texture coords
 
 g Capsule001
-usemtl Material__402
+usemtl Material__417
 s 4
 f 1/1/1 2/2/2 3/3/3 
 f 1/1/1 3/3/3 4/4/4 

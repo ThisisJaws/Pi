@@ -29,13 +29,7 @@ Ship::~Ship(){
 }
 
 void Ship::tick(irr::f32 deltaTime){    
-    Object *collidedObject = checkCollision();
-    if(collidedObject == NULL){
-        //continue to move forward if no static objects were hit
-        updatePosition(0.0f, 0.0f, moveSpeed * deltaTime);
-    }else{
-        //individual object collision here
-    }
+    updatePosition(0.0f, 0.0f, moveSpeed * deltaTime);
     
     //check how long is left before the ship can fire again
     if(!canFire){

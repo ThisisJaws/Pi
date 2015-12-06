@@ -21,13 +21,16 @@ int main(int argc, char** argv) {
     //create a game object - everything gets initialised in the constructor
     Game currentGame = Game();
 
-    //call the play function
-    int r = currentGame.play();
+	bool exit = false;
+
+	do{
+		exit = currentGame.play();
+	} while(!exit);
 
     //once the loop breaks go straight to clean up (for now)
     currentGame.cleanUp();
     
     //once the 'play' loop has ended then exit program
-    return r;
+    return 0;
 }
 

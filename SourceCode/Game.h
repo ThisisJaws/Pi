@@ -43,14 +43,19 @@ private:
     
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
+
+	//temp, just to add in a 'menu'
+	bool playGame;
     
+	unsigned short previousScore;
+
     //FUNCTIONS
 public:
     //constructor
     Game();
     
     //main loop of the game
-    int play();
+    bool play();
     
     //call when the game gets reset (if th player dies and whats to start over)
     void restart();
