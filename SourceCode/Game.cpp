@@ -25,7 +25,7 @@ Game::Game(){
 	playGame = false;
 }
 
-int Game::play(){
+bool Game::play(){
     //create a ship for the player
     PlayerShip *player = new PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
 
@@ -140,6 +140,7 @@ int Game::play(){
 		//check for escape key
 		if(eReceiver.isKeyDown(irr::KEY_ESCAPE)){
 			device->closeDevice();
+			return true;
 		}
 
 		if(eReceiver.isKeyDown(irr::KEY_RETURN) && playGame == false){
@@ -199,9 +200,26 @@ int Game::play(){
         guienv->drawAll();
 
         driver->endScene();
+
+		//if player loses return to the menu
+		if(player->playerLost()){
+			//device->closeDevice();
+
+			for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+				Object *toDelete = *objectIterator;
+				toDelete->getSceneNode()->remove();
+				delete toDelete;
+			}
+
+			objectsToUpdate.clear();
+			objectsToUpdate.resize(0);
+
+			playGame = false;
+			return false;
+		}
     }
 
-    return EXIT_SUCCESS;
+    return false;
 }
 
 void Game::cleanUp(){

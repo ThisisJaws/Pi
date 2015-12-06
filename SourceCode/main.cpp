@@ -21,6 +21,12 @@ int main(int argc, char** argv) {
     //create a game object - everything gets initialised in the constructor
     Game currentGame = Game();
 
+	bool exit = false;
+
+	do{
+		bool exit = currentGame.play();
+	} while(exit);
+
     //call the play function
     int r = currentGame.play();
 

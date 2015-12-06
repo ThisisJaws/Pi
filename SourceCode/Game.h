@@ -53,7 +53,7 @@ public:
     Game();
     
     //main loop of the game
-    int play();
+    bool play();
     
     //call when the game gets reset (if th player dies and whats to start over)
     void restart();
