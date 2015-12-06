@@ -12,7 +12,7 @@ Game::Game(){
     irr::core::dimension2d<irr::u32> deskres = nullDevice->getVideoModeList()->getDesktopResolution();
 
     //create the device - make sure to pass the address of eReceiver
-    device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &eReceiver);
+    device = irr::createDevice(irr::video::EDT_BURNINGSVIDEO, deskres, 32, true, false, true, &eReceiver);
 
     //get the neccessary pointers
     driver = device->getVideoDriver();
