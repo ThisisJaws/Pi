@@ -43,6 +43,9 @@ private:
     
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
+
+	//temp, just to add in a 'menu'
+	bool playGame;
     
     //FUNCTIONS
 public:
