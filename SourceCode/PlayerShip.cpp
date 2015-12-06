@@ -27,9 +27,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     
     modeChangeIteration = 0;
     
-    //store the timer pointer so time between each shot can be fired
-    timerReference = timerReference;
-    
     //set the ship's default mode
     currentMode = flying;
 
