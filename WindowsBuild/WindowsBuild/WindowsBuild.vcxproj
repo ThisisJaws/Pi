@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Alex\Documents\GitHub\Pi\irrlicht-1.8.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\Documents\GitHub\Pi\irrlicht-1.8.3\lib\Win32-visualstudio;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\..\irrlicht-1.8.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\..\irrlicht-1.8.3\lib\Win32-visualstudio;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
