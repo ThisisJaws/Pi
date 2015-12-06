@@ -63,10 +63,12 @@ public:
     //getters and setters for ammo and score
     unsigned short getAmmo();
     void increaseAmmo(unsigned short amount);
-    
     unsigned short getScore();
     void increaseScore(unsigned short amount);
-      
+
+	//when the player collides or gets shot we don't want to delete it, just lose the game
+	virtual void markForDelete() override;
+
 private:
     //turns the player left or right
     void turnLeft(float speed, irr::f32 deltaTime);

@@ -4,7 +4,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.bmp", sceneManagerReference, driverReference){
     
     //change the object type
-    typeID = TYPE_PLAYER;
+    typeID = TYPE_SHIP_PLAYER;
     
     //init variables
     score = 0;
@@ -97,6 +97,10 @@ unsigned short PlayerShip::getScore(){
 
 void PlayerShip::increaseScore(unsigned short amount){
     score += amount;
+}
+
+void PlayerShip::markForDelete(){
+	//TODO: Fill
 }
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
