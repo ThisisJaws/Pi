@@ -6,15 +6,15 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(irr::IrrlichtDevice *device){
+Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     //get a pointer to the irrlicht device
-    this->device = device
+    this->device = device;
 
     //get the neccessary pointers
     driver = device->getVideoDriver();
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
-    eReceiver = device->getEventReceiver();
+    eReceiver = receiver;
 }
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
@@ -27,6 +27,8 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     player->addChangeModePoints(changePoints);
     //Add the player oto the update list
     addObjectToUpdate(player);
+    //Add to the global variable
+    g_player = player;
     //Clear the pointer
     player = 0;
 
@@ -136,31 +138,29 @@ void Game::play(){
 
     //Update the score text
     irr::core::stringw scoreCount(L"Score: ");
-    scoreCount += player->getScore();
-    font->draw(scoreCount.c_str(), irr::core::rect<irr::u32>(10, 10, 200, 22));
+    scoreCount += g_player->getScore();
+    font->draw(scoreCount, irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
 
     //Update the ammo text
     irr::core::stringw ammoCount(L"Ammo: ");
-    ammoCount += player->getAmmo();
-    font->draw(ammoCount.c_str(), irr::core::rect<irr::u32>(10, 30, 200, 52));
+    ammoCount += g_player->getAmmo();
+    font->draw(ammoCount, irr::core::rect<irr::s32>(10, 30, 200, 42), irr::video::SColor(255, 255, 255, 255));
 
     //Update FPS text
-    fps = driver->getFPS();
-    if(lastFPS != fps){
+    FPS = driver->getFPS();
+    if(lastFPS != FPS){
         irr::core::stringw FPSText(L"FPS: ");
-        FPSTest += FPS;
-        font->draw(FPSText.c_str(), irr::core::rect<irr::u32>(10, 10, 200, 22));
-        lastFPS = fps;
+        FPSText += FPS;
+        font->draw(FPSText, irr::core::rect<irr::s32>(10, 60, 200, 72), irr::video::SColor(255, 255, 255, 255));
+        lastFPS = FPS;
     }
 }
 
 void Game::cleanUp(){
-    //anything made with create needs to be 'droped'
-    device->drop();
-
     //loop through object vector and delete all pointers
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
         Object *toDelete = *objectIterator;
+        toDelete->getSceneNode()->remove();
         delete toDelete;
     }
     objectsToUpdate.clear();

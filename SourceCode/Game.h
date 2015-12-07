@@ -37,6 +37,9 @@ private:
     //object to receive keyboard input
     EventReceiver *eReceiver;
 
+    //Keep track of the player
+    PlayerShip *g_player;
+
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 
@@ -55,7 +58,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
 
     //load all the objects to go in the scene
     void load(irr::scene::ICameraSceneNode *camera);
