@@ -6,42 +6,31 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(){
-    //make a nul device to get the desktop res
-    irr::IrrlichtDevice *nullDevice = irr::createDevice(irr::video::EDT_NULL);
-    irr::core::dimension2d<irr::u32> deskres = nullDevice->getVideoModeList()->getDesktopResolution();
-
-    //create the device - make sure to pass the address of eReceiver
-    device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &eReceiver);
+Game::Game(irr::IrrlichtDevice *device){
+    //get a pointer to the irrlicht device
+    this->device = device
 
     //get the neccessary pointers
     driver = device->getVideoDriver();
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
-
-    //make the address of selector 0 for now
-    //selector = 0;
-
-	playGame = false;
-
-	previousScore = 0;
+    eReceiver = device->getEventReceiver();
 }
 
-bool Game::play(){
-    //create a ship for the player
-    PlayerShip *player = new PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
-
-	irr::scene::ICameraSceneNode *camera = smgr->addCameraSceneNode();
-
-    //add a camera to render the scene and give it to the player
-	//player->addCamera(smgr->addCameraSceneNode());
-	player->addCamera(camera);
-
-    //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
-    //create the points in where the modes will change - TEST
+void Game::load(irr::scene::ICameraSceneNode *camera){
+    //Create a ship for the player
+    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, driver);
+    //Give the player the camera
+    player->addCamera(camera);
+    //Add the change points to the player - THESE ARE TEMP
     int changePoints[6] = {4500, 9000, 11000, 13000, 16000, 6000};
     player->addChangeModePoints(changePoints);
+    //Add the player oto the update list
+    addObjectToUpdate(player);
+    //Clear the pointer
+    player = 0;
 
+    //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     srand(1);
 
     //array of test cubes
@@ -109,127 +98,60 @@ bool Game::play(){
 
         z += 400;
     }
-    //add in the terrain as a static object
-    //StaticObject terrain = StaticObject(irr::core::vector3df(0, -250, 0), "Assets/PlaceHolders/terrainSnow.obj", "", smgr, driver);
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //add all objects into the vector
-    addObjectToUpdate(player);
+    //Load in the font
+    font = guienv->getBuiltInFont();
 
-    //setup the user ammo count and score - test
-    irr::gui::IGUIStaticText *scoreText = guienv->addStaticText(L"", irr::core::rect<irr::s32>(10, 10, 200, 22));
-    irr::gui::IGUIStaticText *ammoText = guienv->addStaticText(L"", irr::core::rect<irr::s32>(10, 32, 200, 54));
+    //Set up FPS counters
+    lastFPS = -1;
+    FPS = 0;
 
-    //Text for fps
-    irr::gui::IGUIStaticText *fpsText = guienv->addStaticText(L"", irr::core::rect<irr::s32>(10, 700, 200, 722));
+    //Start the timer for frame independent movement
+    then = device->getTimer()->getRealTime();
+}
 
-    //used to make checking fps slight more effecient
-    int lastFPS = -1;
-    int fps;
+void Game::play(){
+    //Work out frame delta time
+    now = device->getTimer()->getRealTime();
+    frameDeltaTime = (irr::f32)(now - then) / 1000.0f;
+    then = now;
 
-    //set up for frame independent movement
-    irr::u32 then = device->getTimer()->getRealTime();
+    //Tick(update) all objects
+    for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); /*removed increment here because it will crash when iterator is changed*/){
+        if((*objectIterator)->isMarkedForDelete()){
+            //Remove the object if it is marked for deletion
+            Object *toDelete = *objectIterator;
+            objectIterator = objectsToUpdate.erase(objectIterator);
+            toDelete->removeFromScene();
+            delete toDelete;
+        }else{
+            //Update the object
+            (*objectIterator)->tick(frameDeltaTime);
 
-	//set up the variables for the menu screen
-	irr::core::stringw textForMenu(L"Press Enter to start, Previous Score: ");
-	textForMenu += previousScore;
-	irr::gui::IGUIStaticText *menuText = guienv->addStaticText(textForMenu.c_str(), irr::core::rect<irr::s32>(500, 500, 700, 522));
-
-	camera->setPosition(irr::core::vector3df(0, 50, 0));
-	camera->setTarget(irr::core::vector3df(0, 51, 0));
-
-    //main loop
-    while(device->run()){
-		//check for escape key
-		if(eReceiver.isKeyDown(irr::KEY_ESCAPE)){
-			device->closeDevice();
-			//return true;
-		}
-
-		if(eReceiver.isKeyDown(irr::KEY_RETURN) && playGame == false){
-			menuText->remove();
-			playGame = true;
-		}
-
-		//work out frame delta time
-		const irr::u32 now = device->getTimer()->getRealTime();
-		const irr::f32 frameDeltaTime = (irr::f32)(now - then) / 1000.0f;
-		then = now;
-
-		if(playGame){
-			//tick(update) all objects
-			for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); /*removed increment here because it will crash when iterator is changed*/){
-				if((*objectIterator)->isMarkedForDelete()){
-					//remove any marked objects
-					Object *toDelete = *objectIterator;
-					objectIterator = objectsToUpdate.erase(objectIterator);
-					toDelete->removeFromScene();
-					delete toDelete;
-				}
-				else{
-					//update the object
-					(*objectIterator)->tick(frameDeltaTime);
-
-					//increment iterator
-					++objectIterator;
-				}
-			}
-
-			//update score
-			irr::core::stringw scoreCount(L"Score: ");
-			scoreCount += player->getScore();
-			scoreText->setText(scoreCount.c_str());
-
-			//update the ammo text
-			irr::core::stringw ammoCount(L"Ammo: ");
-			ammoCount += player->getAmmo();
-			ammoText->setText(ammoCount.c_str());
-
-			//add fps to window name
-			fps = driver->getFPS();
-			if(lastFPS != fps){
-				irr::core::stringw tmp(L"FPS: ");
-				tmp += fps;
-				fpsText->setText(tmp.c_str());
-				lastFPS = fps;
-			}
-
-		}
-
-        //tell irrlicht to draw/updates scenes
-        driver->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
-
-        smgr->drawAll();
-        guienv->drawAll();
-
-        driver->endScene();
-
-		//if player loses return to the menu
-		if(player->playerLost()){
-			//device->closeDevice();
-
-			previousScore = player->getScore();
-
-			for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-				Object *toDelete = *objectIterator;
-				toDelete->getSceneNode()->remove();
-				delete toDelete;
-			}
-
-			objectsToUpdate.clear();
-			objectsToUpdate.resize(0);
-
-			scoreText->remove();
-			ammoText->remove();
-			fpsText->remove();
-
-			playGame = false;
-			return false;
-		}
+            //Increment iterator
+            ++objectIterator;
+        }
     }
 
-    return true;
+    //Update the score text
+    irr::core::stringw scoreCount(L"Score: ");
+    scoreCount += player->getScore();
+    font->draw(scoreCount.c_str(), irr::core::rect<irr::u32>(10, 10, 200, 22));
+
+    //Update the ammo text
+    irr::core::stringw ammoCount(L"Ammo: ");
+    ammoCount += player->getAmmo();
+    font->draw(ammoCount.c_str(), irr::core::rect<irr::u32>(10, 30, 200, 52));
+
+    //Update FPS text
+    fps = driver->getFPS();
+    if(lastFPS != fps){
+        irr::core::stringw FPSText(L"FPS: ");
+        FPSTest += FPS;
+        font->draw(FPSText.c_str(), irr::core::rect<irr::u32>(10, 10, 200, 22));
+        lastFPS = fps;
+    }
 }
 
 void Game::cleanUp(){
