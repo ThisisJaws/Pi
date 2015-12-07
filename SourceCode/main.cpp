@@ -25,28 +25,32 @@ int main(int argc, char** argv) {
     irr::core::dimension2d<irr::u32> deskres = nullDevice->getVideoModeList()->getDesktopResolution();
     nullDevice->drop();
 
-    //Create the device the run the game
-    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 16, true, false, true);
     //Create the device to handle input
-    EventReceiver reciever = EventReceiver();
+    EventReceiver receiver;
+    //Create the device the run the game
+    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &receiver);
     //Create the class that will handle the actual playing of the game
-    Game game = Game();
+    //Game game = Game();
 
     //Create a font variable to draw text
     irr::gui::IGUIFont *font = device->getGUIEnvironment()->getBuiltInFont();
 
+    device->getSceneManager()->addCameraSceneNode();
+
     //The main loop of the entire program
     while(device->run()){
         //If escape is pressed at any point, break the loop
-        if(reciever.isKeyDown(irr::KEY_ESCAPE)){
+        if(receiver.isKeyDown(irr::KEY_ESCAPE)){
             device->closeDevice();
         }
 
-        //Set up the text for the main menu
-        font->draw(L"TEST", irr::core::rect<irr::s32>(130, 100, 170, 120), irr::video::SColor(255, 255, 255, 255));
-
         //Begin the scene
-        device->getVideoDriver()->beginScene();
+        device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
+
+        //Update the game
+
+        //Set up the text for the main menu
+        font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
 
         //Draw everything
         device->getSceneManager()->drawAll();
