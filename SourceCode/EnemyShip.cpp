@@ -43,14 +43,17 @@ void EnemyShip::tick(irr::f32 deltaTime){
 
     //check if the enemy is too far off to the left of the screen
     if(getPosition().Z + 15 < playerTarget->getPosition().Z){
+        //don,t reward score if the ship goes off scren
         rewardScore = false;
         markForDelete();
     }
 }
 
 void EnemyShip::markForDelete(){
+    //check if the player should get some score
     if(rewardScore){
         playerTarget->increaseScore(scoreAmount);
     }
+    //call the base function
     Object::markForDelete();
 }
