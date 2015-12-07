@@ -3,20 +3,23 @@
 
 EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
         : Ship(spawnPosition, movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
-    
+
     //change the type of the object
     typeID = TYPE_SHIP_ENEMY;
-    
+
     //rotate to the right position
     getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
-    
+
     //set the player
     playerTarget = player;
-    
+
     //init variables
     combatDistance = 125.0f;
     activeDistance = combatDistance + 50;
     canMove = false;
+
+    rewardScore = true;
+    scoreAmount = 500;
 }
 
 EnemyShip::~EnemyShip(){
@@ -37,9 +40,17 @@ void EnemyShip::tick(irr::f32 deltaTime){
     if(playerTarget != NULL && getPosition().getDistanceFrom(playerTarget->getPosition()) <= combatDistance){
         shoot(irr::core::vector3df(0, 0, moveDir));
     }
-    
+
     //check if the enemy is too far off to the left of the screen
     if(getPosition().Z + 15 < playerTarget->getPosition().Z){
+        rewardScore = false;
         markForDelete();
     }
+}
+
+void EnemyShip::markForDelete(){
+    if(rewardScore){
+        playerTarget->increaseScore(scoreAmount);
+    }
+    Object::markForDelete();
 }
