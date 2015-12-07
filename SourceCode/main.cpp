@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &receiver);
     //Create the class that will handle the actual playing of the game
-    //Game game = Game();
+    Game game = Game(device);
 
     //Create a font variable to draw text
     irr::gui::IGUIFont *font = device->getGUIEnvironment()->getBuiltInFont();
