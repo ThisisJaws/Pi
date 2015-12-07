@@ -34,18 +34,18 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
+    Ship::tick(deltaTime);
+
+    //check for collision
 	Object *collidedObject = checkCollision();
 	if(collidedObject == NULL){
         //get the previous position to work out score
         int oldZ = getPosition().Z;
-
-		//call base class function to handle shooting/movement
-		Ship::tick(deltaTime);
-
+        //move forward
+        move(deltaTime);
 		//work out the distance traveled
 		int newZ = getPosition().Z;
 		int difference = newZ - oldZ;
-
 		//increase score by the difference
 		score += difference;;
 	}else{

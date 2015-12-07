@@ -28,9 +28,10 @@ EnemyShip::~EnemyShip(){
 }
 
 void EnemyShip::tick(irr::f32 deltaTime){
+    Ship::tick(deltaTime);
+
     if(canMove){
-        //call the base class function
-        Ship::tick(deltaTime);
+        move(deltaTime);
     }
 
     //check the distance of the player
