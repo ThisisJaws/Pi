@@ -36,11 +36,18 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 void PlayerShip::tick(irr::f32 deltaTime){
 	Object *collidedObject = checkCollision();
 	if(collidedObject == NULL){
-		//call base class function to handle shootingg/movement
+        //get the previous position to work out score
+        int oldZ = getPosition().Z;
+
+		//call base class function to handle shooting/movement
 		Ship::tick(deltaTime);
 
-		//increase score
-		score++;
+		//work out the distance traveled
+		int newZ = getPosition().Z;
+		int difference = newZ - oldZ;
+
+		//increase score by the difference
+		score += difference;;
 	}else{
 		if(collidedObject->getTypeID() != TYPE_BULLET && collidedObject->getTypeID() != TYPE_COLLECTABLE){
 			markForDelete();
