@@ -30,11 +30,12 @@ int main(int argc, char** argv) {
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &receiver);
     //Create the class that will handle the actual playing of the game
-    Game game = Game(device);
+    Game game = Game(device, &receiver);
 
     //Create a font variable to draw text
     irr::gui::IGUIFont *font = device->getGUIEnvironment()->getBuiltInFont();
 
+    //Create a camera to use
     device->getSceneManager()->addCameraSceneNode();
 
     //The main loop of the entire program
@@ -48,6 +49,7 @@ int main(int argc, char** argv) {
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
         //Update the game
+        //game.play();
 
         //Set up the text for the main menu
         font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
