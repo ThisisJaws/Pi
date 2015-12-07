@@ -11,10 +11,11 @@
 
 class EnemyShip : public Ship{
     //VARIABLES
-private:
+protected:
     //the player, the enemy's target
     PlayerShip *playerTarget;
 
+private:
     //how far the player needs to be for the enemy to start shooting
     float combatDistance;
     //how far the player has to be for the enemy to start moving
