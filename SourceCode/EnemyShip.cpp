@@ -19,7 +19,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, flo
     canMove = false;
 
     rewardScore = true;
-    scoreAmount = 500;
+    scoreAmount = 1000;
 }
 
 EnemyShip::~EnemyShip(){
