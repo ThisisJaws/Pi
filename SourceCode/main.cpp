@@ -56,11 +56,10 @@ int main(int argc, char** argv) {
         if(game.isLoaded()){
             //Update the game
             game.play();
+        }else{
+            //Set up the text for the main menu
+            font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
         }
-
-        //Set up the text for the main menu
-        font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
-
         //Draw everything
         device->getSceneManager()->drawAll();
         device->getGUIEnvironment()->drawAll();
