@@ -69,9 +69,6 @@ public:
     //main loop of the game, will just update everything
     void play();
 
-    //call when the game gets reset (if th player dies and whats to start over)
-    //void restart();
-
     //call before exiting porgram
     void cleanUp();
 

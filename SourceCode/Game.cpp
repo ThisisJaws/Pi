@@ -156,6 +156,11 @@ void Game::play(){
         font->draw(FPSText, irr::core::rect<irr::s32>(10, 60, 200, 72), irr::video::SColor(255, 255, 255, 255));
         lastFPS = FPS;
     }
+
+    //If the player loses, end this current game
+    if(g_player->playerLost()){
+        cleanUp();
+    }
 }
 
 void Game::cleanUp(){
@@ -167,6 +172,9 @@ void Game::cleanUp(){
     }
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
+
+    //clear the player pointer
+    g_player = 0;
 
     loaded = false;
 }
