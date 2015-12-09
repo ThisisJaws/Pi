@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     irr::gui::IGUIFont *font = device->getGUIEnvironment()->getBuiltInFont();
 
     //Create a camera to use
-    device->getSceneManager()->addCameraSceneNode();
+    irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
 
     //The main loop of the entire program
     while(device->run()){
@@ -45,11 +45,18 @@ int main(int argc, char** argv) {
             device->closeDevice();
         }
 
+        //Load and start the game when enter is pressed
+        if(receiver.isKeyDown(irr::KEY_RETURN) && !game.isLoaded()){
+            game.load(camera);
+        }
+
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-        //Update the game
-        //game.play();
+        if(game.isLoaded()){
+            //Update the game
+            game.play();
+        }
 
         //Set up the text for the main menu
         font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
