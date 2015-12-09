@@ -101,7 +101,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
         z += 400;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
     //Load in the sky box
     skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
@@ -109,7 +109,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
-
+*/
     //Load in the font
     font = guienv->getBuiltInFont();
 
@@ -179,7 +179,6 @@ void Game::cleanUp(){
 
     //Get rid of the skybox
     skyBox->remove();
-    //delete skyBox;
 
     //Game is not loaded
     loaded = false;
