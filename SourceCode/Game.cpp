@@ -31,8 +31,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     addObjectToUpdate(player);
     //Add to the global variable
     g_player = player;
-    //Clear the pointer
-    player = 0;
 
     //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
     srand(1);
