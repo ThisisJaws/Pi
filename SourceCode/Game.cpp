@@ -102,12 +102,21 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Load in the sky box
+    skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
+
     //Load in the font
     font = guienv->getBuiltInFont();
 
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
 
+    //Game has been loaded
     loaded = true;
 }
 
@@ -168,6 +177,11 @@ void Game::cleanUp(){
     //clear the player pointer
     g_player = 0;
 
+    //Get rid of the skybox
+    skyBox->remove();
+    //delete skyBox;
+
+    //Game is not loaded
     loaded = false;
 }
 

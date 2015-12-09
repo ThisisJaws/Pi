@@ -40,6 +40,9 @@ private:
     //Keep track of the player
     PlayerShip *g_player;
 
+    //The skybox
+    irr::scene::ISceneNode *skyBox;
+
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 

@@ -40,14 +40,6 @@ int main(int argc, char** argv) {
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
 
-    //Create the sky box
-    device->getSceneManager()->addSkyBoxSceneNode(device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
-
     //The main loop of the entire program
     while(device->run()){
         //If escape is pressed at any point, break the loop
