@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
         }
 
         //Control the state of the game when enter is pressed
-        if(receiver.isKeyDown(irr::KEY_RETURN) && !game.isLoaded()){
+        if(receiver.isKeyDown(irr::KEY_RETURN)){
             if(gameState == startMenu){
                 gameState = gamePlaying;
                 menuImage->setVisible(false);
