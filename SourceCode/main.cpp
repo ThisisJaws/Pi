@@ -33,7 +33,9 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver);
 
     //Create a texture variable to draw the menu
-    //irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
+    irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
+    //Add the texture to the gui
+    irr::gui::IGUIImage *menuImage = device->getGUIEnvironment()->addImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
 
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
@@ -56,6 +58,9 @@ int main(int argc, char** argv) {
         //Load and start the game when enter is pressed
         if(receiver.isKeyDown(irr::KEY_RETURN) && !game.isLoaded()){
             game.load(camera);
+            if(menuImage->isVisible()){
+                menuImage->setVisible(false);
+            }
         }
 
         //Begin the scene
@@ -66,7 +71,9 @@ int main(int argc, char** argv) {
             game.play();
         }else{
             //Draw menu graphic
-            //device->getVideoDriver()->draw2DImage(device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg"), irr::core::position2d<irr::s32>(0, 0));
+            if(!menuImage->isVisible()){
+                menuImage->setVisible(true);
+            }
         }
         //Draw everything
         device->getSceneManager()->drawAll();
