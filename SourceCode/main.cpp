@@ -32,8 +32,8 @@ int main(int argc, char** argv) {
     //Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 
-    //Create a font variable to draw text
-    irr::gui::IGUIFont *font = device->getGUIEnvironment()->getBuiltInFont();
+    //Create a texture variable to draw the menu
+    irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
 
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
@@ -57,8 +57,8 @@ int main(int argc, char** argv) {
             //Update the game
             game.play();
         }else{
-            //Set up the text for the main menu
-            font->draw(L"TEST", irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
+            //Draw menu graphic
+            device->getVideoDriver()->draw2DImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
         }
         //Draw everything
         device->getSceneManager()->drawAll();
