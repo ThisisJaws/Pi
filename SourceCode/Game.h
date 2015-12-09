@@ -46,8 +46,10 @@ private:
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 
-    //The font to use
-    irr::gui::IGUIFont *font;
+    //Static text of the Infomation
+    irr::gui::IGUIStaticText *scoreText;
+    irr::gui::IGUIStaticText *ammoText;
+    irr::gui::IGUIStaticText *FPSText;
 
     //Handle frame independent movement
     irr::u32 then;

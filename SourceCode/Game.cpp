@@ -110,8 +110,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
 
-    //Load in the font
-    font = guienv->getBuiltInFont();
+    //Load the text variables
+    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
+    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 30, 200, 42));
+    FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 50, 200, 62));
 
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
@@ -146,17 +148,17 @@ void Game::play(){
     //Update the score text
     irr::core::stringw scoreCount(L"Score: ");
     scoreCount += g_player->getScore();
-    font->draw(scoreCount, irr::core::rect<irr::s32>(10, 10, 200, 22), irr::video::SColor(255, 255, 255, 255));
+    scoreText->setText(scoreCount.c_str());
 
     //Update the ammo text
     irr::core::stringw ammoCount(L"Ammo: ");
     ammoCount += g_player->getAmmo();
-    font->draw(ammoCount, irr::core::rect<irr::s32>(10, 30, 200, 42), irr::video::SColor(255, 255, 255, 255));
+    ammoText->setText(ammoCount.c_str());
 
     //Update FPS text
-    irr::core::stringw FPSText(L"FPS: ");
-    FPSText += driver->getFPS();;
-    font->draw(FPSText, irr::core::rect<irr::s32>(10, 60, 200, 72), irr::video::SColor(255, 255, 255, 255));
+    irr::core::stringw FPSCount(L"FPS: ");
+    FPSCount += driver->getFPS();;
+    FPSText->setText(FPSCount.c_str());
 
     //If the player loses, end this current game
     if(g_player->playerLost()){
