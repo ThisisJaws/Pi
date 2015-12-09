@@ -183,6 +183,11 @@ void Game::cleanUp(){
     //Get rid of the skybox
     skyBox->remove();
 
+    //Remove the static text objects
+    scoreText->remove();
+    ammoText->remove();
+    FPSText->remove();
+
     //Game is not loaded
     loaded = false;
 }
