@@ -55,26 +55,41 @@ int main(int argc, char** argv) {
             device->closeDevice();
         }
 
-        //Load and start the game when enter is pressed
+        //Control the state of the game when enter is pressed
         if(receiver.isKeyDown(irr::KEY_RETURN) && !game.isLoaded()){
-            game.load(camera);
-            if(menuImage->isVisible()){
+            if(gameState == startMenu){
+                gameState = gamePlaying;
                 menuImage->setVisible(false);
+            }else if (gameState == scoreScreen){
+                gameState = startMenu;
+                menuImage->setVisible(true);
             }
         }
 
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-        if(game.isLoaded()){
-            //Update the game
-            game.play();
-        }else{
-            //Draw menu graphic
-            if(!menuImage->isVisible()){
-                menuImage->setVisible(true);
-            }
+        //Hadle logic depending on the game state
+        switch(gameState){
+            case startMenu:
+                //Start menu logic
+                break;
+            case gamePlaying:
+                if(!game.isLoaded()){
+                    game.load(camera);
+                }
+                if(game.play()){
+                    gameState = scoreScreen;
+                }
+                break;
+            case scoreScreen:
+                //Score screen logic
+                break;
+
+            default:
+                break;
         }
+
         //Draw everything
         device->getSceneManager()->drawAll();
         device->getGUIEnvironment()->drawAll();
