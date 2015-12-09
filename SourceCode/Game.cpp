@@ -164,8 +164,8 @@ bool Game::play(){
 
     //If the player loses, end this current game
     if(g_player->playerLost()){
-        cleanUp();
         previousScore = g_player->getScore();
+        cleanUp();
         return true;
     }else{
         return false;
