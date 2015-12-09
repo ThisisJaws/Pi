@@ -48,10 +48,10 @@ int main(int argc, char** argv) {
     } gameState;
     gameState = startMenu;
 
-    //The player's score
-    unsigned int previousScore;
+    //Show the player's score
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
     scoreText->setVisible(false);
+    irr::core::stringw scoreCount(L"Empty");
 
     //The main loop of the entire program
     while(device->run()){
@@ -90,7 +90,9 @@ int main(int argc, char** argv) {
                 }
                 break;
             case scoreScreen:
-                //Score screen logic
+                scoreCount = L"Final Score: ";
+                scoreCount += game.getFinalScore();
+                scoreText->setText(scoreCount.c_str());
                 break;
 
             default:
