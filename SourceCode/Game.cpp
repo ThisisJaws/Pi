@@ -17,6 +17,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     eReceiver = receiver;
 
     loaded = false;
+    previousScore = 0;
 }
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
@@ -164,6 +165,7 @@ bool Game::play(){
     //If the player loses, end this current game
     if(g_player->playerLost()){
         cleanUp();
+        previousScore = g_player->getScore();
         return true;
     }else{
         return false;
@@ -201,4 +203,8 @@ void Game::addObjectToUpdate(Object* toAdd){
 
 bool Game::isLoaded(){
     return loaded;
+}
+
+unsigned int Game::getFinalScore(){
+    return previousScore;
 }

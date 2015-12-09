@@ -59,6 +59,9 @@ private:
     //check if the game has been loaded
     bool loaded;
 
+    //Keep track of the score
+    unsigned int previousScore;
+
     //FUNCTIONS
 public:
     //constructor
@@ -78,6 +81,9 @@ public:
 
     //returns true if objects are loaded in the scene
     bool isLoaded();
+
+    //Returns the score when the game is finished
+    unsigned int getFinalScore();
 };
 
 #endif	/* GAME_H */
