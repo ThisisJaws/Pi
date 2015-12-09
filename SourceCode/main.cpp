@@ -48,6 +48,11 @@ int main(int argc, char** argv) {
     } gameState;
     gameState = startMenu;
 
+    //The player's score
+    unsigned int previousScore;
+    irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
+    scoreText->setVisible(false);
+
     //The main loop of the entire program
     while(device->run()){
         //If escape is pressed at any point, break the loop
@@ -63,6 +68,7 @@ int main(int argc, char** argv) {
             }else if (gameState == scoreScreen){
                 gameState = startMenu;
                 menuImage->setVisible(true);
+                scoreText->setVisible(false);
             }
         }
 
@@ -80,6 +86,7 @@ int main(int argc, char** argv) {
                 }
                 if(game.play()){
                     gameState = scoreScreen;
+                    scoreText->setVisible(true);
                 }
                 break;
             case scoreScreen:
