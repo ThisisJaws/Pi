@@ -105,10 +105,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     //Load in the font
     font = guienv->getBuiltInFont();
 
-    //Set up FPS counters
-    lastFPS = -1;
-    FPS = 0;
-
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
 
@@ -149,13 +145,9 @@ void Game::play(){
     font->draw(ammoCount, irr::core::rect<irr::s32>(10, 30, 200, 42), irr::video::SColor(255, 255, 255, 255));
 
     //Update FPS text
-    FPS = driver->getFPS();
-    if(lastFPS != FPS){
-        irr::core::stringw FPSText(L"FPS: ");
-        FPSText += FPS;
-        font->draw(FPSText, irr::core::rect<irr::s32>(10, 60, 200, 72), irr::video::SColor(255, 255, 255, 255));
-        lastFPS = FPS;
-    }
+    irr::core::stringw FPSText(L"FPS: ");
+    FPSText += driver->getFPS();;
+    font->draw(FPSText, irr::core::rect<irr::s32>(10, 60, 200, 72), irr::video::SColor(255, 255, 255, 255));
 
     //If the player loses, end this current game
     if(g_player->playerLost()){

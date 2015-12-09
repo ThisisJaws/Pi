@@ -46,10 +46,6 @@ private:
     //The font to use
     irr::gui::IGUIFont *font;
 
-    //To count the fps
-    int lastFPS;
-    int FPS;
-
     //Handle frame independent movement
     irr::u32 then;
     irr::u32 now;
