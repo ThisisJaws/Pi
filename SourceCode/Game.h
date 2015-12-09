@@ -67,8 +67,8 @@ public:
     //load all the objects to go in the scene
     void load(irr::scene::ICameraSceneNode *camera);
 
-    //main loop of the game, will just update everything
-    void play();
+    //main loop of the game, will just update everything. Returns true if player dies
+    bool play();
 
     //call before exiting porgram
     void cleanUp();

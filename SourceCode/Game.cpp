@@ -123,7 +123,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     loaded = true;
 }
 
-void Game::play(){
+bool Game::play(){
     //Work out frame delta time
     now = device->getTimer()->getRealTime();
     frameDeltaTime = (irr::f32)(now - then) / 1000.0f;
@@ -164,6 +164,9 @@ void Game::play(){
     //If the player loses, end this current game
     if(g_player->playerLost()){
         cleanUp();
+        return true;
+    }else{
+        return false;
     }
 }
 
