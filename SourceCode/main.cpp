@@ -33,10 +33,18 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver);
 
     //Create a texture variable to draw the menu
-    irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
+    //irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
 
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
+
+    //Create the sky box
+    device->getSceneManager()->addSkyBoxSceneNode(device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
+                                                  device->getVideoDriver()->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
 
     //The main loop of the entire program
     while(device->run()){
@@ -58,7 +66,7 @@ int main(int argc, char** argv) {
             game.play();
         }else{
             //Draw menu graphic
-            device->getVideoDriver()->draw2DImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
+            //device->getVideoDriver()->draw2DImage(device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg"), irr::core::position2d<irr::s32>(0, 0));
         }
         //Draw everything
         device->getSceneManager()->drawAll();
