@@ -55,6 +55,9 @@ private:
     irr::u32 now;
     irr::f32 frameDeltaTime;
 
+    //check if the game has been loaded
+    bool loaded;
+
     //FUNCTIONS
 public:
     //constructor
@@ -74,6 +77,9 @@ public:
 
     //adds objects onto the static list
     static void addObjectToUpdate(Object *toAdd);
+
+    //returns true if objects are loaded in the scene
+    bool isLoaded();
 };
 
 #endif	/* GAME_H */

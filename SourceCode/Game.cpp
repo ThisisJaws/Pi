@@ -15,6 +15,8 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
+
+    loaded = false;
 }
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
@@ -111,6 +113,8 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
+
+    loaded = true;
 }
 
 void Game::play(){
@@ -165,8 +169,14 @@ void Game::cleanUp(){
     }
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
+
+    loaded = false;
 }
 
 void Game::addObjectToUpdate(Object* toAdd){
     objectsToUpdate.push_back(toAdd);
+}
+
+bool Game::isLoaded(){
+    return loaded;
 }
