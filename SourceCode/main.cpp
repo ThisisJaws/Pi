@@ -40,6 +40,14 @@ int main(int argc, char** argv) {
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
 
+    //enum to keep track of game states
+    enum state{
+        startMenu,
+        gamePlaying,
+        scoreScreen
+    } gameState;
+    gameState = startMenu;
+
     //The main loop of the entire program
     while(device->run()){
         //If escape is pressed at any point, break the loop
