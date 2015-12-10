@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver);
 
     //Create a texture variable to draw the menu
-    irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu.jpg");
+    irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu800x600.jpg");
     //Add the texture to the gui
     irr::gui::IGUIImage *menuImage = device->getGUIEnvironment()->addImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
 
