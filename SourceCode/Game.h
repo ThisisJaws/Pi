@@ -1,4 +1,4 @@
-/* 
+/*
  * This is the class that will handle everything game related
  * so restarting a game ect. can be done with ease from main.cpp
  */
@@ -34,37 +34,56 @@ private:
     irr::scene::ISceneManager *smgr;
     //a pointer to the gui iterface
     irr::gui::IGUIEnvironment *guienv;
-    
-    //set up a selector for collision purposes
-    //irr::scene::ITriangleSelector *selector;
-    
     //object to receive keyboard input
-    EventReceiver eReceiver;
-    
+    EventReceiver *eReceiver;
+
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 
-	//temp, just to add in a 'menu'
-	bool playGame;
-    
-	unsigned short previousScore;
+    //Keep track of the player
+    PlayerShip *g_player;
+
+    //The skybox
+    irr::scene::ISceneNode *skyBox;
+
+    //Static text of the Infomation
+    irr::gui::IGUIStaticText *scoreText;
+    irr::gui::IGUIStaticText *ammoText;
+    irr::gui::IGUIStaticText *FPSText;
+
+    //Handle frame independent movement
+    irr::u32 then;
+    irr::u32 now;
+    irr::f32 frameDeltaTime;
+
+    //check if the game has been loaded
+    bool loaded;
+
+    //Keep track of the score
+    unsigned int previousScore;
 
     //FUNCTIONS
 public:
     //constructor
-    Game();
-    
-    //main loop of the game
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
+
+    //load all the objects to go in the scene
+    void load(irr::scene::ICameraSceneNode *camera);
+
+    //main loop of the game, will just update everything. Returns true if player dies
     bool play();
-    
-    //call when the game gets reset (if th player dies and whats to start over)
-    void restart();
-    
+
     //call before exiting porgram
     void cleanUp();
-    
+
     //adds objects onto the static list
     static void addObjectToUpdate(Object *toAdd);
+
+    //returns true if objects are loaded in the scene
+    bool isLoaded();
+
+    //Returns the score when the game is finished
+    unsigned int getFinalScore();
 };
 
 #endif	/* GAME_H */

@@ -1,4 +1,4 @@
-/* 
+/*
  * This is the base class for all ships ie. player and enemies
  * this class will contain all shared functionality
  */
@@ -20,7 +20,7 @@ protected:
     float turnSpeed;
     //the direction to move in (will be +1 or -1)
     signed char moveDir;
-    
+
 private:
     //if the ship is able to fire
     bool canFire;
@@ -28,26 +28,30 @@ private:
     irr::u32 timeSinceLastFire;
     irr::ITimer *timerReference;
     int timeBetweenShots;
-    
+
     //the bullet the ship will fire
     Bullet *bullet;
-    
+
     //needed to construct new bullets
     irr::scene::ISceneManager *smgr;
     irr::video::IVideoDriver *drv;
-    
+
     //FUNCTIONS
 public:
-    //constructor 
+    //constructor
     Ship(irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, int movementDirecion, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
     //destructor
     ~Ship();
-    
+
+    //checks the cool down on shooting
     virtual void tick(irr::f32 deltaTime) override;
-    
+
 protected:
     //makes the ship shoot, returns true if it fired
-    bool shoot(irr::core::vector3df direction);    
+    bool shoot(irr::core::vector3df direction);
+
+    //moves the ship forward
+    void move(irr::f32 deltaTime);
 };
 
 #endif	/* _SHIP_H */

@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 27.11.2015 15:41:02
+# File Created: 06.12.2015 20:45:34
 
 mtllib ship 2.mtl
 
@@ -2492,7 +2492,7 @@ vt 0.6884 0.8818 0.0000
 # 1340 texture coords
 
 g Box001
-usemtl Material__767
+usemtl Material__857
 s 2
 f 1/1/1 2/2/2 3/3/3 4/4/4 
 f 4/4/4 3/3/3 5/5/5 6/6/5 
