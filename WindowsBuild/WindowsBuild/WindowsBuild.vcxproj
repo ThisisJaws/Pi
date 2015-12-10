@@ -22,7 +22,6 @@
     <ProjectGuid>{D3979463-E55E-430B-B85C-8571D5A5D190}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WindowsBuild</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,6 +80,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\..\..\irrlicht-1.8.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\..\irrlicht-1.8.3\lib\Win32-visualstudio;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
