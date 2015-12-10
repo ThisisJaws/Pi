@@ -49,6 +49,8 @@ private:
 
 	bool lost;
 
+	bool reset;
+
     //FUNCTIONS
 public:
     //constructor
@@ -72,6 +74,8 @@ public:
 	virtual void markForDelete() override;
 
 	bool playerLost();
+
+	bool playerReset();
 
 private:
     //turns the player left or right
