@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
     //Create the device the run the game
-    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, deskres, 32, true, false, true, &receiver);
+    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, deskres, 32, true, false, true, &receiver);
     //Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 
