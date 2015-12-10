@@ -40,14 +40,14 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	Object *collidedObject = checkCollision();
 	if(collidedObject == NULL){
         //get the previous position to work out score
-        int oldZ = getPosition().Z;
+		unsigned int oldZ = getPosition().Z;
         //move forward
         move(deltaTime);
 		//work out the distance traveled
-		int newZ = getPosition().Z;
-		int difference = newZ - oldZ;
+		unsigned int newZ = getPosition().Z;
+		unsigned int difference = newZ - oldZ;
 		//increase score by the difference
-		score += difference;;
+		increaseScore(difference);
 	}else{
 		if(collidedObject->getTypeID() != TYPE_BULLET && collidedObject->getTypeID() != TYPE_COLLECTABLE){
 			markForDelete();
@@ -87,6 +87,14 @@ void PlayerShip::tick(irr::f32 deltaTime){
     if(modeChangePoints[modeChangeIteration] > 0 && getPosition().Z >= modeChangePoints[modeChangeIteration]){
         //if we have a point that is greater than 0 and player the player's X is past that then change modes
         changeMode();
+
+		//TEMP WINDOWS BUILD------------
+		if(modeChangeIteration == 2){
+			changePosition(irr::core::vector3df(0, 0, 0));
+			modeChangeIteration = 0;
+			moveSpeed += moveSpeed / 2;
+		}
+		//------------------------------
     }
 }
 
@@ -107,11 +115,11 @@ void PlayerShip::increaseAmmo(unsigned short amount){
     ammo += amount;
 }
 
-unsigned short PlayerShip::getScore(){
+unsigned int PlayerShip::getScore(){
     return score;
 }
 
-void PlayerShip::increaseScore(unsigned short amount){
+void PlayerShip::increaseScore(unsigned int amount){
     score += amount;
 }
 

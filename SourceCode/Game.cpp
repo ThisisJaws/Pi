@@ -115,7 +115,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
     //Load the text variables
     guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 255, 255, 255));
-    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
+    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 400, 22), true);
     ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 30, 200, 42));
     FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 50, 200, 62));
 

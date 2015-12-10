@@ -65,8 +65,8 @@ public:
     //getters and setters for ammo and score
     unsigned short getAmmo();
     void increaseAmmo(unsigned short amount);
-    unsigned short getScore();
-    void increaseScore(unsigned short amount);
+    unsigned int getScore();
+    void increaseScore(unsigned int amount);
 
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;

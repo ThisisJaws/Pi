@@ -24,7 +24,7 @@ private:
 
     //reward score when the enemy dies
     bool rewardScore;
-    int scoreAmount;
+    unsigned int scoreAmount;
 
     //FUNCTIONS
 public:

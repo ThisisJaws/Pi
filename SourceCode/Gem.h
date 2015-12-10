@@ -11,7 +11,7 @@ class Gem : public Collectable{
     //VARIABLES
 private:
     //how much to increase score by
-    int scoreIncrease;
+    unsigned int scoreIncrease;
     
     //FUNCTIONS
 public:
