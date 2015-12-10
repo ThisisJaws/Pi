@@ -46,7 +46,7 @@ bool Ship::shoot(irr::core::vector3df direction){
         irr::core::vector3df front = getPosition();
         front.Z += 20 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
         //then fire the bullet
-        bullet->fire(front, direction);
+        bullet->fire(front, direction, moveSpeed);
 
         //add it onto the list to be updated
         Game::addObjectToUpdate(bullet);

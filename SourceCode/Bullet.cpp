@@ -60,10 +60,17 @@ void Bullet::tick(irr::f32 deltaTime){
     }
 }
 
-void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction){
+void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed){
     //spawn the object into the scene
     spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
+	moveSpeed = shipSpeed;
+	if(direction.Z > 0){
+		moveSpeed += 100;
+	} else{
+		moveSpeed -= 100;
+	}
+
     //temp - set scale of bullet and rotation
     getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
     getSceneNode()->setRotation(irr::core::vector3df(0, 90, 0));
