@@ -22,23 +22,6 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	previousScore = 0;
 }
 
-bool Game::play(){
-    //create a ship for the player
-    PlayerShip *player = new PlayerShip(&eReceiver, device->getTimer(), smgr, driver);
-
-	irr::scene::ICameraSceneNode *camera = smgr->addCameraSceneNode();
-
-    //add a camera to render the scene and give it to the player
-	//player->addCamera(smgr->addCameraSceneNode());
-	player->addCamera(camera);
-
-    //BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
-    //create the points in where the modes will change - TEST
-
-    loaded = false;
-    previousScore = 0;
-}
-
 void Game::load(irr::scene::ICameraSceneNode *camera){
     //Create a ship for the player
     PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, driver);

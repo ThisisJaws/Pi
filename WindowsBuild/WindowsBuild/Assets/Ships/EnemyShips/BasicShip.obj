@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 27.11.2015 15:38:31
+# File Created: 06.12.2015 20:49:50
 
 mtllib Slow Ship Obj.mtl
 
@@ -3237,7 +3237,7 @@ vt 0.5901 0.8120 0.0000
 # 1671 texture coords
 
 g Capsule001
-usemtl Material__397
+usemtl Material__423
 s 4
 f 1/1/1 2/2/2 3/3/3 
 f 1/1/1 3/3/3 4/4/4 
