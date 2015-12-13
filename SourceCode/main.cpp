@@ -20,10 +20,8 @@
  * program entry point
  */
 int main(int argc, char** argv) {
-    //Create a null device to get the desktop res
-    //irr::IrrlichtDevice *nullDevice = irr::createDevice(irr::video::EDT_NULL);
-    //irr::core::dimension2d<irr::u32> deskres = nullDevice->getVideoModeList()->getDesktopResolution();
-    //nullDevice->drop();
+	//Resolution for the pi
+	//irr::core::dimension2d<irr::s32> piRes(1280, 720);
 
     //Create the device to handle input
     EventReceiver receiver;
