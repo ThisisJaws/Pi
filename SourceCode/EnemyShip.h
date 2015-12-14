@@ -40,7 +40,7 @@ public:
 
 protected:
 	//What to do when the enemy is in range of the player
-	//virtual void combatManouver(irr::f32 deltaTime) = 0;
+	virtual void combatManouver(irr::f32 deltaTime) = 0;
 };
 
 #endif	/* ENEMYSHIP_H */

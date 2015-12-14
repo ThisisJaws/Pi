@@ -34,7 +34,7 @@ void EnemyShip::tick(irr::f32 deltaTime){
         move(deltaTime);
 
 		//Perform the combat manouver
-		//combatManouver(deltaTime);
+		combatManouver(deltaTime);
     }
 
     //check the distance of the player
