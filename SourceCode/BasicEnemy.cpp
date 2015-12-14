@@ -33,24 +33,27 @@ void BasicEnemy::combatManouver(irr::f32 deltaTime){
 }
 
 void BasicEnemy::combatStageA(irr::f32 deltaTime){
+	//Moves the ship to the top of the screen while shooting
 	if(getPosition().Y < 45){
 		moveUp(turnSpeed / 2, deltaTime);
-		shoot(irr::core::vector3df(0, 0, moveDir));
+		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER);
 	} else{
 		currentStage = stageB;
 	}
 }
 
 void BasicEnemy::combatStageB(irr::f32 deltaTime){
+	//Moves the ship to the bottom of the screen while shooting
 	if(getPosition().Y > -45){
 		moveDown(turnSpeed / 2, deltaTime);
-		shoot(irr::core::vector3df(0, 0, moveDir));
+		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER);
 	} else{
 		currentStage = stageC;
 	}
 }
 
 void BasicEnemy::combatStageC(irr::f32 deltaTime){
+	//Makes the ship leave the area
 	moveSpeed /= 2;
 	currentStage = stageEnd;
 }

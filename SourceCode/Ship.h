@@ -51,7 +51,7 @@ public:
 
 protected:
     //makes the ship shoot, returns true if it fired
-    bool shoot(irr::core::vector3df direction);
+    bool shoot(irr::core::vector3df direction, int targetTypeID);
 
     //moves the ship forward
     void move(float speed, irr::f32 deltaTime);

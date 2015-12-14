@@ -41,16 +41,13 @@ float Ship::getMovementSpeed(){
 	return moveSpeed;
 }
 
-bool Ship::shoot(irr::core::vector3df direction){
+bool Ship::shoot(irr::core::vector3df direction, int targetTypeID){
     if(canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
 
-        //figure out the front of the ship
-        irr::core::vector3df front = getPosition();
-        front.Z += 20 * moveDir;    //work around for getting the bullet to fire out the front CHANGE
-        //then fire the bullet
-        bullet->fire(front, direction, moveSpeed);
+		//then fire the bullet
+        bullet->fire(getPosition(), direction, moveSpeed, targetTypeID);
 
         //add it onto the list to be updated
         Game::addObjectToUpdate(bullet);
