@@ -78,9 +78,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
         test1->changePosition(irr::core::vector3df(x,y,z));
         addObjectToUpdate(test1);
 
-        y = rand() % 100 + 1;
-        y -= 50;
-
         z += 400;
 
         //strong
@@ -88,18 +85,12 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
         test2->changePosition(irr::core::vector3df(x,y,z));
         addObjectToUpdate(test2);
 
-        y = rand() % 200 + 1;
-        y -= 100;
-
         z += 400;
 
         //fast
         FastEnemy *test3  = new FastEnemy(player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
         test3->changePosition(irr::core::vector3df(x,y,z));
         addObjectToUpdate(test3);
-
-        y = rand() % 200 + 1;
-        y -= 100;
 
         z += 400;
     }
