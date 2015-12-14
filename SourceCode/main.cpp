@@ -59,19 +59,15 @@ int main(int argc, char** argv) {
         }
 
         //Start the game when enter is pressed
-        if(receiver.isKeyDown(irr::KEY_RETURN)){
+        if(receiver.isKeyPressed(irr::KEY_RETURN)){
             if(gameState == startMenu){
                 gameState = gamePlaying;
                 menuImage->setVisible(false);
-            }
-        }
-        //Leave score screen when space bar is pressed
-        if(receiver.isKeyDown(irr::KEY_BACK)){
-            if (gameState == scoreScreen){
-                gameState = startMenu;
-                menuImage->setVisible(true);
-                scoreText->setVisible(false);
-            }
+            }else if(gameState == scoreScreen){
+				gameState = startMenu;
+				menuImage->setVisible(true);
+				scoreText->setVisible(false);
+			}
         }
 
         //Begin the scene
@@ -107,6 +103,9 @@ int main(int argc, char** argv) {
 
         //End the scene
         device->getVideoDriver()->endScene();
+
+		//Update the keyStates
+		receiver.endOfLoop();
     }
 
     //Drop the device to end the program
