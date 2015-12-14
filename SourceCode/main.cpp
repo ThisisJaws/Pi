@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-        //Hadle logic depending on the game state
+        //Handle logic depending on the game state
         switch(gameState){
             case startMenu:
                 //Start menu logic
