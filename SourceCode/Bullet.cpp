@@ -64,11 +64,12 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, 
     //spawn the object into the scene
     spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
+	//Work out the speed of the bullet
 	moveSpeed = shipSpeed;
 	if(direction.Z > 0){
-		moveSpeed += 100;
+		moveSpeed *= 1.7f;
 	} else{
-		moveSpeed -= 100;
+		moveSpeed = -moveSpeed * 0.35f;
 	}
 
     //temp - set scale of bullet and rotation
