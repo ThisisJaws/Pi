@@ -38,32 +38,19 @@ void Bullet::tick(irr::f32 deltaTime){
         //check the type of collision
         Object *collidedObject = checkCollision();
         if(collidedObject != NULL){
-            switch(collidedObject->getTypeID()){
-                case TYPE_SHIP_PLAYER:
-                    //player logic goes here
-					collidedObject->markForDelete();
-					markForDelete();
-                    break;
-                
-                case TYPE_SHIP_ENEMY:
-                    //enemys will get marked for delete
-                    collidedObject->markForDelete();
-                    markForDelete();
-                    break;
-                
-                default:
-                    //if it hits anything
-                    markForDelete();
-                    break;
-            }
+			if(collidedObject->getTypeID() == targetTypeID){
+				collidedObject->markForDelete();
+			}
         }
     }
 }
 
-void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed){
+void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed, int targetTypeID){
     //spawn the object into the scene
     spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
     
+	this->targetTypeID = targetTypeID;
+	
 	//Work out the speed of the bullet
 	moveSpeed = shipSpeed;
 	if(direction.Z > 0){

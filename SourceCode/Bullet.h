@@ -16,6 +16,8 @@ private:
     float moveSpeed;
     //check if it has been fired
     bool fired;
+	//The type ID of the target
+	int targetTypeID;
     
     //how long the bullet is 'alive' for before despawning
     float currentLifeTime;
@@ -38,7 +40,7 @@ public:
     void tick(irr::f32 deltatime) override;
     
     //call to fire the bullet
-    void fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed);
+    void fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed, int targetTypeID);
 };
 
 #endif	/* BULLET_H */
