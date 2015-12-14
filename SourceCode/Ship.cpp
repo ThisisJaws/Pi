@@ -37,6 +37,10 @@ void Ship::tick(irr::f32 deltaTime){
     }
 }
 
+float Ship::getMovementSpeed(){
+	return moveSpeed;
+}
+
 bool Ship::shoot(irr::core::vector3df direction){
     if(canFire){
         //construct a new bullet

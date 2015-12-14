@@ -46,6 +46,9 @@ public:
     //checks the cool down on shooting
     virtual void tick(irr::f32 deltaTime) override;
 
+	//Returns the movement speed
+	float getMovementSpeed();
+
 protected:
     //makes the ship shoot, returns true if it fired
     bool shoot(irr::core::vector3df direction);
