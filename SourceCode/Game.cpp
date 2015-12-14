@@ -28,7 +28,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     //Give the player the camera
     player->addCamera(camera);
     //Add the change points to the player - THESE ARE TEMP
-    int changePoints[6] = {4500, 9000, 11000, 13000, 16000, 6000};
+    int changePoints[6] = {4500, 10000, 17000, 18000, 19000, 20000};
     player->addChangeModePoints(changePoints);
     //Add the player oto the update list
     addObjectToUpdate(player);
