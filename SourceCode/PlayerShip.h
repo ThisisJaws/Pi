@@ -77,13 +77,16 @@ public:
 
 	bool playerReset();
 
+protected:
+	//Overriden for camera controls
+	virtual void moveUp(float speed, irr::f32 deltaTime) override;
+	virtual void moveDown(float speed, irr::f32 deltaTime) override;
+
 private:
-    //turns the player left or right
+	//Moves the player left or right
     void turnLeft(float speed, irr::f32 deltaTime);
     void turnRight(float speed, irr::f32 deltaTime);
-    void moveUp(float speed, irr::f32 deltaTime);
-    void moveDown(float speed, irr::f32 deltaTime);
-
+	
     //changes the player/camera between modes
     void changeMode();
 
