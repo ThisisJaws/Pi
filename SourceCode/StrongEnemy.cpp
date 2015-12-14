@@ -8,9 +8,10 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 
 	hitsTaken = 0;
 
-	combatLoop = 2;
 	currentLoop = 0;
+
 	currentStage = stageA;
+
 	speedChanged = false;
 	shotsFired = 0;
 }
@@ -25,34 +26,37 @@ void StrongEnemy::markForDelete(){
 
 void StrongEnemy::combatManouver(irr::f32 deltaTime){
 	//Devide what stage to perform
-	if(currentLoop < combatLoop){
-		switch(currentStage){
-			case stageA:
-				combatStageA(deltaTime);
-				break;
+	switch(currentStage){
+		case stageA:
+			combatStageA(deltaTime);
+			break;
 
-			case stageB:
-				combatStageB(deltaTime);
-				break;
+		case stageB:
+			combatStageB(deltaTime);
+			break;
 
-			case StageC:
-				combatStageC(deltaTime);
-				break;
-		}
-	} else if(!speedChanged){
-		moveSpeed /= 2;
-		speedChanged = true;
+		case stageC:
+			combatStageC(deltaTime);
+			break;
+
+		default:
+			//Do nothing as default
+			break;
 	}
 }
 
 void StrongEnemy::combatStageA(irr::f32 deltaTime){
-	if(shotsFired != 3){
-		shoot(irr::core::vector3df(0, 0, moveDir));
-		shotsFired++;
+	if(shotsFired < maxShotCount){
+		//Shoots 3 bullets
+		if(shoot(irr::core::vector3df(0, 0, moveDir))){
+			shotsFired++;
+		}
 	} else{
+		//Moves to the middle of the screen
 		if(getPosition().Y < 0){
 			moveUp(turnSpeed / 3, deltaTime);
 		} else{
+			//Reset shot count and advance stage
 			shotsFired = 0;
 			currentStage = stageB;
 		}
@@ -60,9 +64,45 @@ void StrongEnemy::combatStageA(irr::f32 deltaTime){
 }
 
 void StrongEnemy::combatStageB(irr::f32 deltaTime){
-
+	if(shotsFired < maxShotCount){
+		//Shoots 3 bullets
+		if(shoot(irr::core::vector3df(0, 0, moveDir))){
+			shotsFired++;
+		}
+	} else{
+		//Moves to the top of the screen
+		if(getPosition().Y < 45){
+			moveUp(turnSpeed / 3, deltaTime);
+		} else{
+			//Reset shot count and advance stage
+			shotsFired = 0;
+			currentStage = stageC;
+		}
+	}
 }
 
 void StrongEnemy::combatStageC(irr::f32 deltaTime){
-
+	if(shotsFired != maxShotCount){
+		if(shoot(irr::core::vector3df(0, 0, moveDir))){
+			shotsFired++;
+		}
+	}else{
+		if(currentLoop < combatLoop){
+			//Moves to the bottom of the screen
+			if(getPosition().Y > -45){
+				moveDown(turnSpeed / 3, deltaTime);
+			}else{
+				if(currentLoop != combatLoop){
+					//Reset shout count, increment loop count and reset stage
+					shotsFired = 0;
+					currentLoop++;
+					currentStage = stageA;
+				}
+			}
+		}else{
+			//If the loop count is reached then leave the area
+			moveSpeed /= 2;
+			currentStage = stageEnd;
+		}
+	}
 }
