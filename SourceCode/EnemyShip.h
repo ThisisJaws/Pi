@@ -37,6 +37,10 @@ public:
 
     //overriden so the enemy can award score
     virtual void markForDelete() override;
+
+protected:
+	//What to do when the enemy is in range of the player
+	virtual void combatManouver(irr::f32 deltaTime) = 0;
 };
 
 #endif	/* ENEMYSHIP_H */
