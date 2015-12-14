@@ -16,11 +16,12 @@ protected:
     PlayerShip *playerTarget;
 
 private:
-    //how far the player needs to be for the enemy to start shooting
-    float combatDistance;
-    //how far the player has to be for the enemy to start moving
+    //How far the player has to be for the enemy to start moving
     float activeDistance;
     bool canMove;
+	//Time variables for starting manouvers
+	float timeElapsed;
+	float combatStartTime;
 
     //reward score when the enemy dies
     bool rewardScore;

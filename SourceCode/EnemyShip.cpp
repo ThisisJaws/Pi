@@ -16,6 +16,8 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int
     //init variables
 	activeDistance = 125.0f;
     canMove = false;
+	timeElapsed = 0;
+	combatStartTime = 1.5;
 
     rewardScore = true;
     scoreAmount = 1000;
@@ -32,9 +34,12 @@ void EnemyShip::tick(irr::f32 deltaTime){
     if(canMove){
 		//Let the ship move
         move(moveSpeed, deltaTime);
-
-		//Perform the combat manouver
-		combatManouver(deltaTime);
+		if(timeElapsed >= combatStartTime){
+			//Perform the combat manouver
+			combatManouver(deltaTime);
+		}else{
+			timeElapsed += deltaTime;
+		}
     }
 
     //check the distance of the player
