@@ -14,3 +14,5 @@ void StrongEnemy::markForDelete(){
         EnemyShip::markForDelete();
     }
 }
+
+void StrongEnemy::combatManouver(irr::f32 deltaTime){}

@@ -4,3 +4,5 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
             : EnemyShip(player, spawnPosition, 250, timerReference, "Assets/Ships/EnemyShips/BasicShip.obj", "Assets/Ships/EnemyShips/BasicShipTexture.jpg", sceneManagerReference, driverReference){
 
 }
+
+void BasicEnemy::combatManouver(irr::f32 deltaTime){}
