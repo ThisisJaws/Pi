@@ -11,8 +11,16 @@
 class EventReceiver : public irr::IEventReceiver{
     //VARIABLES
 private:
+	//Enumeration of keyboard events
+	enum keyStates{
+		Pressed,
+		Down,
+		Released,
+		Up
+	};
+
     //use this array to store the state of each key
-    bool keyIsDown[irr::KEY_KEY_CODES_COUNT];
+	keyStates keyState[irr::KEY_KEY_CODES_COUNT];
     
     //FUNCTIONS
 public:
@@ -20,10 +28,19 @@ public:
     EventReceiver();
     
     //override the pure virtual function to get the event
-    virtual bool OnEvent(const irr::SEvent &event) ;
+    virtual bool OnEvent(const irr::SEvent &event);
+
+	//Place at the end of the game loop to update Keys
+	void endOfLoop();
     
-    //use this to check whether a key is being held down (const to make sure it is never overwritten))
-    virtual bool isKeyDown(irr::EKEY_CODE keyCode) const;
+	//Returns true on the frame the key is pressed down
+	virtual bool isKeyPressed(irr::EKEY_CODE keyCode);
+
+    //Returns true while the key is pressed down
+    virtual bool isKeyDown(irr::EKEY_CODE keyCode);
+
+	//Returns true on the frame the key is released
+	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
 };
 
 #endif	/* EVENTRECEIVER_H */
