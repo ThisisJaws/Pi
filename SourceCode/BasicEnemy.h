@@ -8,6 +8,19 @@
 #include "EnemyShip.h"
 
 class BasicEnemy : public EnemyShip{
+	//VARIABLES
+private:
+	//What stage the combat manouver is in
+	enum combatStage{
+		stageA,
+		stageB,
+		stageC,
+		stageEnd
+	} currentStage;
+
+	//How long has passed (deltaTime) for the combat manouver
+	float timeElapsed;
+
     //FUNCTIONS
 public:
     //constructor
@@ -15,6 +28,12 @@ public:
 
 	//What the enemy will do when in range of the player
 	virtual void combatManouver(irr::f32 deltaTime) override;
+
+private:
+	//Combat manouver stages
+	void combatStageA(irr::f32 deltaTime);
+	void combatStageB(irr::f32 deltaTime);
+	void combatStageC(irr::f32 deltaTime);
 };
 
 #endif	/* BASICENEMY_H */
