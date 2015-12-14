@@ -1,4 +1,0 @@
-﻿  PlayerShip.cpp
-d:\files\github\pi\sourcecode\playership.cpp(45): warning C4244: 'initializing': conversion from 'irr::f32' to 'unsigned int', possible loss of data
-d:\files\github\pi\sourcecode\playership.cpp(49): warning C4244: 'initializing': conversion from 'irr::f32' to 'unsigned int', possible loss of data
-  WindowsBuild.vcxproj -> D:\Files\GitHub\Pi\WindowsBuild\Debug\WindowsBuild.exe
