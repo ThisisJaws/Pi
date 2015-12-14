@@ -75,3 +75,13 @@ bool Ship::shoot(irr::core::vector3df direction){
 void Ship::move(irr::f32 deltaTime){
     updatePosition(0.0f, 0.0f, moveSpeed * deltaTime);
 }
+
+void Ship::moveUp(float speed, irr::f32 deltaTime){
+	float moveBy = speed * deltaTime;
+	updatePosition(0.0f, moveBy, 0.0f);
+}
+
+void Ship::moveDown(float speed, irr::f32 deltaTime){
+	float moveBy = speed * deltaTime;
+	updatePosition(0.0f, -moveBy, 0.0f);
+}
