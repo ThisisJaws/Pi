@@ -54,7 +54,7 @@ protected:
     bool shoot(irr::core::vector3df direction);
 
     //moves the ship forward
-    void move(irr::f32 deltaTime);
+    void move(float speed, irr::f32 deltaTime);
 	//Moves the ship up or down
 	virtual void moveUp(float speed, irr::f32 deltaTime);
 	virtual void moveDown(float speed, irr::f32 deltaTime);
