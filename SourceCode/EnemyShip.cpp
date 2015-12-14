@@ -17,7 +17,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int
 	activeDistance = 125.0f;
     canMove = false;
 	timeElapsed = 0;
-	combatStartTime = 1.5;
+	combatStartTime = 0.5f;
 
     rewardScore = true;
     scoreAmount = 1000;
