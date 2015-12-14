@@ -31,7 +31,7 @@ void EnemyShip::tick(irr::f32 deltaTime){
 
     if(canMove){
 		//Let the ship move
-        move(deltaTime);
+        move(moveSpeed, deltaTime);
 
 		//Perform the combat manouver
 		combatManouver(deltaTime);
