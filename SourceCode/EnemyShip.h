@@ -29,7 +29,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    EnemyShip(PlayerShip *player, irr::core::vector3df spawnPos, float movementSpeed, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    EnemyShip(PlayerShip *player, irr::core::vector3df spawnPos, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
     //destructor
     ~EnemyShip();
 
@@ -40,7 +40,7 @@ public:
 
 protected:
 	//What to do when the enemy is in range of the player
-	virtual void combatManouver(irr::f32 deltaTime) = 0;
+	//virtual void combatManouver(irr::f32 deltaTime) = 0;
 };
 
 #endif	/* ENEMYSHIP_H */

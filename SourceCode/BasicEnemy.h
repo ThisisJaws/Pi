@@ -12,7 +12,6 @@ class BasicEnemy : public EnemyShip{
 public:
     //constructor
     BasicEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference);
-    
 };
 
 #endif	/* BASICENEMY_H */

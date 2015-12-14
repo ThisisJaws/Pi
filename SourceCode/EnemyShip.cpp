@@ -1,8 +1,8 @@
 # include "EnemyShip.h"
 #include "Ammo.h"
 
-EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
-        : Ship(spawnPosition, movementSpeed, firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
+EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
+        : Ship(spawnPosition, player->getMovementSpeed(), firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
 
     //change the type of the object
     typeID = TYPE_SHIP_ENEMY;
@@ -34,7 +34,7 @@ void EnemyShip::tick(irr::f32 deltaTime){
         move(deltaTime);
 
 		//Perform the combat manouver
-		combatManouver(deltaTime);
+		//combatManouver(deltaTime);
     }
 
     //check the distance of the player
