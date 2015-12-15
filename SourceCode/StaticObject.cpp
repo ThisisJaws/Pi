@@ -22,12 +22,4 @@ void StaticObject::tick(irr::f32 deltaTime){
         currentRot += rotAxis * deltaTime;
         getSceneNode()->setRotation(currentRot);
     }
-
-	//Check if the player has collided
-	Object *collidedObject = checkCollision();
-	if(collidedObject != NULL){
-		if(collidedObject->getTypeID() == TYPE_SHIP_PLAYER){
-			collidedObject->markForDelete();
-		}
-	}
 }

@@ -38,6 +38,14 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 void PlayerShip::tick(irr::f32 deltaTime){
     Ship::tick(deltaTime);
 
+	//check for collision with static Objects
+	Object *collidedObject = checkCollision();
+	if(collidedObject != NULL){
+		if(collidedObject->getTypeID() == TYPE_STATIC_OBJECT){
+			lost = true;
+		}
+	}
+
 	//get the previous position to work out score
 	unsigned int oldZ = getPosition().Z;
 	//move forward
