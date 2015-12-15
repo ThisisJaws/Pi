@@ -40,6 +40,7 @@ void Bullet::tick(irr::f32 deltaTime){
         if(collidedObject != NULL){
 			if(collidedObject->getTypeID() == targetTypeID){
 				collidedObject->markForDelete();
+				markForDelete();
 			}
         }
     }
