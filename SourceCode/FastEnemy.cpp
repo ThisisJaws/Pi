@@ -1,13 +1,16 @@
 #include "FastEnemy.h"
 
-FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
-            : EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference, driverReference){
+FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference) 
+	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference, driverReference){
 
 	//Start at the top of the screen
 	changePosition(irr::core::vector3df(getPosition().X, 45, getPosition().Z));
 
-	currentStage = stageStart;
+	currentStage = stageA;
 	timeElapsed = 0;
+
+	//adjust move speed
+	moveSpeed -= 20;
 }
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){
@@ -16,12 +19,6 @@ void FastEnemy::combatManouver(irr::f32 deltaTime){
 
 	//Decide which stage to perform
 	switch(currentStage){
-		case stageStart:
-			//Move slowly forward
-			moveSpeed -= 20;
-			currentStage = stageA;
-			break;
-
 		case stageA:
 			combatStageA(deltaTime);
 			break;

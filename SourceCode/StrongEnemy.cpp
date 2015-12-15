@@ -14,6 +14,9 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 
 	speedChanged = false;
 	shotsFired = 0;
+
+	//adjust turn speed
+	turnSpeed /= 3;
 }
 
 void StrongEnemy::markForDelete(){
@@ -54,7 +57,7 @@ void StrongEnemy::combatStageA(irr::f32 deltaTime){
 	} else{
 		//Moves to the middle of the screen
 		if(getPosition().Y < 0){
-			moveUp(turnSpeed / 3, deltaTime);
+			moveUp(turnSpeed, deltaTime);
 		} else{
 			//Reset shot count and advance stage
 			shotsFired = 0;
@@ -72,7 +75,7 @@ void StrongEnemy::combatStageB(irr::f32 deltaTime){
 	} else{
 		//Moves to the top of the screen
 		if(getPosition().Y < 45){
-			moveUp(turnSpeed / 3, deltaTime);
+			moveUp(turnSpeed, deltaTime);
 		} else{
 			//Reset shot count and advance stage
 			shotsFired = 0;
@@ -90,7 +93,7 @@ void StrongEnemy::combatStageC(irr::f32 deltaTime){
 		if(currentLoop < combatLoop){
 			//Moves to the bottom of the screen
 			if(getPosition().Y > -45){
-				moveDown(turnSpeed / 3, deltaTime);
+				moveDown(turnSpeed, deltaTime);
 			}else{
 				if(currentLoop != combatLoop){
 					//Reset shout count, increment loop count and reset stage
