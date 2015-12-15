@@ -38,36 +38,27 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 void PlayerShip::tick(irr::f32 deltaTime){
     Ship::tick(deltaTime);
 
-    //check for collision
-	Object *collidedObject = checkCollision();
-	if(collidedObject == NULL || collidedObject->getTypeID() == TYPE_BULLET || collidedObject->getTypeID() == TYPE_COLLECTABLE){
-        //get the previous position to work out score
-		unsigned int oldZ = getPosition().Z;
-        //move forward
-        move(moveSpeed, deltaTime);
-		//work out the distance traveled
-		unsigned int newZ = getPosition().Z;
-		unsigned int difference = newZ - oldZ;
-		//increase score by the difference
-		increaseScore(difference);
-	}else{
-		markForDelete();
-	}
+	//get the previous position to work out score
+	unsigned int oldZ = getPosition().Z;
+	//move forward
+	move(moveSpeed, deltaTime);
+	//work out the distance traveled
+	unsigned int newZ = getPosition().Z;
+	unsigned int difference = newZ - oldZ;
+	//increase score by the difference
+	increaseScore(difference);
 
-    //check for and apply all position changes
-    if(!checkCollision()){
-        //check for movement input
-        if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
-            turnLeft(turnSpeed, deltaTime);
-        }else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-            turnRight(turnSpeed, deltaTime);
-        }
-        if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
-            moveUp(turnSpeed, deltaTime);
-        }else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
-            moveDown(turnSpeed, deltaTime);
-        }
-    }
+	//check for and apply all position changes
+	if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
+		turnLeft(turnSpeed, deltaTime);
+	} else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
+		turnRight(turnSpeed, deltaTime);
+	}
+	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
+		moveUp(turnSpeed, deltaTime);
+	} else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
+		moveDown(turnSpeed, deltaTime);
+	}
 
     //perform camera updates
     updateCameraPositions();
