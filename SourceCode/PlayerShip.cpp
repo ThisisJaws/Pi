@@ -40,7 +40,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 
     //check for collision
 	Object *collidedObject = checkCollision();
-	if(collidedObject == NULL){
+	if(collidedObject == NULL || collidedObject->getTypeID() == TYPE_BULLET || collidedObject->getTypeID() == TYPE_COLLECTABLE){
         //get the previous position to work out score
 		unsigned int oldZ = getPosition().Z;
         //move forward
@@ -51,9 +51,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		//increase score by the difference
 		increaseScore(difference);
 	}else{
-		if(collidedObject->getTypeID() != TYPE_BULLET && collidedObject->getTypeID() != TYPE_COLLECTABLE){
-			markForDelete();
-		}
+		markForDelete();
 	}
 
     //check for and apply all position changes
