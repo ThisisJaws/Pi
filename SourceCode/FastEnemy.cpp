@@ -6,11 +6,10 @@ FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr
 	//Start at the top of the screen
 	changePosition(irr::core::vector3df(getPosition().X, 45, getPosition().Z));
 
-	currentStage = stageA;
+	currentStage = stageStart;
 	timeElapsed = 0;
 
-	//adjust move speed
-	moveSpeed -= 20;
+	
 }
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){
@@ -19,6 +18,12 @@ void FastEnemy::combatManouver(irr::f32 deltaTime){
 
 	//Decide which stage to perform
 	switch(currentStage){
+		case stageStart:
+			//adjust moveSpeed when combat has started
+			moveSpeed -= 50;
+			currentStage = stageA;
+			break;
+
 		case stageA:
 			combatStageA(deltaTime);
 			break;

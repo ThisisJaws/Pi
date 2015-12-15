@@ -14,7 +14,7 @@ private:
 	enum combatStage{
 		stageStart,
 		stageA,
-		stageB,
+		stageB
 	}currentStage;
 
 	//Time (deltatime) elapsed
