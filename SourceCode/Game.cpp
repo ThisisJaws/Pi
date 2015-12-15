@@ -91,6 +91,12 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
         z += 400;
     }
+
+	//irr::scene::IAnimatedMesh *levelMesh = smgr->getMesh("Assets/PlaceHolders/TestLavaLevel.obj");
+	//irr::scene::IAnimatedMeshSceneNode *levelNode = smgr->addAnimatedMeshSceneNode(levelMesh);
+	//levelNode->setPosition(irr::core::vector3df(0, 0, 10));
+	//levelNode->setRotation(irr::core::vector3df(0, 180, 0));
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Load in the sky box
