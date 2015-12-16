@@ -8,6 +8,14 @@ World::World(PlayerShip *player, float phase1WinPosition){
 	phase2Loaded = false;
 }
 
+bool World::isPhase1Loaded(){
+	return phase1Loaded;
+}
+
+bool World::isPhase2Loaded(){
+	return phase2Loaded;
+}
+
 bool World::isPhase1Complete(){
 	//Check if the player has complete phase 1
 	if(phase1Loaded){

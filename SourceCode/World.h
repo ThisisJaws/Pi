@@ -42,6 +42,10 @@ public:
 	virtual void loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
 	virtual void loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
 
+	//Check if each phase is loaded
+	bool isPhase1Loaded();
+	bool isPhase2Loaded();
+
 	//Check if the phase is complete
 	bool isPhase1Complete();
 	bool isPhase2Complete();
