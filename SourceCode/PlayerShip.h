@@ -61,9 +61,6 @@ public:
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);
 
-    //adds the array of made changes points
-    void addChangeModePoints(int zPoints[6]);
-
     //getters and setters for ammo and score
     unsigned short getAmmo();
     void increaseAmmo(unsigned short amount);

@@ -82,29 +82,10 @@ void PlayerShip::tick(irr::f32 deltaTime){
             }
         }
     }
-
-    if(modeChangePoints[modeChangeIteration] > 0 && getPosition().Z >= modeChangePoints[modeChangeIteration]){
-        //if we have a point that is greater than 0 and player the player's X is past that then change modes
-        changeMode();
-
-		//TEMP WINDOWS BUILD------------
-		if(modeChangeIteration == 2){
-			changePosition(irr::core::vector3df(0, 0, 0));
-			modeChangeIteration = 0;
-			moveSpeed += moveSpeed / 2;
-			reset = true;
-		}
-		//------------------------------
-    }
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
-}
-
-void PlayerShip::addChangeModePoints(int zPoints[6]){
-    //copy the array
-    std::copy(zPoints, zPoints+6, modeChangePoints);
 }
 
 unsigned short PlayerShip::getAmmo(){
