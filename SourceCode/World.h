@@ -35,8 +35,8 @@ public:
 		Takes the device to load everything into the scene
 		Takes the static list to load everything into the list
 		*/
-	virtual void loadPhase1(irr::IrrlichtDevice *device, static std::list<Object*> *objectUpdateList) = 0;
-	virtual void loadPhase2(irr::IrrlichtDevice *device, static std::list<Object*> *objectUpdateList) = 0;
+	virtual void loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
+	virtual void loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
 
 	//Check if the phase is complete
 	bool isPhase1Complete();
