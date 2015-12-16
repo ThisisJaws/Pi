@@ -33,8 +33,8 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     g_player = player;
 
 	//Load the first level
-	lavaWorld = LavaWorld(g_player);
-	lavaWorld.loadPhase1(device, &objectsToUpdate);
+	lavaWorld = new LavaWorld(g_player);
+	lavaWorld->loadPhase1(device, &objectsToUpdate);
 
     //Load in the sky box
     skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
@@ -106,7 +106,7 @@ bool Game::play(){
 	}
 
 	//Check the win condition of the current game
-	if(lavaWorld.isPhase1Complete()){
+	if(lavaWorld->isPhase1Complete()){
 		//Takes player back to score screen for now, will laod next phase
 		previousScore = g_player->getScore();
 		cleanUp();
@@ -141,6 +141,10 @@ void Game::cleanUp(){
 
     //Game is not loaded
     loaded = false;
+
+	//delete lava world
+	delete lavaWorld;
+	lavaWorld = 0;
 }
 
 void Game::addObjectToUpdate(Object* toAdd){

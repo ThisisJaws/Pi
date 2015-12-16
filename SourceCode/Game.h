@@ -36,7 +36,7 @@ private:
     irr::gui::IGUIEnvironment *guienv;
     //object to receive keyboard input
     EventReceiver *eReceiver;
-
+	
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 
@@ -47,7 +47,7 @@ private:
 	unsigned int previousScore;
 
 	//TEMP (porbably make this an array) - Lava world
-	LavaWorld lavalWorld;
+	LavaWorld *lavaWorld;
 
     //The skybox
     irr::scene::ISceneNode *skyBox;
