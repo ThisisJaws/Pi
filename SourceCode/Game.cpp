@@ -119,13 +119,10 @@ bool Game::play(){
 void Game::cleanUp(){
     //loop through object vector and delete all pointers
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-		//Remove the object if it is marked for deletion
 		Object *toDelete = *objectIterator;
-		objectIterator = objectsToUpdate.erase(objectIterator);
-		toDelete->removeFromScene();
+		toDelete->getSceneNode()->remove();
 		delete toDelete;
 	}
-    objectsToUpdate.clear();
     objectsToUpdate.resize(0);
 
     //clear the player pointer
@@ -144,7 +141,7 @@ void Game::cleanUp(){
 
 	//delete lava world
 	delete lavaWorld;
-	lavaWorld = 0;
+	//lavaWorld = 0;
 }
 
 void Game::addObjectToUpdate(Object* toAdd){
