@@ -25,8 +25,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     cameraXOffset = 0;
     maxXOffset = 20;
 
-    modeChangeIteration = 0;
-
     //set the ship's default mode
     currentMode = flying;
 
