@@ -74,10 +74,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     x = 0;
     for(int i = 0; i < 3; i++){
         //basic
-        BasicEnemy *test1 = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+        /*BasicEnemy *test1 = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
         addObjectToUpdate(test1);
 
-        z += 400;
+        z += 400;*/
 
         //strong
         StrongEnemy *test2  = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
@@ -86,10 +86,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
         z += 400;
 
         //fast
-        FastEnemy *test3  = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+        /*FastEnemy *test3  = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
         addObjectToUpdate(test3);
 
-        z += 400;
+        z += 400;*/
     }
 
 	//irr::scene::IAnimatedMesh *levelMesh = smgr->getMesh("Assets/PlaceHolders/TestLavaLevel.obj");
@@ -265,32 +265,20 @@ void Game::resetGame(){
 	x = 0;
 	for(int i = 0; i < 3; i++){
 		//basic
-		BasicEnemy *test1 = new BasicEnemy(g_player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
-		test1->changePosition(irr::core::vector3df(x, y, z));
+		BasicEnemy *test1 = new BasicEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
 		addObjectToUpdate(test1);
-
-		y = rand() % 100 + 1;
-		y -= 50;
 
 		z += 400;
 
 		//strong
-		StrongEnemy *test2 = new StrongEnemy(g_player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
-		test2->changePosition(irr::core::vector3df(x, y, z));
+		StrongEnemy *test2 = new StrongEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
 		addObjectToUpdate(test2);
-
-		y = rand() % 200 + 1;
-		y -= 100;
 
 		z += 400;
 
 		//fast
-		FastEnemy *test3 = new FastEnemy(g_player, irr::core::vector3df(0, 50, 1600), device->getTimer(), smgr, driver);
-		test3->changePosition(irr::core::vector3df(x, y, z));
+		FastEnemy *test3 = new FastEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
 		addObjectToUpdate(test3);
-
-		y = rand() % 200 + 1;
-		y -= 100;
 
 		z += 400;
 	}
