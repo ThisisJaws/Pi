@@ -175,11 +175,21 @@ bool Game::play(){
 
 void Game::cleanUp(){
     //loop through object vector and delete all pointers
-    for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-        Object *toDelete = *objectIterator;
-        toDelete->getSceneNode()->remove();
-        delete toDelete;
-    }
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); /*removed increment here because it will crash when iterator is changed*/){
+		if((*objectIterator)->isMarkedForDelete()){
+			//Remove the object if it is marked for deletion
+			Object *toDelete = *objectIterator;
+			objectIterator = objectsToUpdate.erase(objectIterator);
+			toDelete->removeFromScene();
+			delete toDelete;
+		} else{
+			//Update the object
+			(*objectIterator)->tick(frameDeltaTime);
+
+			//Increment iterator
+			++objectIterator;
+		}
+	}
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
 
