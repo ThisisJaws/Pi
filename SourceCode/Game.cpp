@@ -33,7 +33,8 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     g_player = player;
 
 	//Load the first level
-
+	lavaWorld = LavaWorld(g_player);
+	lavaWorld.loadPhase1(device, &objectsToUpdate);
 
     //Load in the sky box
     skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
@@ -103,6 +104,8 @@ bool Game::play(){
 		cleanUp();
 		return true;
 	}
+
+	//Check the win condition of the current game
 
     return false;
 }
