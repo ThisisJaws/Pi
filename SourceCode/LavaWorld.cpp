@@ -59,26 +59,20 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *obje
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
-	//
-	////array of test enemies
-	//int x = 0; int y = 0; int z = 500;
-	//for(int i = 0; i < 3; i++){
-	//	//basic
-	//	/*BasicEnemy *test1 = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-	//	addObjectToUpdate(test1);
+	
+	//array of Enemies
+	int x = 0; int y = 0; int z = 500;
+	for(int i = 0; i < 3; i++){
+		//basic
+		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+		objectUpdateList->push_back(basicEnemy);
 
-	//	z += 400;*/
+		z += 400;
 
-	//	//strong
-	//	StrongEnemy *test2 = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-	//	addObjectToUpdate(test2);
+		//strong
+		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+		objectUpdateList->push_back(strongEnemy);
 
-	//	z += 400;
-
-	//	//fast
-	//	FastEnemy *test3  = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-	//	addObjectToUpdate(test3);
-
-	//	z += 400;
-	//}
+		z += 400;
+	}
 }
