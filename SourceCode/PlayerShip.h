@@ -37,10 +37,6 @@ private:
     //to be able to receive events
     EventReceiver *eReceiver;
 
-    //keep track of all the points where the mode changes (these will be a point along the X axis)
-    int modeChangePoints[6];    //there will be 3 levels with 2 changes
-    int modeChangeIteration;
-
     //enum to store the payer's mode
     enum modes{
         flying,
@@ -48,8 +44,6 @@ private:
     } currentMode;
 
 	bool lost;
-
-	bool reset;
 
     //FUNCTIONS
 public:
@@ -71,8 +65,6 @@ public:
 	virtual void markForDelete() override;
 
 	bool playerLost();
-
-	bool playerReset();
 
 protected:
 	//Overriden for camera controls

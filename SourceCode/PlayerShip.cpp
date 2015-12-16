@@ -31,8 +31,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     currentMode = flying;
 
 	lost = false;
-
-	reset = false;
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
@@ -185,9 +183,6 @@ void PlayerShip::changeMode(){
     //make sure the offsets are reset
     cameraXOffset = 0;
     cameraYOffset = 0;
-
-    //move the mode iterator along one after the change
-    modeChangeIteration++;
 }
 
 void PlayerShip::updateCameraPositions(){
@@ -230,13 +225,4 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
     //apply look at and position changes
     sceneCamera->setTarget(cameraLookAt);
     sceneCamera->setPosition(cameraPosition);
-}
-
-bool PlayerShip::playerReset(){
-	if(reset){
-		reset = false;
-		return true;
-	} else{
-		return false;
-	}
 }
