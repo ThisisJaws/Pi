@@ -9,6 +9,9 @@
 
 #include "EnemyTypes.h"
 #include "PlayerShip.h"
+#include "StaticObject.h"
+#include "Ammo.h"
+#include "Gem.h"
 
 class World{
 	//VARIABLES
