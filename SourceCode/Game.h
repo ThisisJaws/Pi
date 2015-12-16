@@ -15,10 +15,8 @@
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
-#include "EnemyShip.h"
-#include "BasicEnemy.h"
-#include "StrongEnemy.h"
-#include "FastEnemy.h"
+#include "EnemyTypes.h"
+
 #include "StaticObject.h"
 #include "Ammo.h"
 #include "Gem.h"
@@ -43,6 +41,14 @@ private:
     //Keep track of the player
     PlayerShip *g_player;
 
+	//Keep track of the score
+	unsigned int previousScore;
+
+	//Structures for each worldd
+	struct world{
+
+	} worldA, worldB, worldC;
+
     //The skybox
     irr::scene::ISceneNode *skyBox;
 
@@ -58,9 +64,6 @@ private:
 
     //check if the game has been loaded
     bool loaded;
-
-    //Keep track of the score
-    unsigned int previousScore;
 
     //FUNCTIONS
 public:
