@@ -4,8 +4,6 @@
 #include "World.h"
 
 class LavaWorld : public World{
-	//VARIABLES
-
 	//FUNCTIONS
 public:
 	//constructor

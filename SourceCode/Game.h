@@ -82,6 +82,9 @@ public:
     //adds objects onto the static list
     static void addObjectToUpdate(Object *toAdd);
 
+	//Check if the objects list contains any type of object
+	static bool objectToUpdateContainsAnyType(int typeID);
+
     //returns true if objects are loaded in the scene
     bool isLoaded();
 

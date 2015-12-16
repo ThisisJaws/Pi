@@ -23,9 +23,6 @@ protected:
 	bool phase1Loaded;
 	bool phase2Loaded;
 
-	//keep a reference of all the ships to check for phase completion
-	std::list<Object*> shipReferences;
-
 private:
 	//Position in which the player has 'passed' the first stage
 	float phase1WinPosition;
@@ -37,8 +34,7 @@ public:
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene
-		Takes the static list to load everything into the list
-		*/
+		Takes the static list to load everything into the list */
 	virtual void loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
 	virtual void loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) = 0;
 

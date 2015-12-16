@@ -106,8 +106,15 @@ bool Game::play(){
 	}
 
 	//Check the win condition of the current game
-	if(lavaWorld->isPhase1Complete()){
-		//Takes player back to score screen for now, will laod next phase
+	if(lavaWorld->isPhase1Complete() && !lavaWorld->isPhase2Loaded()){
+		//Load phase 2
+		resetObjectsToUpdate();
+		lavaWorld->loadPhase2(device, &objectsToUpdate);
+		g_player->changeMode();
+	} 
+	
+	if(lavaWorld->isPhase2Complete()){
+		//Will load the other level but just stops the game for now
 		previousScore = g_player->getScore();
 		cleanUp();
 		return true;
@@ -148,6 +155,17 @@ void Game::addObjectToUpdate(Object* toAdd){
     objectsToUpdate.push_back(toAdd);
 }
 
+bool Game::objectToUpdateContainsAnyType(int typeID){
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getTypeID() == typeID){
+			return true;
+		}
+	}
+
+	//if the loop completes, no objects are of requested type
+	return false;
+}
+
 bool Game::isLoaded(){
     return loaded;
 }
@@ -165,6 +183,5 @@ void Game::resetObjectsToUpdate(){
 			delete toDelete;
 		}
 	}
-	objectsToUpdate.clear();
 	objectsToUpdate.resize(1);
 }
