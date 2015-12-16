@@ -106,6 +106,12 @@ bool Game::play(){
 	}
 
 	//Check the win condition of the current game
+	if(lavaWorld.isPhase1Complete()){
+		//Takes player back to score screen for now, will laod next phase
+		previousScore = g_player->getScore();
+		cleanUp();
+		return true;
+	}
 
     return false;
 }
