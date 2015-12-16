@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     gameState = startMenu;
 
     //Show the player's score
-    irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
+    irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));
     scoreText->setVisible(false);
     irr::core::stringw scoreCount(L"Empty");
 

@@ -107,11 +107,14 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
                                       driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
 
-    //Load the text variables
-    guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 255, 255, 255));
-    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 200, 22));
-    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 30, 200, 42));
-    FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 50, 200, 62));
+    //Set the font
+	guienv->getSkin()->setFont(guienv->getFont("Assets/Font.png"));
+    //Set the colour
+	guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
+	//Load in the static text variables
+    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
+    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 41, 300, 71));
+    FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 72, 300, 102));
 
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
