@@ -15,10 +15,11 @@
 
 class World{
 	//VARIABLES
-private:
+protected:
 	//Reference to the player
 	PlayerShip *player;
 
+private:
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
