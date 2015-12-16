@@ -66,13 +66,17 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *obje
 		//basic
 		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
 		objectUpdateList->push_back(basicEnemy);
+		shipReferences.push_back(basicEnemy);
 
 		z += 400;
 
 		//strong
 		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
 		objectUpdateList->push_back(strongEnemy);
+		shipReferences.push_back(strongEnemy);
 
 		z += 400;
 	}
+
+	phase2Loaded = true;
 }
