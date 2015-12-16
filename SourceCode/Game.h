@@ -88,7 +88,7 @@ public:
     //Returns the score when the game is finished
     unsigned int getFinalScore();
 
-	void resetGame();
+	void resetObjectsToUpdate();
 };
 
 #endif	/* GAME_H */

@@ -109,20 +109,12 @@ bool Game::play(){
 
 void Game::cleanUp(){
     //loop through object vector and delete all pointers
-	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); /*removed increment here because it will crash when iterator is changed*/){
-		if((*objectIterator)->isMarkedForDelete()){
-			//Remove the object if it is marked for deletion
-			Object *toDelete = *objectIterator;
-			objectIterator = objectsToUpdate.erase(objectIterator);
-			toDelete->removeFromScene();
-			delete toDelete;
-		} else{
-			//Update the object
-			(*objectIterator)->tick(frameDeltaTime);
-
-			//Increment iterator
-			++objectIterator;
-		}
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		//Remove the object if it is marked for deletion
+		Object *toDelete = *objectIterator;
+		objectIterator = objectsToUpdate.erase(objectIterator);
+		toDelete->removeFromScene();
+		delete toDelete;
 	}
     objectsToUpdate.clear();
     objectsToUpdate.resize(0);
@@ -154,76 +146,15 @@ unsigned int Game::getFinalScore(){
     return previousScore;
 }
 
-void Game::resetGame(){
+void Game::resetObjectsToUpdate(){
 	//loop through object vector and delete all pointers
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-		
 		if((*objectIterator)->getTypeID() != g_player->getTypeID()){
 			Object *toDelete = *objectIterator;
 			toDelete->getSceneNode()->remove();
 			delete toDelete;
 		}
 	}
-	//objectsToUpdate.clear();
+	objectsToUpdate.clear();
 	objectsToUpdate.resize(1);
-
-	//readd the player
-	//addObjectToUpdate(g_player);
-
-	//BELOW IS ALL TEMPORARY AND IS JUST FOR THE PURPOSE OF A DEMO LEVEL
-	srand(1);
-
-	//array of test cubes
-	int x = 0, y = 0, z = 500;
-	int colChanceA;
-	int colChanceB;
-	for(int i = 0; i < 40; i++){
-		colChanceA = rand() % 5 + 1;
-		colChanceB = rand() % 2 + 1;
-		if(colChanceA == 1){
-			if(colChanceB == 1){
-				Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
-				addObjectToUpdate(ap);
-			} else{
-				Gem *gp = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
-				addObjectToUpdate(gp);
-			}
-		} else{
-			StaticObject *cube = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", smgr, driver);
-			cube->changePosition(irr::core::vector3df(x, y, z));
-			addObjectToUpdate(cube);
-		}
-
-		y = rand() % 30 + 1;
-		y -= 10;
-
-		x = rand() % 40 + 1;
-		x -= 20;
-
-		z += 100;
-	}
-
-	//array of test enemies
-	z = 4500 + 600;
-	y = 0;
-	x = 0;
-	for(int i = 0; i < 3; i++){
-		//basic
-		BasicEnemy *test1 = new BasicEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-		addObjectToUpdate(test1);
-
-		z += 400;
-
-		//strong
-		StrongEnemy *test2 = new StrongEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-		addObjectToUpdate(test2);
-
-		z += 400;
-
-		//fast
-		FastEnemy *test3 = new FastEnemy(g_player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-		addObjectToUpdate(test3);
-
-		z += 400;
-	}
 }
