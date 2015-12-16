@@ -102,9 +102,7 @@ bool Game::play(){
 		previousScore = g_player->getScore();
 		cleanUp();
 		return true;
-	}else if (g_player->playerReset()){
-		resetGame();
-    }
+	}
 
     return false;
 }

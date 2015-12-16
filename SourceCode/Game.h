@@ -21,6 +21,8 @@
 #include "Ammo.h"
 #include "Gem.h"
 
+#include "LavaWorld.h"
+
 class Game{
     //VARIABLES
 private:
@@ -44,10 +46,8 @@ private:
 	//Keep track of the score
 	unsigned int previousScore;
 
-	//Structures for each worldd
-	struct world{
-
-	} worldA, worldB, worldC;
+	//TEMP (porbably make this an array) - Lava world
+	LavaWorld lavalWorld;
 
     //The skybox
     irr::scene::ISceneNode *skyBox;
