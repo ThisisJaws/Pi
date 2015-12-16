@@ -23,12 +23,12 @@ protected:
 	bool phase1Loaded;
 	bool phase2Loaded;
 
+	//keep a reference of all the ships to check for phase completion
+	std::list<Object*> shipReferences;
+
 private:
 	//Position in which the player has 'passed' the first stage
 	float phase1WinPosition;
-
-	//keep a reference of all the ships to check for phase completion
-	std::list<Object*> shipReferences;
 
 	//FUNCTIONS
 public:
