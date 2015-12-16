@@ -64,6 +64,10 @@ public:
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;
 
+	//changes the player/camera between modes
+	void changeMode();
+
+	//Returns true if the player has lost
 	bool playerLost();
 
 protected:
@@ -75,9 +79,6 @@ private:
 	//Moves the player left or right
     void turnLeft(float speed, irr::f32 deltaTime);
     void turnRight(float speed, irr::f32 deltaTime);
-	
-    //changes the player/camera between modes
-    void changeMode();
 
     //updates the two camera positions
     void updateCameraPositions();
