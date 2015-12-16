@@ -19,11 +19,11 @@ protected:
 	//Reference to the player
 	PlayerShip *player;
 
-private:
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
 
+private:
 	//Position in which the player has 'passed' the first stage
 	float phase1WinPosition;
 

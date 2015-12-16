@@ -1,7 +1,7 @@
 #include "LavaWorld.h"
 
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, 1000){
+	: World(player, 500){
 
 }
 
@@ -44,6 +44,8 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *obje
 
 		z += 100;
 	}
+
+	phase1Loaded = true;
 }
 
 void LavaWorld::loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList){
