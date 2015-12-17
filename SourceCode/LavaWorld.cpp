@@ -1,11 +1,12 @@
 #include "LavaWorld.h"
 
+#include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
 	: World(player, 4500){
 
 }
 
-void LavaWorld::loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList){
+void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -26,14 +27,14 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *obje
 		if(colChanceA == 1){
 			if(colChanceB == 1){
 				Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
-				objectUpdateList->push_back(ap);
+				Game::addObjectToUpdate(ap);
 			} else{
 				Gem *gp = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
-				objectUpdateList->push_back(gp);
+				Game::addObjectToUpdate(gp);
 			}
 		} else{
 			StaticObject *rock = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", smgr, driver);
-			objectUpdateList->push_back(rock);
+			Game::addObjectToUpdate(rock);
 		}
 
 		y = rand() % 30 + 1;
@@ -48,7 +49,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *obje
 	phase1Loaded = true;
 }
 
-void LavaWorld::loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList){
+void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -65,13 +66,13 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *obje
 	for(int i = 0; i < 3; i++){
 		//basic
 		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-		objectUpdateList->push_back(basicEnemy);
+		Game::addObjectToUpdate(basicEnemy);
 
 		z += 400;
 
 		//strong
 		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
-		objectUpdateList->push_back(strongEnemy);
+		Game::addObjectToUpdate(strongEnemy);
 
 		z += 400;
 	}

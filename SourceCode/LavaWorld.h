@@ -9,8 +9,8 @@ public:
 	//constructor
 	LavaWorld(PlayerShip *player);
 
-	virtual void loadPhase1(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) override;
-	virtual void loadPhase2(irr::IrrlichtDevice *device, std::list<Object*> *objectUpdateList) override;
+	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
+	virtual void loadPhase2(irr::IrrlichtDevice *device) override;
 };
 
 
