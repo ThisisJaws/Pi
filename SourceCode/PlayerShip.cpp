@@ -183,7 +183,7 @@ void PlayerShip::changeMode(int increaseSpeedByFactor){
     cameraYOffset = 0;
 
 	//Increase the player's speed
-	moveSpeed += moveSpeed * increaseSpeedByFactor;
+	moveSpeed += 25 * increaseSpeedByFactor;
 }
 
 void PlayerShip::updateCameraPositions(){
