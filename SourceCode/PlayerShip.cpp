@@ -155,7 +155,7 @@ void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
     }
 }
 
-void PlayerShip::changeMode(){
+void PlayerShip::changeMode(int increaseSpeedByFactor){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;
@@ -181,6 +181,9 @@ void PlayerShip::changeMode(){
     //make sure the offsets are reset
     cameraXOffset = 0;
     cameraYOffset = 0;
+
+	//Increase the player's speed
+	moveSpeed += moveSpeed * increaseSpeedByFactor;
 }
 
 void PlayerShip::updateCameraPositions(){
