@@ -45,6 +45,9 @@ public:
 	//Check if the phase is complete
 	bool isPhase1Complete();
 	bool isPhase2Complete();
+
+	//Resets the world
+	void reset();
 };
 
 #endif /* WORLD_H */

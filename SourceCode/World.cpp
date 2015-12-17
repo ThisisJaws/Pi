@@ -35,3 +35,8 @@ bool World::isPhase2Complete(){
 		return false;
 	}
 }
+
+void World::reset(){
+	phase1Loaded = false;
+	phase2Loaded = false;
+}
