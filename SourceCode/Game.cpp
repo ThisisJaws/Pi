@@ -116,11 +116,26 @@ bool Game::play(){
 		worlds[0]->loadPhase2(device);
 	} 
 	
+	//When phase 2 is complete
 	if(worlds[currentWorld]->isPhase2Complete()){
-		//Will load the other level but just stops the game for now
-		previousScore = g_player->getScore();
-		cleanUp();
-		return true;
+		//Reset the objects
+		resetObjectsToUpdate();
+		//Reset the world
+		worlds[currentWorld]->reset();
+		//Increment the cuurent world tracker
+		currentWorld++;
+		//Check if there are any more worlds to load
+		if(currentWorld < NUM_WORLDS){
+			//Change mode
+			g_player->changeMode();
+			//Load the next world
+			worlds[currentWorld]->loadPhase1(device);
+		} else{
+			//Start again but increment speed by double
+			currentWorld = 0;
+			g_player->changeMode(2);
+			worlds[currentWorld]->loadPhase1(device);
+		}
 	}
 
     return false;
