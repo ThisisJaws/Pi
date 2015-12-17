@@ -55,9 +55,13 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, 
 	//Work out the speed of the bullet
 	moveSpeed = shipSpeed;
 	if(direction.Z > 0){
-		moveSpeed *= 1.5f;
+		//Increase the forward speed by a consistent amount
+		moveSpeed += 100;
 	} else{
-		moveSpeed = -moveSpeed * 0.5f;
+		//Increase the backwards speed by a percentage amount
+		float onePercent = moveSpeed / 100;
+		int percentDecrease = 150;
+		moveSpeed -= onePercent * percentDecrease;
 	}
 
     //temp - set scale of bullet and rotation
