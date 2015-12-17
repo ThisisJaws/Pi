@@ -15,11 +15,10 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
-
-    //make the address of selector 0 for now
-    //selector = 0;
-
+	
+	//Init default variables
 	previousScore = 0;
+	currentWorld = 0;
 }
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
@@ -32,9 +31,11 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     //Add to the global variable
     g_player = player;
 
-	//Load the first level
-	lavaWorld = new LavaWorld(g_player);
-	lavaWorld->loadPhase1(device, &objectsToUpdate);
+	//Add the worlds into the array to load later
+	worlds[0] = new LavaWorld(g_player);
+
+	//Load the first world
+	worlds[0]->loadPhase1(device);
 
     //Load in the sky box
     skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
@@ -106,14 +107,14 @@ bool Game::play(){
 	}
 
 	//Check the win condition of the current game
-	if(lavaWorld->isPhase1Complete() && !lavaWorld->isPhase2Loaded()){
+	if(worlds[currentWorld]->isPhase1Complete() && !worlds[currentWorld]->isPhase2Loaded()){
 		//Load phase 2
 		resetObjectsToUpdate();
-		lavaWorld->loadPhase2(device, &objectsToUpdate);
+		worlds[0]->loadPhase2(device);
 		g_player->changeMode();
 	} 
 	
-	if(lavaWorld->isPhase2Complete()){
+	if(worlds[currentWorld]->isPhase2Complete()){
 		//Will load the other level but just stops the game for now
 		previousScore = g_player->getScore();
 		cleanUp();
@@ -146,9 +147,10 @@ void Game::cleanUp(){
     //Game is not loaded
     loaded = false;
 
-	//delete lava world
-	delete lavaWorld;
-	//lavaWorld = 0;
+	//Delete all the worlds
+	for(int i = 0; i < NUM_WORLDS; i++){
+		delete worlds[i];
+	}
 }
 
 void Game::addObjectToUpdate(Object* toAdd){

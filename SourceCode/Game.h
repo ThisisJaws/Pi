@@ -23,6 +23,8 @@
 
 #include "LavaWorld.h"
 
+#define NUM_WORLDS 1 //will be 3, change worlds get added
+
 class Game{
     //VARIABLES
 private:
@@ -46,8 +48,10 @@ private:
 	//Keep track of the score
 	unsigned int previousScore;
 
-	//TEMP (porbably make this an array) - Lava world
-	LavaWorld *lavaWorld;
+	//Array of worlds
+	World *worlds[NUM_WORLDS];
+	//Keep track of the current world
+	int currentWorld;
 
     //The skybox
     irr::scene::ISceneNode *skyBox;
