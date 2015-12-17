@@ -110,8 +110,10 @@ bool Game::play(){
 	if(worlds[currentWorld]->isPhase1Complete() && !worlds[currentWorld]->isPhase2Loaded()){
 		//Load phase 2
 		resetObjectsToUpdate();
-		worlds[0]->loadPhase2(device);
+		//Change mode first because of speed increase
 		g_player->changeMode();
+		//Load in the next phase
+		worlds[0]->loadPhase2(device);
 	} 
 	
 	if(worlds[currentWorld]->isPhase2Complete()){
