@@ -160,6 +160,7 @@
     <ClCompile Include="..\..\SourceCode\FastEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Game.cpp" />
     <ClCompile Include="..\..\SourceCode\Gem.cpp" />
+    <ClCompile Include="..\..\SourceCode\LavaWorld.cpp" />
     <ClCompile Include="..\..\SourceCode\main.cpp" />
     <ClCompile Include="..\..\SourceCode\Object.cpp" />
     <ClCompile Include="..\..\SourceCode\PlayerShip.cpp" />
@@ -167,9 +168,7 @@
     <ClCompile Include="..\..\SourceCode\StaticObject.cpp" />
     <ClCompile Include="..\..\SourceCode\StrongEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Testing.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SourceCode\HelloWorld.vcproj" />
+    <ClCompile Include="..\..\SourceCode\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SourceCode\Ammo.h" />
@@ -177,10 +176,12 @@
     <ClInclude Include="..\..\SourceCode\Bullet.h" />
     <ClInclude Include="..\..\SourceCode\Collectable.h" />
     <ClInclude Include="..\..\SourceCode\EnemyShip.h" />
+    <ClInclude Include="..\..\SourceCode\EnemyTypes.h" />
     <ClInclude Include="..\..\SourceCode\EventReceiver.h" />
     <ClInclude Include="..\..\SourceCode\FastEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Game.h" />
     <ClInclude Include="..\..\SourceCode\Gem.h" />
+    <ClInclude Include="..\..\SourceCode\LavaWorld.h" />
     <ClInclude Include="..\..\SourceCode\Object.h" />
     <ClInclude Include="..\..\SourceCode\ObjectTypes.h" />
     <ClInclude Include="..\..\SourceCode\PlayerShip.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="..\..\SourceCode\StaticObject.h" />
     <ClInclude Include="..\..\SourceCode\StrongEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Testing.h" />
+    <ClInclude Include="..\..\SourceCode\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

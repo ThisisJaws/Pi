@@ -63,11 +63,12 @@
     <ClCompile Include="..\..\SourceCode\Testing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SourceCode\HelloWorld.vcproj">
+    <ClCompile Include="..\..\SourceCode\World.cpp">
       <Filter>Source Files</Filter>
-    </None>
+    </ClCompile>
+    <ClCompile Include="..\..\SourceCode\LavaWorld.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SourceCode\Ammo.h">
@@ -116,6 +117,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\Testing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SourceCode\EnemyTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SourceCode\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SourceCode\LavaWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
