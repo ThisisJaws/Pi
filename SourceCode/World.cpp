@@ -8,6 +8,9 @@ World::World(PlayerShip *player, float phase1WinPosition){
 
 	phase1Loaded = false;
 	phase2Loaded = false;
+
+	worldMesh = 0;
+	worldNode = 0;
 }
 
 bool World::isPhase1Loaded(){

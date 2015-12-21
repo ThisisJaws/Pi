@@ -23,6 +23,11 @@ protected:
 	bool phase1Loaded;
 	bool phase2Loaded;
 
+	//The mesh for the world
+	irr::scene::IAnimatedMesh *worldMesh;
+	//Scene node for the world
+	irr::scene::IAnimatedMeshSceneNode *worldNode;
+
 private:
 	//Position in which the player has 'passed' the first stage
 	float phase1WinPosition;
