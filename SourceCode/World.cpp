@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, float phase1WinPosition){
+World::World(PlayerShip *player){
 	this->player = player;
 	this->phase1WinPosition = phase1WinPosition;
 
@@ -23,7 +23,14 @@ bool World::isPhase2Loaded(){
 bool World::isPhase1Complete(){
 	//Check if the player has complete phase 1
 	if(phase1Loaded){
-		return player->getPosition().Z >= phase1WinPosition;
+		if(worldNode){
+			//Get the extent of the Z axis
+			irr::core::vector3df extent = worldNode->getTransformedBoundingBox().getExtent();
+			return player->getPosition().Z >= (extent.Z + 100);
+		} else{
+			//TEMP - this else statement will no longer exists
+			return player->getPosition().Z >= 4500.0f;
+		}
 	} else{
 		return false;
 	}

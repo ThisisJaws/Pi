@@ -33,7 +33,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, float phase1WinPosition);
+	World(PlayerShip *player);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/

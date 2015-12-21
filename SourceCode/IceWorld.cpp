@@ -1,7 +1,7 @@
 #include "IceWorld.h"
 
 IceWorld::IceWorld(PlayerShip *player) 
-	: World(player, 10000){
+	: World(player){
 
 }
 
@@ -12,7 +12,7 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 
 	//Load the mesh into the level
 	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/AllFourIceTerrainSeamless.obj"));
-	worldNode->setPosition(irr::core::vector3df(0, -75, 10000));
+	worldNode->setPosition(irr::core::vector3df(0, -75, 15000));
 
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));

@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, 4500){
+	: World(player){
 
 }
 
