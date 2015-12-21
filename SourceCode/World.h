@@ -33,8 +33,7 @@ public:
 	World(PlayerShip *player, float phase1WinPosition);
 
 	/** abstract functions to load the levels
-		Takes the device to load everything into the scene
-		Takes the static list to load everything into the list */
+		Takes the device to load everything into the scene*/
 	virtual void loadPhase1(irr::IrrlichtDevice *device) = 0;
 	virtual void loadPhase2(irr::IrrlichtDevice *device) = 0;
 
