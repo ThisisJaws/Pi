@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, 4500){
+	: World(player, 9000){
 
 }
 
@@ -10,7 +10,17 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
-	
+
+	//Load the level into the scene
+	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaLevel-Land.obj"));
+	worldNode->setPosition(irr::core::vector3df(0, -25, 500));
+
+	//Below is just for the purposes for demonstration
+	irr::scene::IAnimatedMeshSceneNode *worldNode1 = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/JungleLevel.obj"));
+	worldNode1->setPosition(irr::core::vector3df(0, -25, 2000));
+	irr::scene::IAnimatedMeshSceneNode *worldNode2 = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/IceLevel.obj"));
+	worldNode2->setPosition(irr::core::vector3df(0, -70, 5000));
+
 	//Set the random seed
 	srand(1);
 
@@ -18,7 +28,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Spawn in the asteroids/collectables
-	int x = 0, y = 0, z = 500;
+	/*int x = 0, y = 0, z = 500;
 	int colChanceA;
 	int colChanceB;
 	for(int i = 0; i < 40; i++){
@@ -44,12 +54,26 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 		x -= 20;
 
 		z += 100;
-	}
+	}*/
 
 	phase1Loaded = true;
 }
 
 void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
+	//Unload the node from the scene
+	if(worldNode){
+		worldNode->remove();
+	}
+
+	//TEMP///////////////////////
+	if(worldNode1){
+		worldNode1->remove();
+	}
+	if(worldNode2){
+		worldNode2->remove();
+	}
+	///////////////////////////
+
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
