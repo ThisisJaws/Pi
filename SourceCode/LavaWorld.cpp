@@ -65,7 +65,6 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
-	
 	//array of Enemies
 	int x = 0; int y = 0; int z = 500;
 	for(int i = 0; i < 2; i++){
