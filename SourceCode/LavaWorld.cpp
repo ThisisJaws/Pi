@@ -14,6 +14,8 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Load the level into the scene
 	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaLevel-Land.obj"));
 	worldNode->setPosition(irr::core::vector3df(0, -25, 500));
+	worldNode->setMaterialTexture(0, driver->getTexture("Assets/PlaceHolders/Levels/LavaLevel-LandTexture.png"));
+	worldNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 	//Set the random seed
 	srand(1);
