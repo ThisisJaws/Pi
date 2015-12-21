@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, 10000){
+	: World(player, 4500){
 
 }
 
@@ -14,12 +14,6 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Load the level into the scene
 	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaLevel-Land.obj"));
 	worldNode->setPosition(irr::core::vector3df(0, -25, 500));
-
-	//Below is just for the purposes for demonstration
-	irr::scene::IAnimatedMeshSceneNode *worldNode1 = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/JungleLevel.obj"));
-	worldNode1->setPosition(irr::core::vector3df(0, -25, 2000));
-	irr::scene::IAnimatedMeshSceneNode *worldNode2 = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/IceLevel.obj"));
-	worldNode2->setPosition(irr::core::vector3df(0, -70, 5000));
 
 	//Set the random seed
 	srand(1);
@@ -64,15 +58,6 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	if(worldNode){
 		worldNode->remove();
 	}
-
-	//TEMP///////////////////////
-	if(worldNode1){
-		worldNode1->remove();
-	}
-	if(worldNode2){
-		worldNode2->remove();
-	}
-	///////////////////////////
 
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
