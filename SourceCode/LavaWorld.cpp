@@ -11,12 +11,6 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Load the level into the scene
-	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaLevel-Land.obj"));
-	worldNode->setPosition(irr::core::vector3df(0, -25, 500));
-	worldNode->setMaterialTexture(0, driver->getTexture("Assets/PlaceHolders/Levels/LavaLevel-LandTexture.png"));
-	worldNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-
 	//Set the random seed
 	srand(1);
 
@@ -24,7 +18,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Spawn in the asteroids/collectables
-	/*int x = 0, y = 0, z = 500;
+	int x = 0, y = 0, z = 500;
 	int colChanceA;
 	int colChanceB;
 	for(int i = 0; i < 40; i++){
@@ -50,7 +44,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 		x -= 20;
 
 		z += 100;
-	}*/
+	}
 
 	phase1Loaded = true;
 }
