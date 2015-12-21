@@ -114,7 +114,7 @@ bool Game::play(){
 		//Change mode first because of speed increase
 		g_player->changeMode();
 		//Load in the next phase
-		worlds[0]->loadPhase2(device);
+		worlds[currentWorld]->loadPhase2(device);
 	} 
 	
 	//When phase 2 is complete
