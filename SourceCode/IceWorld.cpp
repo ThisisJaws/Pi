@@ -18,6 +18,10 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 }
 
 void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
+	if(worldNode){
+		worldNode->remove();
+	}
+
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
