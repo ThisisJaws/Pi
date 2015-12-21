@@ -160,6 +160,8 @@
     <ClCompile Include="..\..\SourceCode\FastEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Game.cpp" />
     <ClCompile Include="..\..\SourceCode\Gem.cpp" />
+    <ClCompile Include="..\..\SourceCode\IceWorld.cpp" />
+    <ClCompile Include="..\..\SourceCode\JungleWorld.cpp" />
     <ClCompile Include="..\..\SourceCode\LavaWorld.cpp" />
     <ClCompile Include="..\..\SourceCode\main.cpp" />
     <ClCompile Include="..\..\SourceCode\Object.cpp" />
@@ -181,6 +183,8 @@
     <ClInclude Include="..\..\SourceCode\FastEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Game.h" />
     <ClInclude Include="..\..\SourceCode\Gem.h" />
+    <ClInclude Include="..\..\SourceCode\IceWorld.h" />
+    <ClInclude Include="..\..\SourceCode\JungleWorld.h" />
     <ClInclude Include="..\..\SourceCode\LavaWorld.h" />
     <ClInclude Include="..\..\SourceCode\Object.h" />
     <ClInclude Include="..\..\SourceCode\ObjectTypes.h" />
