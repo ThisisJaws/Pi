@@ -15,48 +15,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//load in the terrain
-	terrain = loadTerrain(device, "Assets/PlaceHolders/Levels/heightmap.jpg", driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
-	terrain->setRotation(irr::core::vector3df(0, 180, 0));
-
-	//Load in the mesh
-	/*worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaWLandLong2.obj"));
-	worldNode->setMaterialTexture(0, driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
-
-	worldNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	worldNode->setRotation(irr::core::vector3df(0, 180, 0));
-	worldNode->setPosition(irr::core::vector3df(0, 50, 0));*/
-
-	//Set the random seed
-	//srand(1);
-
-	//Spawn in the asteroids/collectables
-	/*int x = 0, y = 0, z = 500;
-	int colChanceA;
-	int colChanceB;
-	for(int i = 0; i < 40; i++){
-		colChanceA = rand() % 5 + 1;
-		colChanceB = rand() % 2 + 1;
-		if(colChanceA == 1){
-			if(colChanceB == 1){
-				Ammo *ap = new Ammo(irr::core::vector3df(x, y, z), smgr, driver);
-				Game::addObjectToUpdate(ap);
-			} else{
-				Gem *gp = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
-				Game::addObjectToUpdate(gp);
-			}
-		} else{
-			StaticObject *rock = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", smgr, driver);
-			Game::addObjectToUpdate(rock);
-		}
-
-		y = rand() % 30 + 1;
-		y -= 10;
-
-		x = rand() % 40 + 1;
-		x -= 20;
-
-		z += 100;
-	}*/
+	terrain = loadTerrain(device, "Assets/Environment/Levels/LavaWorldHeightMapLand.jpg", driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
 
 	phase1Loaded = true;
 }
