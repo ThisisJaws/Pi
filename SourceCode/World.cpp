@@ -4,7 +4,6 @@
 
 World::World(PlayerShip *player){
 	this->player = player;
-	this->phase1WinPosition = phase1WinPosition;
 
 	phase1Loaded = false;
 	phase2Loaded = false;

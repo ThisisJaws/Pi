@@ -30,10 +30,6 @@ protected:
 	//Scene node for the world
 	irr::scene::IAnimatedMeshSceneNode *worldNode;
 
-private:
-	//Position in which the player has 'passed' the first stage
-	float phase1WinPosition;
-
 	//FUNCTIONS
 public:
 	//constructor
