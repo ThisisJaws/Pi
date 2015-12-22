@@ -76,3 +76,25 @@ void World::reset(){
 	phase1Complete = false;
 	phase2Complete = false;
 }
+
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, irr::io::IReadFile *heightMapFile, irr::video::ITexture *texture, float tileAmount = 20.0f){
+	//Create the return variable
+	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFile);
+
+	//Set the lighting
+	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+
+	//Set the diffuse texture
+
+	//Set the detail texture
+	terrain->setMaterialTexture(1, texture);
+	//Clear the pointer
+	delete texture;
+
+	//Set the material type so it can be tiled
+	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
+
+	//Set how many times each texture is tiled
+	terrain->scaleTexture(1.0f, tileAmount);
+}
+
