@@ -4,6 +4,11 @@
 #include "World.h"
 
 class LavaWorld : public World{
+	//VARIABLES
+private:
+	//Holds the lava (see loadPhase1 in .cpp)
+	irr::scene::ITerrainSceneNode *terrainLava;
+
 	//FUNCTIONS
 public:
 	//constructor
