@@ -11,18 +11,18 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Set the random seed
-	srand(1);
-
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Load in the mesh
-	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaWLandLong.obj"));
+	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaWLandLong2.obj"));
 	worldNode->setMaterialTexture(0, driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
+	
 	worldNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	worldNode->setRotation(irr::core::vector3df(0, 180, 0));
 
+	//Set the random seed
+	srand(1);
 
 	//Spawn in the asteroids/collectables
 	/*int x = 0, y = 0, z = 500;
