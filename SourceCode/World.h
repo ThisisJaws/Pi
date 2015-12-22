@@ -53,7 +53,7 @@ public:
 
 protected:
 	//Takes a height map and returns the loaded terrain
-	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, irr::io::IReadFile *heightMapFile, irr::video::ITexture *texture, float tileAmount = 20.0f);
+	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, float tileAmount = 20.0f);
 };
 
 #endif /* WORLD_H */
