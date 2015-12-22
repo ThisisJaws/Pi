@@ -96,5 +96,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, i
 
 	//Set how many times each texture is tiled
 	terrain->scaleTexture(1.0f, tileAmount);
+
+	return terrain;
 }
 
