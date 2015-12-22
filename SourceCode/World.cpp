@@ -29,19 +29,21 @@ bool World::isPhase1Complete(){
 		//Return if it is already complete to avoid uneccesary calculations
 		if(phase1Complete){
 			return true;
-		}
+		} else{
+			if(worldNode != NULL){
+				//Get an array to hold all of the edges
+				irr::core::vector3d<irr::f32> edges[8];
+				//Get the counding box of the mesh
+				irr::core::aabbox3d<irr::f32> boundingBox = worldNode->getTransformedBoundingBox();
+				//Get the edges of the box
+				boundingBox.getEdges(edges);
 
-		if(worldNode != NULL){
-			//Get an array to hold all of the edges
-			irr::core::vector3d<irr::f32> edges[8];
-			//Get the counding box of the mesh
-			irr::core::aabbox3d<irr::f32> boundingBox = worldNode->getTransformedBoundingBox();
-			//Get the edges of the box
-			boundingBox.getEdges(edges);
-
-			if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
-				phase1Complete = true;
-				return true;
+				if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
+					phase1Complete = true;
+					return true;
+				} else{
+					return false;
+				}
 			}
 		}
 	} else{
@@ -55,11 +57,13 @@ bool World::isPhase2Complete(){
 		//Return if it is already complete to avoid uneccesary calculations
 		if(phase2Complete){
 			return true;
-		}
-
-		if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
-			phase2Complete = true;
-			return true;
+		} else{
+			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
+				phase2Complete = true;
+				return true;
+			} else{
+				return false;
+			}
 		}
 	} else{
 		return false;
