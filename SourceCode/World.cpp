@@ -9,6 +9,9 @@ World::World(PlayerShip *player){
 	phase1Loaded = false;
 	phase2Loaded = false;
 
+	phase1Complete = false;
+	phase2Complete = false;
+
 	worldNode = 0;
 }
 
@@ -23,6 +26,11 @@ bool World::isPhase2Loaded(){
 bool World::isPhase1Complete(){
 	//Check if the player has complete phase 1
 	if(phase1Loaded){
+		//Return if it is already complete to avoid uneccesary calculations
+		if(phase1Complete){
+			return true;
+		}
+
 		if(worldNode != NULL){
 			//Get an array to hold all of the edges
 			irr::core::vector3d<irr::f32> edges[8];
@@ -31,10 +39,10 @@ bool World::isPhase1Complete(){
 			//Get the edges of the box
 			boundingBox.getEdges(edges);
 
-			return player->getPosition().Z >= edges[2].Z - edges[0].Z;
-		} else{
-			//TEMP - this else statement will no longer exists
-			return player->getPosition().Z >= 4500.0f;
+			if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
+				phase1Complete = true;
+				return true;
+			}
 		}
 	} else{
 		return false;
@@ -44,7 +52,15 @@ bool World::isPhase1Complete(){
 bool World::isPhase2Complete(){
 	//Check if the player has completed phase 2
 	if(phase2Loaded){
-		return !Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY);
+		//Return if it is already complete to avoid uneccesary calculations
+		if(phase2Complete){
+			return true;
+		}
+
+		if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
+			phase2Complete = true;
+			return true;
+		}
 	} else{
 		return false;
 	}
@@ -53,4 +69,7 @@ bool World::isPhase2Complete(){
 void World::reset(){
 	phase1Loaded = false;
 	phase2Loaded = false;
+
+	phase1Complete = false;
+	phase2Complete = false;
 }

@@ -23,6 +23,10 @@ protected:
 	bool phase1Loaded;
 	bool phase2Loaded;
 
+	//Keep track of what has been completed
+	bool phase1Complete;
+	bool phase2Complete;
+
 	//Scene node for the world
 	irr::scene::IAnimatedMeshSceneNode *worldNode;
 
