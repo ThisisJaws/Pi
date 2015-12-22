@@ -25,6 +25,11 @@ bool World::isPhase2Loaded(){
 bool World::isPhase1Complete(){
 	//Check if the player has complete phase 1
 	if(phase1Loaded){
+
+		//DELETE
+		return false;
+		//
+
 		//Return if it is already complete to avoid uneccesary calculations
 		if(phase1Complete){
 			return true;
@@ -77,9 +82,17 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, float tileAmount){
 	//Create the return variable
-	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation);
+	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
+																							0,										//Parent Node
+																							-1,										//Node ID
+																							irr::core::vector3df(0, 0, 0),			//Position
+																							irr::core::vector3df(0, 0, 0),			//Rotation
+																							irr::core::vector3df(1, 1, 1),			//Scale
+																							irr::video::SColor(255, 255, 255, 255),	//Colour
+																							6,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
+																							irr::scene::ETPS_129);					//Patch size (What the LOD depends on)
 
 	//Set the lighting
 	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
