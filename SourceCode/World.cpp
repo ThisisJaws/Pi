@@ -11,7 +11,7 @@ World::World(PlayerShip *player){
 	phase1Complete = false;
 	phase2Complete = false;
 
-	worldNode = 0;
+	terrain = 0;
 }
 
 bool World::isPhase1Loaded(){
@@ -24,30 +24,30 @@ bool World::isPhase2Loaded(){
 
 bool World::isPhase1Complete(){
 	//Check if the player has complete phase 1
-	//if(phase1Loaded){
-	//	//Return if it is already complete to avoid uneccesary calculations
-	//	if(phase1Complete){
-	//		return true;
-	//	} else{
-	//		if(worldNode != NULL){
-	//			//Get an array to hold all of the edges
-	//			irr::core::vector3d<irr::f32> edges[8];
-	//			//Get the counding box of the mesh
-	//			irr::core::aabbox3d<irr::f32> boundingBox = worldNode->getTransformedBoundingBox();
-	//			//Get the edges of the box
-	//			boundingBox.getEdges(edges);
+	if(phase1Loaded){
+		//Return if it is already complete to avoid uneccesary calculations
+		if(phase1Complete){
+			return true;
+		} else{
+			if(terrain != NULL){
+				//Get an array to hold all of the edges
+				irr::core::vector3d<irr::f32> edges[8];
+				//Get the counding box of the mesh
+				irr::core::aabbox3d<irr::f32> boundingBox = terrain->getTransformedBoundingBox();
+				//Get the edges of the box
+				boundingBox.getEdges(edges);
 
-	//			if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
-	//				phase1Complete = true;
-	//				return true;
-	//			} else{
-	//				return false;
-	//			}
-	//		}
-	//	}
-	//} else{
+				if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
+					phase1Complete = true;
+					return true;
+				} else{
+					return false;
+				}
+			}
+		}
+	} else{
 		return false;
-	//}
+	}
 }
 
 bool World::isPhase2Complete(){

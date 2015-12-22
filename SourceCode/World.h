@@ -28,7 +28,7 @@ protected:
 	bool phase2Complete;
 
 	//Scene node for the world
-	irr::scene::IAnimatedMeshSceneNode *worldNode;
+	irr::scene::ITerrainSceneNode *terrain;
 
 	//FUNCTIONS
 public:
