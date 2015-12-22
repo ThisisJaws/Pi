@@ -77,7 +77,7 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, irr::io::IReadFile *heightMapFile, irr::video::ITexture *texture, float tileAmount = 20.0f){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, irr::io::IReadFile *heightMapFile, irr::video::ITexture *texture, float tileAmount){
 	//Create the return variable
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFile);
 
