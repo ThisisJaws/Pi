@@ -17,8 +17,15 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
+	//Load in the mesh
+	worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/LavaWLandLong.obj"));
+	worldNode->setMaterialTexture(0, driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
+	worldNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	worldNode->setRotation(irr::core::vector3df(0, 180, 0));
+
+
 	//Spawn in the asteroids/collectables
-	int x = 0, y = 0, z = 500;
+	/*int x = 0, y = 0, z = 500;
 	int colChanceA;
 	int colChanceB;
 	for(int i = 0; i < 40; i++){
@@ -44,7 +51,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 		x -= 20;
 
 		z += 100;
-	}
+	}*/
 
 	phase1Loaded = true;
 }
