@@ -77,25 +77,25 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, irr::io::IReadFile *heightMapFile, irr::video::ITexture *texture, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, float tileAmount){
 	//Create the return variable
-	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFile);
+	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation);
 
 	//Set the lighting
 	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 	//Set the diffuse texture
 
-	//Set the detail texture
-	terrain->setMaterialTexture(1, texture);
-	//Clear the pointer
-	delete texture;
+	////Set the detail texture
+	//terrain->setMaterialTexture(1, texture);
+	////Clear the pointer
+	//delete texture;
 
-	//Set the material type so it can be tiled
-	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
+	////Set the material type so it can be tiled
+	//terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
 
-	//Set how many times each texture is tiled
-	terrain->scaleTexture(1.0f, tileAmount);
+	////Set how many times each texture is tiled
+	//terrain->scaleTexture(1.0f, tileAmount);
 
 	return terrain;
 }
