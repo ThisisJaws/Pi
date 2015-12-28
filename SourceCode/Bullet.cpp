@@ -36,13 +36,13 @@ void Bullet::tick(irr::f32 deltaTime){
         }
         
         //check the type of collision
-        Object *collidedObject = checkCollision();
+        /*Object *collidedObject = checkCollision();
         if(collidedObject != NULL){
 			if(collidedObject->getTypeID() == targetTypeID){
 				collidedObject->markForDelete();
 				markForDelete();
 			}
-        }
+        }*/
     }
 }
 

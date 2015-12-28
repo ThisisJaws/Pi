@@ -16,7 +16,7 @@ void Collectable::tick(irr::f32 deltaTime){
     getSceneNode()->setRotation(rotation);
     
     //check for collision
-    Object *collidedObject = checkCollision();
+    /*Object *collidedObject = checkCollision();
     if(collidedObject != NULL){
         if(collidedObject->getTypeID() == TYPE_SHIP_PLAYER){
             //dynamic cast to the player
@@ -26,5 +26,5 @@ void Collectable::tick(irr::f32 deltaTime){
             //then remove from the scene
             markForDelete();
         }
-    }
+    }*/
 }
