@@ -27,7 +27,7 @@ protected:
 	bool phase1Complete;
 	bool phase2Complete;
 
-	//Scene node for the world
+	//Scene nodes for the world
 	irr::scene::ITerrainSceneNode *terrain;
 
 	//FUNCTIONS
@@ -49,7 +49,7 @@ public:
 	bool isPhase2Complete();
 
 	//Resets the world
-	void reset();
+	virtual void reset();
 
 protected:
 	//Takes a height map and returns the loaded terrain

@@ -10,8 +10,6 @@ World::World(PlayerShip *player){
 
 	phase1Complete = false;
 	phase2Complete = false;
-
-	terrain = 0;
 }
 
 bool World::isPhase1Loaded(){
@@ -75,6 +73,11 @@ void World::reset(){
 
 	phase1Complete = false;
 	phase2Complete = false;
+
+	if(terrain){
+		terrain->remove();
+		terrain = 0;
+	}
 }
 
 irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &position, irr::core::vector3df &scaleFactor, float tileAmount){
@@ -88,7 +91,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
 																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
-																							4);										//Smoothfactor
+																							1);										//Smoothfactor
 
 	//Set the lighting
 	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
