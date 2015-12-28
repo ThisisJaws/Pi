@@ -11,22 +11,22 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Reset the player position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
-
 	//load in the terrain
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/LavaWorldHeightMapLand.jpg",
 						  driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"),
-						  irr::core::vector3df(-1477.0f, -165, 250),
-						  irr::core::vector3df(6.0f, 2, 6.0f));
+						  irr::core::vector3df(-6000, -350, 0),
+						  irr::core::vector3df(12, 5, 20));
 
-	////This level requires two types of terrains so any extra one has to be loaded in 
-	//terrainLava = loadTerrain(device,
-	//						  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
-	//						  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
-	//						  irr::core::vector3df(-1477.0f, -165, 250),
-	//						  irr::core::vector3df(6.0f, 2, 6.0f));
+	//This level requires two types of terrains so any extra one has to be loaded in 
+	terrainLava = loadTerrain(device,
+							  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
+							  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
+							  irr::core::vector3df(-6000, -300, 0),
+							  irr::core::vector3df(12, 5, 20));
+
+	//Reset the player position
+	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	phase1Loaded = true;
 }
@@ -35,6 +35,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Unload the node from the scene
 	if(terrain){
 		terrain->remove();
+		terrainLava->remove();
 	}
 
 	//Get the references
@@ -47,7 +48,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
-	//array of Enemies
+	//array of Enemies - these get deleted once they move off screen
 	int x = 0; int y = 0; int z = 500;
 	for(int i = 0; i < 2; i++){
 		//basic
@@ -70,4 +71,11 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	}
 
 	phase2Loaded = true;
+}
+
+void LavaWorld::reset(){
+	//Call the super function
+	World::reset();
+	//Make sure the lava terrain also gets removed
+	terrainLava->remove();
 }
