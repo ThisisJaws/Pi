@@ -165,8 +165,11 @@ void Game::cleanUp(){
     //Game is not loaded
     loaded = false;
 
-	//Delete all the worlds
+	//Loop through all worlds
 	for(int i = 0; i < NUM_WORLDS; i++){
+		//Make sure there are no scene nodes left
+		worlds[i]->reset();
+		//Delete the world
 		delete worlds[i];
 	}
 }
