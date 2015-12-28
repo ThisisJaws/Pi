@@ -105,6 +105,11 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 	//Set how many times each texture is tiled
 	terrain->scaleTexture(tileAmount, 1.0f);
 
+	//create the triangle selector for the terrain to handle collision
+	irr::scene::ITriangleSelector *selector = device->getSceneManager()->createTerrainTriangleSelector(terrain);
+	terrain->setTriangleSelector(selector);
+	selector->drop();
+
 	//Return the terrain
 	return terrain;
 }
