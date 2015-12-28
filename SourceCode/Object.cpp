@@ -1,8 +1,5 @@
 #include "Object.h"
 
-//static variables need to be defined outside of the class so the lniker knows where to allocate the memory
-std::list<Object*> Object::collideables;
-
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos){
     //set the default object type to undefined
     typeID = TYPE_UNDEFINED_TYPE;
@@ -16,20 +13,12 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     //dont want it to get deleted straight away
     markedForDelete = false;
 
+	//Make sure the collisionManager points to nothing
+	collMan = 0;
+
     //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
     if(spawnOnConstruct){
         spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference);
-    }
-}
-
-Object::~Object(){
-    //remove the object from the collideables list
-    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); /*incremented in 'else' to stop crashes*/){
-        if((*nodeIterator) == this){
-            nodeIterator = collideables.erase(nodeIterator);
-        }else{
-            ++nodeIterator;
-        }
     }
 }
 
@@ -57,7 +46,27 @@ irr::core::vector3df Object::getPosition(){
     return objectNode->getPosition();
 }
 
-Object* Object::checkCollision(){
+Object* Object::checkCollision(int direction){
+	//Cast a ray from the object to slightly infront of the object
+	irr::core::line3df ray;
+	ray.start = getPosition();
+	ray.end = ray.start;
+	ray.end.Z += 1 * direction;
+	//Current interection of a level or a mesh
+	irr::core::vector3df interesection;
+	//The triangle that was hit
+	irr::core::triangle3df hitTriangle;
+
+	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
+
+	if(objectTest != NULL){
+		changePosition(irr::core::vector3df(0, 0, 0));
+		return NULL;
+	} else{
+		return NULL;
+	}
+
+	/*
     //if we don't have any collideables then return straight away
     if(collideables.size() <= 0){
         return NULL;
@@ -67,12 +76,14 @@ Object* Object::checkCollision(){
     for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
         if(*nodeIterator != this){
             if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getSceneNode()->getTransformedBoundingBox())){
-                return *nodeIterator;
+				
+				return *nodeIterator;
             }
         }
     }
 
     return NULL;
+	*/
 }
 
 void Object::updatePosition(irr::core::vector3df newPosition){
@@ -105,8 +116,15 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         //set the object to not need lighting
         objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
-        //let other objects collision test against this object
-        collideables.push_back(this);
+		//Create a triangle selector of this object
+		irr::scene::ITriangleSelector *selector = sceneManagerReference->createTriangleSelector(objectNode);
+		//Give the node the newly created selector
+		objectNode->setTriangleSelector(selector);
+		//Drop the selector to remove it from memory
+		selector->drop();
+
+		//Create a reference to the collision Manager, to use when the collision function is called
+		collMan = sceneManagerReference->getSceneCollisionManager();
 
         objectSpawned = true;
     }

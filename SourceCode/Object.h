@@ -24,8 +24,8 @@ private:
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
     
-    //a list of objects that are collideable
-    static std::list<Object*> collideables;
+	//Pointer to the collision manager to check for collisions
+	irr::scene::ISceneCollisionManager *collMan;
     
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
@@ -40,8 +40,6 @@ private:
 public:
     //constructor
     Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0));
-    //destructor
-    virtual ~Object();
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
@@ -74,8 +72,8 @@ public:
 	void removeFromScene();
     
 protected:
-    //returns true if the object has collided with an object contained within the vector
-    virtual Object* checkCollision();
+    //returns true if the object has collided with an object contained within the vector, direction will be either 1 or -1;
+    virtual Object* checkCollision(int direction);
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
