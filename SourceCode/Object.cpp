@@ -1,8 +1,8 @@
 #include "Object.h"
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos, irr::s32 objectTypeID){
     //set the default object type to undefined
-    typeID = TYPE_UNDEFINED_TYPE;
+    typeID = objectTypeID;
 
     //set the spawn position
     this->spawnPos = spawnPos;
