@@ -37,11 +37,11 @@ void PlayerShip::tick(irr::f32 deltaTime){
 
 	//check for collision with static Objects
 	irr::scene::ISceneNode *collidedNode = checkCollision(moveDir);
-	/*if(collidedNode != NULL){
+	if(collidedNode != NULL){
 		if(collidedNode->getID() == TYPE_STATIC_OBJECT){
 			lost = true;
 		}
-	}*/
+	}
 
 	//get the previous position to work out score
 	unsigned int oldZ = getPosition().Z;
