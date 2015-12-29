@@ -14,10 +14,6 @@
 
 class Object{
     //VARIABLES
-protected:
-    //to store the type of the object
-    int typeID;
-    
 private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
@@ -35,11 +31,14 @@ private:
     
     //mark an object for delete to remove it o update
     bool markedForDelete;
+
+	//to store the type of the object for the spawn on construct function
+	irr::s32 typeID;
     
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0));
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0), irr::s32 objectTypeID = TYPE_UNDEFINED_TYPE);
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
