@@ -86,7 +86,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							0,										//Parent Node
 																							-1,										//Node ID
 																							irr::core::vector3df(0),				//Position
-																							rotation,								//Rotation
+																							irr::core::vector3df(0),				//Rotation
 																							scaleFactor,							//Scale (Will have to get adjusted per map because some might be different lengths)
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
