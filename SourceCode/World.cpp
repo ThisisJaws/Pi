@@ -80,12 +80,12 @@ void World::reset(){
 	}
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, float tileAmount){
 	//Create the return variable
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
 																							0,										//Parent Node
 																							-1,										//Node ID
-																							irr::core::vector3df(0),				//Position
+																							position,								//Position - avoid changing this because it causes errors with the collision
 																							irr::core::vector3df(0),				//Rotation
 																							scaleFactor,							//Scale (Will have to get adjusted per map because some might be different lengths)
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
