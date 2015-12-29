@@ -39,7 +39,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Ship(irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, int movementDirecion, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true);
+    Ship(irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, int movementDirecion, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, irr::s32 objectTypeID, bool spawnOnConstruct = true);
     //destructor
     ~Ship();
 
