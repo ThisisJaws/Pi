@@ -35,7 +35,7 @@ bool World::isPhase1Complete(){
 				//Get the edges of the box
 				boundingBox.getEdges(edges);
 
-				if(player->getPosition().Z >= edges[2].Z - edges[0].Z){
+				if(player->getPosition().Z >= (edges[2].Z - edges[0].Z) / terrain->getScale().Z){
 					phase1Complete = true;
 					return true;
 				} else{
