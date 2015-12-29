@@ -1,9 +1,7 @@
 #include "Collectable.h"
 
 Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition){
-    
-	typeID = TYPE_COLLECTABLE;
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE){
 
     //set the movement speeds
     rotSpeed = 50.0f;

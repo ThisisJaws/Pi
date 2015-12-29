@@ -2,10 +2,7 @@
 #include "Ammo.h"
 
 EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
-        : Ship(spawnPosition, player->getMovementSpeed(), firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference){
-
-    //change the type of the object
-    typeID = TYPE_SHIP_ENEMY;
+        : Ship(spawnPosition, player->getMovementSpeed(), firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, TYPE_SHIP_ENEMY){
 
     //rotate to the right position
     getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
