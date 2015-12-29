@@ -74,10 +74,10 @@ void World::reset(){
 	phase1Complete = false;
 	phase2Complete = false;
 
-	if(terrain){
-		terrain->remove();
-		terrain = 0;
-	}
+	//if(terrain){
+	//	terrain->remove();
+	//	terrain = 0;
+	//}
 }
 
 irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, float tileAmount){
@@ -106,7 +106,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 	terrain->scaleTexture(tileAmount, 1.0f);
 
 	//Set the object ID for collision handling
-	//terrain->setID(TYPE_STATIC_OBJECT);
+	terrain->setID(TYPE_STATIC_OBJECT);
 
 	//Create the triangle selector for the terrain to handle collision
 	irr::scene::ITriangleSelector *selector = device->getSceneManager()->createTerrainTriangleSelector(terrain);
