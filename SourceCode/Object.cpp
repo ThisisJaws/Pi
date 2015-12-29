@@ -46,7 +46,7 @@ irr::core::vector3df Object::getPosition(){
     return objectNode->getPosition();
 }
 
-Object* Object::checkCollision(int direction){
+irr::scene::ISceneNode* Object::checkCollision(int direction){
 	//WORKING HERE TO GET COLLISION WORKING WITH TRIANGLE SELECTORS NOW - REMEMBER TO ALSO CHANGE THE FUNCTIONS IN BULLET, COLELCTABLE AND PLAYERSHIP
 
 	//Cast a ray from the object to slightly infront of the object
@@ -60,13 +60,7 @@ Object* Object::checkCollision(int direction){
 	irr::core::triangle3df hitTriangle;
 
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
-
-	if(objectTest != NULL){
-		changePosition(irr::core::vector3df(0, 0, 0));
-		return NULL;
-	} else{
-		return NULL;
-	}
+	return objectTest;
 
 	/*
     //if we don't have any collideables then return straight away
