@@ -14,19 +14,22 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//load in the terrain
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/LavaWorldHeightMapLand.jpg",
-						  driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"),
-						  irr::core::vector3df(-6000, -350, 0),
-						  irr::core::vector3df(12, 5, 20));
+						  driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"));
 
 	//This level requires two types of terrains so any extra one has to be loaded in 
 	terrainLava = loadTerrain(device,
 							  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
-							  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
-							  irr::core::vector3df(-6000, -300, 0),
-							  irr::core::vector3df(12, 5, 20));
+							  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"));
 
 	//Reset the player position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
+	player->changePosition(irr::core::vector3df(500, 0, -500));
+
+	//irr::core::vector3df(-12700, -460, 1000),
+	//irr::core::vector3df(24, 5, 20));
+
+	//asdasdasdasdasd fucking temp
+	StaticObject *object = new StaticObject(irr::core::vector3df(0, 0, 500), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", smgr, driver);
+	Game::addObjectToUpdate(object);
 
 	phase1Loaded = true;
 }
