@@ -30,8 +30,8 @@ void Object::markForDelete(){
     markedForDelete = true;
 }
 
-int Object::getTypeID(){
-    return typeID;
+irr::s32 Object::getTypeID(){
+	return objectNode->getID();
 }
 
 irr::scene::IAnimatedMesh* Object::getMesh(){
@@ -112,7 +112,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);
 
         //create the scene node using loaded mesh
-        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, -1, spawnPos);
+        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, typeID, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
 
         //set the object to not need lighting

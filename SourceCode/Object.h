@@ -50,7 +50,7 @@ public:
     virtual void markForDelete();
     
     //get thew type of the object
-    virtual int getTypeID();
+    irr::s32 getTypeID();
     
     //get the object's mesh
     virtual irr::scene::IAnimatedMesh* getMesh();
