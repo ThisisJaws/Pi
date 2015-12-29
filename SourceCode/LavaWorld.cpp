@@ -15,16 +15,17 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/LavaWorldHeightMapLand.jpg",
 						  driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"),
-						  irr::core::vector3df(2, 2, 3));
+						  irr::core::vector3df(10, 2, 10));
 
 	//This level requires two types of terrains so any extra one has to be loaded in 
 	terrainLava = loadTerrain(device,
 							  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
 							  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
-							  irr::core::vector3df(2, 2, 3));
+							  irr::core::vector3df(10, 2, 10),
+							  irr::core::vector3df(0, 70, 0));
 	
 	//Set the player position to the phase start position
-	player->changePosition(irr::core::vector3df(1050, 150, -500));
+	player->changePosition(irr::core::vector3df(5275, 190, -500));
 
 	//Phase is now loaded
 	phase1Loaded = true;
@@ -34,7 +35,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Unload the node from the scene
 	if(terrain){
 		terrain->remove();
-		//terrainLava->remove();
+		terrainLava->remove();
 	}
 
 	//Get the references
