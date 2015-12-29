@@ -28,6 +28,9 @@ private:
     float cameraYOffset, maxYOffset, minYOffset;
     float cameraXOffset, maxXOffset;
 
+	//This holds the 'base' position, the one that will be considered 0, 0, 0 if the player moves
+	irr::core::vector3df basePosition;
+
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;
     //vectors to switch between the two camera positions
@@ -60,6 +63,9 @@ public:
     void increaseAmmo(unsigned short amount);
     unsigned int getScore();
     void increaseScore(unsigned int amount);
+
+	//Overriden to make sure the cameraOffsets get updated
+	virtual void changePosition(irr::core::vector3df newPosition);
 
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;

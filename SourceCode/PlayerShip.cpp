@@ -18,9 +18,13 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     //set up the current offsets as the flying mode ones for the camera
     cameraYOffset = 0;
     maxYOffset = 20;
-    minYOffset = -8;
+    minYOffset = 8;
+
     cameraXOffset = 0;
     maxXOffset = 20;
+
+	//Set the base position, will always start at 0, 0, 0
+	basePosition = irr::core::vector3df(0);
 
     //set the ship's default mode
     currentMode = flying;
@@ -97,6 +101,18 @@ void PlayerShip::increaseScore(unsigned int amount){
     score += amount;
 }
 
+void PlayerShip::changePosition(irr::core::vector3df newPosition){
+	//Call the super function
+	Ship::changePosition(newPosition);
+	
+	//Adjust the base position
+	basePosition = newPosition;
+
+	//Reset the camera offsets
+	cameraXOffset = 0;
+	cameraYOffset = 0;
+}
+
 void PlayerShip::markForDelete(){
 	lost = true;
 }
@@ -107,7 +123,7 @@ bool PlayerShip::playerLost(){
 
 void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        if(getPosition().X > -maxXOffset){
+        if(getPosition().X > basePosition.X - maxXOffset){
             float moveBy = speed * deltaTime;
 
             //move the ship to the left
@@ -119,7 +135,7 @@ void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
     if(currentMode == flying){
-        if(getPosition().X < maxXOffset){
+        if(getPosition().X < basePosition.X + maxXOffset){
             float moveBy = speed * deltaTime;
 
             //move the ship to the right
@@ -131,7 +147,7 @@ void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
     //if ship is still inside screen
-    if(getPosition().Y < maxYOffset){
+    if(getPosition().Y < basePosition.Y + maxYOffset){
         float moveBy = speed * deltaTime;
 
         //move the ship up
@@ -142,7 +158,7 @@ void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
 }
 void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
     //if ship is still inside screen
-    if(getPosition().Y > minYOffset){
+    if(getPosition().Y > basePosition.Y - minYOffset){
         float moveBy = speed * deltaTime;
 
         //move the ship down
