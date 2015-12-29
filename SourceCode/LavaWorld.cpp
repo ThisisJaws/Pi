@@ -33,7 +33,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Unload the node from the scene
-	if(terrain){
+	if(terrain != NULL){
 		terrain->remove();
 		terrainLava->remove();
 	}

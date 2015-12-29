@@ -74,10 +74,10 @@ void World::reset(){
 	phase1Complete = false;
 	phase2Complete = false;
 
-	//if(terrain){
-	//	terrain->remove();
-	//	terrain = 0;
-	//}
+	if(terrain != NULL){
+		terrain->remove();
+		terrain = 0;
+	}
 }
 
 irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, float tileAmount){
