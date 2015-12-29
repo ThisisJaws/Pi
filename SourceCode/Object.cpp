@@ -47,6 +47,8 @@ irr::core::vector3df Object::getPosition(){
 }
 
 Object* Object::checkCollision(int direction){
+	//WORKING HERE TO GET COLLISION WORKING WITH TRIANGLE SELECTORS NOW - REMEMBER TO ALSO CHANGE THE FUNCTIONS IN BULLET, COLELCTABLE AND PLAYERSHIP
+
 	//Cast a ray from the object to slightly infront of the object
 	irr::core::line3df ray;
 	ray.start = getPosition();
@@ -110,7 +112,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);
 
         //create the scene node using loaded mesh
-        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, 0, spawnPos);
+        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, -1, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
 
         //set the object to not need lighting
