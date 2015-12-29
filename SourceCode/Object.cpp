@@ -47,8 +47,6 @@ irr::core::vector3df Object::getPosition(){
 }
 
 irr::scene::ISceneNode* Object::checkCollision(int direction){
-	//WORKING HERE TO GET COLLISION WORKING WITH TRIANGLE SELECTORS NOW - REMEMBER TO ALSO CHANGE THE FUNCTIONS IN BULLET, COLELCTABLE AND PLAYERSHIP
-
 	//Cast a ray from the object to slightly infront of the object
 	irr::core::line3df ray;
 	ray.start = getPosition();
@@ -61,25 +59,6 @@ irr::scene::ISceneNode* Object::checkCollision(int direction){
 
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
 	return objectTest;
-
-	/*
-    //if we don't have any collideables then return straight away
-    if(collideables.size() <= 0){
-        return NULL;
-    }
-
-    //loop through and return true if any object has collided
-    for(std::list<Object*>::iterator nodeIterator = collideables.begin(); nodeIterator != collideables.end(); ++nodeIterator){
-        if(*nodeIterator != this){
-            if(objectNode->getTransformedBoundingBox().intersectsWithBox((*nodeIterator)->getSceneNode()->getTransformedBoundingBox())){
-				
-				return *nodeIterator;
-            }
-        }
-    }
-
-    return NULL;
-	*/
 }
 
 void Object::updatePosition(irr::core::vector3df newPosition){
