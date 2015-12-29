@@ -103,7 +103,10 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
 
 	//Set how many times each texture is tiled
-	terrain->scaleTexture(tileAmount, 1.0f);
+	terrain->scaleTexture(tileAmount);
+
+	//Set the object ID for collision handling
+	terrain->setID(TYPE_STATIC_OBJECT);
 
 	//create the triangle selector for the terrain to handle collision
 	irr::scene::ITriangleSelector *selector = device->getSceneManager()->createTerrainTriangleSelector(terrain);
