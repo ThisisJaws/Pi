@@ -80,13 +80,13 @@ void World::reset(){
 	}
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &position, irr::core::vector3df &scaleFactor, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, float tileAmount){
 	//Create the return variable
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
 																							0,										//Parent Node
 																							-1,										//Node ID
-																							position,								//Position
-																							irr::core::vector3df(0, 0, 0),			//Rotation
+																							irr::core::vector3df(0),				//Position
+																							irr::core::vector3df(0),				//Rotation
 																							scaleFactor,							//Scale (Will have to get adjusted per map because some might be different lengths)
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
