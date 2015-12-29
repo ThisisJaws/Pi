@@ -91,7 +91,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
 																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
-																							1);										//Smoothfactor
+																							2);										//Smoothfactor
 
 	//Set the lighting
 	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
