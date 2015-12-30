@@ -68,16 +68,18 @@ bool World::isPhase2Complete(){
 }
 
 void World::reset(){
+	//Remove any terrains
+	if(phase1Loaded && terrain != NULL){
+		terrain->remove();
+		terrain = 0;
+	}
+
+	//Reset the bools
 	phase1Loaded = false;
 	phase2Loaded = false;
 
 	phase1Complete = false;
 	phase2Complete = false;
-
-	if(terrain != NULL){
-		terrain->remove();
-		terrain = 0;
-	}
 }
 
 irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, float tileAmount){

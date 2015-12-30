@@ -38,6 +38,9 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 		terrainLava->remove();
 	}
 
+	//Make sure the previous phase is no longer considered loaded
+	phase1Loaded = false;
+
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -74,8 +77,11 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 }
 
 void LavaWorld::reset(){
+	if(phase1Loaded && terrainLava != NULL){
+		//Make sure the lava terrain also gets removed
+		terrainLava->remove();
+	}
+
 	//Call the super function
 	World::reset();
-	//Make sure the lava terrain also gets removed
-	terrainLava->remove();
 }
