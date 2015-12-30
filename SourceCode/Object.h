@@ -32,8 +32,13 @@ private:
     //mark an object for delete to remove it o update
     bool markedForDelete;
 
-	//to store the type of the object for the spawn on construct function
+	//The typeID is what type of object this is (see ObjectTypes.h) stored to quickly check what type of an object it is
 	irr::s32 typeID;
+
+	//This increments every time an object is created
+	static irr::s32 objectCount;
+	//This holds the unique ID of the object so it can be found when searching through lists
+	irr::s32 uniqueID;
     
     //FUNCTIONS
 public:
@@ -48,8 +53,11 @@ public:
     //mark the object for deletion
     virtual void markForDelete();
     
-    //get thew type of the object
+    //Get the type of the object
     irr::s32 getTypeID();
+
+	//Get the unique ID of the object
+	irr::s32 getUniqueID();
     
     //get the object's mesh
     virtual irr::scene::IAnimatedMesh* getMesh();

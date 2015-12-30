@@ -1,7 +1,15 @@
 #include "Object.h"
 
+//Init static member here
+irr::s32 Object::objectCount = 0;
+
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos, irr::s32 objectTypeID){
-    //set the ID of the object
+	//Make the ID of the object the current object count
+	uniqueID = objectCount;
+	//Increment the object count when the ID has been used
+	objectCount++;
+	
+	//set the ID of the object
     typeID = objectTypeID;
 
     //set the spawn position
@@ -32,6 +40,10 @@ void Object::markForDelete(){
 
 irr::s32 Object::getTypeID(){
 	return objectNode->getID();
+}
+
+signed int Object::getUniqueID(){
+	return uniqueID;
 }
 
 irr::scene::IAnimatedMesh* Object::getMesh(){
@@ -91,7 +103,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectMesh = sceneManagerReference->getMesh(pathOfMesh);
 
         //create the scene node using loaded mesh
-        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, typeID, spawnPos);
+        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
 
         //set the object to not need lighting
