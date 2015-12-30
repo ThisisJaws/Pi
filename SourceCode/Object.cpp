@@ -57,6 +57,7 @@ irr::scene::ISceneNode* Object::checkCollision(int direction){
 	//The triangle that was hit
 	irr::core::triangle3df hitTriangle;
 
+	//Perform the ray cast and return the scene node
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
 	
 	if(objectTest != NULL && objectTest != objectNode){
