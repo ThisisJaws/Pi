@@ -175,7 +175,7 @@ void PlayerShip::changeMode(int increaseSpeedByFactor){
 
         //update the offsets
         maxYOffset = 50;
-        minYOffset = -maxYOffset;
+        minYOffset = maxYOffset;
 
     }else{
         //switch the enum
@@ -183,17 +183,8 @@ void PlayerShip::changeMode(int increaseSpeedByFactor){
 
         //update the offsets
         maxYOffset = 20;
-        minYOffset = -8;
+        minYOffset = 8;
     }
-
-    //reset X and Y pos so player is aligned properly
-    irr::core::vector3df newPos = getPosition();
-    newPos.X = 0;
-    newPos.Y = 0;
-    changePosition(newPos);
-    //make sure the offsets are reset
-    cameraXOffset = 0;
-    cameraYOffset = 0;
 
 	//Increase the player's speed
 	moveSpeed += 25 * increaseSpeedByFactor;
