@@ -27,7 +27,7 @@ protected:
 	bool phase1Complete;
 	bool phase2Complete;
 
-	//Scene nodes for the world
+	//Scene node for the terrain of the world
 	irr::scene::ITerrainSceneNode *terrain;
 
 	//FUNCTIONS
