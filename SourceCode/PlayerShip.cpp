@@ -39,7 +39,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	irr::scene::ISceneNode *collidedNode = checkCollision(moveDir);
 	if(collidedNode != NULL){
 		if(collidedNode->getID() == TYPE_STATIC_OBJECT){
-			lost = true;
+			markForDelete();
 		}
 	}
 
