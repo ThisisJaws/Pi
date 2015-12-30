@@ -16,6 +16,11 @@
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif
 
+//Defines for version number
+#define CURRENT_VERSION_MAJOR	 0
+#define CURRENT_VERSION_MINOR	 1
+#define CURRENT_VERSION_REVISION 0
+
 /*
  * program entry point
  */
@@ -29,6 +34,15 @@ int main(int argc, char** argv) {
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
     //Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
+
+	//Change the window name
+	irr::core::stringw windowName(L"Space Trip Version: ");
+	windowName += CURRENT_VERSION_MAJOR;
+	windowName += ".";
+	windowName += CURRENT_VERSION_MINOR;
+	windowName += ".";
+	windowName += CURRENT_VERSION_REVISION;
+	device->setWindowCaption(windowName.c_str());
 
     //Create a texture variable to draw the menu
     irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu800x600.jpg");
