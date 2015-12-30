@@ -1,5 +1,7 @@
 #include "Bullet.h"
 
+#include "Game.h"
+
 //pass everythig through the constructor
 Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
     : Object("Assets/PlaceHolders/LaserBulletSix.obj", "", sceneManagerReference, driverReference, false, irr::core::vector3df(0), TYPE_BULLET){
@@ -33,14 +35,16 @@ void Bullet::tick(irr::f32 deltaTime){
             markForDelete();
         }
         
-        //check the type of collision
-        /*Object *collidedObject = checkCollision();
-        if(collidedObject != NULL){
-			if(collidedObject->getTypeID() == targetTypeID){
+        //Check the type of collision
+		irr::s32 collidedObjectUniqueID = checkCollision(-1);
+		if(collidedObjectUniqueID > 1){
+			Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
+			if(collidedObject != NULL && collidedObject->getTypeID() == targetTypeID){
+				//If the bullet hits it target, then delete it
 				collidedObject->markForDelete();
 				markForDelete();
 			}
-        }*/
+		}
     }
 }
 
