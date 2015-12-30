@@ -39,7 +39,7 @@ void Object::markForDelete(){
 }
 
 irr::s32 Object::getTypeID(){
-	return objectNode->getID();
+	return typeID;
 }
 
 signed int Object::getUniqueID(){
