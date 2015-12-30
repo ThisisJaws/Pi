@@ -30,6 +30,9 @@ protected:
 	//Scene node for the terrain of the world
 	irr::scene::ITerrainSceneNode *terrain;
 
+	//The start position of the player for phase 1
+	irr::core::vector3df phase1StartPosition;
+
 	//FUNCTIONS
 public:
 	//constructor
