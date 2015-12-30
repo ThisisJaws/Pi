@@ -1,5 +1,7 @@
 #include "PlayerShip.h"
 
+#include "Game.h"
+
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
     : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, driverReference, TYPE_SHIP_PLAYER){
 
@@ -36,9 +38,14 @@ void PlayerShip::tick(irr::f32 deltaTime){
     Ship::tick(deltaTime);
 
 	//check for collision with static Objects
-	irr::scene::ISceneNode *collidedNode = checkCollision(moveDir);
-	if(collidedNode != NULL){
-		if(collidedNode->getID() == TYPE_STATIC_OBJECT){
+	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
+	if(collidedObjectUniqueID == 1){
+		//ID 1 is always terrain, so the player loses
+		markForDelete();
+	}else if(collidedObjectUniqueID > 1){
+		//If the ID is greater than 1 (0 is no collision) then search for the object
+		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
+		if(collidedObject != NULL && collidedObject->getTypeID() == TYPE_STATIC_OBJECT){
 			markForDelete();
 		}
 	}
