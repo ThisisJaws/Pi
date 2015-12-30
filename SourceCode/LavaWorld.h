@@ -22,6 +22,9 @@ public:
 private:
 	//Function to load in all the rocks for phase 1, takes the start position as point of reference
 	void loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
+
+	//Loads in all the gems
+	void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
 };
 
 

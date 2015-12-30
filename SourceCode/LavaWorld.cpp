@@ -27,6 +27,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 	//Load in all the individual objects
 	loadPhase1Rocks(phase1StartPosition, smgr, driver);
+	loadPhase1Gems(phase1StartPosition, smgr, driver);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
@@ -113,7 +114,7 @@ void LavaWorld::loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr:
 	spawnPos.Y = playerStartPos.Y;
 
 	//Repeating for all objects
-	//3
+	//2
 	spawnPos.Z += 300;
 	spawnPos.X += 15;
 	spawnPos.Y -= 10;
@@ -229,6 +230,57 @@ void LavaWorld::loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr:
 	spawnPos.Y += 9;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
+
+	//Clear the pointer when done
+	rock = 0;
+}
+
+void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr::scene::ISceneManager * sceneManager, irr::video::IVideoDriver * videoDriver){
+	//The pointer that will init all the gems into memory then be passed into the list
+	Gem *gem;
+
+	//Where the gems will spawn
+	irr::core::vector3df spawnPos = playerStartPos;
+
+	//1
+	//Get the spawn based off the player start position
+	spawnPos.Z += 2090;
+	spawnPos.X -= 11;
+	spawnPos.Y += 5;
+	//Create the new object
+	gem = new Gem(spawnPos, sceneManager, videoDriver);
+	//Put it on the update list
+	Game::addObjectToUpdate(gem);
+	//Reset the X and Y back to zero
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
+
+	//Repeating for all objects
+	//2
+	spawnPos.Z += 1217;
+	spawnPos.X += 23;
+	spawnPos.Y -= 2;
+	gem = new Gem(spawnPos, sceneManager, videoDriver);
+	Game::addObjectToUpdate(gem);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//3
+	spawnPos.Z += 2387;
+	spawnPos.X += 25;
+	spawnPos.Y -= 8;
+	gem = new Gem(spawnPos, sceneManager, videoDriver);
+	Game::addObjectToUpdate(gem);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//4
+	spawnPos.Z += 1880;
+	spawnPos.X -= 20;
+	spawnPos.Y += 17;
+	gem = new Gem(spawnPos, sceneManager, videoDriver);
+	Game::addObjectToUpdate(gem);
+
+	//Clear the pointer when done
+	gem = 0;
 }
