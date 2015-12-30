@@ -28,6 +28,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Load in all the individual objects
 	loadPhase1Rocks(phase1StartPosition, smgr, driver);
 	loadPhase1Gems(phase1StartPosition, smgr, driver);
+	loadPhase1Ammo(phase1StartPosition, smgr, driver);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
@@ -283,4 +284,34 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 
 	//Clear the pointer when done
 	gem = 0;
+}
+
+void LavaWorld::loadPhase1Ammo(const irr::core::vector3df & playerStartPos, irr::scene::ISceneManager * sceneManager, irr::video::IVideoDriver * videoDriver){
+	//The pointer that will init all the ammo into memory then be passed into the list
+	Ammo *ammo;
+
+	//Where the ammo will spawn
+	irr::core::vector3df spawnPos = playerStartPos;
+
+	//1
+	//Get the spawn based off the player start position
+	spawnPos.Z += 3510;
+	spawnPos.X -= 17;
+	spawnPos.Y += 18;
+	//Create the new object
+	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
+	//Put it on the update list
+	Game::addObjectToUpdate(ammo);
+	//Reset the X and Y back to zero
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//2
+	spawnPos.Z += 1400;
+	spawnPos.Y -= 10;
+	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
+	Game::addObjectToUpdate(ammo);
+
+	//Clear the pointer when done
+	ammo = 0;
 }

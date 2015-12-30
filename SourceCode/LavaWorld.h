@@ -25,6 +25,9 @@ private:
 
 	//Loads in all the gems
 	void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
+
+	//Loads in all the ammo
+	void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
 };
 
 
