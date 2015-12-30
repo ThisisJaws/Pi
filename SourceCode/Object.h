@@ -79,8 +79,8 @@ public:
 	void removeFromScene();
     
 protected:
-    //returns true if the object has collided with an object contained within the vector, direction will be either 1 or -1;
-    virtual irr::scene::ISceneNode* checkCollision(int direction);
+    //returns the unique ID of the object that collided, direction will be either 1 or -1;
+    virtual irr::s32 checkCollision(int direction);
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);

@@ -1,7 +1,7 @@
 #include "Object.h"
 
-//Init static member here
-irr::s32 Object::objectCount = 0;
+//Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
+irr::s32 Object::objectCount = 2;
 
 Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos, irr::s32 objectTypeID){
 	//Make the ID of the object the current object count
@@ -58,7 +58,7 @@ irr::core::vector3df Object::getPosition(){
     return objectNode->getPosition();
 }
 
-irr::scene::ISceneNode* Object::checkCollision(int direction){
+irr::s32 Object::checkCollision(int direction){
 	//Cast a ray from the object to slightly infront of the object
 	irr::core::line3df ray;
 	ray.start = getPosition();
@@ -73,9 +73,9 @@ irr::scene::ISceneNode* Object::checkCollision(int direction){
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
 	
 	if(objectTest != NULL && objectTest != objectNode){
-		return objectTest;
+		return objectTest->getID();
 	} else{
-		return NULL;
+		return 0;
 	}
 }
 
