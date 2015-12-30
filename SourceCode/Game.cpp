@@ -190,7 +190,7 @@ bool Game::objectToUpdateContainsAnyType(int typeID){
 
 Object* Game::getObjectReferenceByID(irr::s32 objectID){
 	//Make sure it isn't looknig for 0 or 1 
-	if(objectID > 0){
+	if(objectID <= 1){
 		return NULL;
 	}
 
