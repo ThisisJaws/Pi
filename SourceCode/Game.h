@@ -90,6 +90,9 @@ public:
 	//Check if the objects list contains any type of object
 	static bool objectToUpdateContainsAnyType(int typeID);
 
+	//Returns the object if the loop contains the ID
+	static Object* getObjectReferenceByID(irr::s32 objectID);
+
     //returns true if objects are loaded in the scene
     bool isLoaded();
 

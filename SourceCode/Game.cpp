@@ -173,7 +173,7 @@ void Game::cleanUp(){
 	}
 }
 
-void Game::addObjectToUpdate(Object* toAdd){
+void Game::addObjectToUpdate(Object *toAdd){
     objectsToUpdate.push_back(toAdd);
 }
 
@@ -186,6 +186,23 @@ bool Game::objectToUpdateContainsAnyType(int typeID){
 
 	//if the loop completes, no objects are of requested type
 	return false;
+}
+
+Object* Game::getObjectReferenceByID(irr::s32 objectID){
+	//Make sure it isn't looknig for 0 or 1 
+	if(objectID > 0){
+		return NULL;
+	}
+
+	//Loop through the list to find the object with the same ID
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getUniqueID() == objectID){
+			return (*objectIterator);
+		}
+	}
+
+	//If the loop completes return NULL
+	return NULL;
 }
 
 bool Game::isLoaded(){
