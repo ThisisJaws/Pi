@@ -23,9 +23,9 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 }
 
 void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
-	/*if(worldNode){
-		worldNode->remove();
-	}*/
+	if(terrain != NULL){
+		terrain->remove();
+	}
 
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
