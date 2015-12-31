@@ -18,7 +18,6 @@ public:
     //constructor
     Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
  
-protected:
     virtual void activate(PlayerShip *player) override;
 };
 

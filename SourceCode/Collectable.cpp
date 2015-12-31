@@ -17,18 +17,9 @@ void Collectable::tick(irr::f32 deltaTime){
     irr::core::vector3df rotation = getSceneNode()->getRotation();
     rotation.Y += rotSpeed * deltaTime;
     getSceneNode()->setRotation(rotation);
-    
-    //Check for collision
-	irr::s32 collidedObjectUniqueID = checkCollision(-1);
-	if(collidedObjectUniqueID > 1){
-		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
-		if(collidedObject != NULL && collidedObject->getTypeID() == TYPE_SHIP_PLAYER){
-			//dynamic cast to the player
-			PlayerShip *player = dynamic_cast<PlayerShip *>(collidedObject);
-			//then activate the collectable
-			activate(player);
-			//then remove from the scene
-			markForDelete();
-		}
-	}
+}
+
+void Collectable::activate(PlayerShip * player){
+	//Base function simply marks for delete
+	markForDelete();
 }

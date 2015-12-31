@@ -25,9 +25,8 @@ public:
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;
     
-protected:
     //pure virtual function which gets called when the player player collides
-    virtual void activate(PlayerShip *player) = 0;
+    virtual void activate(PlayerShip *player);
 };
 
 #endif	/* COLLLECTABLE_H */
