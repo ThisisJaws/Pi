@@ -10,9 +10,11 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Load the mesh into the level
-	//worldNode = smgr->addAnimatedMeshSceneNode(smgr->getMesh("Assets/PlaceHolders/Levels/AllFourIceTerrainSeamless.obj"));
-	//worldNode->setPosition(irr::core::vector3df(0, -75, 0));
+	//load in the terrain
+	terrain = loadTerrain(device,
+						  "Assets/Environment/Levels/IceWorldHeightMap512x512.jpg",
+						  driver->getTexture("Assets/Environment/Levels/IceWorldTexture.jpg"),
+						  irr::core::vector3df(10, 2, 10));
 
 	//Reset the player position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
