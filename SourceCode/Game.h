@@ -24,7 +24,7 @@
 #include "LavaWorld.h"
 #include "IceWorld.h"
 
-#define NUM_WORLDS 1 //will be 3, change worlds get added
+#define NUM_WORLDS 2 //will be 3, change worlds get added
 
 class Game{
     //VARIABLES

@@ -33,6 +33,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
 	//Add the worlds into the array to load later
 	worlds[0] = new LavaWorld(g_player);
+	worlds[1] = new IceWorld(g_player);
 
 	//Load the first world
 	worlds[0]->loadPhase1(device);
