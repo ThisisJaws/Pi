@@ -14,10 +14,10 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/IceWorldHeightMap512x512.jpg",
 						  driver->getTexture("Assets/Environment/Levels/IceWorldTexture.jpg"),
-						  irr::core::vector3df(1, 1, 1));
+						  irr::core::vector3df(13, 1, 15));
 
 	//Reset the player position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
+	player->changePosition(irr::core::vector3df(3500, 125, -500));
 
 	phase1Loaded = true;
 }
