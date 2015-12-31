@@ -79,6 +79,17 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 		z += 800;
 	}
 
+	//Add some gems to the level
+	x = 0; y = 0; z = 1200;
+	Gem *gem;
+	for(int i = 0; i < 3; i++){
+		y = rand() % 20 + 1;
+		y -= 10;
+		gem = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
+
+		z += rand() % 3000 + 100;
+	}
+
 	phase2Loaded = true;
 }
 
