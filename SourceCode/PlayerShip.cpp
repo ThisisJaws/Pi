@@ -45,8 +45,17 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	}else if(collidedObjectUniqueID > 1){
 		//If the ID is greater than 1 (0 is no collision) then search for the object
 		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
-		if(collidedObject != NULL && collidedObject->getTypeID() == TYPE_STATIC_OBJECT){
-			markForDelete();
+		//Perform the collision checks for the object types
+		if(collidedObject != NULL){
+			if(collidedObject->getTypeID() == TYPE_STATIC_OBJECT){
+				markForDelete();
+			}
+
+			if(collidedObject->getTypeID() == TYPE_COLLECTABLE){
+				//Dynamic cast to a collectable to see the activate function
+				Collectable *collectible = dynamic_cast<Collectable *>(collidedObject);
+				collectible->activate(this);
+			}
 		}
 	}
 
