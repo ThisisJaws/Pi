@@ -268,8 +268,8 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 
 	//3
 	spawnPos.Z += 2387;
-	spawnPos.X += 23;
-	spawnPos.Y -= 8;
+	spawnPos.X += 20;
+	spawnPos.Y -= 6;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 	spawnPos.X = playerStartPos.X;
