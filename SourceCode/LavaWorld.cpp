@@ -246,7 +246,7 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 	//1
 	//Get the spawn based off the player start position
 	spawnPos.Z += 2090;
-	spawnPos.X -= 11;
+	spawnPos.X -= 10;
 	spawnPos.Y += 5;
 	//Create the new object
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
@@ -259,7 +259,7 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 	//Repeating for all objects
 	//2
 	spawnPos.Z += 1217;
-	spawnPos.X += 23;
+	spawnPos.X += 20;
 	spawnPos.Y -= 2;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
@@ -268,7 +268,7 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 
 	//3
 	spawnPos.Z += 2387;
-	spawnPos.X += 25;
+	spawnPos.X += 23;
 	spawnPos.Y -= 8;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
@@ -308,7 +308,7 @@ void LavaWorld::loadPhase1Ammo(const irr::core::vector3df & playerStartPos, irr:
 
 	//2
 	spawnPos.Z += 1400;
-	spawnPos.Y -= 10;
+	spawnPos.Y -= 7;
 	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(ammo);
 
