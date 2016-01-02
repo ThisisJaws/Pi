@@ -3,6 +3,7 @@
 IceWorld::IceWorld(PlayerShip *player) 
 	: World(player){
 
+	phase1StartPosition = irr::core::vector3df(5100, 170, -500);
 }
 
 void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
@@ -14,10 +15,10 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/IceWorldHeightMap512x512.jpg",
 						  driver->getTexture("Assets/Environment/Levels/IceWorldTexture.jpg"),
-						  irr::core::vector3df(10, 2, 10));
+						  irr::core::vector3df(20, 1.25F, 12));
 
 	//Reset the player position
-	player->changePosition(irr::core::vector3df(2650, 200, -500));
+	player->changePosition(phase1StartPosition);
 
 	phase1Loaded = true;
 }
