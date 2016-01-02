@@ -82,7 +82,7 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df &scaleFactor, irr::core::vector3df position, irr::s32 smoothFactor, float tileAmount){
 	//Create the return variable
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
 																							0,										//Parent Node
@@ -93,7 +93,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
 																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
-																							1);										//Smoothfactor
+																							smoothFactor);							//Smoothfactor
 
 	//Set the lighting
 	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
