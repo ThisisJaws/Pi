@@ -22,11 +22,14 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 }
 
 Game::~Game(){
-	//Loop through all worlds
+	//loop through object vector and delete all pointers
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		Object *toDelete = *objectIterator;
+		delete toDelete;
+	}
+
+	//Loop through all worlds and delete them
 	for(int i = 0; i < NUM_WORLDS; i++){
-		//Make sure there are no scene nodes left
-		worlds[i]->reset();
-		//Delete the world
 		delete worlds[i];
 	}
 }
@@ -42,7 +45,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     g_player = player;
 
 	//Add the worlds into the array to load later
-	worlds[0] = new LavaWorld(g_player);
+	worlds[0] = new IceWorld(g_player);
 	worlds[1] = new IceWorld(g_player);
 	worlds[2] = new JungleWorld(g_player);
 
