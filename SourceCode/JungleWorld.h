@@ -4,8 +4,6 @@
 #include "World.h"
 
 class JungleWorld : public World{
-	//VARIABLES
-
 	//FUNCTIONS
 public:
 	//constructor
