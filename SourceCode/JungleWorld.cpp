@@ -14,10 +14,10 @@ void JungleWorld::loadPhase1(irr::IrrlichtDevice * device){
 	terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/JungleWorldHeightMap512x512.jpg",
 						  driver->getTexture("Assets/Environment/Levels/JungleWorldTexture.jpg"),
-						  irr::core::vector3df(13, 1, 15));
+						  irr::core::vector3df(14, 1, 10));
 
 	//Reset the player position
-	player->changePosition(irr::core::vector3df(3500, 125, -500));
+	player->changePosition(irr::core::vector3df(3690, 130, -500));
 
 	phase1Loaded = true;
 }
