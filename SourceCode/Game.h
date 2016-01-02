@@ -76,6 +76,8 @@ private:
 public:
     //constructor
     Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
+	//destructor
+	~Game();
 
     //load all the objects to go in the scene
     void load(irr::scene::ICameraSceneNode *camera);

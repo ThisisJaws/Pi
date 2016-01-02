@@ -21,6 +21,16 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	currentWorld = 0;
 }
 
+Game::~Game(){
+	//Loop through all worlds
+	for(int i = 0; i < NUM_WORLDS; i++){
+		//Make sure there are no scene nodes left
+		worlds[i]->reset();
+		//Delete the world
+		delete worlds[i];
+	}
+}
+
 void Game::load(irr::scene::ICameraSceneNode *camera){
     //Create a ship for the player
     PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, driver);
