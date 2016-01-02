@@ -27,20 +27,18 @@ bool World::isPhase1Complete(){
 		if(phase1Complete){
 			return true;
 		} else{
-			if(terrain != NULL){
-				//Get an array to hold all of the edges
-				irr::core::vector3d<irr::f32> edges[8];
-				//Get the counding box of the mesh
-				irr::core::aabbox3d<irr::f32> boundingBox = terrain->getTransformedBoundingBox();
-				//Get the edges of the box
-				boundingBox.getEdges(edges);
+			//Get an array to hold all of the edges
+			irr::core::vector3d<irr::f32> edges[8];
+			//Get the counding box of the mesh
+			irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[TERRAIN_NODE_COUNT - 1]->getTransformedBoundingBox();
+			//Get the edges of the box
+			boundingBox.getEdges(edges);
 
-				if(player->getPosition().Z >= (edges[2].Z - edges[0].Z) / terrain->getScale().Z){
-					phase1Complete = true;
-					return true;
-				} else{
-					return false;
-				}
+			if(player->getPosition().Z >= (edges[2].Z - edges[0].Z) / terrainNodes[TERRAIN_NODE_COUNT - 1]->getScale().Z){
+				phase1Complete = true;
+				return true;
+			} else{
+				return false;
 			}
 		}
 	} else{
@@ -67,11 +65,18 @@ bool World::isPhase2Complete(){
 	}
 }
 
+void World::clearTerrains(){
+	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+		terrainNodes[i]->remove();
+		delete terrainNodes[i];
+		terrainNodes[i] = 0;
+	}
+}
+
 void World::reset(){
 	//Remove any terrains
-	if(phase1Loaded && terrain != NULL){
-		terrain->remove();
-		terrain = 0;
+	if(phase1Loaded){
+		clearTerrains();
 	}
 
 	//Reset the bools

@@ -13,6 +13,9 @@
 #include "Ammo.h"
 #include "Gem.h"
 
+#define HEIGHT_MAP_COUNT 5		//temp as 5 for now
+#define TERRAIN_NODE_COUNT 10	//temp as 10 for now
+
 class World{
 	//VARIABLES
 protected:
@@ -27,8 +30,11 @@ protected:
 	bool phase1Complete;
 	bool phase2Complete;
 
-	//Scene node for the terrain of the world
-	irr::scene::ITerrainSceneNode *terrain;
+	//An array that holds the locations of the heightmap pieces
+	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
+
+	//An array of the scene nodes that will make up the entire terrain
+	irr::scene::ITerrainSceneNode *terrainNodes[TERRAIN_NODE_COUNT]; //temp as 10 for now
 
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
@@ -50,6 +56,9 @@ public:
 	//Check if the phase is complete
 	bool isPhase1Complete();
 	bool isPhase2Complete();
+
+	//Loops through the array of terrain nodes and deletes them
+	virtual void clearTerrains();
 
 	//Resets the world
 	virtual void reset();
