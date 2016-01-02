@@ -23,8 +23,10 @@
 
 #include "LavaWorld.h"
 #include "IceWorld.h"
+#include "JungleWorld.h"
 
-#define NUM_WORLDS 2 //will be 3, change worlds get added
+//Number of playable worlds
+#define NUM_WORLDS 3
 
 class Game{
     //VARIABLES
