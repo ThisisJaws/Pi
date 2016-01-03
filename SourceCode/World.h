@@ -36,6 +36,9 @@ protected:
 	//An array of the scene nodes that will make up the entire terrain
 	irr::scene::ITerrainSceneNode *terrainNodes[TERRAIN_NODE_COUNT];
 
+	//The path to the texture
+	irr::io::path terrainTexturePath;
+
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
 
