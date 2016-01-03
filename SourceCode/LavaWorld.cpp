@@ -4,9 +4,6 @@
 LavaWorld::LavaWorld(PlayerShip *player) 
 	: World(player){
 
-	//Set the player start pos
-	phase1StartPosition = irr::core::vector3df(256, 60, -500);
-
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1-512x512.jpg";
 	heightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece2-512x512.jpg";

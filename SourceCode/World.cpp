@@ -3,6 +3,9 @@
 #include "Game.h"
 
 World::World(PlayerShip *player){
+	//Set the player start pos
+	phase1StartPosition = irr::core::vector3df(256, 60, -500);
+
 	this->player = player;
 
 	phase1Loaded = false;
