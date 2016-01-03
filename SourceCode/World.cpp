@@ -68,7 +68,6 @@ bool World::isPhase2Complete(){
 void World::clearTerrains(){
 	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
 		terrainNodes[i]->remove();
-		delete terrainNodes[i];
 		terrainNodes[i] = 0;
 	}
 }
