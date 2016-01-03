@@ -37,6 +37,11 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		terrainPos.Z += (edges[2].Z - edges[0].Z);
 	}
 
+	//Load in all the individual objects
+	//loadPhase1Rocks(phase1StartPosition, smgr, driver);
+	//loadPhase1Gems(phase1StartPosition, smgr, driver);
+	//loadPhase1Ammo(phase1StartPosition, smgr, driver);
+
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
 
