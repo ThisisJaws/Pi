@@ -14,10 +14,10 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
 	//load in the terrain
-	terrain = loadTerrain(device,
+	/*terrain = loadTerrain(device,
 						  "Assets/Environment/Levels/IceWorldHeightMap512x512.jpg",
 						  driver->getTexture("Assets/Environment/Levels/IceWorldTexture.jpg"),
-						  irr::core::vector3df(20, 1.25F, 12));
+						  irr::core::vector3df(20, 1.25F, 12));*/
 
 	//Reset the player position
 	player->changePosition(phase1StartPosition);
@@ -26,10 +26,8 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice * device){
 }
 
 void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
-	//Unload the node from the scene
-	if(terrain != NULL){
-		terrain->remove();
-	}
+	//Unload the terrains from the scene
+	clearTerrains();
 
 	//Make sure the previous phase is no longer considered loaded
 	phase1Loaded = false;
