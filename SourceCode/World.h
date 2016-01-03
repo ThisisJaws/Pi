@@ -13,8 +13,8 @@
 #include "Ammo.h"
 #include "Gem.h"
 
-#define HEIGHT_MAP_COUNT 5		//temp as 5 for now
-#define TERRAIN_NODE_COUNT 10	//temp as 10 for now
+#define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
+#define TERRAIN_NODE_COUNT 10	//How many segments to lay out for each level
 
 class World{
 	//VARIABLES
@@ -34,7 +34,7 @@ protected:
 	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
 
 	//An array of the scene nodes that will make up the entire terrain
-	irr::scene::ITerrainSceneNode *terrainNodes[TERRAIN_NODE_COUNT]; //temp as 10 for now
+	irr::scene::ITerrainSceneNode *terrainNodes[TERRAIN_NODE_COUNT];
 
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
