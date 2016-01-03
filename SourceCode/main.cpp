@@ -69,6 +69,11 @@ int main(int argc, char** argv) {
     while(device->run()){
         //If escape is pressed at any point, break the loop
         if(receiver.isKeyDown(irr::KEY_ESCAPE)){
+			//Make sure to clean up the game if it has been loaded
+			if(game.isLoaded()){
+				game.cleanUp();
+			}
+
             device->closeDevice();
         }
 

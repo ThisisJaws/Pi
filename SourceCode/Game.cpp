@@ -27,11 +27,6 @@ Game::~Game(){
 		Object *toDelete = *objectIterator;
 		delete toDelete;
 	}
-
-	//Loop through all worlds and delete them
-	for(int i = 0; i < NUM_WORLDS; i++){
-		delete worlds[i];
-	}
 }
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
