@@ -91,7 +91,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
 																							0,										//Parent Node
 																							-1,										//Node ID
-																							position,								//Position - avoid changing this because it causes errors with the collision
+																							irr::core::vector3df(0),				//Position - Changed below because of collision errors
 																							irr::core::vector3df(0),				//Rotation
 																							scaleFactor,							//Scale (Will have to get adjusted per map because some might be different lengths)
 																							irr::video::SColor(255, 255, 255, 255),	//Colour
@@ -110,6 +110,9 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 
 	//Set how many times each texture is tiled
 	terrain->scaleTexture(tileAmount, 1.0f);
+
+	//Set the position of the terrain
+	terrain->setPosition(position);
 
 	//Set the object ID for collision handling, 1 is reserved for terrain
 	terrain->setID(1);
