@@ -71,6 +71,7 @@ int main(int argc, char** argv) {
         if(receiver.isKeyDown(irr::KEY_ESCAPE)){
 			//Make sure to clean up the game if it has been loaded
 			if(game.isLoaded()){
+				gameState = startMenu;
 				game.cleanUp();
 			}
 
