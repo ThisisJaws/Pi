@@ -4,7 +4,18 @@
 LavaWorld::LavaWorld(PlayerShip *player) 
 	: World(player){
 
-	phase1StartPosition = irr::core::vector3df(5275, 190, -500);
+	//Set the player start pos
+	phase1StartPosition = irr::core::vector3df(256, 100, -500);
+
+	//Load in all the file paths
+	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1-512x512.jpg";
+	heightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece2-512x512.jpg";
+	heightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece3-512x512.jpg";
+	heightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece4-512x512.jpg";
+	heightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece5-512x512.jpg";
+
+	//Load in the texture's file path
+	terrainTexturePath = "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png";
 }
 
 void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
@@ -12,23 +23,37 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//load in the terrain
-	terrain = loadTerrain(device,
-						  "Assets/Environment/Levels/LavaWorldHeightMapLand.jpg",
-						  driver->getTexture("Assets/PlaceHolders/Levels/mountain.png"),
-						  irr::core::vector3df(10, 2, 10));
+	//Set the seed
+	srand(1);
+	//The position to place each terrain
+	irr::core::vector3df terrainPos(0);
+	//Loop through and place each terrain
+	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+		//Random number for which tile to load
+		int tile = rand() % HEIGHT_MAP_COUNT;
+		//Create a terrain scene node using the tile selection
+		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), irr::core::vector3df(1), terrainPos);
+		//Get an array to hold all of the edges
+		irr::core::vector3d<irr::f32> edges[8];
+		//Get the bounding box of the mesh
+		irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[i]->getTransformedBoundingBox();
+		//Get the edges of the box
+		boundingBox.getEdges(edges);
+		//Increase the starting pos by the length of the box
+		terrainPos.Z += (edges[2].Z - edges[0].Z);
+	}
 
 	//This level requires two types of terrains so any extra one has to be loaded in 
-	terrainLava = loadTerrain(device,
-							  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
-							  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
-							  irr::core::vector3df(10, 2, 10),
-							  irr::core::vector3df(0, 70, 0));
+	//terrainLava = loadTerrain(device,
+	//						  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
+	//						  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
+	//						  irr::core::vector3df(10, 2, 10),
+	//						  irr::core::vector3df(0, 70, 0));
 
 	//Load in all the individual objects
-	loadPhase1Rocks(phase1StartPosition, smgr, driver);
-	loadPhase1Gems(phase1StartPosition, smgr, driver);
-	loadPhase1Ammo(phase1StartPosition, smgr, driver);
+	//loadPhase1Rocks(phase1StartPosition, smgr, driver);
+	//loadPhase1Gems(phase1StartPosition, smgr, driver);
+	//loadPhase1Ammo(phase1StartPosition, smgr, driver);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
@@ -38,11 +63,8 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 }
 
 void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
-	//Unload the node from the scene
-	if(terrain != NULL){
-		terrain->remove();
-		terrainLava->remove();
-	}
+	//Unload the terrains from the scene
+	clearTerrains();
 
 	//Make sure the previous phase is no longer considered loaded
 	phase1Loaded = false;
@@ -91,16 +113,6 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	}
 
 	phase2Loaded = true;
-}
-
-void LavaWorld::reset(){
-	if(phase1Loaded && terrainLava != NULL){
-		//Make sure the lava terrain also gets removed
-		terrainLava->remove();
-	}
-
-	//Call the super function
-	World::reset();
 }
 
 void LavaWorld::loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver){
