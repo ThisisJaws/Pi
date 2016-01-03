@@ -17,6 +17,9 @@ public:
 	//Override to load in the lava as well
 	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
 
+	//Override to delete the lava as well
+	virtual void clearTerrains() override;
+
 protected:
 	//Function to load in all the rocks for phase 1, takes the start position as point of reference
 	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);

@@ -31,6 +31,15 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	World::loadPhase1(device);
 }
 
+void LavaWorld::clearTerrains(){
+	//Delete the lava
+	//TODO
+	//
+
+	//Call super function to finish clearing the terrains
+	World::clearTerrains();
+}
+
 void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver){
 	//The pointer that will init all the rocks into memory then be passed into the list
 	StaticObject *rock;
