@@ -64,7 +64,7 @@ public:
 	virtual void clearTerrains();
 
 	//Resets the world
-	virtual void reset();
+	void reset();
 
 protected:
 	//Takes a height map and returns the loaded terrain
