@@ -22,14 +22,6 @@ protected:
 	//Reference to the player
 	PlayerShip *player;
 
-	//Keep track of which phase has been loaded
-	bool phase1Loaded;
-	bool phase2Loaded;
-
-	//Keep track of what has been completed
-	bool phase1Complete;
-	bool phase2Complete;
-
 	//An array that holds the locations of the heightmap pieces
 	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
 
@@ -41,6 +33,15 @@ protected:
 
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
+
+private:
+	//Keep track of which phase has been loaded
+	bool phase1Loaded;
+	bool phase2Loaded;
+
+	//Keep track of what has been completed
+	bool phase1Complete;
+	bool phase2Complete;
 
 	//FUNCTIONS
 public:
