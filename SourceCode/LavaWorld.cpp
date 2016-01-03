@@ -5,7 +5,7 @@ LavaWorld::LavaWorld(PlayerShip *player)
 	: World(player){
 
 	//Set the player start pos
-	phase1StartPosition = irr::core::vector3df(256, 100, -500);
+	phase1StartPosition = irr::core::vector3df(256, 60, -500);
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1-512x512.jpg";
@@ -23,43 +23,12 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Set the seed
-	srand(1);
-	//The position to place each terrain
-	irr::core::vector3df terrainPos(0);
-	//Loop through and place each terrain
-	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
-		//Random number for which tile to load
-		int tile = rand() % HEIGHT_MAP_COUNT;
-		//Create a terrain scene node using the tile selection
-		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), irr::core::vector3df(1), terrainPos);
-		//Get an array to hold all of the edges
-		irr::core::vector3d<irr::f32> edges[8];
-		//Get the bounding box of the mesh
-		irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[i]->getTransformedBoundingBox();
-		//Get the edges of the box
-		boundingBox.getEdges(edges);
-		//Increase the starting pos by the length of the box
-		terrainPos.Z += (edges[2].Z - edges[0].Z);
-	}
+	//Load in the Lava
+	//TODO
+	//
 
-	//This level requires two types of terrains so any extra one has to be loaded in 
-	//terrainLava = loadTerrain(device,
-	//						  "Assets/Environment/Levels/LavaWorldHeightMapLava.jpg",
-	//						  driver->getTexture("Assets/PlaceHolders/Levels/lava.jpg"),
-	//						  irr::core::vector3df(10, 2, 10),
-	//						  irr::core::vector3df(0, 70, 0));
-
-	//Load in all the individual objects
-	//loadPhase1Rocks(phase1StartPosition, smgr, driver);
-	//loadPhase1Gems(phase1StartPosition, smgr, driver);
-	//loadPhase1Ammo(phase1StartPosition, smgr, driver);
-
-	//Set the player position to the phase start position
-	player->changePosition(phase1StartPosition);
-
-	//Phase is now loaded
-	phase1Loaded = true;
+	//Call the super function to finish loading the phase
+	World::loadPhase1(device);
 }
 
 void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
@@ -115,7 +84,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice *device){
 	phase2Loaded = true;
 }
 
-void LavaWorld::loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver){
+void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver){
 	//The pointer that will init all the rocks into memory then be passed into the list
 	StaticObject *rock;
 

@@ -14,20 +14,15 @@ public:
 	//constructor
 	LavaWorld(PlayerShip *player);
 
+	//Override to load in the lava as well
 	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
 	virtual void loadPhase2(irr::IrrlichtDevice *device) override;
 
-	void reset() override;
-
-private:
+protected:
 	//Function to load in all the rocks for phase 1, takes the start position as point of reference
-	void loadPhase1Rocks(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
-
-	//Loads in all the gems
-	void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
-
-	//Loads in all the ammo
-	void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
+	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
+	virtual void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
+	virtual void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver);
 };
 
 
