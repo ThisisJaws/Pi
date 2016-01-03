@@ -50,7 +50,7 @@ public:
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
 	virtual void loadPhase1(irr::IrrlichtDevice *device);
-	virtual void loadPhase2(irr::IrrlichtDevice *device) = 0;
+	virtual void loadPhase2(irr::IrrlichtDevice *device);
 
 	//Check if each phase is loaded
 	bool isPhase1Loaded();

@@ -16,7 +16,6 @@ public:
 
 	//Override to load in the lava as well
 	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
-	virtual void loadPhase2(irr::IrrlichtDevice *device) override;
 
 protected:
 	//Function to load in all the rocks for phase 1, takes the start position as point of reference
