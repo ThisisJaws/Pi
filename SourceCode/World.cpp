@@ -4,7 +4,7 @@
 
 World::World(PlayerShip *player){
 	//Set the player start pos
-	phase1StartPosition = irr::core::vector3df(256 * 3, 60, -500);
+	phase1StartPosition = irr::core::vector3df(256 * 3, 60 * 3, -500 * 3);
 
 	this->player = player;
 
