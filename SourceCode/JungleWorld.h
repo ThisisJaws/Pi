@@ -9,7 +9,6 @@ public:
 	//constructor
 	JungleWorld(PlayerShip *player);
 
-	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
 	virtual void loadPhase2(irr::IrrlichtDevice *device) override;
 
 };

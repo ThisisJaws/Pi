@@ -8,23 +8,6 @@ JungleWorld::JungleWorld(PlayerShip *player)
 	phase1StartPosition = irr::core::vector3df(4920, 190, -500);
 }
 
-void JungleWorld::loadPhase1(irr::IrrlichtDevice * device){
-	//Get the references
-	irr::scene::ISceneManager *smgr = device->getSceneManager();
-	irr::video::IVideoDriver *driver = device->getVideoDriver();
-
-	//load in the terrain
-	/*terrain = loadTerrain(device,
-						  "Assets/Environment/Levels/JungleWorldHeightMap512x512.jpg",
-						  driver->getTexture("Assets/Environment/Levels/JungleWorldTexture.jpg"),
-						  irr::core::vector3df(20, 1.5f, 10));*/
-
-	//Reset the player position
-	player->changePosition(phase1StartPosition);
-
-	phase1Loaded = true;
-}
-
 void JungleWorld::loadPhase2(irr::IrrlichtDevice * device){
 	//Unload the terrains from the scene
 	clearTerrains();

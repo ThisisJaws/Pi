@@ -12,6 +12,38 @@ World::World(PlayerShip *player){
 	phase2Complete = false;
 }
 
+void World::loadPhase1(irr::IrrlichtDevice * device){
+	//Get the references
+	irr::scene::ISceneManager *smgr = device->getSceneManager();
+	irr::video::IVideoDriver *driver = device->getVideoDriver();
+
+	//Set the seed
+	srand(1);
+	//The position to place each terrain
+	irr::core::vector3df terrainPos(0);
+	//Loop through and place each terrain
+	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+		//Random number for which tile to load
+		int tile = rand() % HEIGHT_MAP_COUNT;
+		//Create a terrain scene node using the tile selection
+		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), irr::core::vector3df(1), terrainPos);
+		//Get an array to hold all of the edges
+		irr::core::vector3d<irr::f32> edges[8];
+		//Get the bounding box of the mesh
+		irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[i]->getTransformedBoundingBox();
+		//Get the edges of the box
+		boundingBox.getEdges(edges);
+		//Increase the starting pos by the length of the box
+		terrainPos.Z += (edges[2].Z - edges[0].Z);
+	}
+
+	//Set the player position to the phase start position
+	player->changePosition(phase1StartPosition);
+
+	//Phase is now loaded
+	phase1Loaded = true;
+}
+
 bool World::isPhase1Loaded(){
 	return phase1Loaded;
 }
