@@ -3,8 +3,8 @@
 #include "Game.h"
 
 World::World(PlayerShip *player){
-	//Set the player start pos
-	phase1StartPosition = irr::core::vector3df(256 * 3, 60 * 3, -500 * 3);
+	//Set the player start pos for if the map's scael was 1x1x1
+	phase1StartPosition = irr::core::vector3df(256, 60, -500);
 
 	this->player = player;
 
@@ -39,6 +39,11 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		//Increase the starting pos by the length of the box
 		terrainPos.Z += (edges[2].Z - edges[0].Z);
 	}
+
+
+	//Modify the start position by the scale factor
+	phase1StartPosition.X *= terrainNodes[0]->getScale().X;
+	phase1StartPosition.Y *= terrainNodes[0]->getScale().Y;
 
 	//Load in all the individual objects
 	//loadPhase1Obsticlesgit(phase1StartPosition, smgr, driver);

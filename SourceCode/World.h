@@ -69,7 +69,7 @@ public:
 
 protected:
 	//Takes a height map and returns the loaded terrain
-	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df position = irr::core::vector3df(0), irr::core::vector3df &scaleFactor = irr::core::vector3df(3), irr::s32 smoothFactor = 1, float tileAmount = 20.0f);
+	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df position = irr::core::vector3df(0), irr::core::vector3df &scaleFactor = irr::core::vector3df(2), irr::s32 smoothFactor = 1, float tileAmount = 20.0f);
 
 	//Derived classes will override these to place objects
 	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
