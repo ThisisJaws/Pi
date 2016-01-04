@@ -37,7 +37,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		//Get the edges of the box
 		boundingBox.getEdges(edges);
 		//Increase the starting pos by the length of the box
-		terrainPos.Z += (edges[2].Z - edges[0].Z);
+		terrainPos.Z += (edges[2].Z - edges[0].Z) / terrainNodes[i]->getScale().Z;
 	}
 
 
