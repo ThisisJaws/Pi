@@ -4,7 +4,7 @@
 
 World::World(PlayerShip *player){
 	//Set the player start pos for if the map's scael was 1x1x1
-	phase1StartPosition = irr::core::vector3df(256, 60, -500);
+	phase1StartPosition = irr::core::vector3df(256, 70, -500);
 
 	this->player = player;
 
@@ -29,7 +29,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		//Random number for which tile to load
 		int tile = rand() % HEIGHT_MAP_COUNT;
 		//Create a terrain scene node using the tile selection
-		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, irr::core::vector3df(1, 1, 2));
+		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, irr::core::vector3df(1, 1, 1));
 		//Get an array to hold all of the edges
 		irr::core::vector3d<irr::f32> edges[8];
 		//Get the bounding box of the mesh
@@ -133,7 +133,7 @@ bool World::isPhase1Complete(){
 			//Get the edges of the box
 			boundingBox.getEdges(edges);
 
-			if(player->getPosition().Z >= edges[2].Z / terrainNodes[TERRAIN_NODE_COUNT - 1]->getScale().Z){
+			if(player->getPosition().Z >= edges[2].Z){
 				phase1Complete = true;
 				return true;
 			} else{
