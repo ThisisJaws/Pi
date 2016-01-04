@@ -14,7 +14,7 @@
 #include "Gem.h"
 
 #define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
-#define TERRAIN_NODE_COUNT 10	//How many segments to lay out for each level
+#define TERRAIN_NODE_COUNT 15	//How many segments to lay out for each level
 
 class World{
 	//VARIABLES
