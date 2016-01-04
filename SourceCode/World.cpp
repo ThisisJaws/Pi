@@ -46,9 +46,9 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	phase1StartPosition.Y *= terrainNodes[0]->getScale().Y;
 
 	//Load in all the individual objects
-	//loadPhase1Obsticlesgit(phase1StartPosition, smgr, driver);
-	//loadPhase1Gems(phase1StartPosition, smgr, driver);
-	//loadPhase1Ammo(phase1StartPosition, smgr, driver);
+	loadPhase1Obsticles(phase1StartPosition, smgr, driver);
+	loadPhase1Gems(phase1StartPosition, smgr, driver);
+	loadPhase1Ammo(phase1StartPosition, smgr, driver);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
