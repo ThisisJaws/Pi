@@ -5,6 +5,9 @@
 JungleWorld::JungleWorld(PlayerShip *player)
 	: World(player){
 
+	//make the player start much higher
+	phase1StartPosition = irr::core::vector3df(256, 200, -500);
+
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/JungleWorld/HeightMap-Piece1-512x512.jpg";
 	heightMapLocations[1] = "Assets/Environment/Levels/JungleWorld/HeightMap-Piece2-512x512.jpg";
