@@ -75,7 +75,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//array of Enemies - these get deleted once they move off screen
-	int x = 0; int y = 0; int z = 500;
+	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
 	for(int i = 0; i < 2; i++){
 		//basic
 		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);

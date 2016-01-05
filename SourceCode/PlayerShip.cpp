@@ -60,12 +60,12 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	}
 
 	//get the previous position to work out score
-	unsigned int oldZ = getPosition().Z;
+	irr::f32 oldZ = getPosition().Z;
 	//move forward
 	move(moveSpeed, deltaTime);
 	//work out the distance traveled
-	unsigned int newZ = getPosition().Z;
-	unsigned int difference = newZ - oldZ;
+	irr::f32 newZ = getPosition().Z;
+	irr::f32 difference = newZ - oldZ;
 	//increase score by the difference
 	increaseScore(difference);
 
