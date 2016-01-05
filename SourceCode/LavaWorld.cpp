@@ -11,8 +11,16 @@ LavaWorld::LavaWorld(PlayerShip *player)
 	heightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece4-512x512.jpg";
 	heightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece5-512x512.jpg";
 
+	lavaHeightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece1-512x512.jpg";
+	lavaHeightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece2-512x512.jpg";
+	lavaHeightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece3-512x512.jpg";
+	lavaHeightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece4-512x512.jpg";
+	lavaHeightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece5-512x512.jpg";
+
 	//Load in the texture's file path
 	terrainTexturePath = "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png";
+	lavaTerrainTexturePath = "Assets/Environment/Levels/LavaWorld/Lava/LavaWorldTexture-Lava.jpg";
+
 }
 
 void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
@@ -20,8 +28,17 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Load in the Lava
-	//TODO
+	//Load in the Lava (see base function for details)
+	srand(1);
+	irr::core::vector3df terrainPos(0);
+	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+		int tile = rand() % HEIGHT_MAP_COUNT;
+		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), terrainPos, irr::core::vector3df(1, 1, 1));
+		irr::core::vector3d<irr::f32> edges[8];
+		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
+		boundingBox.getEdges(edges);
+		terrainPos.Z += (edges[2].Z - edges[0].Z) / lavaTerrainNodes[i]->getScale().Z;
+	}
 	//
 
 	//Call the super function to finish loading the phase
@@ -30,7 +47,10 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 void LavaWorld::clearTerrains(){
 	//Delete the lava
-	//TODO
+	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+		lavaTerrainNodes[i]->remove();
+		lavaTerrainNodes[i] = 0;
+	}
 	//
 
 	//Call super function to finish clearing the terrains

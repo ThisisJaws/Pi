@@ -6,8 +6,10 @@
 class LavaWorld : public World{
 	//VARIABLES
 private:
-	//Holds the lava (see loadPhase1 in .cpp)
-	irr::scene::ITerrainSceneNode *terrainLava;
+	//Variables for the lava
+	irr::io::path lavaHeightMapLocations[HEIGHT_MAP_COUNT];
+	irr::scene::ITerrainSceneNode *lavaTerrainNodes[TERRAIN_NODE_COUNT];
+	irr::io::path lavaTerrainTexturePath;
 
 	//FUNCTIONS
 public:
