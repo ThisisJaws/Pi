@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player){
+	: World(player, irr::core::vector3df(0, 0, -500)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1.jpg";
@@ -33,7 +33,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::core::vector3df terrainPos(0);
 	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
 		int tile = rand() % HEIGHT_MAP_COUNT;
-		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), terrainPos, irr::core::vector3df(1, 1, 1));
+		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), terrainPos);
 		irr::core::vector3d<irr::f32> edges[8];
 		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
