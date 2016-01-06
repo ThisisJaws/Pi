@@ -6,7 +6,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE){
 
     //set the rotation speed
-    rotSpeed = 50.0f;
+    rotSpeed = 75.0f;
 
 	//Resize all collectibles, might be temp
 	getSceneNode()->setScale(irr::core::vector3df(2));
