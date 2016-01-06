@@ -23,7 +23,7 @@ LavaWorld::LavaWorld(PlayerShip *player)
 
 }
 
-void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
+void LavaWorld::loadPhase1(irr::IrrlichtDevice *device, irr::core::vector3df worldScale){
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -33,7 +33,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::core::vector3df terrainPos(0, 50, 0);
 	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
 		int tile = rand() % HEIGHT_MAP_COUNT;
-		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), irr::core::vector3df(1, 1, 2));
+		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), worldScale);
 		irr::core::vector3d<irr::f32> edges[8];
 		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
@@ -42,7 +42,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//
 
 	//Call the super function to finish loading the phase
-	World::loadPhase1(device);
+	World::loadPhase1(device, worldScale);
 }
 
 void LavaWorld::clearTerrains(){

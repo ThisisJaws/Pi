@@ -17,7 +17,7 @@ public:
 	LavaWorld(PlayerShip *player);
 
 	//Override to load in the lava as well
-	virtual void loadPhase1(irr::IrrlichtDevice *device) override;
+	virtual void loadPhase1(irr::IrrlichtDevice *device, irr::core::vector3df worldScale = irr::core::vector3df(1, 1, 2)) override;
 
 	//Override to delete the lava as well
 	virtual void clearTerrains() override;
