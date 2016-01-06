@@ -51,7 +51,7 @@ public:
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
-	virtual void loadPhase1(irr::IrrlichtDevice *device, irr::core::vector3df worldScale = irr::core::vector3df(1, 1, 2));
+	virtual void loadPhase1(irr::IrrlichtDevice *device);
 	virtual void loadPhase2(irr::IrrlichtDevice *device);
 
 	//Check if each phase is loaded
