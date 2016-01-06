@@ -15,7 +15,7 @@ World::World(PlayerShip *player, irr::core::vector3df &phase1StartPos){
 	phase2Complete = false;
 }
 
-void World::loadPhase1(irr::IrrlichtDevice * device){
+void World::loadPhase1(irr::IrrlichtDevice * device, irr::core::vector3df worldScale = irr::core::vector3df(1)){
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -29,7 +29,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		//Random number for which tile to load
 		int tile = rand() % HEIGHT_MAP_COUNT;
 		//Create a terrain scene node using the tile selection
-		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, irr::core::vector3df(1, 2, 2));
+		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, worldScale);
 		//Get an array to hold all of the edges
 		irr::core::vector3d<irr::f32> edges[8];
 		//Get the bounding box of the mesh
