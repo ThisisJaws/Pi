@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, irr::core::vector3df(0, 0, -500)){
+	: World(player, irr::core::vector3df(78, 78, -200)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1.jpg";
@@ -30,10 +30,10 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 	//Load in the Lava (see base function for details)
 	srand(1);
-	irr::core::vector3df terrainPos(0);
+	irr::core::vector3df terrainPos(0, 50, 0);
 	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
 		int tile = rand() % HEIGHT_MAP_COUNT;
-		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), terrainPos);
+		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), irr::core::vector3df(1, 2, 2));
 		irr::core::vector3d<irr::f32> edges[8];
 		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
@@ -70,7 +70,9 @@ void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, 
 
 	//1
 	//Get the spawn based off the player start position
-	spawnPos.Z += 1000;
+	spawnPos.Z += 400;
+	spawnPos.X -= 5;
+	spawnPos.Y += 2;
 	//Create the new object
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	//Put it on the update list
@@ -81,81 +83,88 @@ void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, 
 
 	//Repeating for all objects
 	//2
-	spawnPos.Z += 300;
-	spawnPos.X += 15;
-	spawnPos.Y -= 10;
+	spawnPos.Z += 100;
+	spawnPos.X += 12;
+	spawnPos.Y -= 4;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//3
-	spawnPos.Z += 790;
-	spawnPos.X += 15;
-	spawnPos.Y -= 5;
+	spawnPos.Z += 250;
+	spawnPos.X += 0;
+	spawnPos.Y += 10;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//4
-	spawnPos.Z += 460;
-	spawnPos.X += 10;
+	spawnPos.Z += 70;
+	spawnPos.X += 11;
+	spawnPos.Y += 8;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//5
-	spawnPos.Z += 250;
-	spawnPos.X -= 15;
+	spawnPos.Z += 50;
+	spawnPos.X += -13;
+	spawnPos.Y += 5;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//6
-	spawnPos.Z += 200;
-	spawnPos.X += 17;
+	spawnPos.Z += 220;
+	spawnPos.X += 18;
+	spawnPos.Y += 5;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//7
-	spawnPos.Z += 1350;
-	spawnPos.X -= 13;
+	spawnPos.Z += 350;
+	spawnPos.X -= 7;
+	spawnPos.Y += 3;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//8
-	spawnPos.Z += 130;
-	spawnPos.X += 13;
-	spawnPos.Y += 4;
+	spawnPos.Z += 216;
+	spawnPos.X += 7;
+	spawnPos.Y += 1;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//9
-	spawnPos.Z += 200;
+	spawnPos.X += 0;
 	spawnPos.Y += 12;
-	spawnPos.X -= 3;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//10
-	spawnPos.Z += 1010;
-	spawnPos.X -= 12;
+	spawnPos.X -= 11;
+	spawnPos.Y += 18;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 	
 	//11
-	spawnPos.Z += 500;
-	spawnPos.X -= 10;
-	spawnPos.Y -= 2;
+	spawnPos.Z += 100;
+	spawnPos.X -= 6;
+	spawnPos.Y += 4;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
@@ -163,21 +172,24 @@ void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, 
 
 	//12
 	spawnPos.X += 12;
-	spawnPos.Y += 4;
+	spawnPos.Y += 13;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//13
-	spawnPos.Z += 400;
+	spawnPos.Z += 100;
+	spawnPos.X += 10;
+	spawnPos.Y += 3;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//14
-	spawnPos.Z += 200;
-	spawnPos.X += 11;
-	spawnPos.Y += 3;
+	spawnPos.Z += 160;
+	spawnPos.Y += 5;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
@@ -185,17 +197,175 @@ void LavaWorld::loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, 
 
 	//15
 	spawnPos.Z += 150;
-	spawnPos.X -= 7;
+	spawnPos.X += 4;
+	spawnPos.Y += 13;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
 	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//16
-	spawnPos.Z += 1034;
-	spawnPos.X -= 18;
-	spawnPos.Y += 9;
+	spawnPos.Z += 50;
+	spawnPos.X += 0;
+	spawnPos.Y -= 5;
 	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
 	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//17
+	spawnPos.Z += 120;
+	spawnPos.X -= 10;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//18
+	spawnPos.Z += 70;
+	spawnPos.X -= 5;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//19
+	spawnPos.Z += 70;
+	spawnPos.X += 0;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//20
+	spawnPos.Z += 70;
+	spawnPos.X += 5;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//21
+	spawnPos.Z += 70;
+	spawnPos.X += 10;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//22
+	spawnPos.Z += 300;
+	spawnPos.X -= 14;
+	spawnPos.Y += 8;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//23
+	spawnPos.Z += 100;
+	spawnPos.X += 8;
+	spawnPos.Y += 11;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//24
+	spawnPos.Z += 100;
+	spawnPos.X -= 6;
+	spawnPos.Y += 8;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//25
+	spawnPos.Z += 90;
+	spawnPos.X += 4;
+	spawnPos.Y += 6;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//26
+	spawnPos.Z += 300;
+	spawnPos.X += 8;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//27
+	spawnPos.Z += 100;
+	spawnPos.X -= 11;
+	spawnPos.Y -= 4;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//28
+	spawnPos.Z += 300;
+	spawnPos.X += 15;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//29
+	spawnPos.X -= 15;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//30
+	spawnPos.Y += 15;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//31
+	spawnPos.Y -= 15;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//32
+	spawnPos.Z += 80;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//33
+	spawnPos.Z += 150;
+	spawnPos.X += 7;
+	spawnPos.Y -= 5;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//34
+	spawnPos.Z += 100;
+	spawnPos.X -= 8;
+	spawnPos.Y += 4;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//35
+	spawnPos.Z += 200;
+	rock = new StaticObject(spawnPos, meshPath, texturePath, sceneManager, videoDriver, false);
+	Game::addObjectToUpdate(rock);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
 
 	//Clear the pointer when done
 	rock = 0;
@@ -210,9 +380,9 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 
 	//1
 	//Get the spawn based off the player start position
-	spawnPos.Z += 2090;
+	spawnPos.Z += 870;
 	spawnPos.X -= 10;
-	spawnPos.Y += 5;
+	spawnPos.Y -= 7;
 	//Create the new object
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	//Put it on the update list
@@ -223,27 +393,36 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 
 	//Repeating for all objects
 	//2
-	spawnPos.Z += 1217;
-	spawnPos.X += 20;
-	spawnPos.Y -= 2;
+	spawnPos.Z += 786;
+	spawnPos.X += 9;
+	spawnPos.Y += 12;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//3
-	spawnPos.Z += 2387;
-	spawnPos.X += 20;
-	spawnPos.Y -= 6;
+	spawnPos.Z += 890;
+	spawnPos.X -= 17;
+	spawnPos.Y += 3;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 	spawnPos.X = playerStartPos.X;
 	spawnPos.Y = playerStartPos.Y;
 
 	//4
-	spawnPos.Z += 1880;
-	spawnPos.X -= 20;
-	spawnPos.Y += 17;
+	spawnPos.Z += 660;
+	spawnPos.X += 11;
+	spawnPos.Y -= 5;
+	gem = new Gem(spawnPos, sceneManager, videoDriver);
+	Game::addObjectToUpdate(gem);
+	spawnPos.X = playerStartPos.X;
+	spawnPos.Y = playerStartPos.Y;
+
+	//5
+	spawnPos.Z += 778;
+	spawnPos.X += 13;
+	spawnPos.Y -= 10;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 
@@ -260,9 +439,8 @@ void LavaWorld::loadPhase1Ammo(const irr::core::vector3df & playerStartPos, irr:
 
 	//1
 	//Get the spawn based off the player start position
-	spawnPos.Z += 3510;
-	spawnPos.X -= 17;
-	spawnPos.Y += 18;
+	spawnPos.Z += 1160;
+	spawnPos.Y += 10;
 	//Create the new object
 	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
 	//Put it on the update list
@@ -272,8 +450,9 @@ void LavaWorld::loadPhase1Ammo(const irr::core::vector3df & playerStartPos, irr:
 	spawnPos.Y = playerStartPos.Y;
 
 	//2
-	spawnPos.Z += 1400;
-	spawnPos.Y -= 7;
+	spawnPos.Z += 2740;
+	spawnPos.X -= 3;
+	spawnPos.Y += 5;
 	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(ammo);
 
