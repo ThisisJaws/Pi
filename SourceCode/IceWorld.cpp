@@ -3,7 +3,7 @@
 #include "Game.h"
 
 IceWorld::IceWorld(PlayerShip *player) 
-	: World(player, irr::core::vector3df(74, 175, -500), irr::core::vector3df(1, 0.5f, 3)){
+	: World(player, irr::core::vector3df(74, 175, -500), irr::core::vector3df(1, 0.25f, 3)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/IceWorld/HeightMap-Piece1.jpg";
