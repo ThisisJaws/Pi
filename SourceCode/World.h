@@ -15,7 +15,7 @@
 #include "Gem.h"
 
 #define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
-#define TERRAIN_NODE_COUNT 25	//How many segments to lay out for each level
+#define TERRAIN_NODE_COUNT 17	//How many segments to lay out for each level
 
 class World{
 	//VARIABLES
@@ -70,7 +70,7 @@ public:
 
 protected:
 	//Takes a height map and returns the loaded terrain
-	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df position = irr::core::vector3df(0), irr::core::vector3df &scaleFactor = irr::core::vector3df(1), irr::s32 smoothFactor = 1, float tileAmount = 20.0f);
+	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df position = irr::core::vector3df(0), irr::core::vector3df &scaleFactor = irr::core::vector3df(1), irr::s32 smoothFactor = 1, float tileAmount = 3.0f);
 
 	//Derived classes will override these to place objects
 	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;

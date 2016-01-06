@@ -29,7 +29,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		//Random number for which tile to load
 		int tile = rand() % HEIGHT_MAP_COUNT;
 		//Create a terrain scene node using the tile selection
-		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, irr::core::vector3df(1, 1, 2));
+		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, irr::core::vector3df(1, 2, 2));
 		//Get an array to hold all of the edges
 		irr::core::vector3d<irr::f32> edges[8];
 		//Get the bounding box of the mesh
@@ -208,7 +208,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
 
 	//Set how many times each texture is tiled
-	terrain->scaleTexture(tileAmount, 1.0f);
+	terrain->scaleTexture(tileAmount);
 
 	//Set the position of the terrain
 	terrain->setPosition(position);
