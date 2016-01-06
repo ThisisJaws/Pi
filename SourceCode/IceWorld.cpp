@@ -3,7 +3,7 @@
 #include "Game.h"
 
 IceWorld::IceWorld(PlayerShip *player) 
-	: World(player, irr::core::vector3df(0)){
+	: World(player, irr::core::vector3df(74, 175, -500), irr::core::vector3df(1, 0.5f, 3)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/IceWorld/HeightMap-Piece1.jpg";
@@ -17,6 +17,10 @@ IceWorld::IceWorld(PlayerShip *player)
 }
 
 void IceWorld::loadPhase1Obsticles(const irr::core::vector3df & playerStartPos, irr::scene::ISceneManager * sceneManager, irr::video::IVideoDriver * videoDriver){
+	//Pointers to the objects that will spawn
+	//StaticObject *iceSpikes;
+	//StaticObject *giantHail;
+
 
 }
 

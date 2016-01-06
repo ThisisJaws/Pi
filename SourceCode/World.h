@@ -32,6 +32,9 @@ protected:
 	//The path to the texture
 	irr::io::path terrainTexturePath;
 
+	//What to scale the world to
+	irr::core::vector3df worldScale;
+
 private:
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
@@ -47,7 +50,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, irr::core::vector3df &phase1StartPos);
+	World(PlayerShip *player, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
