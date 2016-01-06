@@ -32,10 +32,10 @@ protected:
 	//The path to the texture
 	irr::io::path terrainTexturePath;
 
+private:
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
 
-private:
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
@@ -47,7 +47,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player);
+	World(PlayerShip *player, irr::core::vector3df &phase1StartPos);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/

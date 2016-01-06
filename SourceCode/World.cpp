@@ -2,9 +2,9 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player){
-	//Set the player start pos for if the map's scael was 1x1x1
-	phase1StartPosition = irr::core::vector3df(256, 70, -500);
+World::World(PlayerShip *player, irr::core::vector3df &phase1StartPos){
+	//Set the player start pos for the map
+	phase1StartPosition = phase1StartPos;
 
 	this->player = player;
 
