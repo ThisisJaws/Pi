@@ -5,17 +5,17 @@ LavaWorld::LavaWorld(PlayerShip *player)
 	: World(player){
 
 	//Load in all the file paths
-	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1-512x512.jpg";
-	heightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece2-512x512.jpg";
-	heightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece3-512x512.jpg";
-	heightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece4-512x512.jpg";
-	heightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece5-512x512.jpg";
+	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1.jpg";
+	heightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece2.jpg";
+	heightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece3.jpg";
+	heightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece4.jpg";
+	heightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece5.jpg";
 
-	lavaHeightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece1-512x512.jpg";
-	lavaHeightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece2-512x512.jpg";
-	lavaHeightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece3-512x512.jpg";
-	lavaHeightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece4-512x512.jpg";
-	lavaHeightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece5-512x512.jpg";
+	lavaHeightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece1.jpg";
+	lavaHeightMapLocations[1] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece2.jpg";
+	lavaHeightMapLocations[2] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece3.jpg";
+	lavaHeightMapLocations[3] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece4.jpg";
+	lavaHeightMapLocations[4] = "Assets/Environment/Levels/LavaWorld/Lava/HeightMap-Piece5.jpg";
 
 	//Load in the texture's file path
 	terrainTexturePath = "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png";
