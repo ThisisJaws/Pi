@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, irr::core::vector3df(78, 78, -200)){
+	: World(player, irr::core::vector3df(78, 73, -200)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1.jpg";
@@ -33,7 +33,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	irr::core::vector3df terrainPos(0, 50, 0);
 	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
 		int tile = rand() % HEIGHT_MAP_COUNT;
-		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), irr::core::vector3df(1, 2, 2));
+		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), irr::core::vector3df(1, 1, 2));
 		irr::core::vector3d<irr::f32> edges[8];
 		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
@@ -381,8 +381,8 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 	//1
 	//Get the spawn based off the player start position
 	spawnPos.Z += 870;
-	spawnPos.X -= 10;
-	spawnPos.Y -= 7;
+	spawnPos.X -= 12;
+	spawnPos.Y -= 5;
 	//Create the new object
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	//Put it on the update list
@@ -413,7 +413,7 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 	//4
 	spawnPos.Z += 660;
 	spawnPos.X += 11;
-	spawnPos.Y -= 5;
+	spawnPos.Y += 5;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 	spawnPos.X = playerStartPos.X;
@@ -422,7 +422,7 @@ void LavaWorld::loadPhase1Gems(const irr::core::vector3df & playerStartPos, irr:
 	//5
 	spawnPos.Z += 778;
 	spawnPos.X += 13;
-	spawnPos.Y -= 10;
+	spawnPos.Y += 4;
 	gem = new Gem(spawnPos, sceneManager, videoDriver);
 	Game::addObjectToUpdate(gem);
 
@@ -440,7 +440,7 @@ void LavaWorld::loadPhase1Ammo(const irr::core::vector3df & playerStartPos, irr:
 	//1
 	//Get the spawn based off the player start position
 	spawnPos.Z += 1160;
-	spawnPos.Y += 10;
+	spawnPos.Y += 12;
 	//Create the new object
 	ammo = new Ammo(spawnPos, sceneManager, videoDriver);
 	//Put it on the update list
