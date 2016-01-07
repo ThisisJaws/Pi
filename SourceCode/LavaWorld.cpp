@@ -38,7 +38,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 		irr::core::aabbox3d<irr::f32> boundingBox = node->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
 		terrainPos.Z += (edges[2].Z - edges[0].Z) / node->getScale().Z;
-		terrainNodes.push_back(node);
+		lavaTerrainNodes.push_back(node);
 	}
 	//
 
@@ -49,8 +49,8 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 void LavaWorld::clearTerrains(){
 	//Delete the lava
 	for(int i = 0; i < terrainNodesToSpawn; i++){
-		lavaTerrainNodes[i]->remove();
-		lavaTerrainNodes[i] = 0;
+		lavaTerrainNodes.at(i)->remove();
+		lavaTerrainNodes.at(i) = 0;
 	}
 	//
 
