@@ -8,7 +8,7 @@ class LavaWorld : public World{
 private:
 	//Variables for the lava
 	irr::io::path lavaHeightMapLocations[HEIGHT_MAP_COUNT];
-	irr::scene::ITerrainSceneNode *lavaTerrainNodes[TERRAIN_NODE_COUNT];
+	std::vector<irr::scene::ITerrainSceneNode *>lavaTerrainNodes;
 	irr::io::path lavaTerrainTexturePath;
 
 	//FUNCTIONS

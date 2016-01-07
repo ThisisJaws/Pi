@@ -31,13 +31,14 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	//Load in the Lava (see base function for details)
 	srand(1);
 	irr::core::vector3df terrainPos(0, 50, 0);
-	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+	for(int i = 0; i < terrainNodesToSpawn; i++){
 		int tile = rand() % HEIGHT_MAP_COUNT;
-		lavaTerrainNodes[i] = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), worldScale);
+		irr::scene::ITerrainSceneNode *node = loadTerrain(device, lavaHeightMapLocations[tile], driver->getTexture(lavaTerrainTexturePath), worldScale);
 		irr::core::vector3d<irr::f32> edges[8];
-		irr::core::aabbox3d<irr::f32> boundingBox = lavaTerrainNodes[i]->getTransformedBoundingBox();
+		irr::core::aabbox3d<irr::f32> boundingBox = node->getTransformedBoundingBox();
 		boundingBox.getEdges(edges);
-		terrainPos.Z += (edges[2].Z - edges[0].Z) / lavaTerrainNodes[i]->getScale().Z;
+		terrainPos.Z += (edges[2].Z - edges[0].Z) / node->getScale().Z;
+		terrainNodes.push_back(node);
 	}
 	//
 
@@ -47,7 +48,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 void LavaWorld::clearTerrains(){
 	//Delete the lava
-	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+	for(int i = 0; i < terrainNodesToSpawn; i++){
 		lavaTerrainNodes[i]->remove();
 		lavaTerrainNodes[i] = 0;
 	}
