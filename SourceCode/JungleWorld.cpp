@@ -3,7 +3,7 @@
 #include "Game.h"
 
 JungleWorld::JungleWorld(PlayerShip *player)
-	: World(player, 17, irr::core::vector3df(0), irr::core::vector3df(1)){
+	: World(player, 17, irr::core::vector3df(50, 200, -500), irr::core::vector3df(1)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/JungleWorld/HeightMap-Piece1.jpg";
