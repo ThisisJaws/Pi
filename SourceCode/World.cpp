@@ -2,12 +2,11 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale){
+World::World(PlayerShip *player, int &sceneNodesToSpawn, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale){
 	//Set the player start pos for the map
 	phase1StartPosition = phase1StartPos;
-
 	this->worldScale = worldScale;
-
+	terrainNodesToSpawn = sceneNodesToSpawn;
 	this->player = player;
 
 	phase1Loaded = false;
@@ -27,19 +26,21 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	//The position to place each terrain
 	irr::core::vector3df terrainPos(0);
 	//Loop through and place each terrain
-	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
+	for(int i = 0; i < terrainNodesToSpawn; i++){
 		//Random number for which tile to load
 		int tile = rand() % HEIGHT_MAP_COUNT;
 		//Create a terrain scene node using the tile selection
-		terrainNodes[i] = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, worldScale);
+		irr::scene::ITerrainSceneNode *node = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, worldScale);
 		//Get an array to hold all of the edges
 		irr::core::vector3d<irr::f32> edges[8];
 		//Get the bounding box of the mesh
-		irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[i]->getTransformedBoundingBox();
+		irr::core::aabbox3d<irr::f32> boundingBox = node->getTransformedBoundingBox();
 		//Get the edges of the box
 		boundingBox.getEdges(edges);
 		//Increase the starting pos by the length of the box
 		terrainPos.Z += (edges[2].Z - edges[0].Z);
+		//Add the node onto the vector
+		terrainNodes.push_back(node);
 	}
 
 
@@ -131,7 +132,7 @@ bool World::isPhase1Complete(){
 			//Get an array to hold all of the edges
 			irr::core::vector3d<irr::f32> edges[8];
 			//Get the counding box of the mesh
-			irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes[TERRAIN_NODE_COUNT - 1]->getTransformedBoundingBox();
+			irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes.at(terrainNodes.size() - 1)->getTransformedBoundingBox();
 			//Get the edges of the box
 			boundingBox.getEdges(edges);
 
@@ -167,10 +168,13 @@ bool World::isPhase2Complete(){
 }
 
 void World::clearTerrains(){
-	for(int i = 0; i < TERRAIN_NODE_COUNT; i++){
-		terrainNodes[i]->remove();
-		terrainNodes[i] = 0;
+	for(int i = 0; i < terrainNodes.size(); i++){
+		terrainNodes.at(i)->remove();
+		terrainNodes.at(i) = 0;
 	}
+
+	terrainNodes.clear();
+	terrainNodes.resize(0);
 }
 
 void World::reset(){

@@ -3,7 +3,7 @@
 
 /* This class is the base class for each world (phase 1 & phase 2) */
 
-#include <list>
+#include <vector>
 
 #include "Irrlicht.h"
 
@@ -15,7 +15,6 @@
 #include "Gem.h"
 
 #define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
-#define TERRAIN_NODE_COUNT 17	//How many segments to lay out for each level
 
 class World{
 	//VARIABLES
@@ -27,7 +26,10 @@ protected:
 	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
 
 	//An array of the scene nodes that will make up the entire terrain
-	irr::scene::ITerrainSceneNode *terrainNodes[TERRAIN_NODE_COUNT];
+	std::vector<irr::scene::ITerrainSceneNode *>terrainNodes;
+
+	//How many terrain nodes to spawn
+	int terrainNodesToSpawn;
 
 	//The path to the texture
 	irr::io::path terrainTexturePath;
@@ -50,7 +52,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale);
+	World(PlayerShip *player, int &sceneNodesToSpawn irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
