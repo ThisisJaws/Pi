@@ -2,7 +2,7 @@
 
 #include "Game.h"
 LavaWorld::LavaWorld(PlayerShip *player) 
-	: World(player, irr::core::vector3df(78, 73, -200), irr::core::vector3df(1, 1, 2)){
+	: World(player, 17, irr::core::vector3df(78, 73, -200), irr::core::vector3df(1, 1, 2)){
 
 	//Load in all the file paths
 	heightMapLocations[0] = "Assets/Environment/Levels/LavaWorld/Land/HeightMap-Piece1.jpg";
