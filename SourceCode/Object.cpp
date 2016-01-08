@@ -88,6 +88,14 @@ void Object::updatePosition(float x, float y, float z){
     updatePosition(temp);
 }
 
+void Object::rotate(const irr::core::vector3df &angle){
+	objectNode->setRotation(getRotation() + angle);
+}
+
+irr::core::vector3df Object::getRotation(){
+	return objectNode->getRotation();
+}
+
 void Object::changePosition(irr::core::vector3df newPosition){
     objectNode->setPosition(newPosition);
 }

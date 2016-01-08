@@ -71,6 +71,11 @@ public:
     //call to update the current position with the direction
     virtual void updatePosition(irr::core::vector3df newPosition);
     virtual void updatePosition(float x, float y, float z);
+
+	//Rotates the object by the desired amount
+	void rotate(const irr::core::vector3df &angle);
+	//Returns the current ojbects relative rotation
+	irr::core::vector3df getRotation();
     
     //call to completely change the object position (see update pos to move the object)
     virtual void changePosition(irr::core::vector3df newPosition);
