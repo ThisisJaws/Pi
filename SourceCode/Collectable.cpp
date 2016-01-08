@@ -14,7 +14,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
 
 void Collectable::tick(irr::f32 deltaTime){
     //make the collectable rotate
-    updateRotation(irr::core::vector3df(0, rotSpeed, 0) * deltaTime);
+    updateRotation(0, rotSpeed * deltaTime, 0);
 }
 
 void Collectable::activate(PlayerShip * player){
