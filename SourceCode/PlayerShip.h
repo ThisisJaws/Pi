@@ -21,6 +21,12 @@ private:
 	//Will be true if the player loses
 	bool lost;
 
+	//The maximum amount the ship can rotate
+	float maxZRotate;
+	float maxXRotate;
+	//How fast the player will rotate
+	float rotSpeed;
+
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player

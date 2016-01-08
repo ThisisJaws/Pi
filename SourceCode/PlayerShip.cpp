@@ -8,6 +8,9 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     //init variables
     score = 0;
     ammo = 20;
+	maxZRotate = 45;
+	maxXRotate = 25;
+	rotSpeed = 100;
     this->eReceiver = eReceiver;
 
     //init the camera variables
@@ -70,18 +73,44 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	increaseScore(difference);
 
 	//check for and apply all position changes
+	//Left
 	if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
 		turnLeft(turnSpeed, deltaTime);
-	} else if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-		turnRight(turnSpeed, deltaTime);
+	} else{
+		//Rotate the ship back to 0
+		if(getRotation().Z > 0){
+			updateRotation(0, 0, -rotSpeed * deltaTime);
+		}
 	}
+	//Right
+	if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
+		turnRight(turnSpeed, deltaTime);
+	} else{
+		//Rotate the ship back to 0
+		if(getRotation().Z < 0){
+			updateRotation(0, 0, rotSpeed * deltaTime);
+		}
+	}
+	//Up
 	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
 		moveUp(turnSpeed, deltaTime);
-	} else if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
+	} else{
+		//Rotate the ship back to 0
+		if(getRotation().X < 0){
+			updateRotation(rotSpeed * deltaTime, 0, 0);
+		}
+	}
+	//Down
+	if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
 		moveDown(turnSpeed, deltaTime);
+	} else{
+		//Rotate the ship back to 0
+		if(getRotation().X > 0){
+			updateRotation(-rotSpeed * deltaTime, 0, 0);
+		}
 	}
 
-    //perform camera updates
+    //Perform camera updates after movement
     updateCameraPositions();
     updateCamera(camera);
 
@@ -146,6 +175,11 @@ void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
             updatePosition(-moveBy, 0.0f, 0.0f);
             //move the camera to the right
             cameraXOffset += moveBy;
+
+			//Rotate the ship to the left
+			if(getRotation().Z < maxZRotate){
+				updateRotation(0, 0, rotSpeed * deltaTime);
+			}
         }
     }
 }
@@ -158,6 +192,11 @@ void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
             updatePosition(moveBy, 0.0f, 0.0f);
             //move the camera to the left
             cameraXOffset -= moveBy;
+
+			//Rotate the ship to the right
+			if(getRotation().Z > -maxZRotate){
+				updateRotation(0, 0, -rotSpeed * deltaTime);
+			}
         }
     }
 }
@@ -170,6 +209,11 @@ void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
         updatePosition(0.0f, moveBy, 0.0f);
         //move the camera down
         cameraYOffset -= moveBy;
+
+		//Rotate the ship up
+		if(getRotation().X > -maxXRotate){
+			updateRotation(-rotSpeed * deltaTime, 0, 0);
+		}
     }
 }
 void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
@@ -181,6 +225,11 @@ void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
         updatePosition(0.0f, -moveBy, 0.0f);
         //move the camera up
         cameraYOffset += moveBy;
+
+		//Rotate the ship down
+		if(getRotation().X < maxXRotate){
+			updateRotation(rotSpeed * deltaTime, 0, 0);
+		}
     }
 }
 
