@@ -74,6 +74,7 @@ public:
 
 	//Rotates the object by the desired amount
 	void updateRotation(const irr::core::vector3df &angle);
+	void updateRotation(const float &x, const float &y, const float &z);
 	//Returns the current ojbects relative rotation
 	irr::core::vector3df getRotation();
     
