@@ -18,6 +18,9 @@ private:
     //how many bullets the player can shoot
     unsigned short ammo;
 
+	//Will be true if the player loses
+	bool lost;
+
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
@@ -45,8 +48,6 @@ private:
         flying,
         shooting,
     } currentMode;
-
-	bool lost;
 
     //FUNCTIONS
 public:
