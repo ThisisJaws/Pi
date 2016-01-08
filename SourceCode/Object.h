@@ -73,7 +73,7 @@ public:
     virtual void updatePosition(float x, float y, float z);
 
 	//Rotates the object by the desired amount
-	void rotate(const irr::core::vector3df &angle);
+	void updateRotation(const irr::core::vector3df &angle);
 	//Returns the current ojbects relative rotation
 	irr::core::vector3df getRotation();
     
