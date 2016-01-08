@@ -16,7 +16,6 @@ class Collectable : public Object{
  private:
      //variables to rate and move up and down
      float rotSpeed;
-	 irr::core::vector3df rotAxis;
 
     //FUNCTIONS
 public:
