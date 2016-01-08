@@ -15,8 +15,6 @@ StaticObject::StaticObject(irr::core::vector3df spawnPosition, const irr::io::pa
 void StaticObject::tick(irr::f32 deltaTime){
     if(rotate){
 		//Rotate the object around random axis
-        irr::core::vector3df currentRot = getSceneNode()->getRotation();
-        currentRot += rotAxis * deltaTime;
-        getSceneNode()->setRotation(currentRot);
+		updateRotation(rotAxis * deltaTime);
     }
 }
