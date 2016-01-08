@@ -8,15 +8,16 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
     //set the rotation speed
     rotSpeed = 75.0f;
 
+	//Set the axis
+	rotAxis = irr::core::vector3df(0, 1, 0);
+
 	//Resize all collectibles, might be temp
 	getSceneNode()->setScale(irr::core::vector3df(2));
 }
 
 void Collectable::tick(irr::f32 deltaTime){
     //make the collectable rotate
-    irr::core::vector3df rotation = getRotation();
-    rotation.Y += rotSpeed * deltaTime;
-    updateRotation(rotation);
+    updateRotation(rotAxis * rotSpeed * deltaTime);
 }
 
 void Collectable::activate(PlayerShip * player){
