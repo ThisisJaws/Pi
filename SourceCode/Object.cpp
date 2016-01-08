@@ -79,7 +79,7 @@ irr::s32 Object::checkCollision(int direction){
 	}
 }
 
-void Object::updatePosition(irr::core::vector3df newPosition){
+void Object::updatePosition(const irr::core::vector3df &newPosition){
     objectNode->setPosition(getPosition() + newPosition);
 }
 
