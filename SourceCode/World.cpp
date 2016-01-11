@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, int sceneNodesToSpawn, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale){
+World::World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale){
 	//Set the player start pos for the map
 	phase1StartPosition = phase1StartPos;
 	this->worldScale = worldScale;
