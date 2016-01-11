@@ -60,9 +60,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
 					Collectable *collectible = dynamic_cast<Collectable *>(collidedObject);
 					collectible->activate(this);
 					break;
-
-				default:
-					break;
 			}
 		}
 	}
@@ -154,7 +151,7 @@ void PlayerShip::increaseScore(unsigned int amount){
 void PlayerShip::changePosition(irr::core::vector3df newPosition){
 	//Call the super function
 	Ship::changePosition(newPosition);
-	
+
 	//Adjust the base position
 	basePosition = newPosition;
 
