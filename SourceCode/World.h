@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include "Irrlicht.h"
+#include "irrlicht.h"
 
 #include "EnemyTypes.h"
 #include "PlayerShip.h"
