@@ -191,7 +191,7 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, irr::core::vector3df position, irr::core::vector3df scaleFactor, irr::s32 smoothFactor, float tileAmount){
+irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position, const irr::core::vector3df &scaleFactor, const irr::s32 &smoothFactor, const float &tileAmount){
 	//Create the return variable
 	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
 																							0,										//Parent Node
