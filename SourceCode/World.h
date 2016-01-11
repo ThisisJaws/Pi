@@ -52,7 +52,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, int sceneNodesToSpawn, irr::core::vector3df &phase1StartPos, irr::core::vector3df &worldScale);
+	World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
