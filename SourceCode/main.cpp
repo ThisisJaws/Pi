@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
 	//Set the scene shadows to be darker
-	device->getSceneManager()->setShadowColor(irr::video::SColor(255, 0, 0, 0));
+	device->getSceneManager()->setShadowColor(irr::video::SColor(200, 0, 0, 0));
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 
