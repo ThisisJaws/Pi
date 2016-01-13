@@ -118,7 +118,7 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
 
         //set the object to not need lighting
-        objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+        //objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 		//Create a triangle selector of this object
 		irr::scene::ITriangleSelector *selector = sceneManagerReference->createTriangleSelector(objectNode);

@@ -205,7 +205,7 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							smoothFactor);							//Smoothfactor
 
 	//Set the lighting
-	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	//terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 	//Set the texture
 	terrain->setMaterialTexture(0, texture);
