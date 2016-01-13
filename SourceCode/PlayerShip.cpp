@@ -37,6 +37,9 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	//Create the light and set the the light type
 	headLight = sceneManagerReference->addLightSceneNode();
 	headLight->setLightType(irr::video::ELT_SPOT);
+
+	//Makesure the player always stays lit
+	getSceneNode()->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	
 	//Configure the offset
 	headLightOffSet = irr::core::vector3df(0, 0, 10);
