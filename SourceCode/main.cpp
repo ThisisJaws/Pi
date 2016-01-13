@@ -32,7 +32,9 @@ int main(int argc, char** argv) {
     EventReceiver receiver;
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-    //Create the class that will handle the actual playing of the game
+	//Set the scene shadows to be darker
+	device->getSceneManager()->setShadowColor(irr::video::SColor(255, 0, 0, 0));
+	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 
 	//Change the window name
