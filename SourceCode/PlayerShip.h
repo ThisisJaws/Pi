@@ -55,6 +55,11 @@ private:
         shooting,
     } currentMode;
 
+	//Light source to act as some sort of headlight
+	irr::scene::ILightSceneNode *headLight;
+	//offset for the light
+	irr::core::vector3df headLightOffSet;
+
     //FUNCTIONS
 public:
     //constructor
