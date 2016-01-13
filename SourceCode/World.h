@@ -38,6 +38,9 @@ protected:
 	irr::core::vector3df worldScale;
 
 private:
+	//The light that will act as a sun
+	irr::scene::ILightSceneNode *sun;
+
 	//The start position of the player for phase 1
 	irr::core::vector3df phase1StartPosition;
 

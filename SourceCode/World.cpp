@@ -25,6 +25,8 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	srand(1);
 	//The position to place each terrain
 	irr::core::vector3df terrainPos(0);
+	//To store the total length of the terrain
+	float terrainLength = 0;
 	//Loop through and place each terrain
 	for(int i = 0; i < terrainNodesToSpawn; i++){
 		//Random number for which tile to load
@@ -39,6 +41,8 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 		boundingBox.getEdges(edges);
 		//Increase the starting pos by the length of the box
 		terrainPos.Z += (edges[2].Z - edges[0].Z);
+		//Increase the total length
+		terrainLength += (edges[2].Z - edges[0].Z);
 		//Add the node onto the vector
 		terrainNodes.push_back(node);
 	}
@@ -55,6 +59,9 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
+
+	//Add in a point light
+	sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
 
 	//Phase is now loaded
 	phase1Loaded = true;
@@ -175,6 +182,9 @@ void World::clearTerrains(){
 
 	terrainNodes.clear();
 	terrainNodes.resize(0);
+
+	//Get rid of the light
+	sun->remove();
 }
 
 void World::reset(){
@@ -203,9 +213,6 @@ irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, c
 																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
 																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
 																							smoothFactor);							//Smoothfactor
-
-	//Set the lighting
-	//terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 	//Set the texture
 	terrain->setMaterialTexture(0, texture);
