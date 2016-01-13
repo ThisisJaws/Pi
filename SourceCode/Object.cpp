@@ -116,9 +116,6 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         //create the scene node using loaded mesh
         objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
-
-        //set the object to not need lighting
-        //objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 		
 		//Let the object cast shadows
 		objectNode->addShadowVolumeSceneNode();
