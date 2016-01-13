@@ -17,6 +17,9 @@ class Collectable : public Object{
      //variables to rate and move up and down
      float rotSpeed;
 
+	 //Particle system scene node
+	 irr::scene::IParticleSystemSceneNode *ps;
+
     //FUNCTIONS
 public:
     //constructor
@@ -27,6 +30,9 @@ public:
     
     //pure virtual function which gets called when the player player collides
     virtual void activate(PlayerShip *player);
+
+	//Override to remove the particle emitter
+	virtual void markForDelete() override;
 };
 
 #endif	/* COLLLECTABLE_H */
