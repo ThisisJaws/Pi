@@ -119,6 +119,9 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
 
         //set the object to not need lighting
         //objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+		
+		//Let the object cast shadows
+		objectNode->addShadowVolumeSceneNode();
 
 		//Create a triangle selector of this object
 		irr::scene::ITriangleSelector *selector = sceneManagerReference->createTriangleSelector(objectNode);
