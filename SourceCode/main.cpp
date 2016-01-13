@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver);
 
 	//Change the window name
-	irr::core::stringw windowName(L"Space Trip Version: ");
+	irr::core::stringw windowName(L"Space Trip - Version: ");
 	windowName += CURRENT_VERSION_MAJOR;
 	windowName += ".";
 	windowName += CURRENT_VERSION_MINOR;
