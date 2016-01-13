@@ -34,16 +34,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     //set the ship's default mode
     currentMode = flying;
 
-	//Create the light and set the the light type
-	headLight = sceneManagerReference->addLightSceneNode();
-	headLight->setLightType(irr::video::ELT_SPOT);
-
-	//Makesure the player always stays lit
-	getSceneNode()->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	
-	//Configure the offset
-	headLightOffSet = irr::core::vector3df(0, 0, 10);
-
 	//Default is false
 	lost = false;
 }
@@ -126,9 +116,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
     //Perform camera updates after movement
     updateCameraPositions();
     updateCamera(camera);
-
-	//Move the light after movement
-	headLight->setPosition(getPosition() + headLightOffSet);
 
     //check if fire key was pressed
     if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
