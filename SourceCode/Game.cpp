@@ -60,9 +60,9 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     //Set the colour
 	guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
 	//Load in the static text variables
-    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
+    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(500, 10, 1000, 40));
 	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(10, 40, 500, 70));
-    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(600, 10, 1000, 40));
+    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
     FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 550, 300, 580));
 
     //Start the timer for frame independent movement
