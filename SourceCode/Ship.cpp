@@ -44,6 +44,10 @@ float Ship::getMovementSpeed(){
 	return moveSpeed;
 }
 
+unsigned short Ship::getLives(){
+	return lives;
+}
+
 void Ship::dealDamage(const unsigned short &amount){
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){

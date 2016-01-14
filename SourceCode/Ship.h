@@ -52,6 +52,9 @@ public:
 	//Returns the movement speed
 	float getMovementSpeed();
 
+	//Returns the amount of lives
+	unsigned short getLives();
+
 	//Call to deal 'damage'
 	virtual void dealDamage(const unsigned short &amount = 1);
 
