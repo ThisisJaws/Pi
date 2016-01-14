@@ -9,7 +9,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
     rotSpeed = 75.0f;
 
 	//Create a prticle effect around the collectible
-	ps = sceneManagerReference->addParticleSystemSceneNode(false, 0, -1, spawnPosition);
+	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = ps->createPointEmitter(
 		irr::core::vector3df(0.0f, 0.01f, 0.0f),			// direction, also acts as speed
@@ -46,8 +46,5 @@ void Collectable::activate(PlayerShip * player){
 void Collectable::markForDelete(){
 	//Call the base
 	Object::markForDelete();
-
-	//Remove the particle system from the scene graph
-	ps->remove();
 }
 
