@@ -100,6 +100,11 @@ bool Game::play(){
     scoreCount += g_player->getScore();
     scoreText->setText(scoreCount.c_str());
 
+	//Update the lives text
+	irr::core::stringw livesCount(L"Lives: ");
+	livesCount += g_player->getLives();
+	livesText->setText(livesCount.c_str());
+
     //Update the ammo text
     irr::core::stringw ammoCount(L"Ammo: ");
     ammoCount += g_player->getAmmo();
@@ -169,6 +174,7 @@ void Game::cleanUp(){
 
     //Remove the static text objects
     scoreText->remove();
+	livesText->remove();
     ammoText->remove();
     FPSText->remove();
 
