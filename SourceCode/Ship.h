@@ -36,10 +36,13 @@ private:
     irr::scene::ISceneManager *smgr;
     irr::video::IVideoDriver *drv;
 
+	//The lives this ship has - or how many hits it can take
+	unsigned short lives;
+
     //FUNCTIONS
 public:
     //constructor
-    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const bool &spawnOnConstruct = true);
+    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 1, const bool &spawnOnConstruct = true);
     //destructor
     ~Ship();
 
@@ -48,6 +51,9 @@ public:
 
 	//Returns the movement speed
 	float getMovementSpeed();
+
+	//Call to deal 'damage'
+	virtual void dealDamage(const unsigned short &amount = 1);
 
 protected:
     //makes the ship shoot, returns true if it fired

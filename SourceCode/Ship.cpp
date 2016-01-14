@@ -1,7 +1,7 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const bool &spawnOnConstruct)
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 1, const bool &spawnOnConstruct)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct, spawnPosition, objectTypeID){
 
     //set up variables
@@ -19,6 +19,9 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
     //reference the pointers
     smgr = sceneManagerReference;
     drv = driverReference;
+
+	//Set the lives
+	lives = startingLives;
 }
 
 Ship::~Ship(){
@@ -39,6 +42,16 @@ void Ship::tick(irr::f32 deltaTime){
 
 float Ship::getMovementSpeed(){
 	return moveSpeed;
+}
+
+void Ship::dealDamage(const unsigned short &amount){
+	//If there are no lives left, mark the ship for delete
+	if(lives == 0){
+		markForDelete();
+	}
+
+	//Take away the amount of lives
+	lives -= amount;
 }
 
 bool Ship::shoot(irr::core::vector3df direction, int targetTypeID){
