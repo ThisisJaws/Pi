@@ -45,7 +45,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
 	if(collidedObjectUniqueID == 1){
 		//ID 1 is always terrain, so the player loses
-		markForDelete();
+		dealDamage();
 	}else if(collidedObjectUniqueID > 1){
 		//If the ID is greater than 1 (0 is no collision) then search for the object
 		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
@@ -53,7 +53,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		if(collidedObject != NULL){
 			switch(collidedObject->getTypeID()){
 				case TYPE_STATIC_OBJECT:
-					markForDelete();
+					dealDamage();
 					break;
 
 				case TYPE_COLLECTABLE:
