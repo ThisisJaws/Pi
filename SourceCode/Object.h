@@ -43,7 +43,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0), irr::s32 objectTypeID = TYPE_UNDEFINED_TYPE);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct = true, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE);
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
