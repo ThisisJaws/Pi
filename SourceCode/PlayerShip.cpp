@@ -169,7 +169,7 @@ bool PlayerShip::playerLost(){
 	return lost;
 }
 
-void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
+void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
     if(currentMode == flying){
         if(getPosition().X > basePosition.X - maxXOffset){
             float moveBy = speed * deltaTime;
@@ -186,7 +186,7 @@ void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
         }
     }
 }
-void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
+void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
     if(currentMode == flying){
         if(getPosition().X < basePosition.X + maxXOffset){
             float moveBy = speed * deltaTime;
@@ -203,7 +203,7 @@ void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
         }
     }
 }
-void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
+void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
     //if ship is still inside screen
     if(getPosition().Y < basePosition.Y + maxYOffset){
         float moveBy = speed * deltaTime;
@@ -219,7 +219,7 @@ void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
 		}
     }
 }
-void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
+void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
     //if ship is still inside screen
     if(getPosition().Y > basePosition.Y - minYOffset){
         float moveBy = speed * deltaTime;
