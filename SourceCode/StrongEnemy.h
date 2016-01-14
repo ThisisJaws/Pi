@@ -27,17 +27,10 @@ private:
 		stageEnd
 	}currentStage;
 
-public:
-    //strong enemy takes two hits to kill
-    int hitsTaken;
-    
     //FUNCTIONS
 public:
     //constructor
     StrongEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference);
-    
-	//Overriden to be able to take more hits
-    void markForDelete() override;
 
 	//What the enemy will do when in range of the player
 	virtual void combatManouver(irr::f32 deltaTime) override;

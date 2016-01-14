@@ -6,8 +6,6 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 	//Start the ship at the bottom
 	changePosition(irr::core::vector3df(getPosition().X, -45, getPosition().Z));
 
-	hitsTaken = 0;
-
 	currentLoop = 0;
 
 	currentStage = stageA;
@@ -17,14 +15,6 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 
 	//adjust turn speed
 	turnSpeed /= 3;
-}
-
-void StrongEnemy::markForDelete(){
-	hitsTaken++;
-
-	if(hitsTaken >= 2){
-		EnemyShip::markForDelete();
-	}
 }
 
 void StrongEnemy::combatManouver(irr::f32 deltaTime){
