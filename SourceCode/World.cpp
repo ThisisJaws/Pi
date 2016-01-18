@@ -20,7 +20,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
 	//LOAD IN THE MAP FILE - test
-	loadMapFile("Assets/LevelMaps/LavaWorld.stm");
+	loadMapFile("Assets/LevelMaps/LavaWorld.stm", device);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
@@ -151,10 +151,10 @@ bool World::isPhase2Complete(){
 void World::clearTerrains(){
 	/*
 	for(int i = 0; i < terrainNodes.size(); i++){
-		terrainNodes.at(i)->remove();
-		terrainNodes.at(i) = 0;
+	terrainNodes.at(i)->remove();
+	terrainNodes.at(i) = 0;
 	}
-	
+
 	terrainNodes.clear();
 	terrainNodes.resize(0);
 	*/
@@ -177,11 +177,73 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-void World::loadMapFile(const std::string &mapFile){
+void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
 	//Create a variable to read the file
-	std::ifstream fileData;
+	std::ifstream file;
+	//The string that will hold each line of the file
+	std::string line;
+	//Path to the level segments
+	const std::string path = "Assets/LevelAssets/";
+
+	//The name of the object
+	std::string nameOfObject, tempHold;
+	//The vectors that will store the objects variables
+	irr::core::vector3df objectPos(0);
+	irr::core::vector3df objectRot(0);
+	irr::core::vector3df objectScale(0);
+
 	//Open the file
-	fileData.open(mapFile);
+	file.open(mapFile);
 
+	//Check if it is open
+	if(file.is_open()){
+		//Loop through each line of the file
+		while(std::getline(file, line)){
+			/* Each part of the file is seperated by a space, ex:
+			* Name posX posY posZ rotX rotY rotZ scaleX scaleY scaleZ
+			* with a length of 10
+			* So each bit of data is handled world by word
+			*/
 
+			//Get each word line by line
+			std::stringstream stream(line);
+			//Then input the neccesaary data
+			stream >> nameOfObject;
+			//Make sure it has the right suffix
+			nameOfObject += ".obj";
+
+			//Position
+			stream >> tempHold;
+			objectPos.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectPos.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectPos.Z = std::stof(tempHold.c_str());
+			
+			//Rotation
+			stream >> tempHold;
+			objectRot.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectRot.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectRot.Z = std::stof(tempHold.c_str());
+
+			//Scale
+			stream >> tempHold;
+			objectScale.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectScale.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectScale.Z = std::stof(tempHold.c_str());
+			
+			//change tmp hold to the path
+			tempHold = path + nameOfObject;
+
+			//Now create an object and add it to the update vector
+			Game::addObjectToUpdate(new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false));
+		}
+
+		//Close the file when done
+		file.close();
+	}
 }

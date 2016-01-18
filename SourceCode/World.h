@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 #include "irrlicht.h"
@@ -13,6 +14,8 @@
 #include "PlayerShip.h"
 
 #include "WorldPiece.h"
+
+#include "Windows.h"
 
 #include "Ammo.h"
 #include "Gem.h"
@@ -64,7 +67,7 @@ public:
 
 protected:
 	//Loads in the map file for the level
-	void loadMapFile(const std::string &mapFile);
+	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
 };
 
 #endif /* WORLD_H */
