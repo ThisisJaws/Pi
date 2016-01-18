@@ -1,5 +1,5 @@
 --Ask the user to open the file
-savePath = getSaveFileName caption:"Chose File Location" filename:"C:/rename_to_level_name_system.h" types:"C++ Header File(*.h)|*.h"
+savePath = getSaveFileName caption:"Chose File Location" filename:"C:/level.stm" types:"SpaceTripMap file(*.stm)|*.stm"
 
 --Check if the file has opened properly
 if savePath != undefined do(
