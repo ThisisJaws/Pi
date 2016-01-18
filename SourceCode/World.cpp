@@ -18,6 +18,8 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
+	player->changePosition(irr::core::vector3df(0, 100, 0));
+
 	//LOAD IN THE MAP FILE - test
 	loadMapFile(levelLocation, device);
 
