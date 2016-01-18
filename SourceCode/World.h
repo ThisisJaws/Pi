@@ -30,9 +30,6 @@ private:
 	//The light that will act as a sun
 	irr::scene::ILightSceneNode *sun;
 
-	//The start position of the player for phase 1
-	irr::core::vector3df phase1StartPosition;
-
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
@@ -44,7 +41,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, const irr::core::vector3df &phase1StartPos);
+	World(PlayerShip *player);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/

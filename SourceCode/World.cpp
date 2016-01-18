@@ -2,9 +2,7 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, const irr::core::vector3df &phase1StartPos){
-	//Set the player start pos for the map
-	phase1StartPosition = phase1StartPos;
+World::World(PlayerShip *player){
 	this->player = player;
 
 	phase1Loaded = false;
@@ -21,9 +19,6 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 
 	//LOAD IN THE MAP FILE - test
 	loadMapFile("Assets/LevelMaps/LavaWorld.stm", device);
-
-	//Set the player position to the phase start position
-	player->changePosition(phase1StartPosition);
 
 	//Add in a point light
 	//sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
