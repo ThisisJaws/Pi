@@ -103,6 +103,10 @@ void Object::updateRotation(const float & x, const float & y, const float & z){
 	updateRotation(irr::core::vector3df(x, y, z));
 }
 
+void Object::changeRotation(const irr::core::vector3df &angle){
+	objectNode->setRotation(angle);
+}
+
 void Object::removeFromScene(){
     objectNode->remove();
 }

@@ -78,6 +78,8 @@ public:
 	//Rotates the object by the desired amount
 	void updateRotation(const irr::core::vector3df &angle);
 	void updateRotation(const float &x, const float &y, const float &z);
+	//Changes the rotation to the given amount
+	void changeRotation(const irr::core::vector3df &angle);
 
 	//call the remove the object's mesh from the scene
 	void removeFromScene();
