@@ -17,9 +17,9 @@ if savePath != undefined do(
 		--Write all the infomation of the selected object to the file
 		lineToWrite = \
 		OBJ.name \
-		+ " " + OBJ.position.x as string + " " + OBJ.position.y as string + " " + OBJ.position.z as string \
-		+ " " + rot.x as string + " " + rot.y as string + " " + rot.z as string \
-		+ " " + OBJ.scale.x as string + " " + OBJ.scale.y as string + " " + OBJ.scale.z as string \
+		+ " " + OBJ.position.x as string + " " + OBJ.position.z as string + " " + OBJ.position.y as string \
+		+ " " + rot.x as string + " " + rot.z as string + " " + rot.y as string \
+		+ " " + OBJ.scale.x as string + " " + OBJ.scale.z as string + " " + OBJ.scale.y as string \
 		+ "\n"
 		format lineToWrite to:outPutFile
 	)
