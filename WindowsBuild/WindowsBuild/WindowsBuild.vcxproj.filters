@@ -66,7 +66,7 @@
     <ClCompile Include="..\..\SourceCode\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SourceCode\LavaWorld.cpp">
+    <ClCompile Include="..\..\SourceCode\WorldPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SourceCode\IceWorld.cpp">
@@ -75,7 +75,7 @@
     <ClCompile Include="..\..\SourceCode\JungleWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SourceCode\WorldPiece.cpp">
+    <ClCompile Include="..\..\SourceCode\LavaWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +134,7 @@
     <ClInclude Include="..\..\SourceCode\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SourceCode\LavaWorld.h">
+    <ClInclude Include="..\..\SourceCode\WorldPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\IceWorld.h">
@@ -143,7 +143,7 @@
     <ClInclude Include="..\..\SourceCode\JungleWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SourceCode\WorldPiece.h">
+    <ClInclude Include="..\..\SourceCode\LavaWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
