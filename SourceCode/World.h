@@ -30,6 +30,9 @@ private:
 	//The light that will act as a sun
 	irr::scene::ILightSceneNode *sun;
 
+	//String to the level data
+	std::string levelLocation;
+
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
@@ -41,7 +44,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player);
+	World(PlayerShip *player, const std::string &levelLocation);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/

@@ -2,8 +2,9 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player){
+World::World(PlayerShip *player, const std::string &levelLocation){
 	this->player = player;
+	this->levelLocation = levelLocation;
 
 	phase1Loaded = false;
 	phase2Loaded = false;
