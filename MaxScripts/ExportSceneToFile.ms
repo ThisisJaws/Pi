@@ -14,7 +14,7 @@ if savePath != undefined do(
 	
 	--Iterate through the objects
 	for OBJ in allObjects do(
-		--Write all the infomation the selected object to the file
+		--Write all the infomation of the selected object to the file
 		lineToWrite = "N:" + OBJ.name + " P:" + OBJ.position as string + " R:" + OBJ.rotation as string + " S:" + OBJ.scale as string + "\n"
 		format lineToWrite to:outPutFile
 	)
