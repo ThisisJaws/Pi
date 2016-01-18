@@ -18,10 +18,11 @@ if savePath != undefined do(
 		rot = OBJ.rotation as eulerAngles
 		
 		--Write all the infomation of the selected object to the file
-		lineToWrite = "N:" + OBJ.name \
-		+ " P:" + OBJ.position.x as string + "," + OBJ.position.y as string + "," + OBJ.position.z as string \
-		+ " R:" + rot.x as string + "," + rot.y as string + "," + rot.z as string \
-		+ " S:" + OBJ.scale.x as string + "," + OBJ.scale.y as string + "," + OBJ.scale.z as string \
+		lineToWrite = \
+		OBJ.name \
+		+ " " + OBJ.position.x as string + " " + OBJ.position.y as string + " " + OBJ.position.z as string \
+		+ " " + rot.x as string + " " + rot.y as string + " " + rot.z as string \
+		+ " " + OBJ.scale.x as string + " " + OBJ.scale.y as string + " " + OBJ.scale.z as string \
 		+ "\n"
 		format lineToWrite to:outPutFile
 	)
