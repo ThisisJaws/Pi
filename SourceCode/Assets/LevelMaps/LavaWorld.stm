@@ -1,4 +1,4 @@
 Export_Begin
-N:LavaWorldPiece_a P:[35.7185,84.2721,0] R:(quat 0 0 0 1) S:[1,1,1]
-N:LavaWorldPiece_b P:[99.1207,5134.27,43.4617] R:(quat 0 0 0 1) S:[1,1,1]
+N:LavaWorldPiece_a P:35.7185,84.2721,0.0 R:0.0,0.0,0.0 S:1.0,1.0,1.0
+N:LavaWorldPiece_b P:99.1207,5134.27,43.4617 R:-9.98231,0.0,0.0 S:1.0,1.0,1.0
 Export_End
