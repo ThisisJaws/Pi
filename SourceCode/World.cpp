@@ -240,7 +240,10 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			tempHold = path + nameOfObject;
 
 			//Now create an object and add it to the update vector
-			Game::addObjectToUpdate(new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false));
+			StaticObject *terrainPiece = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+			terrainPiece->changeRotation(objectRot);
+			terrainPiece->getSceneNode()->setScale(objectScale);
+			Game::addObjectToUpdate(terrainPiece);
 		}
 
 		//Close the file when done
