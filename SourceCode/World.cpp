@@ -19,7 +19,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
 	//LOAD IN THE MAP FILE - test
-	loadMapFile("Assets/LevelMaps/LavaWorld.stm", device);
+	loadMapFile(levelLocation, device);
 
 	//Add in a point light
 	//sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
