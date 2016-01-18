@@ -9,18 +9,21 @@ if savePath != undefined do(
 	--Select Everything in the scene
 	allObjects = $*
 	
-	--Make a mark in the file
-	format "Export_Begin\n" to:outPutFile
-	
 	--Iterate through the objects
 	for OBJ in allObjects do(
+		--Get the eulerAngles of the rotation
+		rot = OBJ.rotation as eulerAngles
+		
 		--Write all the infomation of the selected object to the file
-		lineToWrite = "N:" + OBJ.name + " P:" + OBJ.position as string + " R:" + OBJ.rotation as string + " S:" + OBJ.scale as string + "\n"
+		lineToWrite = \
+		OBJ.name \
+		+ " " + OBJ.position.x as string + " " + OBJ.position.z as string + " " + OBJ.position.y as string \
+		+ " " + rot.x as string + " " + rot.z as string + " " + rot.y as string \
+		+ " " + OBJ.scale.x as string + " " + OBJ.scale.z as string + " " + OBJ.scale.y as string \
+		+ "\n"
 		format lineToWrite to:outPutFile
 	)
 	
-	--Make a mark in the file
-	format "Export_End\n" to:outPutFile
 	--Close the file when we have finished writing
 	close outPutFile
 )

@@ -2,11 +2,9 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale){
+World::World(PlayerShip *player, const irr::core::vector3df &phase1StartPos){
 	//Set the player start pos for the map
 	phase1StartPosition = phase1StartPos;
-	this->worldScale = worldScale;
-	terrainNodesToSpawn = sceneNodesToSpawn;
 	this->player = player;
 
 	phase1Loaded = false;
@@ -21,47 +19,14 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
 
-	//Set the seed
-	srand(1);
-	//The position to place each terrain
-	irr::core::vector3df terrainPos(0);
-	//To store the total length of the terrain
-	float terrainLength = 0;
-	//Loop through and place each terrain
-	for(int i = 0; i < terrainNodesToSpawn; i++){
-		//Random number for which tile to load
-		int tile = rand() % HEIGHT_MAP_COUNT;
-		//Create a terrain scene node using the tile selection
-		irr::scene::ITerrainSceneNode *node = loadTerrain(device, heightMapLocations[tile], driver->getTexture(terrainTexturePath), terrainPos, worldScale);
-		//Get an array to hold all of the edges
-		irr::core::vector3d<irr::f32> edges[8];
-		//Get the bounding box of the mesh
-		irr::core::aabbox3d<irr::f32> boundingBox = node->getTransformedBoundingBox();
-		//Get the edges of the box
-		boundingBox.getEdges(edges);
-		//Increase the starting pos by the length of the box
-		terrainPos.Z += (edges[2].Z - edges[0].Z);
-		//Increase the total length
-		terrainLength += (edges[2].Z - edges[0].Z);
-		//Add the node onto the vector
-		terrainNodes.push_back(node);
-	}
-
-
-	//Modify the start position by the scale factor
-	phase1StartPosition.X *= terrainNodes[0]->getScale().X;
-	phase1StartPosition.Y *= terrainNodes[0]->getScale().Y;
-
-	//Load in all the individual objects
-	loadPhase1Obsticles(phase1StartPosition, smgr, driver);
-	loadPhase1Gems(phase1StartPosition, smgr, driver);
-	loadPhase1Ammo(phase1StartPosition, smgr, driver);
+	//LOAD IN THE MAP FILE - test
+	loadMapFile("Assets/LevelMaps/LavaWorld.stm", device);
 
 	//Set the player position to the phase start position
 	player->changePosition(phase1StartPosition);
 
 	//Add in a point light
-	sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
+	//sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
 
 	//Phase is now loaded
 	phase1Loaded = true;
@@ -130,6 +95,10 @@ bool World::isPhase2Loaded(){
 }
 
 bool World::isPhase1Complete(){
+
+	//TEMP
+	return false;
+
 	//Check if the player has complete phase 1
 	if(phase1Loaded){
 		//Return if it is already complete to avoid uneccesary calculations
@@ -139,9 +108,9 @@ bool World::isPhase1Complete(){
 			//Get an array to hold all of the edges
 			irr::core::vector3d<irr::f32> edges[8];
 			//Get the counding box of the mesh
-			irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes.at(terrainNodes.size() - 1)->getTransformedBoundingBox();
+			//irr::core::aabbox3d<irr::f32> boundingBox = terrainNodes.at(terrainNodes.size() - 1)->getTransformedBoundingBox();
 			//Get the edges of the box
-			boundingBox.getEdges(edges);
+			//boundingBox.getEdges(edges);
 
 			if(player->getPosition().Z >= edges[2].Z){
 				phase1Complete = true;
@@ -156,6 +125,11 @@ bool World::isPhase1Complete(){
 }
 
 bool World::isPhase2Complete(){
+
+
+	//TEMP
+	return false;
+
 	//Check if the player has completed phase 2
 	if(phase2Loaded){
 		//Return if it is already complete to avoid uneccesary calculations
@@ -175,16 +149,18 @@ bool World::isPhase2Complete(){
 }
 
 void World::clearTerrains(){
+	/*
 	for(int i = 0; i < terrainNodes.size(); i++){
-		terrainNodes.at(i)->remove();
-		terrainNodes.at(i) = 0;
+	terrainNodes.at(i)->remove();
+	terrainNodes.at(i) = 0;
 	}
 
 	terrainNodes.clear();
 	terrainNodes.resize(0);
+	*/
 
 	//Get rid of the light
-	sun->remove();
+	//sun->remove();
 }
 
 void World::reset(){
@@ -201,43 +177,76 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position, const irr::core::vector3df &scaleFactor, const irr::s32 &smoothFactor, const float &tileAmount){
-	//Create the return variable
-	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
-																							0,										//Parent Node
-																							-1,										//Node ID
-																							irr::core::vector3df(0),				//Position - Changed below because of collision errors
-																							irr::core::vector3df(0),				//Rotation
-																							irr::core::vector3df(1),				//Scale (Will have to get adjusted per map because some might be different lengths)
-																							irr::video::SColor(255, 255, 255, 255),	//Colour
-																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
-																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
-																							smoothFactor);							//Smoothfactor
+void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
+	//Create a variable to read the file
+	std::ifstream file;
+	//The string that will hold each line of the file
+	std::string line;
+	//Path to the level segments
+	const std::string path = "Assets/LevelAssets/";
 
-	//Set the texture
-	terrain->setMaterialTexture(0, texture);
+	//The name of the object
+	std::string nameOfObject, tempHold;
+	//The vectors that will store the objects variables
+	irr::core::vector3df objectPos(0);
+	irr::core::vector3df objectRot(0);
+	irr::core::vector3df objectScale(0);
 
-	//Set the material type so it can be tiled
-	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
+	//Open the file
+	file.open(mapFile);
 
-	//Set how many times each texture is tiled
-	terrain->scaleTexture(tileAmount);
+	//Check if it is open
+	if(file.is_open()){
+		//Loop through each line of the file
+		while(std::getline(file, line)){
+			/* Each part of the file is seperated by a space, ex:
+			* Name posX posY posZ rotX rotY rotZ scaleX scaleY scaleZ
+			* with a length of 10
+			* So each bit of data is handled world by word
+			*/
 
-	//Set the position of the terrain
-	terrain->setPosition(position);
+			//Get each word line by line
+			std::stringstream stream(line);
+			//Then input the neccesaary data
+			stream >> nameOfObject;
+			//Make sure it has the right suffix
+			nameOfObject += ".obj";
 
-	//Set the scale factor of the terrain
-	terrain->setScale(scaleFactor);
+			//Position
+			stream >> tempHold;
+			objectPos.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectPos.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectPos.Z = std::stof(tempHold.c_str());
+			
+			//Rotation
+			stream >> tempHold;
+			objectRot.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectRot.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectRot.Z = std::stof(tempHold.c_str());
 
-	//Set the object ID for collision handling, 1 is reserved for terrain
-	terrain->setID(1);
+			//Scale
+			stream >> tempHold;
+			objectScale.X = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectScale.Y = std::stof(tempHold.c_str());
+			stream >> tempHold;
+			objectScale.Z = std::stof(tempHold.c_str());
+			
+			//change tmp hold to the path
+			tempHold = path + nameOfObject;
 
-	//Create the triangle selector for the terrain to handle collision
-	irr::scene::ITriangleSelector *selector = device->getSceneManager()->createTerrainTriangleSelector(terrain);
-	terrain->setTriangleSelector(selector);
-	selector->drop();
+			//Now create an object and add it to the update vector
+			StaticObject *terrainPiece = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+			terrainPiece->changeRotation(objectRot);
+			terrainPiece->getSceneNode()->setScale(objectScale);
+			Game::addObjectToUpdate(terrainPiece);
+		}
 
-	//Return the terrain
-	return terrain;
+		//Close the file when done
+		file.close();
+	}
 }
-

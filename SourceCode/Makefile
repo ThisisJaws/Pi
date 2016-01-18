@@ -2,7 +2,7 @@
 # It's usually sufficient to change just the target name and source file list
 # and be sure that CXX is set to a valid compiler
 Target = linuxBuild
-Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp World.cpp LavaWorld.cpp IceWorld.cpp JungleWorld.cpp
+Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp WorldPiece.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectable.cpp Gem.cpp Ammo.cpp World.cpp LavaWorld.cpp IceWorld.cpp JungleWorld.cpp
 
 #for use with g++ 4.7
 Sources += -std=c++11

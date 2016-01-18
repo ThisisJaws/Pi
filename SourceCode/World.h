@@ -3,39 +3,28 @@
 
 /* This class is the base class for each world (phase 1 & phase 2) */
 
-#include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 #include "irrlicht.h"
 
 #include "EnemyTypes.h"
 #include "PlayerShip.h"
 
-#include "StaticObject.h"
+#include "WorldPiece.h"
+
+#include "Windows.h"
+
 #include "Ammo.h"
 #include "Gem.h"
-
-#define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
 
 class World{
 	//VARIABLES
 protected:
 	//Reference to the player
 	PlayerShip *player;
-
-	//An array that holds the locations of the heightmap pieces
-	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
-
-	//An array of the scene nodes that will make up the entire terrain
-	std::vector<irr::scene::ITerrainSceneNode *>terrainNodes;
-
-	//How many terrain nodes to spawn
-	int terrainNodesToSpawn;
-
-	//The path to the texture
-	irr::io::path terrainTexturePath;
-
-	//What to scale the world to
-	irr::core::vector3df worldScale;
 
 private:
 	//The light that will act as a sun
@@ -55,7 +44,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale);
+	World(PlayerShip *player, const irr::core::vector3df &phase1StartPos);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
@@ -77,13 +66,8 @@ public:
 	void reset();
 
 protected:
-	//Takes a height map and returns the loaded terrain
-	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position = irr::core::vector3df(0), const irr::core::vector3df &scaleFactor = irr::core::vector3df(1), const irr::s32 &smoothFactor = 1, const float &tileAmount = 3.0f);
-
-	//Derived classes will override these to place objects
-	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
-	virtual void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
-	virtual void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
+	//Loads in the map file for the level
+	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
 };
 
 #endif /* WORLD_H */

@@ -171,6 +171,7 @@
     <ClCompile Include="..\..\SourceCode\StrongEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Testing.cpp" />
     <ClCompile Include="..\..\SourceCode\World.cpp" />
+    <ClCompile Include="..\..\SourceCode\WorldPiece.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SourceCode\Ammo.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\..\SourceCode\StrongEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Testing.h" />
     <ClInclude Include="..\..\SourceCode\World.h" />
+    <ClInclude Include="..\..\SourceCode\WorldPiece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

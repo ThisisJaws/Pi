@@ -91,6 +91,10 @@ void Object::changePosition(const irr::core::vector3df &newPosition){
 	objectNode->setPosition(newPosition);
 }
 
+irr::core::vector3df Object::getRotation(){
+	return objectNode->getRotation();
+}
+
 void Object::updateRotation(const irr::core::vector3df &angle){
 	objectNode->setRotation(getRotation() + angle);
 }
@@ -99,8 +103,8 @@ void Object::updateRotation(const float & x, const float & y, const float & z){
 	updateRotation(irr::core::vector3df(x, y, z));
 }
 
-irr::core::vector3df Object::getRotation(){
-	return objectNode->getRotation();
+void Object::changeRotation(const irr::core::vector3df &angle){
+	objectNode->setRotation(angle);
 }
 
 void Object::removeFromScene(){
