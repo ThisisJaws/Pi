@@ -9,9 +9,6 @@ if savePath != undefined do(
 	--Select Everything in the scene
 	allObjects = $*
 	
-	--Make a mark in the file
-	format "Export_Begin\n" to:outPutFile
-	
 	--Iterate through the objects
 	for OBJ in allObjects do(
 		--Get the eulerAngles of the rotation
@@ -27,8 +24,6 @@ if savePath != undefined do(
 		format lineToWrite to:outPutFile
 	)
 	
-	--Make a mark in the file
-	format "Export_End\n" to:outPutFile
 	--Close the file when we have finished writing
 	close outPutFile
 )
