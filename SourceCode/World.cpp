@@ -71,6 +71,8 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 		y -= 10;
 		gem = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
 
+		Game::addObjectToUpdate(gem);
+
 		z += rand() % 3000 + 100;
 	}
 
