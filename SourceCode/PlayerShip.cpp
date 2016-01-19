@@ -43,11 +43,8 @@ void PlayerShip::tick(irr::f32 deltaTime){
 
 	//check for collision with static Objects
 	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
-	if(collidedObjectUniqueID == 1){
-		//ID 1 is always terrain, so the player loses
-		dealDamage();
-	}else if(collidedObjectUniqueID > 1){
-		//If the ID is greater than 1 (0 is no collision) then search for the object
+	if(collidedObjectUniqueID > 0){
+		//If the ID is greater than 0 (0 is no collision) then search for the object
 		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
 		//Perform the collision checks for the object types
 		if(collidedObject != NULL){
