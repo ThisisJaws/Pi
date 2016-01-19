@@ -14,6 +14,7 @@
 #include "EnemyTypes.h"
 #include "PlayerShip.h"
 
+#include "StaticObject.h"
 #include "Ammo.h"
 #include "Gem.h"
 
@@ -31,7 +32,7 @@ private:
 	std::string levelLocation;
 
 	//Vector of the all the terrain segments to tell when the player has beaten the level
-	std::vector<StaticObject *> terrainSegments;
+	std::vector<StaticObject*> terrainSegments;
 
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
