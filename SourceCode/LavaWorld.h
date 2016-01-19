@@ -4,19 +4,10 @@
 #include "World.h"
 
 class LavaWorld : public World{
-	//VARIABLES
-private:
-	
-
 	//FUNCTIONS
 public:
 	//constructor
 	LavaWorld(PlayerShip *player);
-
-	
-
-protected:
-	
 };
 
 
