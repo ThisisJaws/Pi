@@ -234,14 +234,31 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			stream >> tempHold;
 			objectScale.Z = std::stof(tempHold.c_str());
 			
-			//change tmp hold to the path
+			//change temp hold to the path
 			tempHold = path + nameOfObject;
 
-			//Now create an object and add it to the update vector
-			StaticObject *terrainPiece = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
-			terrainPiece->changeRotation(objectRot);
-			terrainPiece->getSceneNode()->setScale(objectScale);
-			Game::addObjectToUpdate(terrainPiece);
+			//Check thefirst letter of the name to find out what the object is
+			if(nameOfObject.at(0) == 'L'){
+				//For land piece
+				StaticObject *terrainPiece = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+				terrainPiece->changeRotation(objectRot);
+				terrainPiece->getSceneNode()->setScale(objectScale);
+				Game::addObjectToUpdate(terrainPiece);
+
+			} else if(nameOfObject.at(0) == 'O'){
+				//For StaticObjects
+
+			} else if(nameOfObject.at(0) == 'C'){
+				//For Collectibles
+
+				if(nameOfObject.at(1) == 'A'){
+					//For Ammo
+
+				} else if(nameOfObject.at(1) == 'G'){
+					//For Gem
+
+				}
+			}
 		}
 
 		//Close the file when done
