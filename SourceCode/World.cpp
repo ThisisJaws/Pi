@@ -196,7 +196,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			objectPos.Y = std::stof(tempHold.c_str());
 			stream >> tempHold;
 			objectPos.Z = std::stof(tempHold.c_str());
-			
+
 			//Rotation
 			stream >> tempHold;
 			objectRot.X = std::stof(tempHold.c_str());
@@ -212,7 +212,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			objectScale.Y = std::stof(tempHold.c_str());
 			stream >> tempHold;
 			objectScale.Z = std::stof(tempHold.c_str());
-			
+
 			//change temp hold to the path
 			tempHold = path + nameOfObject;
 
@@ -231,10 +231,15 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 			} else if(nameOfObject.at(0) == 'O'){
 				//For StaticObjects
+				StaticObject *Obsticle = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+				Obsticle->changeRotation(objectRot);
+				Obsticle->getSceneNode()->setScale(objectScale);
+
+				//Add to the update vector
+				Game::addObjectToUpdate(Obsticle);
 
 			} else if(nameOfObject.at(0) == 'C'){
 				//For Collectibles
-
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
 
@@ -243,12 +248,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 				}
 			}
-
-			//Add in a point light
-			sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-
-			//Close the file when done
-			file.close();
 		}
+
+		//Add in a point light
+		sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
+
+		//Close the file when done
+		file.close();
 	}
 }
