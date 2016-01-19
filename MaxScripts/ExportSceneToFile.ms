@@ -13,6 +13,8 @@ if savePath != undefined do(
 	for OBJ in allObjects do(
 		--Get the eulerAngles of the rotation
 		rot = OBJ.rotation as eulerAngles
+		--Rotate the Z by 180 degrees
+		rot.z += 180
 		
 		--Write all the infomation of the selected object to the file
 		lineToWrite = \
