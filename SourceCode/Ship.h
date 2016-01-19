@@ -56,7 +56,7 @@ public:
 	unsigned short getLives();
 
 	//Increment the ship's lives
-	void increaseLives(unsigned short amount = 1);
+	void increaseLives(const unsigned short &amount = 1);
 
 	//Call to deal 'damage'
 	virtual void dealDamage(const unsigned short &amount = 1);

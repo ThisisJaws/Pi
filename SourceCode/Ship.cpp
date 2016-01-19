@@ -48,7 +48,7 @@ unsigned short Ship::getLives(){
 	return lives;
 }
 
-void Ship::increaseLives(unsigned short amount){
+void Ship::increaseLives(const unsigned short &amount){
 	lives += amount;
 }
 
