@@ -34,7 +34,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	//Change the sun to be with the camera
 	sun->setParent(device->getSceneManager()->getActiveCamera());
 	sun->setPosition(irr::core::vector3df(0, 0, 0));
-	sun->setRadius(1000);
+	sun->setRadius(500);
 
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
