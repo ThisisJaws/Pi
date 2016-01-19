@@ -12,8 +12,12 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
-    //the player's score
+    //The player's actual score
     unsigned int score;
+	//When the player has gotten enough to recieve an extra life
+	unsigned int previousLifeIncrease;
+	//How many points to get before a life is aded
+	unsigned int lifeIncreasePoints;
 
     //how many bullets the player can shoot
     unsigned short ammo;

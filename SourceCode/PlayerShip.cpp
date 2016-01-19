@@ -7,6 +7,9 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 
     //init variables
     score = 0;
+	lifeIncreasePoints = 100000;
+	previousLifeIncrease = score + lifeIncreasePoints;
+
     ammo = 20;
 	maxZRotate = 45;
 	maxXRotate = 25;
@@ -143,7 +146,17 @@ unsigned int PlayerShip::getScore(){
 }
 
 void PlayerShip::increaseScore(unsigned int amount){
+	//Increment score
     score += amount;
+
+	//Check to see if the player gets a life
+	if(score >= previousLifeIncrease){
+		//Increase the player's lives
+		increaseLives();
+
+		//Make a new score for the player to reach
+		previousLifeIncrease += lifeIncreasePoints;
+	}
 }
 
 void PlayerShip::changePosition(irr::core::vector3df newPosition){
