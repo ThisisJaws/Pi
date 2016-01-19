@@ -10,6 +10,12 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	lifeIncreasePoints = 100000;
 	previousLifeIncrease = score + lifeIncreasePoints;
 
+	damageRecieved = false;
+	flashCount = 0;
+	maxFlash = 12;
+	flashLength = 0.15f;
+	timeSinceLastFlash = flashLength;
+
     ammo = 20;
 	maxZRotate = 45;
 	maxXRotate = 25;
@@ -43,6 +49,34 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 
 void PlayerShip::tick(irr::f32 deltaTime){
     Ship::tick(deltaTime);
+
+	//If the player has recently received damage then begin to make the ship flash
+	if(damageRecieved){
+		if(timeSinceLastFlash >= flashLength){
+			//Swap the visibility
+			if(getSceneNode()->isVisible()){
+				getSceneNode()->setVisible(false);
+			} else{
+				getSceneNode()->setVisible(true);
+			}
+			
+			//Reset time since last flash back to 0
+			timeSinceLastFlash = 0;
+			//Increment the flash count
+			flashCount++;
+		} else{
+			timeSinceLastFlash += deltaTime;
+		}
+
+		if(flashCount >= maxFlash){
+			//Once the ship has flash enough times, reset everything
+			flashCount = 0;
+			damageRecieved = false;
+
+			//Make sure it always ends visible
+			getSceneNode()->setVisible(true);
+		}
+	}
 
 	//check for collision with static Objects
 	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
@@ -177,6 +211,14 @@ void PlayerShip::markForDelete(){
 
 bool PlayerShip::playerLost(){
 	return lost;
+}
+
+void PlayerShip::dealDamage(const unsigned short &amount){
+	//Only damage the player if they haven't recently recieved any
+	if(!damageRecieved){
+		Ship::dealDamage(amount);
+		damageRecieved = true;
+	}
 }
 
 void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){

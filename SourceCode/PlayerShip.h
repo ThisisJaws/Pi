@@ -19,6 +19,14 @@ private:
 	//How many points to get before a life is aded
 	unsigned int lifeIncreasePoints;
 
+	//If this is true then the player will start flashing to indicate damage taken
+	bool damageRecieved;
+	//Track the ship's flashing
+	unsigned short flashCount;		//How many times the ship has flashed
+	unsigned short maxFlash;		//How many times to flash
+	irr::f32 timeSinceLastFlash;	//When was the last flash
+	irr::f32 flashLength;			//How frequently to flash
+
     //how many bullets the player can shoot
     unsigned short ammo;
 
@@ -86,6 +94,9 @@ public:
 
 	//Returns true if the player has lost
 	bool playerLost();
+
+	//Overriden so the player can have a period of invulnerability
+	virtual void dealDamage(const unsigned short &amount = 1);
 
 protected:
 	//Overriden for camera controls
