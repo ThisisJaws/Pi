@@ -141,18 +141,12 @@ bool World::isPhase2Complete(){
 }
 
 void World::clearTerrains(){
-	/*
-	for(int i = 0; i < terrainNodes.size(); i++){
-	terrainNodes.at(i)->remove();
-	terrainNodes.at(i) = 0;
-	}
-
-	terrainNodes.clear();
-	terrainNodes.resize(0);
-	*/
+	//Clear the vector, the object references get deleted in Game.cpp
+	terrainSegments.clear();
+	terrainSegments.resize(0);
 
 	//Get rid of the light
-	//sun->remove();
+	sun->remove();
 }
 
 void World::reset(){
