@@ -66,9 +66,6 @@
     <ClCompile Include="..\..\SourceCode\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SourceCode\WorldPiece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\SourceCode\IceWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\World.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SourceCode\WorldPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\IceWorld.h">
