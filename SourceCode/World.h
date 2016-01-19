@@ -14,10 +14,6 @@
 #include "EnemyTypes.h"
 #include "PlayerShip.h"
 
-#include "WorldPiece.h"
-
-#include "Windows.h"
-
 #include "Ammo.h"
 #include "Gem.h"
 
