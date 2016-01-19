@@ -186,8 +186,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			std::stringstream stream(line);
 			//Then input the neccesaary data
 			stream >> nameOfObject;
-			//Make sure it has the right suffix
-			nameOfObject += ".obj";
 
 			//Position
 			stream >> tempHold;
@@ -214,7 +212,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			objectScale.Z = std::stof(tempHold.c_str());
 
 			//change temp hold to the path
-			tempHold = path + nameOfObject;
+			tempHold = path + nameOfObject + ".obj";
 
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
