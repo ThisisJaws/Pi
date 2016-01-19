@@ -135,9 +135,6 @@ void World::clearTerrains(){
 	//Clear the vector, the object references get deleted in Game.cpp
 	terrainSegments.clear();
 	terrainSegments.resize(0);
-
-	//Get rid of the light
-	sun->remove();
 }
 
 void World::reset(){
@@ -152,6 +149,11 @@ void World::reset(){
 
 	phase1Complete = false;
 	phase2Complete = false;
+
+	//Get rid of the light
+	if(sun != NULL){
+		sun->remove();
+	}
 }
 
 void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
