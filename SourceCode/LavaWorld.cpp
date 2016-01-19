@@ -4,5 +4,4 @@
 
 LavaWorld::LavaWorld(PlayerShip *player) 
 	: World(player, "Assets/LevelAssets/LevelMaps/LavaWorld.stm"){
-
 }

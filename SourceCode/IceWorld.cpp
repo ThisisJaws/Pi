@@ -4,5 +4,4 @@
 
 IceWorld::IceWorld(PlayerShip *player) 
 	: World(player,  "Assets/LevelAssets/LevelMaps/IceWorld.stm"){
-
 }
