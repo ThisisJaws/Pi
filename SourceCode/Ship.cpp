@@ -48,6 +48,10 @@ unsigned short Ship::getLives(){
 	return lives;
 }
 
+void Ship::increaseLives(unsigned short amount){
+	lives += amount;
+}
+
 void Ship::dealDamage(const unsigned short &amount){
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){
