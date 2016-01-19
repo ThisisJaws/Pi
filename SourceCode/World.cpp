@@ -23,9 +23,6 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	//LOAD IN THE MAP FILE - test
 	loadMapFile(levelLocation, device);
 
-	//Add in a point light
-	//sun = smgr->addLightSceneNode(0, phase1StartPosition + irr::core::vector3df(0, 5000, terrainLength / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-
 	//Phase is now loaded
 	phase1Loaded = true;
 }
@@ -183,7 +180,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 	//Path to the level segments
 	const std::string path = "Assets/LevelAssets/";
 
-	//The name of the object
+	//The name of the object + a temp variable to hold float data
 	std::string nameOfObject, tempHold;
 	//The vectors that will store the objects variables
 	irr::core::vector3df objectPos(0);
@@ -243,6 +240,11 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				StaticObject *terrainPiece = new StaticObject(objectPos, tempHold.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
 				terrainPiece->changeRotation(objectRot);
 				terrainPiece->getSceneNode()->setScale(objectScale);
+
+				//Add to the internal vector
+				terrainSegments.push_back(terrainPiece);
+
+				//Add to the update vector
 				Game::addObjectToUpdate(terrainPiece);
 
 			} else if(nameOfObject.at(0) == 'O'){
@@ -259,9 +261,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 				}
 			}
-		}
 
-		//Close the file when done
-		file.close();
+			//Add in a point light
+			sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
+
+			//Close the file when done
+			file.close();
+		}
 	}
 }
