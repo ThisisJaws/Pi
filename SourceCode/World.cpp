@@ -31,6 +31,11 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	//Make sure the previous phase is no longer considered loaded
 	phase1Loaded = false;
 
+	//Change the sun to be with the camera
+	sun->setParent(device->getSceneManager()->getActiveCamera());
+	sun->setPosition(irr::core::vector3df(0, 0, 0));
+	sun->setRadius(1000);
+
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -153,7 +158,7 @@ void World::reset(){
 	phase2Complete = false;
 
 	//Get rid of the light
-	if(sun != NULL){
+	if(sun != nullptr && sun != NULL){
 		sun->remove();
 	}
 }
