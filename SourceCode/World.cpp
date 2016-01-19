@@ -14,13 +14,10 @@ World::World(PlayerShip *player, const std::string &levelLocation){
 }
 
 void World::loadPhase1(irr::IrrlichtDevice * device){
-	//Get the references
-	irr::scene::ISceneManager *smgr = device->getSceneManager();
-	irr::video::IVideoDriver *driver = device->getVideoDriver();
+	//Set the player position
+	player->changePosition(irr::core::vector3df(0, 100, -500));
 
-	player->changePosition(irr::core::vector3df(0, 100, 0));
-
-	//LOAD IN THE MAP FILE - test
+	//Load the map file
 	loadMapFile(levelLocation, device);
 
 	//Phase is now loaded

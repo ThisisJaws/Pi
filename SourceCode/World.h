@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "irrlicht.h"
 
@@ -32,6 +33,9 @@ private:
 
 	//String to the level data
 	std::string levelLocation;
+
+	//Vector of the all the terrain segments to tell when the player has beaten the level
+	std::vector<StaticObject *> terrainSegments;
 
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
