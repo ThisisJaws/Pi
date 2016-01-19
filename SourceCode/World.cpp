@@ -242,10 +242,14 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), device->getVideoDriver());
+					//Add to the update vector
+					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
-
+					Gem *gem = new Gem(objectPos, device->getSceneManager(), device->getVideoDriver());
+					//Add to the update vector
+					Game::addObjectToUpdate(gem);
 				}
 			}
 		}
