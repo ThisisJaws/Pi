@@ -47,6 +47,9 @@ private:
 	//The lives this ship has - or how many hits it can take
 	unsigned short lives;
 
+	//Particle system scene node
+	irr::scene::IParticleSystemSceneNode *ps;
+
     //FUNCTIONS
 public:
     //constructor
