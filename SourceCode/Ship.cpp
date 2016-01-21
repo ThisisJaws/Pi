@@ -10,6 +10,11 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
     //direction of movement +1 is along the positive X axis, -1 is along the negative X axis
     moveDir = movementDirection;
 
+	//Set the rotation variables
+	maxZRotate = 45;
+	maxXRotate = 25;
+	rotSpeed = 100;
+
     //time between each bullet firing 1000 = 1 second
     timeBetweenShots = firingSpeed;
     timeSinceLastFire = 0;

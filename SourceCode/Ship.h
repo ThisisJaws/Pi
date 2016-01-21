@@ -21,6 +21,12 @@ protected:
     //the direction to move in (will be +1 or -1)
     signed char moveDir;
 
+	//The maximum amount the ship can rotate
+	float maxZRotate;
+	float maxXRotate;
+	//How fast the ship will rotate
+	float rotSpeed;
+
 private:
     //if the ship is able to fire
     bool canFire;

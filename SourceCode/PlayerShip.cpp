@@ -17,9 +17,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	timeSinceLastFlash = flashLength;
 
     ammo = 20;
-	maxZRotate = 45;
-	maxXRotate = 25;
-	rotSpeed = 100;
     this->eReceiver = eReceiver;
 
     //init the camera variables
