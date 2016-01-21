@@ -23,7 +23,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setEmitter(em); //Give the emitter to the system
 	em->drop();			//Safe to drop now we don't need it
 
-	//Add change the materials
+	//Add change the materials of the particle system
 	ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
 	ps->setMaterialTexture(0, driverReference->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
