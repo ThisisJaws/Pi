@@ -46,19 +46,19 @@ void Ship::tick(irr::f32 deltaTime){
 
 	//Check if the ship needs to be rotated back
 	if(rotateBack){
-		//UP
+		//DOWN
 		if(getRotation().X < 0){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
 		}
-		//DOWN
+		//UP
 		if(getRotation().X > 0){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
 		}
-		//LEFT
+		//RIGHT
 		if(getRotation().Z > 0){
 			updateRotation(0, 0, -rotSpeed * deltaTime);
 		}
-		//Right
+		//LEFT
 		if(getRotation().Z < 0){
 			updateRotation(0, 0, rotSpeed * deltaTime);
 		}
