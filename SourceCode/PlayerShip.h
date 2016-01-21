@@ -102,12 +102,10 @@ protected:
 	//Overriden for camera controls
 	virtual void moveUp(const float &speed, const irr::f32 &deltaTime) override;
 	virtual void moveDown(const float &speed, const irr::f32 &deltaTime) override;
+	void turnLeft(const float &speed, const irr::f32 &deltaTime);
+	void turnRight(const float &speed, const irr::f32 &deltaTime);
 
 private:
-	//Moves the player left or right
-    void turnLeft(const float &speed, const irr::f32 &deltaTime);
-    void turnRight(const float &speed, const irr::f32 &deltaTime);
-
     //updates the two camera positions
     void updateCameraPositions();
 
