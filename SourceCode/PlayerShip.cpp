@@ -110,38 +110,18 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//Left
 	if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
 		turnLeft(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().Z > 0){
-			updateRotation(0, 0, -rotSpeed * deltaTime);
-		}
 	}
 	//Right
 	if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
 		turnRight(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().Z < 0){
-			updateRotation(0, 0, rotSpeed * deltaTime);
-		}
-	}
+	} 
 	//Up
 	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
 		moveUp(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().X < 0){
-			updateRotation(rotSpeed * deltaTime, 0, 0);
-		}
 	}
 	//Down
 	if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
 		moveDown(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().X > 0){
-			updateRotation(-rotSpeed * deltaTime, 0, 0);
-		}
 	}
 
     //Perform camera updates after movement
@@ -231,6 +211,7 @@ void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
 		//Rotate the ship up
 		if(getRotation().X > -maxXRotate){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
+			rotateBack = false;
 		}
     }
 }
@@ -247,6 +228,7 @@ void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
 		//Rotate the ship down
 		if(getRotation().X < maxXRotate){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
+			rotateBack = false;
 		}
     }
 }
@@ -263,6 +245,7 @@ void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
 			//Rotate the ship to the left
 			if(getRotation().Z < maxZRotate){
 				updateRotation(0, 0, rotSpeed * deltaTime);
+				rotateBack = false;
 			}
 		}
 	}
@@ -280,6 +263,7 @@ void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
 			//Rotate the ship to the right
 			if(getRotation().Z > -maxZRotate){
 				updateRotation(0, 0, -rotSpeed * deltaTime);
+				rotateBack = false;
 			}
 		}
 	}
