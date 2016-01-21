@@ -218,40 +218,6 @@ void PlayerShip::dealDamage(const unsigned short &amount){
 	}
 }
 
-void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
-    if(currentMode == flying){
-        if(getPosition().X > basePosition.X - maxXOffset){
-            float moveBy = speed * deltaTime;
-
-            //move the ship to the left
-            updatePosition(-moveBy, 0.0f, 0.0f);
-            //move the camera to the right
-            cameraXOffset += moveBy;
-
-			//Rotate the ship to the left
-			if(getRotation().Z < maxZRotate){
-				updateRotation(0, 0, rotSpeed * deltaTime);
-			}
-        }
-    }
-}
-void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
-    if(currentMode == flying){
-        if(getPosition().X < basePosition.X + maxXOffset){
-            float moveBy = speed * deltaTime;
-
-            //move the ship to the right
-            updatePosition(moveBy, 0.0f, 0.0f);
-            //move the camera to the left
-            cameraXOffset -= moveBy;
-
-			//Rotate the ship to the right
-			if(getRotation().Z > -maxZRotate){
-				updateRotation(0, 0, -rotSpeed * deltaTime);
-			}
-        }
-    }
-}
 void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
     //if ship is still inside screen
     if(getPosition().Y < basePosition.Y + maxYOffset){
@@ -283,6 +249,40 @@ void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
 		}
     }
+}
+void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
+	if(currentMode == flying){
+		if(getPosition().X > basePosition.X - maxXOffset){
+			float moveBy = speed * deltaTime;
+
+			//move the ship to the left
+			updatePosition(-moveBy, 0.0f, 0.0f);
+			//move the camera to the right
+			cameraXOffset += moveBy;
+
+			//Rotate the ship to the left
+			if(getRotation().Z < maxZRotate){
+				updateRotation(0, 0, rotSpeed * deltaTime);
+			}
+		}
+	}
+}
+void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
+	if(currentMode == flying){
+		if(getPosition().X < basePosition.X + maxXOffset){
+			float moveBy = speed * deltaTime;
+
+			//move the ship to the right
+			updatePosition(moveBy, 0.0f, 0.0f);
+			//move the camera to the left
+			cameraXOffset -= moveBy;
+
+			//Rotate the ship to the right
+			if(getRotation().Z > -maxZRotate){
+				updateRotation(0, 0, -rotSpeed * deltaTime);
+			}
+		}
+	}
 }
 
 void PlayerShip::changeMode(const int &increaseSpeedByFactor){
