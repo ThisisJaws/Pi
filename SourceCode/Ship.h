@@ -26,6 +26,8 @@ protected:
 	float maxXRotate;
 	//How fast the ship will rotate
 	float rotSpeed;
+	//Keep track of the ship if it needs to rotate back
+	bool rotateBack;
 
 private:
     //if the ship is able to fire
