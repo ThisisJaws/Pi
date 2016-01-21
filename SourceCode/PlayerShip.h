@@ -61,6 +61,9 @@ private:
         shooting,
     } currentMode;
 
+	//Particle system scene node
+	irr::scene::IParticleSystemSceneNode *ps;
+
     //FUNCTIONS
 public:
     //constructor
