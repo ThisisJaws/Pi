@@ -90,7 +90,7 @@ public:
 	virtual void markForDelete() override;
 
 	//changes the player/camera between modes
-	void changeMode(int increaseSpeedByFactor = 1);
+	void changeMode(const int &increaseSpeedByFactor = 1);
 
 	//Returns true if the player has lost
 	bool playerLost();

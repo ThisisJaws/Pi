@@ -288,7 +288,7 @@ void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
     }
 }
 
-void PlayerShip::changeMode(int increaseSpeedByFactor){
+void PlayerShip::changeMode(const int &increaseSpeedByFactor){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;
