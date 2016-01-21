@@ -220,14 +220,17 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			stream >> tempHold;
 			objectScale.Z = std::stof(tempHold.c_str());
 
-			//change temp hold to the path
+			//Store the path of the mesh
 			std::string meshPath = path + nameOfObject + ".obj";
+			//Remove the last two letters off of the string to make setting the textures easier
+			nameOfObject.erase(nameOfObject.end() - 2, nameOfObject.end());
+			//Set the texture path
 			std::string textPath = path + nameOfObject + ".jpg";
 
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
 				//For land piece
-				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), device->getVideoDriver(), false);
 				terrainPiece->changeRotation(objectRot);
 				terrainPiece->getSceneNode()->setScale(objectScale);
 
@@ -239,7 +242,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 			} else if(nameOfObject.at(0) == 'O'){
 				//For StaticObjects
-				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), "Assets/Environment/Levels/LavaWorld/Land/LavaWorldTexture-Land.png", device->getSceneManager(), device->getVideoDriver(), false);
+				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), device->getVideoDriver(), false);
 				Obsticle->changeRotation(objectRot);
 				Obsticle->getSceneNode()->setScale(objectScale);
 
