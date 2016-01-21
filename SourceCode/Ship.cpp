@@ -7,7 +7,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
     //set up variables
     moveSpeed = movementSpeed;
     turnSpeed = 75;
-    //direction of movement +1 is along the positive X axis, -1 is along the negative X axis
+    //direction of movement +1 is along the positive Z axis, -1 is along the negative Z axis
     moveDir = movementDirection;
 
 	//Set the rotation variables
@@ -102,20 +102,35 @@ void Ship::move(const float &speed, const irr::f32 &deltaTime){
 void Ship::moveUp(const float &speed, const irr::f32 &deltaTime){
 	float moveBy = speed * deltaTime;
 	updatePosition(0.0f, moveBy, 0.0f);
+	//Rotate the ship up
+	if(getRotation().X > -maxXRotate){
+		updateRotation(-rotSpeed * deltaTime, 0, 0);
+	}
 }
 
 void Ship::moveDown(const float &speed, const irr::f32 &deltaTime){
 	float moveBy = speed * deltaTime;
 	updatePosition(0.0f, -moveBy, 0.0f);
+	//Rotate the ship down
+	if(getRotation().X < maxXRotate){
+		updateRotation(rotSpeed * deltaTime, 0, 0);
+	}
 }
 
 void Ship::turnLeft(const float & speed, const irr::f32 &deltaTime){
 	float moveBy = speed * deltaTime;
 	updatePosition(-moveBy, 0.0f, 0.0f);
-
+	//Rotate the ship to the left
+	if(getRotation().Z < maxZRotate){
+		updateRotation(0, 0, rotSpeed * deltaTime);
+	}
 }
 
 void Ship::turnRight(const float & speed, const irr::f32 &deltaTime){
 	float moveBy = speed * deltaTime;
 	updatePosition(moveBy, 0.0f, 0.0f);
+	//Rotate the ship to the right
+	if(getRotation().Z > -maxZRotate){
+		updateRotation(0, 0, -rotSpeed * deltaTime);
+	}
 }
