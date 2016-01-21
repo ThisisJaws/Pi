@@ -103,3 +103,14 @@ void Ship::moveDown(const float &speed, const irr::f32 &deltaTime){
 	float moveBy = speed * deltaTime;
 	updatePosition(0.0f, -moveBy, 0.0f);
 }
+
+void Ship::turnLeft(const float & speed, const irr::f32 &deltaTime){
+	float moveBy = speed * deltaTime;
+	updatePosition(-moveBy, 0.0f, 0.0f);
+
+}
+
+void Ship::turnRight(const float & speed, const irr::f32 &deltaTime){
+	float moveBy = speed * deltaTime;
+	updatePosition(moveBy, 0.0f, 0.0f);
+}
