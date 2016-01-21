@@ -32,25 +32,25 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = ps->createPointEmitter(
-		irr::core::vector3df(0.0f, 0.0f, 0.0001f * moveDir),	// direction, also acts as speed
-		50U, 70U,												// emit rate
-		irr::video::SColor(0, 255, 255, 255),					// darkest color
-		irr::video::SColor(0, 255, 255, 255),					// brightest color
-		50, 100, 0,												// min and max age, angle
-		irr::core::dimension2df(0.5f, 0.5f),					// min size
-		irr::core::dimension2df(2.0f, 2.0f));					// max size
+		irr::core::vector3df(0.0f, 0.0f, -0.0001f),			// direction, also acts as speed
+		50U, 70U,											// emit rate
+		irr::video::SColor(0, 255, 255, 255),				// darkest color
+		irr::video::SColor(0, 255, 255, 255),				// brightest color
+		50, 100, 0,											// min and max age, angle
+		irr::core::dimension2df(0.5f, 0.5f),				// min size
+		irr::core::dimension2df(2.0f, 2.0f));				// max size
 
 	ps->setEmitter(em); //Give the emitter to the system
 	em->drop();			//Safe to drop now we don't need it
 
-						//Change the materials of the particle system
+	//Change the materials of the particle system
 	ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
 	ps->setMaterialTexture(0, driverReference->getTexture("Assets/FireParticle_b.png"));
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Move the system back slighty to line up with the engine
-	ps->setPosition(irr::core::vector3df(0, 0.5f, 7 * moveDir));
+	ps->setPosition(irr::core::vector3df(0, 0.5f, -7));
 }
 
 Ship::~Ship(){
