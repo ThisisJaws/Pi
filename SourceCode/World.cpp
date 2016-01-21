@@ -14,9 +14,6 @@ World::World(PlayerShip *player, const std::string &levelLocation){
 }
 
 void World::loadPhase1(irr::IrrlichtDevice * device){
-	//Set the player position
-	player->changePosition(irr::core::vector3df(0, 100, -500));
-
 	//Load the map file
 	loadMapFile(levelLocation, device);
 
