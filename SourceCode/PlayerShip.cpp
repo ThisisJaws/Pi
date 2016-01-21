@@ -51,7 +51,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 		50U, 70U,											// emit rate
 		irr::video::SColor(0, 255, 255, 255),				// darkest color
 		irr::video::SColor(0, 255, 255, 255),				// brightest color
-		50, 100, 100,											// min and max age, angle
+		50, 100, 0,											// min and max age, angle
 		irr::core::dimension2df(0.5f, 0.5f),				// min size
 		irr::core::dimension2df(2.0f, 2.0f));				// max size
 
@@ -65,7 +65,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Move the system back slighty to line up with the engine
-	ps->setPosition(irr::core::vector3df(0, 1, -5));
+	ps->setPosition(irr::core::vector3df(0, 0.5f, -7));
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
