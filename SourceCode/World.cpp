@@ -158,7 +158,7 @@ void World::reset(){
 	phase2Complete = false;
 
 	//Get rid of the light
-	if(sun != nullptr && sun != NULL){
+	if(sun){
 		sun->remove();
 	}
 }
