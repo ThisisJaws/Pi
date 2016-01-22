@@ -160,6 +160,7 @@ void World::reset(){
 	//Get rid of the light
 	if(sun){
 		sun->remove();
+		sun = 0;
 	}
 }
 
