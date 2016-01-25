@@ -43,7 +43,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct = true, irr::core::vector3df spawnPos = irr::core::vector3df(0, 0, 0), irr::s32 objectTypeID = TYPE_UNDEFINED_TYPE);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct = true, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE);
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
@@ -67,19 +67,19 @@ public:
     
     //get the position of the object
     virtual irr::core::vector3df getPosition();
-    
     //call to update the current position with the direction
     virtual void updatePosition(const irr::core::vector3df &newPosition);
     virtual void updatePosition(const float &x, const float &y, const float &z);
-    
     //call to completely change the object position (see update pos to move the object)
     virtual void changePosition(const irr::core::vector3df &newPosition);
 
+	//Returns the current ojbects relative rotation
+	irr::core::vector3df getRotation();
 	//Rotates the object by the desired amount
 	void updateRotation(const irr::core::vector3df &angle);
 	void updateRotation(const float &x, const float &y, const float &z);
-	//Returns the current ojbects relative rotation
-	irr::core::vector3df getRotation();
+	//Changes the rotation to the given amount
+	void changeRotation(const irr::core::vector3df &angle);
 
 	//call the remove the object's mesh from the scene
 	void removeFromScene();

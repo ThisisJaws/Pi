@@ -1,7 +1,7 @@
 #include "Gem.h"
 
 Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
-        : Collectable(spawnPosition, "Assets/Collectables/SpaceGem.obj", "Assets/Collectables/SpaceGemOrange.jpg", sceneManagerReference, driverReference){
+        : Collectable(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", "Assets/Collectables/SpaceGemBronze.jpg", sceneManagerReference, driverReference){
 
     scoreIncrease = 10000;
 }

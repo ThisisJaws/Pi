@@ -3,7 +3,7 @@
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool spawnOnConstruct, irr::core::vector3df spawnPos, irr::s32 objectTypeID){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID){
 	//Make the ID of the object the current object count
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
@@ -91,6 +91,10 @@ void Object::changePosition(const irr::core::vector3df &newPosition){
 	objectNode->setPosition(newPosition);
 }
 
+irr::core::vector3df Object::getRotation(){
+	return objectNode->getRotation();
+}
+
 void Object::updateRotation(const irr::core::vector3df &angle){
 	objectNode->setRotation(getRotation() + angle);
 }
@@ -99,8 +103,8 @@ void Object::updateRotation(const float & x, const float & y, const float & z){
 	updateRotation(irr::core::vector3df(x, y, z));
 }
 
-irr::core::vector3df Object::getRotation(){
-	return objectNode->getRotation();
+void Object::changeRotation(const irr::core::vector3df &angle){
+	objectNode->setRotation(angle);
 }
 
 void Object::removeFromScene(){
@@ -116,9 +120,9 @@ void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& p
         //create the scene node using loaded mesh
         objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
         objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
-
-        //set the object to not need lighting
-        objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+		
+		//Let the object cast shadows
+		objectNode->addShadowVolumeSceneNode();
 
 		//Create a triangle selector of this object
 		irr::scene::ITriangleSelector *selector = sceneManagerReference->createTriangleSelector(objectNode);

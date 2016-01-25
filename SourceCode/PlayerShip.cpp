@@ -3,14 +3,20 @@
 #include "Game.h"
 
 PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
-    : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, driverReference, TYPE_SHIP_PLAYER){
+    : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, driverReference, TYPE_SHIP_PLAYER, 3){
 
     //init variables
     score = 0;
+	lifeIncreasePoints = 100000;
+	previousLifeIncrease = score + lifeIncreasePoints;
+
+	damageRecieved = false;
+	flashCount = 0;
+	maxFlash = 12;
+	flashLength = 0.15f;
+	timeSinceLastFlash = flashLength;
+
     ammo = 20;
-	maxZRotate = 45;
-	maxXRotate = 25;
-	rotSpeed = 100;
     this->eReceiver = eReceiver;
 
     //init the camera variables
@@ -34,25 +40,51 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     //set the ship's default mode
     currentMode = flying;
 
+	//Default is false
 	lost = false;
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
     Ship::tick(deltaTime);
 
+	//If the player has recently received damage then begin to make the ship flash
+	if(damageRecieved){
+		if(timeSinceLastFlash >= flashLength){
+			//Swap the visibility
+			if(getSceneNode()->isVisible()){
+				getSceneNode()->setVisible(false);
+			} else{
+				getSceneNode()->setVisible(true);
+			}
+			
+			//Reset time since last flash back to 0
+			timeSinceLastFlash = 0;
+			//Increment the flash count
+			flashCount++;
+		} else{
+			timeSinceLastFlash += deltaTime;
+		}
+
+		if(flashCount >= maxFlash){
+			//Once the ship has flash enough times, reset everything
+			flashCount = 0;
+			damageRecieved = false;
+
+			//Make sure it always ends visible
+			getSceneNode()->setVisible(true);
+		}
+	}
+
 	//check for collision with static Objects
 	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
-	if(collidedObjectUniqueID == 1){
-		//ID 1 is always terrain, so the player loses
-		markForDelete();
-	}else if(collidedObjectUniqueID > 1){
-		//If the ID is greater than 1 (0 is no collision) then search for the object
+	if(collidedObjectUniqueID > 0){
+		//If the ID is greater than 0 (0 is no collision) then search for the object
 		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
 		//Perform the collision checks for the object types
 		if(collidedObject != NULL){
 			switch(collidedObject->getTypeID()){
 				case TYPE_STATIC_OBJECT:
-					markForDelete();
+					dealDamage();
 					break;
 
 				case TYPE_COLLECTABLE:
@@ -78,38 +110,18 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//Left
 	if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
 		turnLeft(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().Z > 0){
-			updateRotation(0, 0, -rotSpeed * deltaTime);
-		}
 	}
 	//Right
 	if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
 		turnRight(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().Z < 0){
-			updateRotation(0, 0, rotSpeed * deltaTime);
-		}
-	}
+	} 
 	//Up
 	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
 		moveUp(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().X < 0){
-			updateRotation(rotSpeed * deltaTime, 0, 0);
-		}
 	}
 	//Down
 	if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
 		moveDown(turnSpeed, deltaTime);
-	} else{
-		//Rotate the ship back to 0
-		if(getRotation().X > 0){
-			updateRotation(-rotSpeed * deltaTime, 0, 0);
-		}
 	}
 
     //Perform camera updates after movement
@@ -117,7 +129,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
     updateCamera(camera);
 
     //check if fire key was pressed
-    if(eReceiver->isKeyDown(irr::KEY_SPACE) && currentMode == shooting){
+    if(eReceiver->isKeyDown(irr::KEY_KEY_J) && currentMode == shooting){
         //check the ammo count
         if(ammo > 0){
             if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY)){
@@ -145,7 +157,17 @@ unsigned int PlayerShip::getScore(){
 }
 
 void PlayerShip::increaseScore(unsigned int amount){
+	//Increment score
     score += amount;
+
+	//Check to see if the player gets a life
+	if(score >= previousLifeIncrease){
+		//Increase the player's lives
+		increaseLives();
+
+		//Make a new score for the player to reach
+		previousLifeIncrease += lifeIncreasePoints;
+	}
 }
 
 void PlayerShip::changePosition(irr::core::vector3df newPosition){
@@ -168,41 +190,15 @@ bool PlayerShip::playerLost(){
 	return lost;
 }
 
-void PlayerShip::turnLeft(float speed, irr::f32 deltaTime){
-    if(currentMode == flying){
-        if(getPosition().X > basePosition.X - maxXOffset){
-            float moveBy = speed * deltaTime;
-
-            //move the ship to the left
-            updatePosition(-moveBy, 0.0f, 0.0f);
-            //move the camera to the right
-            cameraXOffset += moveBy;
-
-			//Rotate the ship to the left
-			if(getRotation().Z < maxZRotate){
-				updateRotation(0, 0, rotSpeed * deltaTime);
-			}
-        }
-    }
+void PlayerShip::dealDamage(const unsigned short &amount){
+	//Only damage the player if they haven't recently recieved any
+	if(!damageRecieved){
+		Ship::dealDamage(amount);
+		damageRecieved = true;
+	}
 }
-void PlayerShip::turnRight(float speed, irr::f32 deltaTime){
-    if(currentMode == flying){
-        if(getPosition().X < basePosition.X + maxXOffset){
-            float moveBy = speed * deltaTime;
 
-            //move the ship to the right
-            updatePosition(moveBy, 0.0f, 0.0f);
-            //move the camera to the left
-            cameraXOffset -= moveBy;
-
-			//Rotate the ship to the right
-			if(getRotation().Z > -maxZRotate){
-				updateRotation(0, 0, -rotSpeed * deltaTime);
-			}
-        }
-    }
-}
-void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
+void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
     //if ship is still inside screen
     if(getPosition().Y < basePosition.Y + maxYOffset){
         float moveBy = speed * deltaTime;
@@ -215,10 +211,11 @@ void PlayerShip::moveUp(float speed, irr::f32 deltaTime){
 		//Rotate the ship up
 		if(getRotation().X > -maxXRotate){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
+			rotateBack = false;
 		}
     }
 }
-void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
+void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
     //if ship is still inside screen
     if(getPosition().Y > basePosition.Y - minYOffset){
         float moveBy = speed * deltaTime;
@@ -231,11 +228,48 @@ void PlayerShip::moveDown(float speed, irr::f32 deltaTime){
 		//Rotate the ship down
 		if(getRotation().X < maxXRotate){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
+			rotateBack = false;
 		}
     }
 }
+void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
+	if(currentMode == flying){
+		if(getPosition().X > basePosition.X - maxXOffset){
+			float moveBy = speed * deltaTime;
 
-void PlayerShip::changeMode(int increaseSpeedByFactor){
+			//move the ship to the left
+			updatePosition(-moveBy, 0.0f, 0.0f);
+			//move the camera to the right
+			cameraXOffset += moveBy;
+
+			//Rotate the ship to the left
+			if(getRotation().Z < maxZRotate){
+				updateRotation(0, 0, rotSpeed * deltaTime);
+				rotateBack = false;
+			}
+		}
+	}
+}
+void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
+	if(currentMode == flying){
+		if(getPosition().X < basePosition.X + maxXOffset){
+			float moveBy = speed * deltaTime;
+
+			//move the ship to the right
+			updatePosition(moveBy, 0.0f, 0.0f);
+			//move the camera to the left
+			cameraXOffset -= moveBy;
+
+			//Rotate the ship to the right
+			if(getRotation().Z > -maxZRotate){
+				updateRotation(0, 0, -rotSpeed * deltaTime);
+				rotateBack = false;
+			}
+		}
+	}
+}
+
+void PlayerShip::changeMode(const int &increaseSpeedByFactor){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;

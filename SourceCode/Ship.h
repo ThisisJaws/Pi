@@ -21,6 +21,14 @@ protected:
     //the direction to move in (will be +1 or -1)
     signed char moveDir;
 
+	//The maximum amount the ship can rotate
+	float maxZRotate;
+	float maxXRotate;
+	//How fast the ship will rotate
+	float rotSpeed;
+	//Keep track of the ship if it needs to rotate back
+	bool rotateBack;
+
 private:
     //if the ship is able to fire
     bool canFire;
@@ -36,10 +44,16 @@ private:
     irr::scene::ISceneManager *smgr;
     irr::video::IVideoDriver *drv;
 
+	//The lives this ship has - or how many hits it can take
+	unsigned short lives;
+
+	//Particle system scene node
+	irr::scene::IParticleSystemSceneNode *ps;
+
     //FUNCTIONS
 public:
     //constructor
-    Ship(irr::core::vector3df spawnPosition, float movementSpeed, int firingSpeed, int movementDirecion, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, irr::s32 objectTypeID, bool spawnOnConstruct = true);
+    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0, const bool &spawnOnConstruct = true);
     //destructor
     ~Ship();
 
@@ -49,15 +63,26 @@ public:
 	//Returns the movement speed
 	float getMovementSpeed();
 
+	//Returns the amount of lives
+	unsigned short getLives();
+
+	//Increment the ship's lives
+	void increaseLives(const unsigned short &amount = 1);
+
+	//Call to deal 'damage'
+	virtual void dealDamage(const unsigned short &amount = 1);
+
 protected:
     //makes the ship shoot, returns true if it fired
     bool shoot(irr::core::vector3df direction, int targetTypeID);
 
     //moves the ship forward
-    void move(float speed, irr::f32 deltaTime);
+    void move(const float &speed, const irr::f32 &deltaTime);
 	//Moves the ship up or down
-	virtual void moveUp(float speed, irr::f32 deltaTime);
-	virtual void moveDown(float speed, irr::f32 deltaTime);
+	virtual void moveUp(const float &speed, const irr::f32 &deltaTime);
+	virtual void moveDown(const float &speed, const irr::f32 &deltaTime);
+	virtual void turnLeft(const float &speed, const irr::f32 &deltaTime);
+	virtual void turnRight(const float &speed, const irr::f32 &deltaTime);
 };
 
 #endif	/* _SHIP_H */

@@ -3,7 +3,12 @@
 
 /* This class is the base class for each world (phase 1 & phase 2) */
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include <vector>
+#include <algorithm>
 
 #include "irrlicht.h"
 
@@ -14,32 +19,21 @@
 #include "Ammo.h"
 #include "Gem.h"
 
-#define HEIGHT_MAP_COUNT 5		//How many inividual height maps there are
-
 class World{
 	//VARIABLES
 protected:
 	//Reference to the player
 	PlayerShip *player;
 
-	//An array that holds the locations of the heightmap pieces
-	irr::io::path heightMapLocations[HEIGHT_MAP_COUNT];
-
-	//An array of the scene nodes that will make up the entire terrain
-	std::vector<irr::scene::ITerrainSceneNode *>terrainNodes;
-
-	//How many terrain nodes to spawn
-	int terrainNodesToSpawn;
-
-	//The path to the texture
-	irr::io::path terrainTexturePath;
-
-	//What to scale the world to
-	irr::core::vector3df worldScale;
-
 private:
-	//The start position of the player for phase 1
-	irr::core::vector3df phase1StartPosition;
+	//The light that will act as a sun
+	irr::scene::ILightSceneNode *sun;
+
+	//String to the level data
+	std::string levelLocation;
+
+	//Vector of the all the terrain segments to tell when the player has beaten the level
+	std::vector<StaticObject*> terrainSegments;
 
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
@@ -49,10 +43,21 @@ private:
 	bool phase1Complete;
 	bool phase2Complete;
 
+	//Structured used for sorting vectors
+	struct less_than_key{
+		inline bool operator() (StaticObject *obj1, StaticObject *obj2){
+			return (obj1->getPosition().Z < obj2->getPosition().Z);
+		}
+	};
+
 	//FUNCTIONS
 public:
 	//constructor
+<<<<<<< HEAD
 	World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale);
+=======
+	World(PlayerShip *player, const std::string &levelLocation);
+>>>>>>> WindowsBuild
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
@@ -74,6 +79,7 @@ public:
 	void reset();
 
 protected:
+<<<<<<< HEAD
 	//Takes a height map and returns the loaded terrain
 	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position = irr::core::vector3df(0), const irr::core::vector3df &scaleFactor = irr::core::vector3df(1), const irr::s32 &smoothFactor = 1, const float &tileAmount = 3.0f);
 
@@ -81,6 +87,10 @@ protected:
 	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
 	virtual void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
 	virtual void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
+=======
+	//Loads in the map file for the level
+	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
+>>>>>>> WindowsBuild
 };
 
 #endif /* WORLD_H */

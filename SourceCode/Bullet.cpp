@@ -40,8 +40,11 @@ void Bullet::tick(irr::f32 deltaTime){
 		if(collidedObjectUniqueID > 1){
 			Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
 			if(collidedObject != NULL && collidedObject->getTypeID() == targetTypeID){
-				//If the bullet hits it target, then delete it
-				collidedObject->markForDelete();
+				//If the bullet hits it target, then damage it
+				Ship *collidedShip = dynamic_cast<Ship *>(collidedObject);
+				collidedShip->dealDamage();
+
+				//Delete the bullet after it collides
 				markForDelete();
 			}
 		}

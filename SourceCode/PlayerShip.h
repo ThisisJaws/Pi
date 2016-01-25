@@ -12,20 +12,26 @@
 class PlayerShip : public Ship{
     //VARIABLES
 private:
-    //the player's score
+    //The player's actual score
     unsigned int score;
+	//When the player has gotten enough to recieve an extra life
+	unsigned int previousLifeIncrease;
+	//How many points to get before a life is aded
+	unsigned int lifeIncreasePoints;
+
+	//If this is true then the player will start flashing to indicate damage taken
+	bool damageRecieved;
+	//Track the ship's flashing
+	unsigned short flashCount;		//How many times the ship has flashed
+	unsigned short maxFlash;		//How many times to flash
+	irr::f32 timeSinceLastFlash;	//When was the last flash
+	irr::f32 flashLength;			//How frequently to flash
 
     //how many bullets the player can shoot
     unsigned short ammo;
 
 	//Will be true if the player loses
 	bool lost;
-
-	//The maximum amount the ship can rotate
-	float maxZRotate;
-	float maxXRotate;
-	//How fast the player will rotate
-	float rotSpeed;
 
     //variables to control the camera pos
     int tpDistance;         //distance behind the player
@@ -78,21 +84,22 @@ public:
 	virtual void markForDelete() override;
 
 	//changes the player/camera between modes
-	void changeMode(int increaseSpeedByFactor = 1);
+	void changeMode(const int &increaseSpeedByFactor = 1);
 
 	//Returns true if the player has lost
 	bool playerLost();
 
+	//Overriden so the player can have a period of invulnerability
+	virtual void dealDamage(const unsigned short &amount = 1);
+
 protected:
 	//Overriden for camera controls
-	virtual void moveUp(float speed, irr::f32 deltaTime) override;
-	virtual void moveDown(float speed, irr::f32 deltaTime) override;
+	virtual void moveUp(const float &speed, const irr::f32 &deltaTime) override;
+	virtual void moveDown(const float &speed, const irr::f32 &deltaTime) override;
+	virtual void turnLeft(const float &speed, const irr::f32 &deltaTime) override;
+	virtual void turnRight(const float &speed, const irr::f32 &deltaTime) override;
 
 private:
-	//Moves the player left or right
-    void turnLeft(float speed, irr::f32 deltaTime);
-    void turnRight(float speed, irr::f32 deltaTime);
-
     //updates the two camera positions
     void updateCameraPositions();
 

@@ -18,8 +18,8 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 3
-#define CURRENT_VERSION_REVISION 4
+#define CURRENT_VERSION_MINOR	 4
+#define CURRENT_VERSION_REVISION 7
 
 /*
  * program entry point
@@ -31,12 +31,19 @@ int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
     //Create the device the run the game
+<<<<<<< HEAD
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
     //Create the class that will handle the actual playing of the game
+=======
+    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
+	//Set the scene shadows to be darker
+	device->getSceneManager()->setShadowColor(irr::video::SColor(200, 0, 0, 0));
+	//Create the class that will handle the actual playing of the game
+>>>>>>> WindowsBuild
     Game game = Game(device, &receiver);
 
 	//Change the window name
-	irr::core::stringw windowName(L"Space Trip Version: ");
+	irr::core::stringw windowName(L"Space Trip - Version: ");
 	windowName += CURRENT_VERSION_MAJOR;
 	windowName += ".";
 	windowName += CURRENT_VERSION_MINOR;

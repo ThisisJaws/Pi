@@ -61,6 +61,7 @@ private:
 
     //Static text of the Infomation
     irr::gui::IGUIStaticText *scoreText;
+	irr::gui::IGUIStaticText *livesText;
     irr::gui::IGUIStaticText *ammoText;
     irr::gui::IGUIStaticText *FPSText;
 
