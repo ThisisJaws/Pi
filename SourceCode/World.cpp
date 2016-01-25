@@ -156,38 +156,6 @@ void World::reset(){
 
 	phase1Complete = false;
 	phase2Complete = false;
-<<<<<<< HEAD
-}
-
-irr::scene::ITerrainSceneNode* World::loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position, const irr::core::vector3df &scaleFactor, const irr::s32 &smoothFactor, const float &tileAmount){
-	//Create the return variable
-	irr::scene::ITerrainSceneNode *terrain = device->getSceneManager()->addTerrainSceneNode(heightMapFileLocation,					//Heightmap file
-																							0,										//Parent Node
-																							-1,										//Node ID
-																							irr::core::vector3df(0),				//Position - Changed below because of collision errors
-																							irr::core::vector3df(0),				//Rotation
-																							irr::core::vector3df(1),				//Scale (Will have to get adjusted per map because some might be different lengths)
-																							irr::video::SColor(255, 255, 255, 255),	//Colour
-																							8,										//Max LOD (This depends on the patch size of the terrain which has to be 2^N+1)
-																							irr::scene::ETPS_129,					//Patch size (What the LOD depends on)
-																							smoothFactor);							//Smoothfactor
-
-	//Set the lighting
-	terrain->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-
-	//Set the texture
-	terrain->setMaterialTexture(0, texture);
-
-	//Set the material type so it can be tiled
-	terrain->setMaterialType(irr::video::EMT_DETAIL_MAP);
-
-	//Set how many times each texture is tiled
-	terrain->scaleTexture(tileAmount);
-
-	//Set the position of the terrain
-	terrain->setPosition(position);
-=======
->>>>>>> WindowsBuild
 
 	//Get rid of the light
 	if(sun){
