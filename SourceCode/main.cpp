@@ -25,21 +25,11 @@
  * program entry point
  */
 int main(int argc, char** argv) {
-	//Resolution for the pi
-	//irr::core::dimension2d<irr::s32> piRes(1280, 720);
-
     //Create the device to handle input
     EventReceiver receiver;
     //Create the device the run the game
-<<<<<<< HEAD
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
     //Create the class that will handle the actual playing of the game
-=======
-    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-	//Set the scene shadows to be darker
-	device->getSceneManager()->setShadowColor(irr::video::SColor(200, 0, 0, 0));
-	//Create the class that will handle the actual playing of the game
->>>>>>> WindowsBuild
     Game game = Game(device, &receiver);
 
 	//Change the window name
