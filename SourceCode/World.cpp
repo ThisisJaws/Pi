@@ -2,15 +2,7 @@
 
 #include "Game.h"
 
-<<<<<<< HEAD
-World::World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale){
-	//Set the player start pos for the map
-	phase1StartPosition = phase1StartPos;
-	this->worldScale = worldScale;
-	terrainNodesToSpawn = sceneNodesToSpawn;
-=======
 World::World(PlayerShip *player, const std::string &levelLocation){
->>>>>>> WindowsBuild
 	this->player = player;
 	this->levelLocation = levelLocation;
 
