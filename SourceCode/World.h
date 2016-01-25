@@ -8,6 +8,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "irrlicht.h"
 
@@ -41,6 +42,13 @@ private:
 	//Keep track of what has been completed
 	bool phase1Complete;
 	bool phase2Complete;
+
+	//Structured used for sorting vectors
+	struct less_than_key{
+		inline bool operator() (StaticObject obj1, StaticObject obj2){
+			return (obj1.getPosition().Z < obj2.getPosition().Z);
+		}
+	};
 
 	//FUNCTIONS
 public:

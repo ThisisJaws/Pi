@@ -14,11 +14,11 @@ World::World(PlayerShip *player, const std::string &levelLocation){
 }
 
 void World::loadPhase1(irr::IrrlichtDevice * device){
-	//Reset the player's position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
-
 	//Load the map file
 	loadMapFile(levelLocation, device);
+
+	//Reset the player's position
+	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Phase is now loaded
 	phase1Loaded = true;
@@ -266,10 +266,14 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			}
 		}
 
+		//Close the file when done
+		file.close();
+
 		//Add in a point light
 		sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
 
-		//Close the file when done
-		file.close();
+		//Sort the vector to put all objects in ascending order of the Z pos
+		//This will mean checking the player position for the end of the level will work better
+		std::sort(terrainSegments.begin(), terrainSegments.end(), less_than_key());
 	}
 }
