@@ -45,8 +45,8 @@ private:
 
 	//Structured used for sorting vectors
 	struct less_than_key{
-		inline bool operator() (StaticObject obj1, StaticObject obj2){
-			return (obj1.getPosition().Z < obj2.getPosition().Z);
+		inline bool operator() (StaticObject *obj1, StaticObject *obj2){
+			return (obj1->getPosition().Z < obj2->getPosition().Z);
 		}
 	};
 
