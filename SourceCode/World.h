@@ -53,11 +53,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-<<<<<<< HEAD
-	World(PlayerShip *player, const int &sceneNodesToSpawn, const irr::core::vector3df &phase1StartPos, const irr::core::vector3df &worldScale);
-=======
 	World(PlayerShip *player, const std::string &levelLocation);
->>>>>>> WindowsBuild
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
@@ -79,18 +75,8 @@ public:
 	void reset();
 
 protected:
-<<<<<<< HEAD
-	//Takes a height map and returns the loaded terrain
-	irr::scene::ITerrainSceneNode* loadTerrain(irr::IrrlichtDevice *device, const irr::io::path &heightMapFileLocation, irr::video::ITexture *texture, const irr::core::vector3df &position = irr::core::vector3df(0), const irr::core::vector3df &scaleFactor = irr::core::vector3df(1), const irr::s32 &smoothFactor = 1, const float &tileAmount = 3.0f);
-
-	//Derived classes will override these to place objects
-	virtual void loadPhase1Obsticles(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
-	virtual void loadPhase1Gems(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
-	virtual void loadPhase1Ammo(const irr::core::vector3df &playerStartPos, irr::scene::ISceneManager *sceneManager, irr::video::IVideoDriver *videoDriver) = 0;
-=======
 	//Loads in the map file for the level
 	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
->>>>>>> WindowsBuild
 };
 
 #endif /* WORLD_H */
