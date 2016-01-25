@@ -61,6 +61,12 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Gem.cpp" />
 		<Unit filename="Gem.h" />
+		<Unit filename="IceWorld.cpp" />
+		<Unit filename="IceWorld.h" />
+		<Unit filename="JungleWorld.cpp" />
+		<Unit filename="JungleWorld.h" />
+		<Unit filename="LavaWorld.cpp" />
+		<Unit filename="LavaWorld.h" />
 		<Unit filename="Object.cpp" />
 		<Unit filename="Object.h" />
 		<Unit filename="ObjectTypes.h" />
@@ -74,6 +80,8 @@
 		<Unit filename="StrongEnemy.h" />
 		<Unit filename="Testing.cpp" />
 		<Unit filename="Testing.h" />
+		<Unit filename="World.cpp" />
+		<Unit filename="World.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion>
