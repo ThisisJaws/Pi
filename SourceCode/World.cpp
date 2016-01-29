@@ -20,6 +20,10 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	//Reset the player's position
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
+	//Add in a point light
+	sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, 0), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
+	sun->setParent(player->getSceneNode());
+
 	//Phase is now loaded
 	phase1Loaded = true;
 }
@@ -32,7 +36,6 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	phase1Loaded = false;
 
 	//Change the sun to be with the camera
-	sun->setParent(device->getSceneManager()->getActiveCamera());
 	sun->setPosition(irr::core::vector3df(0, 0, 0));
 	sun->setRadius(500);
 
@@ -158,10 +161,10 @@ void World::reset(){
 	phase2Complete = false;
 
 	//Get rid of the light
-	if(sun){
-		sun->remove();
-		sun = 0;
-	}
+	//if(sun){
+	//	sun->remove();
+	//	sun = 0;
+	//}
 }
 
 void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
@@ -268,9 +271,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 		//Close the file when done
 		file.close();
-
-		//Add in a point light
-		sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
 
 		//Sort the vector to put all objects in ascending order of the Z pos
 		//This will mean checking the player position for the end of the level will work better
