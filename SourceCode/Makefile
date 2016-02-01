@@ -18,7 +18,7 @@ Bin = .
 
 # general compiler settings
 CPPFLAGS = -I$(IrrlichtHome)/include -I/usr/X11R6/include
-CXXFLAGS = -O3 -ffast-math
+CXXFLAGS = -O3 -ffast-math -Wl,--rpath -Wl,LIBDIR
 #CXXFLAGS = -g -Wall
 
 #default target is Linux
@@ -28,7 +28,7 @@ ifeq ($(HOSTTYPE), x86_64)
 LIBSELECT=64
 endif
 
-OGLESLIBS := -L$(HOME)/irrlicht/SDKPackage-ogles1/Builds/OGLES/LinuxPC/Lib -L/opt/vc/lib -lGLESv1_CM -lGLESv2 -lEGL -lGL -lbcm_host
+OGLESLIBS := -L$(HOME)/irrlicht/SDKPackage-ogles1/Builds/OGLES/LinuxPC/Lib -L/opt/vc/lib -lGLESv1_CM -lGLESv2 -lEGL -lGL -lbcm_host -laudiere
 # target specific settings
 all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L$(IrrlichtHome)/lib/Linux -lIrrlicht $(OGLESLIBS) -lXxf86vm -lXext -lX11 -lXcursor
 all_linux clean_linux: SYSTEM=Linux
