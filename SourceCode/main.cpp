@@ -18,8 +18,8 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 4
-#define CURRENT_VERSION_REVISION 7
+#define CURRENT_VERSION_MINOR	 5
+#define CURRENT_VERSION_REVISION 0
 
 /*
  * program entry point
