@@ -98,8 +98,8 @@ public:
 	//Returns the object if the loop contains the ID
 	static Object* getObjectReferenceByID(const irr::s32 &objectID);
 
-    //Returns a reference to player
-    static PlayerShip* getPlayer();
+    //Returns true if the position is behind the player
+    static bool checkBehidPlayer(const irr::f32 &zPos);
 
     //returns true if objects are loaded in the scene
     bool isLoaded();

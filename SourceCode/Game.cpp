@@ -206,8 +206,8 @@ bool Game::objectToUpdateContainsAnyType(const int &typeID){
 }
 
 Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
-	//Make sure it isn't looknig for 0 or 1
-	if(objectID <= 1){
+	//Make sure it isn't looknig for 0
+	if(objectID == 0){
 		return NULL;
 	}
 
@@ -222,8 +222,8 @@ Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
 	return NULL;
 }
 
-PlayerShip* Game::getPlayer(){
-    return g_player;
+bool Game::checkBehidPlayer(const irr::f32 &zPos){
+    return g_player->getPosition().Z > zPos;
 }
 
 bool Game::isLoaded(){
