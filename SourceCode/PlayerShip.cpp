@@ -40,6 +40,9 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     //set the ship's default mode
     currentMode = flying;
 
+    //Set up the light
+    light = sceneManagerReference->addLightSceneNode(0, irr::core::vector3df(0, 1000, 0));
+
 	//Default is false
 	lost = false;
 }
@@ -56,7 +59,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 			} else{
 				getSceneNode()->setVisible(true);
 			}
-			
+
 			//Reset time since last flash back to 0
 			timeSinceLastFlash = 0;
 			//Increment the flash count
@@ -105,6 +108,11 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	unsigned int difference = newZ - oldZ;
 	//increase score by the difference
 	increaseScore(difference);
+	//Move the light along the Z axis
+	irr::core::vector3df lightPos = getPosition();
+	lightPos.Y = 1000;
+	lightPos.X = 0;
+	light->setPosition(lightPos);
 
 	//check for and apply all position changes
 	//Left
@@ -114,7 +122,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//Right
 	if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
 		turnRight(turnSpeed, deltaTime);
-	} 
+	}
 	//Up
 	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
 		moveUp(turnSpeed, deltaTime);
