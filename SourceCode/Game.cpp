@@ -223,7 +223,12 @@ Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
 }
 
 bool Game::checkBehidPlayer(const irr::f32 &zPos){
-    return g_player->getPosition().Z > zPos;
+    //Loop through the static vector to find the player
+    for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getTypeID() == TYPE_SHIP_PLAYER){
+			return (*objectIterator)->getPosition().Z > zPos;
+		}
+	}
 }
 
 bool Game::isLoaded(){
