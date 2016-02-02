@@ -222,6 +222,10 @@ Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
 	return NULL;
 }
 
+PlayerShip* Game::getPlayer(){
+    return g_player;
+}
+
 bool Game::isLoaded(){
     return loaded;
 }
