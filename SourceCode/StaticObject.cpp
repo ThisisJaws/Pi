@@ -21,7 +21,7 @@ void StaticObject::tick(irr::f32 deltaTime){
     }
 
     //If this object is behind the player then delete it
-    if(Game::checkBehidPlayer(getPosition().Z)){
+    if(Game::checkBehidPlayer(getSceneNode()->getTransformedBoundingBox().MaxEdge.Z)){
         markForDelete();
     }
 }
