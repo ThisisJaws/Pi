@@ -42,6 +42,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 
     //Set up the light
     light = sceneManagerReference->addLightSceneNode(0, irr::core::vector3df(0, 1000, 0));
+    light->setRadius(10000);
 
 	//Default is false
 	lost = false;
