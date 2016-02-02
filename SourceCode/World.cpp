@@ -31,11 +31,6 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	//Make sure the previous phase is no longer considered loaded
 	phase1Loaded = false;
 
-	//Change the sun to be with the camera
-	sun->setParent(device->getSceneManager()->getActiveCamera());
-	sun->setPosition(irr::core::vector3df(0, 0, 0));
-	sun->setRadius(500);
-
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
 	irr::video::IVideoDriver *driver = device->getVideoDriver();
@@ -156,12 +151,6 @@ void World::reset(){
 
 	phase1Complete = false;
 	phase2Complete = false;
-
-	//Get rid of the light
-	if(sun){
-		sun->remove();
-		sun = 0;
-	}
 }
 
 void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
@@ -268,9 +257,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 		//Close the file when done
 		file.close();
-
-		//Add in a point light
-		sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, terrainSegments.size() / 2), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
 
 		//Sort the vector to put all objects in ascending order of the Z pos
 		//This will mean checking the player position for the end of the level will work better
