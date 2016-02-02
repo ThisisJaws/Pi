@@ -18,7 +18,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	loadMapFile(levelLocation, device);
 
 	//Reset the player's position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
+	player->changePosition(irr::core::vector3df(0, 0, -500));
 
 	//Phase is now loaded
 	phase1Loaded = true;
