@@ -3,8 +3,7 @@
 
 /*
  * Sound manager namespace handles the playing of audio, it will have
- * sounds saved in it already as static members and all functions will be 
- * called statically
+ * sounds saved in it already and they can be easily played by calling the function
  */
 
 #include "audiere.h"
