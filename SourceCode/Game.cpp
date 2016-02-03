@@ -19,6 +19,9 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	//Init default variables
 	previousScore = 0;
 	currentWorld = 0;
+
+	stageWaitTime = 5;
+	stageWaitPast = 0;
 }
 
 Game::~Game(){
@@ -64,6 +67,8 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(10, 40, 500, 70));
     ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
     FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 550, 300, 580));
+	stageCompleteText = guienv->addStaticText(L"STAGE COMPLETE", irr::core::rect<irr::s32>(260, 250, 700, 300));
+	stageCompleteText->setVisible(false);
 
     //Start the timer for frame independent movement
     then = device->getTimer()->getRealTime();
@@ -124,33 +129,47 @@ bool Game::play(){
 
 	//Check if a phase has been completed
 	if(worlds[currentWorld]->isPhase1Complete() || worlds[currentWorld]->isPhase2Complete()){
-		//Then check what needs to be loaded
-		if(!worlds[currentWorld]->isPhase2Loaded()){
-			//Load phase 2
-			resetObjectsToUpdate();
-			//Change mode first because of speed increase
-			g_player->changeMode();
-			//Load in the next phase
-			worlds[currentWorld]->loadPhase2(device);
-		} else{
-			//Reset the objects
-			resetObjectsToUpdate();
-			//Reset the world
-			worlds[currentWorld]->reset();
-			//Increment the cuurent world tracker
-			currentWorld++;
-			//Check if there are any more worlds to load
-			if(currentWorld < NUM_WORLDS){
-				//Change mode
+		//If either is complete lock the player's controls
+		g_player->setControlLock(true);
+		stageCompleteText->setVisible(true);
+
+		//Wait for a period of time
+		if(stageWaitPast > stageWaitTime){
+			//Reset the variables
+			stageWaitPast = 0;
+			g_player->setControlLock(false);
+			stageCompleteText->setVisible(false);
+
+			//Then check what needs to be loaded
+			if(!worlds[currentWorld]->isPhase2Loaded()){
+				//Load phase 2
+				resetObjectsToUpdate();
+				//Change mode first because of speed increase
 				g_player->changeMode();
-				//Load the next world
-				worlds[currentWorld]->loadPhase1(device);
+				//Load in the next phase
+				worlds[currentWorld]->loadPhase2(device);
 			} else{
-				//Start again but increment speed by double
-				currentWorld = 0;
-				g_player->changeMode(2);
-				worlds[currentWorld]->loadPhase1(device);
+				//Reset the objects
+				resetObjectsToUpdate();
+				//Reset the world
+				worlds[currentWorld]->reset();
+				//Increment the cuurent world tracker
+				currentWorld++;
+				//Check if there are any more worlds to load
+				if(currentWorld < NUM_WORLDS){
+					//Change mode
+					g_player->changeMode();
+					//Load the next world
+					worlds[currentWorld]->loadPhase1(device);
+				} else{
+					//Start again but increment speed by double
+					currentWorld = 0;
+					g_player->changeMode(2);
+					worlds[currentWorld]->loadPhase1(device);
+				}
 			}
+		} else{
+			stageWaitPast += frameDeltaTime;
 		}
 	}
 

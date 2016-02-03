@@ -59,11 +59,12 @@ private:
     //The skybox
     irr::scene::ISceneNode *skyBox;
 
-    //Static text of the Infomation
+    //GUI Static text of the Infomation
     irr::gui::IGUIStaticText *scoreText;
 	irr::gui::IGUIStaticText *livesText;
     irr::gui::IGUIStaticText *ammoText;
     irr::gui::IGUIStaticText *FPSText;
+	irr::gui::IGUIStaticText *stageCompleteText;
 
     //Handle frame independent movement
     irr::u32 then;
@@ -72,6 +73,10 @@ private:
 
     //check if the game has been loaded
     bool loaded;
+
+	//Howlong to wait after the player has finished the stage to start another
+	float stageWaitTime;
+	float stageWaitPast;
 
     //FUNCTIONS
 public:
