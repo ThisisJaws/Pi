@@ -9,6 +9,7 @@
 
 #include "Game.h"
 #include "EventReceiver.h"
+#include "SoundManager.h"
 
 //so it can work on windows
 #ifdef _IRR_WINDOWS_
@@ -61,6 +62,9 @@ int main(int argc, char** argv) {
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));
     scoreText->setVisible(false);
     irr::core::stringw scoreCount(L"Empty");
+
+	//Loop the menu music
+	SoundManager::playMusicMenu();
 
     //The main loop of the entire program
     while(device->run()){
