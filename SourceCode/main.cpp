@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
     //Set up the audiere device
     audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
     //Loop a sound for now
-    audiere::OutputStreamPtr sound = OpenSound(audDevice, "Assets/Sound/ingame.wav");
+    audiere::OutputStreamPtr sound = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
     sound->setRepeat(true);
     sound->play();
 
