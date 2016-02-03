@@ -122,35 +122,35 @@ bool Game::play(){
 		return true;
 	}
 
-	//Check the win condition of the current game
-	if(worlds[currentWorld]->isPhase1Complete() && !worlds[currentWorld]->isPhase2Loaded()){
-		//Load phase 2
-		resetObjectsToUpdate();
-		//Change mode first because of speed increase
-		g_player->changeMode();
-		//Load in the next phase
-		worlds[currentWorld]->loadPhase2(device);
-	}
-
-	//When phase 2 is complete
-	if(worlds[currentWorld]->isPhase2Complete()){
-		//Reset the objects
-		resetObjectsToUpdate();
-		//Reset the world
-		worlds[currentWorld]->reset();
-		//Increment the cuurent world tracker
-		currentWorld++;
-		//Check if there are any more worlds to load
-		if(currentWorld < NUM_WORLDS){
-			//Change mode
+	//Check if a phase has been completed
+	if(worlds[currentWorld]->isPhase1Complete() || worlds[currentWorld]->isPhase2Complete()){
+		//Then check what needs to be loaded
+		if(!worlds[currentWorld]->isPhase2Loaded()){
+			//Load phase 2
+			resetObjectsToUpdate();
+			//Change mode first because of speed increase
 			g_player->changeMode();
-			//Load the next world
-			worlds[currentWorld]->loadPhase1(device);
+			//Load in the next phase
+			worlds[currentWorld]->loadPhase2(device);
 		} else{
-			//Start again but increment speed by double
-			currentWorld = 0;
-			g_player->changeMode(2);
-			worlds[currentWorld]->loadPhase1(device);
+			//Reset the objects
+			resetObjectsToUpdate();
+			//Reset the world
+			worlds[currentWorld]->reset();
+			//Increment the cuurent world tracker
+			currentWorld++;
+			//Check if there are any more worlds to load
+			if(currentWorld < NUM_WORLDS){
+				//Change mode
+				g_player->changeMode();
+				//Load the next world
+				worlds[currentWorld]->loadPhase1(device);
+			} else{
+				//Start again but increment speed by double
+				currentWorld = 0;
+				g_player->changeMode(2);
+				worlds[currentWorld]->loadPhase1(device);
+			}
 		}
 	}
 
