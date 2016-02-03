@@ -171,6 +171,7 @@
     <ClCompile Include="..\..\SourceCode\Object.cpp" />
     <ClCompile Include="..\..\SourceCode\PlayerShip.cpp" />
     <ClCompile Include="..\..\SourceCode\Ship.cpp" />
+    <ClCompile Include="..\..\SourceCode\SoundManager.cpp" />
     <ClCompile Include="..\..\SourceCode\StaticObject.cpp" />
     <ClCompile Include="..\..\SourceCode\StrongEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Testing.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\..\SourceCode\ObjectTypes.h" />
     <ClInclude Include="..\..\SourceCode\PlayerShip.h" />
     <ClInclude Include="..\..\SourceCode\Ship.h" />
+    <ClInclude Include="..\..\SourceCode\SoundManager.h" />
     <ClInclude Include="..\..\SourceCode\StaticObject.h" />
     <ClInclude Include="..\..\SourceCode\StrongEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Testing.h" />
