@@ -6,6 +6,7 @@
  */
 
 #include "irrlicht.h"
+#include "audiere.h"
 
 #include "Game.h"
 #include "EventReceiver.h"
@@ -18,23 +19,18 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 4
-#define CURRENT_VERSION_REVISION 7
+#define CURRENT_VERSION_MINOR	 5
+#define CURRENT_VERSION_REVISION 1
 
 /*
  * program entry point
  */
 int main(int argc, char** argv) {
-	//Resolution for the pi
-	//irr::core::dimension2d<irr::s32> piRes(1280, 720);
-
     //Create the device to handle input
     EventReceiver receiver;
     //Create the device the run the game
-    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-	//Set the scene shadows to be darker
-	device->getSceneManager()->setShadowColor(irr::video::SColor(200, 0, 0, 0));
-	//Create the class that will handle the actual playing of the game
+    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
+    //Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 
 	//Change the window name
@@ -45,6 +41,13 @@ int main(int argc, char** argv) {
 	windowName += ".";
 	windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
+
+    //Set up the audiere device
+    audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
+    //Loop a sound for now
+    audiere::OutputStreamPtr sound = OpenSound(audDevice, "Assets/Sound/ingame.wav");
+    sound->setRepeat(true);
+    sound->play();
 
     //Create a texture variable to draw the menu
     irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu800x600.jpg");

@@ -41,7 +41,7 @@ private:
     irr::gui::IGUIEnvironment *guienv;
     //object to receive keyboard input
     EventReceiver *eReceiver;
-	
+
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
 
@@ -93,10 +93,13 @@ public:
     static void addObjectToUpdate(Object *toAdd);
 
 	//Check if the objects list contains any type of object
-	static bool objectToUpdateContainsAnyType(int typeID);
+	static bool objectToUpdateContainsAnyType(const int &typeID);
 
 	//Returns the object if the loop contains the ID
-	static Object* getObjectReferenceByID(irr::s32 objectID);
+	static Object* getObjectReferenceByID(const irr::s32 &objectID);
+
+    //Returns true if the position is behind the player
+    static bool checkBehidPlayer(const irr::f32 &zPos);
 
     //returns true if objects are loaded in the scene
     bool isLoaded();

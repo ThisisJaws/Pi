@@ -15,7 +15,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
-	
+
 	//Init default variables
 	previousScore = 0;
 	currentWorld = 0;
@@ -130,8 +130,8 @@ bool Game::play(){
 		g_player->changeMode();
 		//Load in the next phase
 		worlds[currentWorld]->loadPhase2(device);
-	} 
-	
+	}
+
 	//When phase 2 is complete
 	if(worlds[currentWorld]->isPhase2Complete()){
 		//Reset the objects
@@ -194,7 +194,7 @@ void Game::addObjectToUpdate(Object *toAdd){
     objectsToUpdate.push_back(toAdd);
 }
 
-bool Game::objectToUpdateContainsAnyType(int typeID){
+bool Game::objectToUpdateContainsAnyType(const int &typeID){
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
 		if((*objectIterator)->getTypeID() == typeID){
 			return true;
@@ -205,9 +205,9 @@ bool Game::objectToUpdateContainsAnyType(int typeID){
 	return false;
 }
 
-Object* Game::getObjectReferenceByID(irr::s32 objectID){
-	//Make sure it isn't looknig for 0 or 1 
-	if(objectID <= 1){
+Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
+	//Make sure it isn't looknig for 0
+	if(objectID == 0){
 		return NULL;
 	}
 
@@ -220,6 +220,15 @@ Object* Game::getObjectReferenceByID(irr::s32 objectID){
 
 	//If the loop completes return NULL
 	return NULL;
+}
+
+bool Game::checkBehidPlayer(const irr::f32 &zPos){
+    //Loop through the static vector to find the player
+    for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getTypeID() == TYPE_SHIP_PLAYER){
+			return (*objectIterator)->getPosition().Z > zPos;
+		}
+	}
 }
 
 bool Game::isLoaded(){

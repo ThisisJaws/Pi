@@ -18,11 +18,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	loadMapFile(levelLocation, device);
 
 	//Reset the player's position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
-
-	//Add in a point light
-	sun = device->getSceneManager()->addLightSceneNode(0, irr::core::vector3df(0, 5000, 0), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-	sun->setParent(player->getSceneNode());
+	player->changePosition(irr::core::vector3df(0, 0, -500));
 
 	//Phase is now loaded
 	phase1Loaded = true;
@@ -34,10 +30,6 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 
 	//Make sure the previous phase is no longer considered loaded
 	phase1Loaded = false;
-
-	//Change the sun to be with the camera
-	sun->setPosition(irr::core::vector3df(0, 0, 0));
-	sun->setRadius(500);
 
 	//Get the references
 	irr::scene::ISceneManager *smgr = device->getSceneManager();
@@ -159,12 +151,6 @@ void World::reset(){
 
 	phase1Complete = false;
 	phase2Complete = false;
-
-	//Get rid of the light
-	//if(sun){
-	//	sun->remove();
-	//	sun = 0;
-	//}
 }
 
 void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){

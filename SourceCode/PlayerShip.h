@@ -55,6 +55,9 @@ private:
     //to be able to receive events
     EventReceiver *eReceiver;
 
+    //The light to light the level
+    irr::scene::ILightSceneNode *light;
+
     //enum to store the payer's mode
     enum modes{
         flying,

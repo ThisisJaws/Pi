@@ -26,9 +26,6 @@ protected:
 	PlayerShip *player;
 
 private:
-	//The light that will act as a sun
-	irr::scene::ILightSceneNode *sun;
-
 	//String to the level data
 	std::string levelLocation;
 
