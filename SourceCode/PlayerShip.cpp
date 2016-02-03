@@ -44,12 +44,14 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     light = sceneManagerReference->addLightSceneNode(0, irr::core::vector3df(0, 1000, 0));
     light->setRadius(10000);
 
+	controlsLocked = false;
+
 	//Default is false
 	lost = false;
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
-    Ship::tick(deltaTime);
+	Ship::tick(deltaTime);
 
 	//If the player has recently received damage then begin to make the ship flash
 	if(damageRecieved){
@@ -115,38 +117,40 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	lightPos.X = 0;
 	light->setPosition(lightPos);
 
-	//check for and apply all position changes
-	//Left
-	if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
-		turnLeft(turnSpeed, deltaTime);
-	}
-	//Right
-	if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-		turnRight(turnSpeed, deltaTime);
-	}
-	//Up
-	if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
-		moveUp(turnSpeed, deltaTime);
-	}
-	//Down
-	if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
-		moveDown(turnSpeed, deltaTime);
-	}
+	if(!controlsLocked){
+		//check for and apply all position changes
+		//Left
+		if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
+			turnLeft(turnSpeed, deltaTime);
+		}
+		//Right
+		if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
+			turnRight(turnSpeed, deltaTime);
+		}
+		//Up
+		if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
+			moveUp(turnSpeed, deltaTime);
+		}
+		//Down
+		if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
+			moveDown(turnSpeed, deltaTime);
+		}
 
-    //Perform camera updates after movement
-    updateCameraPositions();
-    updateCamera(camera);
+		//Perform camera updates after movement
+		updateCameraPositions();
+		updateCamera(camera);
 
-    //check if fire key was pressed
-    if(eReceiver->isKeyDown(irr::KEY_KEY_J) && currentMode == shooting){
-        //check the ammo count
-        if(ammo > 0){
-            if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY)){
-                //if the ship successfully shot then take away 1 ammo
-                ammo--;
-            }
-        }
-    }
+		//check if fire key was pressed
+		if(eReceiver->isKeyDown(irr::KEY_KEY_J) && currentMode == shooting){
+			//check the ammo count
+			if(ammo > 0){
+				if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY)){
+					//if the ship successfully shot then take away 1 ammo
+					ammo--;
+				}
+			}
+		}
+	}
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
@@ -205,6 +209,14 @@ void PlayerShip::dealDamage(const unsigned short &amount){
 		Ship::dealDamage(amount);
 		damageRecieved = true;
 	}
+}
+
+void PlayerShip::setControlLock(const bool &lock){
+	controlsLocked = lock;
+}
+
+bool PlayerShip::areControlsLocked(){
+	return controlsLocked;
 }
 
 void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){

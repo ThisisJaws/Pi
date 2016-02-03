@@ -58,6 +58,9 @@ private:
     //The light to light the level
     irr::scene::ILightSceneNode *light;
 
+	//Stops the player moving the ship
+	bool controlsLocked;
+
     //enum to store the payer's mode
     enum modes{
         flying,
@@ -94,6 +97,12 @@ public:
 
 	//Overriden so the player can have a period of invulnerability
 	virtual void dealDamage(const unsigned short &amount = 1);
+
+	//Locks the contronls (and camera)
+	void setControlLock(const bool &lock);
+
+	//Returns the lockControls variable
+	bool areControlsLocked();
 
 protected:
 	//Overriden for camera controls
