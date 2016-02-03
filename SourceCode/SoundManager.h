@@ -20,10 +20,10 @@ namespace SoundManager{
 
 
 	//Plays the menu music
-	extern void playMusicMenu(bool repeat = true);
+	extern void playMusicMenu(const bool &repeat = true);
 
 	//Plays the correct music for the level
-	extern void playMusicLevel(LevelType level, bool repeat = true);
+	extern void playMusicLevel(const LevelType &level, const bool &repeat = true);
 
 	//Plays the button SFX
 	extern void playSFXButtonPress();

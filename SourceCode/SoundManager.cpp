@@ -11,12 +11,12 @@ namespace SoundManager{
 	
 	//FUNCTION DEFINITIONS
 
-	void playMusicMenu(bool repeat){
+	void playMusicMenu(const bool &repeat){
 		mainMenu->play();
 		mainMenu->setRepeat(repeat);
 	}
 
-	void playMusicLevel(LevelType level, bool repeat){
+	void playMusicLevel(const LevelType &level, const bool &repeat){
 		//UNFISHED
 	}
 
