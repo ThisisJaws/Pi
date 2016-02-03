@@ -6,7 +6,6 @@
  */
 
 #include "irrlicht.h"
-#include "audiere.h"
 
 #include "Game.h"
 #include "EventReceiver.h"
@@ -20,7 +19,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 5
-#define CURRENT_VERSION_REVISION 1
+#define CURRENT_VERSION_REVISION 2
 
 /*
  * program entry point
@@ -41,13 +40,6 @@ int main(int argc, char** argv) {
 	windowName += ".";
 	windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
-
-    //Set up the audiere device
-    audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
-    //Loop a sound for now
-    audiere::OutputStreamPtr sound = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
-    sound->setRepeat(true);
-    sound->play();
 
     //Create a texture variable to draw the menu
     irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu800x600.jpg");
