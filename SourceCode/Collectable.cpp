@@ -1,6 +1,7 @@
 #include "Collectable.h"
 
 #include "Game.h"
+#include "SoundManager.h"
 
 Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE){
@@ -39,12 +40,8 @@ void Collectable::tick(irr::f32 deltaTime){
 }
 
 void Collectable::activate(PlayerShip * player){
-	//Base function simply marks for delete
 	markForDelete();
+	SoundManager::playSFXPickup();
 }
 
-void Collectable::markForDelete(){
-	//Call the base
-	Object::markForDelete();
-}
 
