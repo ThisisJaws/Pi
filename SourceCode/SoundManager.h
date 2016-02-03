@@ -9,15 +9,16 @@
 #include "audiere.h"
 #include <vector>
 
-//Enum for level types
-enum LevelType{
-	LAVA,
-	ICE,
-	JUNGLE
-};
-
 // Using a namespace and declaring non-memeber functions is better than an 'all static' class
 namespace SoundManager{
+	//Enum for level types
+	enum LevelType{
+		LAVA,
+		ICE,
+		JUNGLE
+	};
+
+
 	//Plays the menu music
 	extern void playMusicMenu(bool repeat = true);
 
