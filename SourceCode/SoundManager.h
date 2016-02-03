@@ -19,13 +19,12 @@ enum LevelType{
 
 // Using a namespace and declaring non-memeber functions is better than an 'all static' class
 namespace SoundManager{
-	//----All variables will be initialised here----//
 	namespace private_members{
 		//Audiere device to handle the sounds
-		audiere::AudioDevicePtr device = audiere::OpenDevice();
+		extern audiere::AudioDevicePtr device;
 
 		//Main menu music
-		audiere::OutputStreamPtr mainMenu = audiere::OpenSound(device, "Assets/Sound/ingame.wav");
+		extern audiere::OutputStreamPtr mainMenu;
 
 		//Lava level music
 
@@ -34,31 +33,31 @@ namespace SoundManager{
 		//Jungle level music
 
 		//Button press SFX
-		audiere::OutputStreamPtr buttonPress = audiere::OpenSound(device, "Assets/Sound/ButtonPress.wav");
+		extern audiere::OutputStreamPtr buttonPress;
 
 		//Pickup SFX
-		audiere::OutputStreamPtr pickup = audiere::OpenSound(device, "Assets/Sound/Pickup.mp3");
+		extern audiere::OutputStreamPtr pickup;
 
 		//Shooting SFX
-		audiere::OutputStreamPtr shoot = audiere::OpenSound(device, "Assets/Sound/Shooting.wav");
+		extern audiere::OutputStreamPtr shoot;
 	}
 
 	//Plays the menu music
-	void playMusicMenu();
+	extern void playMusicMenu(bool repeat = true);
 
 	//Plays the correct music for the level
-	void playMusicLevel(LevelType level);
+	extern void playMusicLevel(LevelType level, bool repeat = true);
 
 	//Plays the button SFX
-	void playSFXButtonPress();
+	extern void playSFXButtonPress();
 
 	//Plays the pickup SFX
-	void playSFXPickup();
+	extern void playSFXPickup();
 
 	//Plays the shooting SFX
-	void playSFXShoot();
+	extern void playSFXShoot();
 
 	//Stops all sounds
-	void stopAllSounds();
+	extern void stopAllSounds();
 }
 #endif
