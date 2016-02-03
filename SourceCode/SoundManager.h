@@ -18,29 +18,6 @@ enum LevelType{
 
 // Using a namespace and declaring non-memeber functions is better than an 'all static' class
 namespace SoundManager{
-	namespace private_members{
-		//Audiere device to handle the sounds
-		extern audiere::AudioDevicePtr device;
-
-		//Main menu music
-		extern audiere::OutputStreamPtr mainMenu;
-
-		//Lava level music
-
-		//Ice level music
-
-		//Jungle level music
-
-		//Button press SFX
-		extern audiere::OutputStreamPtr buttonPress;
-
-		//Pickup SFX
-		extern audiere::OutputStreamPtr pickup;
-
-		//Shooting SFX
-		extern audiere::OutputStreamPtr shoot;
-	}
-
 	//Plays the menu music
 	extern void playMusicMenu(bool repeat = true);
 

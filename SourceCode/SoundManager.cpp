@@ -1,21 +1,19 @@
 #include "SoundManager.h"
 
 namespace SoundManager{
-	namespace private_members{
-		//Define all variables here to avoid multiple definition errors
-		audiere::AudioDevicePtr device = audiere::OpenDevice();
+	//Variables the functions require
+	audiere::AudioDevicePtr device = audiere::OpenDevice();
 
-		audiere::OutputStreamPtr mainMenu		= audiere::OpenSound(device, "Assets/Sound/ingame.wav");
-		audiere::OutputStreamPtr buttonPress	= audiere::OpenSound(device, "Assets/Sound/ButtonPress.wav");
-		audiere::OutputStreamPtr pickup			= audiere::OpenSound(device, "Assets/Sound/Pickup.mp3");
-		audiere::OutputStreamPtr shoot			= audiere::OpenSound(device, "Assets/Sound/Shooting.wav");
-	}
-
+	audiere::OutputStreamPtr mainMenu = audiere::OpenSound(device, "Assets/Sound/ingame.wav");
+	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(device, "Assets/Sound/ButtonPress.wav");
+	audiere::OutputStreamPtr pickup = audiere::OpenSound(device, "Assets/Sound/Pickup.mp3");
+	audiere::OutputStreamPtr shoot = audiere::OpenSound(device, "Assets/Sound/Shooting.wav");
+	
 	//FUNCTION DEFINITIONS
 
 	void playMusicMenu(bool repeat){
-		private_members::mainMenu->play();
-		private_members::mainMenu->setRepeat(repeat);
+		mainMenu->play();
+		mainMenu->setRepeat(repeat);
 	}
 
 	void playMusicLevel(LevelType level, bool repeat){
@@ -23,15 +21,15 @@ namespace SoundManager{
 	}
 
 	void playSFXButtonPress(){
-		private_members::buttonPress->play();
+		buttonPress->play();
 	}
 
 	void playSFXPickup(){
-		private_members::pickup->play();
+		pickup->play();
 	}
 
 	void playSFXShoot(){
-		private_members::shoot->play();
+		shoot->play();
 	}
 
 	void stopAllSounds(){
