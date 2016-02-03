@@ -109,15 +109,17 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//work out the distance traveled
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
-	//increase score by the difference
-	increaseScore(difference);
 	//Move the light along the Z axis
 	irr::core::vector3df lightPos = getPosition();
 	lightPos.Y = 1000;
 	lightPos.X = 0;
 	light->setPosition(lightPos);
 
+	//Check if the player can control the ship
 	if(!controlsLocked){
+		//increase score by the difference above
+		increaseScore(difference);
+
 		//check for and apply all position changes
 		//Left
 		if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
