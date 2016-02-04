@@ -50,8 +50,8 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	lost = false;
 
 	//Set the cannon positions
-	cannonPositions.push_back(irr::core::vector3df( 1, 1, -1));
-	cannonPositions.push_back(irr::core::vector3df(-1, 1, -1));
+	cannonPositions.push_back(irr::core::vector3df( 1, 1.5f, -1.5f));
+	cannonPositions.push_back(irr::core::vector3df(-1, 1.5f, -1.5f));
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
