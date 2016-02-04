@@ -4,11 +4,11 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	guienv = guiEnvironment;
 
 	//Init all gui elements then hide them
-	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 300, 40), true);
+	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 600, 40), true);
 	finalScore->setVisible(false);
-	instructionsText = guienv->addStaticText(L"INSTRUCTIONS DISPLAY TEST", irr::core::rect<irr::s32>(0, 30, 300, 60), true);
+	instructionsText = guienv->addStaticText(L"Enter your name: TEST", irr::core::rect<irr::s32>(0, 50, 500, 80), true);
 	instructionsText->setVisible(false);
-	int x = 10, y = 65;
+	int x = 10, y = 100;
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		irr::core::stringw count;
 		count += (i + 1);
@@ -26,15 +26,23 @@ void ScoreScreen::addScore(const irr::core::stringw &playerName, const unsigned 
 }
 
 void ScoreScreen::displayScore(const bool &display){
+	//Set and display the final score
+	irr::core::stringw finalScoreText("Final Score: ");
+	finalScoreText += scores.at(scores.size() - 1).finalScore;
+	finalScore->setText(finalScoreText.c_str());
 	finalScore->setVisible(display);
+
+	//Display the 'instructions'
 	instructionsText->setVisible(display);
+
 	for(int i = 0; i < MAX_DISPLAY; i++){
-		//change the text to the score data
+		//Change the text to the score data
 		irr::core::stringw text;
 		text += (i + 1);
+		text += " :";
 		if(i < scores.size()){
 			text += scores.at(i).playerName;
-			text += ": ";
+			text += " ";
 			text += scores.at(i).finalScore;
 		}
 		scoreNumbers[i]->setText(text.c_str());
