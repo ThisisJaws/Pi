@@ -2,9 +2,10 @@
 
 #include "Game.h"
 
-World::World(PlayerShip *player, const std::string &levelLocation){
+World::World(PlayerShip *player, const std::string &levelLocation, const irr::io::path &skyDomeLocation){
 	this->player = player;
 	this->levelLocation = levelLocation;
+	this->skyDomeLocation = skyDomeLocation;
 
 	phase1Loaded = false;
 	phase2Loaded = false;
@@ -137,6 +138,10 @@ void World::clearTerrains(){
 	//Clear the vector, the object references get deleted in Game.cpp
 	terrainSegments.clear();
 	terrainSegments.resize(0);
+}
+
+irr::io::path World::getSkydomeLocation(){
+	return skyDomeLocation;
 }
 
 void World::reset(){

@@ -32,6 +32,9 @@ private:
 	//Vector of the all the terrain segments to tell when the player has beaten the level
 	std::vector<StaticObject*> terrainSegments;
 
+	//Location of the skydome file
+	irr::io::path skyDomeLocation;
+
 	//Keep track of which phase has been loaded
 	bool phase1Loaded;
 	bool phase2Loaded;
@@ -50,7 +53,7 @@ private:
 	//FUNCTIONS
 public:
 	//constructor
-	World(PlayerShip *player, const std::string &levelLocation);
+	World(PlayerShip *player, const std::string &levelLocation, const irr::io::path &skyDomeLocation);
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
@@ -67,6 +70,9 @@ public:
 
 	//Loops through the array of terrain nodes and deletes them
 	virtual void clearTerrains();
+
+	//Returns the skydome location for the world
+	irr::io::path getSkydomeLocation();
 
 	//Resets the world
 	void reset();
