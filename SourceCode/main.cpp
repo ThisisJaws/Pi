@@ -8,6 +8,7 @@
 #include "irrlicht.h"
 
 #include "Game.h"
+#include "ScoreScreen.h"
 #include "EventReceiver.h"
 #include "SoundManager.h"
 
@@ -32,6 +33,8 @@ int main(int argc, char** argv) {
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
     //Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
+	//Create the score class which will handle all of the score
+	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 
 	//Change the window name
 	irr::core::stringw windowName(L"Space Trip - Version: ");
@@ -87,36 +90,24 @@ int main(int argc, char** argv) {
             }else if(gameState == scoreScreen){
 				gameState = startMenu;
 				menuImage->setVisible(true);
-				scoreText->setVisible(false);
+				score.displayScore(false);
 			}
         }
 
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-        //Handle logic depending on the game state
-        switch(gameState){
-            case startMenu:
-                //Start menu logic
-                break;
-            case gamePlaying:
-                if(!game.isLoaded()){
-                    game.load(camera);
-                }
-                if(game.play()){
-                    gameState = scoreScreen;
-                    scoreText->setVisible(true);
-                }
-                break;
-            case scoreScreen:
-                scoreCount = L"Final Score: ";
-                scoreCount += game.getFinalScore();
-                scoreText->setText(scoreCount.c_str());
-                break;
-
-            default:
-                break;
-        }
+		//Update the game if it is playing
+		if(gameState == gamePlaying){
+			if(!game.isLoaded()){
+				game.load(camera);
+			}
+			if(game.play()){
+				//play() will be true when the game is over
+				gameState = scoreScreen;
+				score.displayScore(true);
+			}
+		}
 
         //Draw everything
         device->getSceneManager()->drawAll();
