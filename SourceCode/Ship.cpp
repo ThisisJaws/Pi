@@ -114,19 +114,22 @@ void Ship::dealDamage(const unsigned short &amount){
 	lives -= amount;
 }
 
-bool Ship::shoot(const irr::core::vector3df &position, const irr::core::vector3df &direction, const int &targetTypeID){
+bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID, const std::vector<irr::core::vector3df> &firingPositions){
     if(canFire){
-        //construct a new bullet
-        bullet = new Bullet(smgr, drv);
+		//For each position to fire from
+		for(int i = 0; i < firingPositions.size(); i++){
+			//construct a new bullet
+			bullet = new Bullet(smgr, drv);
 
-		//then fire the bullet
-        bullet->fire(position, direction, moveSpeed, targetTypeID);
+			//then fire the bullet
+			bullet->fire(firingPositions.at(i), direction, moveSpeed, targetTypeID);
 
-        //add it onto the list to be updated
-        Game::addObjectToUpdate(bullet);
+			//add it onto the list to be updated
+			Game::addObjectToUpdate(bullet);
 
-        //clear the pointer to prevent memory leaks
-        bullet = 0;
+			//clear the pointer to prevent memory leaks
+			bullet = 0;
+		}
 
         //stop the ship firing immediately after
         canFire = false;
