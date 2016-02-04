@@ -122,7 +122,7 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 			bullet = new Bullet(smgr, drv);
 
 			//then fire the bullet
-			bullet->fire(firingPositions.at(i), direction, moveSpeed, targetTypeID);
+			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);
 
 			//add it onto the list to be updated
 			Game::addObjectToUpdate(bullet);
