@@ -48,15 +48,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	worlds[2] = new JungleWorld(g_player);
 
 	//Load the first world
-	worlds[0]->loadPhase1(device);
+	worlds[currentWorld]->loadPhase1(device);
 
-    //Load in the sky box
-    skyBox = smgr->addSkyBoxSceneNode(driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"),
-                                      driver->getTexture("Assets/PlaceHolders/TestSkyBox.jpg"));
+    //Load in the sky box for the current world
+	skyDome = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[currentWorld]->getSkydomeLocation()));
 
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/Font.png"));
@@ -189,7 +184,7 @@ void Game::cleanUp(){
     g_player = 0;
 
     //Get rid of the skybox
-    skyBox->remove();
+    skyDome->remove();
 
     //Remove the static text objects
     scoreText->remove();
