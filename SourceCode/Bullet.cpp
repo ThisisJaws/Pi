@@ -4,7 +4,7 @@
 
 //pass everythig through the constructor
 Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/PlaceHolders/LaserBulletSix.obj", "", sceneManagerReference, driverReference, false, irr::core::vector3df(0), TYPE_BULLET){
+    : Object("", "", sceneManagerReference, driverReference, false, irr::core::vector3df(0), TYPE_BULLET){
     
     fired = false;
     moveSpeed = 250.0f;
@@ -53,8 +53,8 @@ void Bullet::tick(irr::f32 deltaTime){
 
 void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed, int targetTypeID){
     //spawn the object into the scene
-    spawnObject("Assets/PlaceHolders/LaserBulletSix.obj", "Assets/PlaceHolders/Laser_bullet_purple.bmp", sceneMRef, drvrRef);
-    
+    spawnObject("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneMRef, drvrRef);
+
 	this->targetTypeID = targetTypeID;
 	
 	//Work out the speed of the bullet
@@ -69,9 +69,12 @@ void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, 
 		moveSpeed -= onePercent * percentDecrease;
 	}
 
-    //temp - set scale of bullet and rotation
-    getSceneNode()->setScale(irr::core::vector3df(10, 10, 10));
-    getSceneNode()->setRotation(irr::core::vector3df(0, 90, 0));
+    //Scale the bullets up a little bit
+    getSceneNode()->setScale(irr::core::vector3df(3, 3, 3));
+	//Rotate them properly
+	if(direction.Z == 1){
+		changeRotation(irr::core::vector3df(0, 180, 0));
+	}
     
     //set the direction
     this->direction = direction;
