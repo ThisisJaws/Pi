@@ -74,7 +74,7 @@ public:
 
 protected:
     //makes the ship shoot, returns true if it fired
-    bool shoot(const irr::core::vector3df &position, const irr::core::vector3df &direction, const int &targetTypeID);
+    virtual bool shoot(const irr::core::vector3df &position, const irr::core::vector3df &direction, const int &targetTypeID);
 
     //moves the ship forward
     void move(const float &speed, const irr::f32 &deltaTime);
