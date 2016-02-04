@@ -170,6 +170,7 @@
     <ClCompile Include="..\..\SourceCode\main.cpp" />
     <ClCompile Include="..\..\SourceCode\Object.cpp" />
     <ClCompile Include="..\..\SourceCode\PlayerShip.cpp" />
+    <ClCompile Include="..\..\SourceCode\ScoreScreen.cpp" />
     <ClCompile Include="..\..\SourceCode\Ship.cpp" />
     <ClCompile Include="..\..\SourceCode\SoundManager.cpp" />
     <ClCompile Include="..\..\SourceCode\StaticObject.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\..\SourceCode\Object.h" />
     <ClInclude Include="..\..\SourceCode\ObjectTypes.h" />
     <ClInclude Include="..\..\SourceCode\PlayerShip.h" />
+    <ClInclude Include="..\..\SourceCode\ScoreScreen.h" />
     <ClInclude Include="..\..\SourceCode\Ship.h" />
     <ClInclude Include="..\..\SourceCode\SoundManager.h" />
     <ClInclude Include="..\..\SourceCode\StaticObject.h" />
