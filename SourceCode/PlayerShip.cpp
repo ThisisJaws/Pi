@@ -146,7 +146,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		if(eReceiver->isKeyDown(irr::KEY_KEY_J) && currentMode == shooting){
 			//check the ammo count
 			if(ammo > 0){
-				if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY)){
+				if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY, cannonPositions)){
 					//if the ship successfully shot then take away 1 ammo
 					ammo--;
 				}

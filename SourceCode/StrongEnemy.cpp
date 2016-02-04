@@ -41,7 +41,7 @@ void StrongEnemy::combatManouver(irr::f32 deltaTime){
 void StrongEnemy::combatStageA(irr::f32 deltaTime){
 	if(shotsFired < maxShotCount){
 		//Shoots 3 bullets
-		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER)){
+		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
 		}
 	} else{
@@ -59,7 +59,7 @@ void StrongEnemy::combatStageA(irr::f32 deltaTime){
 void StrongEnemy::combatStageB(irr::f32 deltaTime){
 	if(shotsFired < maxShotCount){
 		//Shoots 3 bullets
-		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER)){
+		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
 		}
 	} else{
@@ -76,7 +76,7 @@ void StrongEnemy::combatStageB(irr::f32 deltaTime){
 
 void StrongEnemy::combatStageC(irr::f32 deltaTime){
 	if(shotsFired != maxShotCount){
-		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER)){
+		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
 		}
 	}else{

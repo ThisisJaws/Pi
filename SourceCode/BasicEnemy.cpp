@@ -8,6 +8,10 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
 
 	//adjust turn speed
 	turnSpeed /= 2;
+
+	//Set up the shooting positions
+	cannonPositions.push_back(irr::core::vector3df(5, 0, -10));
+	cannonPositions.push_back(irr::core::vector3df(-5, 0, -10));
 }
 
 void BasicEnemy::combatManouver(irr::f32 deltaTime){
@@ -39,7 +43,7 @@ void BasicEnemy::combatStageA(irr::f32 deltaTime){
 	//Moves the ship to the top of the screen while shooting
 	if(getPosition().Y < 45){
 		moveUp(turnSpeed, deltaTime);
-		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER);
+		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
 		currentStage = stageB;
 	}
@@ -49,7 +53,7 @@ void BasicEnemy::combatStageB(irr::f32 deltaTime){
 	//Moves the ship to the bottom of the screen while shooting
 	if(getPosition().Y > -45){
 		moveDown(turnSpeed, deltaTime);
-		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER);
+		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
 		currentStage = stageC;
 	}

@@ -14,7 +14,7 @@ FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){
 	//Shoot constantly
-	shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER);
+	shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 
 	//Decide which stage to perform
 	switch(currentStage){
