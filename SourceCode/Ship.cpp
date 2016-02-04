@@ -114,13 +114,13 @@ void Ship::dealDamage(const unsigned short &amount){
 	lives -= amount;
 }
 
-bool Ship::shoot(irr::core::vector3df direction, int targetTypeID){
+bool Ship::shoot(const irr::core::vector3df &position, const irr::core::vector3df &direction, const int &targetTypeID){
     if(canFire){
         //construct a new bullet
         bullet = new Bullet(smgr, drv);
 
 		//then fire the bullet
-        bullet->fire(getPosition(), direction, moveSpeed, targetTypeID);
+        bullet->fire(position, direction, moveSpeed, targetTypeID);
 
         //add it onto the list to be updated
         Game::addObjectToUpdate(bullet);
