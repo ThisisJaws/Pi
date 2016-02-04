@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <algorithm>
-#include <string>
 
 #include "irrlicht.h"
 
@@ -23,10 +22,9 @@ private:
 
 	//Structure to hold the score and name
 	struct scoreData{
-		std::string playerName;
+		irr::core::stringw playerName;
 		unsigned int finalScore;
-
-		scoreData(const std::string &name, const unsigned int &score){
+		scoreData(const irr::core::stringw &name, const unsigned int &score){
 			playerName = name;
 			finalScore = score;
 		}
@@ -46,7 +44,7 @@ public:
 	ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment);
 
 	//Adds a score onto the vector
-	void addScore(const std::string &playerName, const unsigned int &score);
+	void addScore(const irr::core::stringw &playerName, const unsigned int &score);
 
 	//Displays the score on screen
 	void displayScore(const bool &display);
