@@ -40,7 +40,7 @@ public:
     void tick(irr::f32 deltatime) override;
     
     //call to fire the bullet
-    void fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed, int targetTypeID);
+    void fire(const irr::core::vector3df &firePos, const irr::core::vector3df &direction, const float &shipSpeed, const int &targetTypeID);
 };
 
 #endif	/* BULLET_H */

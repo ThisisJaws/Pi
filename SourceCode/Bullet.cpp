@@ -51,7 +51,7 @@ void Bullet::tick(irr::f32 deltaTime){
     }
 }
 
-void Bullet::fire(irr::core::vector3df firePos, irr::core::vector3df direction, float shipSpeed, int targetTypeID){
+void Bullet::fire(const irr::core::vector3df &firePos, const irr::core::vector3df &direction, const float &shipSpeed, const int &targetTypeID){
     //spawn the object into the scene
     spawnObject("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneMRef, drvrRef);
 
