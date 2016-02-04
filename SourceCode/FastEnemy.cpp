@@ -9,7 +9,8 @@ FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr
 	currentStage = stageStart;
 	timeElapsed = 0;
 
-	
+	//Set the cannon position
+	cannonPositions.push_back(irr::core::vector3df(0, 0, -3));
 }
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){

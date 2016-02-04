@@ -15,6 +15,12 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 
 	//adjust turn speed
 	turnSpeed /= 3;
+
+	//Set the cannon positions
+	cannonPositions.push_back(irr::core::vector3df( 1, -1, 0));
+	cannonPositions.push_back(irr::core::vector3df(-1, -1, 0));
+	cannonPositions.push_back(irr::core::vector3df( 1,  1, 0));
+	cannonPositions.push_back(irr::core::vector3df(-1,  1, 0));
 }
 
 void StrongEnemy::combatManouver(irr::f32 deltaTime){

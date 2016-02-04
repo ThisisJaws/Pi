@@ -10,8 +10,8 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
 	turnSpeed /= 2;
 
 	//Set up the shooting positions
-	cannonPositions.push_back(irr::core::vector3df(5, 0, -10));
-	cannonPositions.push_back(irr::core::vector3df(-5, 0, -10));
+	cannonPositions.push_back(irr::core::vector3df(1, 0, -10));
+	cannonPositions.push_back(irr::core::vector3df(-1, 0, -10));
 }
 
 void BasicEnemy::combatManouver(irr::f32 deltaTime){
