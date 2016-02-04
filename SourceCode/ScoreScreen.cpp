@@ -23,12 +23,14 @@ void ScoreScreen::addScore(const irr::core::stringw &playerName, const unsigned 
 	scores.push_back(scoreData(playerName, score));
 	//Then sort the vector
 	sortVector(scores);
+	//Then set the most recetn score
+	mostRecentScore = score;
 }
 
 void ScoreScreen::displayScore(const bool &display){
 	//Set and display the final score
 	irr::core::stringw finalScoreText("Final Score: ");
-	finalScoreText += scores.at(scores.size() - 1).finalScore;
+	finalScoreText += mostRecentScore;
 	finalScore->setText(finalScoreText.c_str());
 	finalScore->setVisible(display);
 
@@ -39,7 +41,7 @@ void ScoreScreen::displayScore(const bool &display){
 		//Change the text to the score data
 		irr::core::stringw text;
 		text += (i + 1);
-		text += " :";
+		text += ": ";
 		if(i < scores.size()){
 			text += scores.at(i).playerName;
 			text += " ";
@@ -51,9 +53,10 @@ void ScoreScreen::displayScore(const bool &display){
 }
 
 void ScoreScreen::writeToFile(){
-
+	//UNFINISHED
 }
 
 void ScoreScreen::sortVector(std::vector<scoreData> &vectorToSort){
-	
+	//Sort the vector using the structure
+	std::sort(scores.begin(), scores.end(), more_than_sort());
 }

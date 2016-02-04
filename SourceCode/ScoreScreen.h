@@ -30,6 +30,9 @@ private:
 		}
 	};
 
+	//Most recent score for easy display
+	unsigned int mostRecentScore;
+
 	//Vector of scores
 	std::vector<scoreData> scores;
 
@@ -37,6 +40,13 @@ private:
 	irr::gui::IGUIStaticText *finalScore;
 	irr::gui::IGUIStaticText *instructionsText;
 	irr::gui::IGUIStaticText *scoreNumbers[MAX_DISPLAY];
+
+	//Structure used for sorting
+	struct more_than_sort{
+		inline bool operator() (const scoreData &sc1, const scoreData &sc2){
+			return (sc1.finalScore > sc2.finalScore);
+		}
+	};
 
 	//FUNCTIONS
 public:
