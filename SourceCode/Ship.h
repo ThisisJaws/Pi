@@ -29,6 +29,8 @@ protected:
 	//Keep track of the ship if it needs to rotate back
 	bool rotateBack;
 
+	std::vector<irr::core::vector3df> cannonPositions;
+
 private:
     //if the ship is able to fire
     bool canFire;
