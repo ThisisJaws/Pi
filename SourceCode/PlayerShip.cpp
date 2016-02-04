@@ -7,7 +7,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 
     //init variables
     score = 0;
-	lifeIncreasePoints = 100000;
+	lifeIncreasePoints = 500000;
 	previousLifeIncrease = score + lifeIncreasePoints;
 
 	damageRecieved = false;
