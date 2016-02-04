@@ -50,8 +50,13 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	//Load the first world
 	worlds[currentWorld]->loadPhase1(device);
 
-    //Load in the sky box for the current world
-	skyDome = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[currentWorld]->getSkydomeLocation()));
+    //Load in the sky dome's for the worlds
+	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
+	skyDome[1] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[1]->getSkydomeLocation()));
+	skyDome[2] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[2]->getSkydomeLocation()));
+
+	skyDome[1]->setVisible(false);
+	skyDome[2]->setVisible(false);
 
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/Font.png"));
@@ -148,6 +153,8 @@ bool Game::play(){
 				resetObjectsToUpdate();
 				//Reset the world
 				worlds[currentWorld]->reset();
+				//Turn off the dome
+				skyDome[currentWorld]->setVisible(false);
 				//Increment the cuurent world tracker
 				currentWorld++;
 				//Check if there are any more worlds to load
@@ -156,6 +163,8 @@ bool Game::play(){
 					g_player->changeMode();
 					//Load the next world
 					worlds[currentWorld]->loadPhase1(device);
+					//Turn on the next skydome
+					skyDome[currentWorld]->setVisible(true);
 				} else{
 					//Start again but increment speed by double
 					currentWorld = 0;
@@ -183,9 +192,6 @@ void Game::cleanUp(){
     //clear the player pointer
     g_player = 0;
 
-    //Get rid of the skybox
-    skyDome->remove();
-
     //Remove the static text objects
     scoreText->remove();
 	livesText->remove();
@@ -201,6 +207,8 @@ void Game::cleanUp(){
 		worlds[i]->reset();
 		//Delete the world
 		delete worlds[i];
+		//And remove the skydomes
+		skyDome[i]->remove();
 	}
 }
 

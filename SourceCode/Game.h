@@ -56,8 +56,8 @@ private:
 	//Keep track of the current world
 	int currentWorld;
 
-    //The skybox
-    irr::scene::ISceneNode *skyBox;
+    //All the sky domes we will need
+    irr::scene::ISceneNode *skyDome[NUM_WORLDS];
 
     //GUI Static text of the Infomation
     irr::gui::IGUIStaticText *scoreText;
