@@ -22,6 +22,8 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 
 	stageWaitTime = 5;
 	stageWaitPast = 0;
+
+	loaded = false;
 }
 
 Game::~Game(){
