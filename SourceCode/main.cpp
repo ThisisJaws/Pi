@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 			if(game.play()){
 				//play() will be true when the game is over
 				gameState = scoreScreen;
-				score.addScore("???", game.getFinalScore());
+				score.addScore("TEST", game.getFinalScore());
 				score.displayScore(true);
 			}
 		}
