@@ -31,8 +31,12 @@ void ScoreScreen::addScore(const irr::core::stringc &playerName, const unsigned 
 	scores.push_back(scoreData(playerName, score));
 	//Then sort the vector
 	sortVector(scores);
-	//Then set the most recetn score
-	mostRecentScore = score;
+
+	//Set the most recent score
+	irr::core::stringw finalScoreText("Final Score: ");
+	finalScoreText += score;
+	finalScore->setText(finalScoreText.c_str());
+
 	//Update each score text
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		//Change the text to the score data
@@ -49,10 +53,7 @@ void ScoreScreen::addScore(const irr::core::stringc &playerName, const unsigned 
 }
 
 void ScoreScreen::displayScore(const bool &display){
-	//Set and display the final score
-	irr::core::stringw finalScoreText("Final Score: ");
-	finalScoreText += mostRecentScore;
-	finalScore->setText(finalScoreText.c_str());
+	//Display the final score
 	finalScore->setVisible(display);
 
 	//Display the 'instructions'

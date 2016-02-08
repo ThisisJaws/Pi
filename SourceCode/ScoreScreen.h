@@ -36,9 +36,6 @@ private:
 		}
 	};
 
-	//Most recent score for easy display
-	unsigned int mostRecentScore;
-
 	//Vector of scores
 	std::vector<scoreData> scores;
 
