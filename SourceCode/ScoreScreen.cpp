@@ -33,6 +33,19 @@ void ScoreScreen::addScore(const irr::core::stringc &playerName, const unsigned 
 	sortVector(scores);
 	//Then set the most recetn score
 	mostRecentScore = score;
+	//Update each score text
+	for(int i = 0; i < MAX_DISPLAY; i++){
+		//Change the text to the score data
+		irr::core::stringw text;
+		text += (i + 1);
+		text += ": ";
+		if(i < scores.size()){
+			text += scores.at(i).playerName;
+			text += " ";
+			text += scores.at(i).finalScore;
+		}
+		scoreNumbers[i]->setText(text.c_str());
+	}
 }
 
 void ScoreScreen::displayScore(const bool &display){
@@ -45,17 +58,8 @@ void ScoreScreen::displayScore(const bool &display){
 	//Display the 'instructions'
 	instructionsText->setVisible(display);
 
+	//Set the visibility of the numbers
 	for(int i = 0; i < MAX_DISPLAY; i++){
-		//Change the text to the score data
-		irr::core::stringw text;
-		text += (i + 1);
-		text += ": ";
-		if(i < scores.size()){
-			text += scores.at(i).playerName;
-			text += " ";
-			text += scores.at(i).finalScore;
-		}
-		scoreNumbers[i]->setText(text.c_str());
 		scoreNumbers[i]->setVisible(display);
 	}
 }
