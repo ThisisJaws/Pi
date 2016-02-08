@@ -25,9 +25,6 @@ private:
     
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
-
-    //keep track if the object has been spawned or not
-    bool objectSpawned;
     
     //mark an object for delete to remove it o update
     bool markedForDelete;
@@ -39,6 +36,10 @@ private:
 	static irr::s32 objectCount;
 	//This holds the unique ID of the object so it can be found when searching through lists
 	irr::s32 uniqueID;
+
+protected:
+	//keep track if the object has been spawned or not
+	bool objectSpawned;
     
     //FUNCTIONS
 public:
