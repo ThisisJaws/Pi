@@ -63,7 +63,7 @@ irr::s32 Object::checkCollision(int direction){
 	irr::core::line3df ray;
 	ray.start = getPosition();
 	ray.end = ray.start;
-	ray.end.Z += 1;// *direction;
+	ray.end.Z += 1 * direction;
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit
