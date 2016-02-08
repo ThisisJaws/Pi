@@ -92,7 +92,7 @@ protected:
 	bool beenSpawned();
     
     //spawns the object into the scene if it hasn't happened already
-    virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+	virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &checkCollisionFromBoundingBox = false);
 };
 
 #endif	/* OBJECT_H */
