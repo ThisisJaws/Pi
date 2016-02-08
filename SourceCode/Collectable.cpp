@@ -4,7 +4,7 @@
 #include "SoundManager.h"
 
 Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE){
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE, true){
 
     //set the rotation speed
     rotSpeed = 75.0f;
@@ -43,5 +43,4 @@ void Collectable::activate(PlayerShip * player){
 	markForDelete();
 	SoundManager::playSFXPickup();
 }
-
 
