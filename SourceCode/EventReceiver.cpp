@@ -65,7 +65,7 @@ bool EventReceiver::isKeyReleased(irr::EKEY_CODE keyCode){
 irr::EKEY_CODE EventReceiver::getAnyKeyPressed(){
 	//Loop through the key states
 	for(int i = 0; i < irr::KEY_KEY_CODES_COUNT; i++){
-		//If the key was Released
+		//Check if any key was pressed or down
 		if(keyState[i] == Pressed || keyState[i] == Down){
 			return (irr::EKEY_CODE)i;
 		}
