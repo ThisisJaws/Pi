@@ -50,7 +50,7 @@ private:
 	unsigned short lives;
 
 	//Particle system scene node
-	irr::scene::IParticleSystemSceneNode *ps;
+	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
     //FUNCTIONS
 public:
