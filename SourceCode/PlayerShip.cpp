@@ -316,7 +316,6 @@ void PlayerShip::changeMode(const int &increaseSpeedByFactor){
 
 	//Increase the player's speed
 	moveSpeed += 25 * increaseSpeedByFactor;
-	turnSpeed += 10 * increaseSpeedByFactor;
 }
 
 void PlayerShip::updateCameraPositions(){

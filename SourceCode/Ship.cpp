@@ -6,7 +6,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
     //set up variables
     moveSpeed = movementSpeed;
-    turnSpeed = 75;
+    turnSpeed = moveSpeed / 2;
     //direction of movement +1 is along the positive Z axis, -1 is along the negative Z axis
     moveDir = movementDirection;
 
