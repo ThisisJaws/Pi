@@ -7,15 +7,15 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	readFromFile(SCORE_FILE);
 
 	//Init all gui elements then hide them
-	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 600, 40), true);
+	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 800, 40), true);
 	finalScore->setVisible(false);
-	instructionsText = guienv->addStaticText(L"Enter your name then press ENTER", irr::core::rect<irr::s32>(0, 50, 500, 80), true);
+	instructionsText = guienv->addStaticText(L"Enter your name then press ENTER", irr::core::rect<irr::s32>(0, 50, 800, 80), true);
 	instructionsText->setVisible(false);
 	int x = 10, y = 100;
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		irr::core::stringw count;
 		count += (i + 1);
-		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 300, y + 30), true);
+		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 30), true);
 		scoreNumbers[i]->setVisible(false);
 		y += 35;
 	}
