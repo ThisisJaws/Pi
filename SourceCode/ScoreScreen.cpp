@@ -54,6 +54,10 @@ void ScoreScreen::addName(const irr::core::stringc &playerName){
 	resfreshScreen();
 }
 
+irr::core::stringc ScoreScreen::getTextBoxName(){
+	return playerName->getText();
+}
+
 void ScoreScreen::displayScore(const bool &display){
 	//Display the final score
 	finalScore->setVisible(display);

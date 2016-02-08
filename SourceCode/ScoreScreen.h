@@ -68,6 +68,9 @@ public:
 	//Associates a name with the most recent score
 	void addName(const irr::core::stringc &playerName);
 
+	//Returns the name in the text box
+	irr::core::stringc getTextBoxName();
+
 	//Displays the score on screen
 	void displayScore(const bool &display);
 
