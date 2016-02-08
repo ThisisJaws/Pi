@@ -71,6 +71,9 @@ public:
 	void displayScore(const bool &display);
 
 private:
+	//Call to refresh the score screen
+	void resfreshScreen();
+
 	//Call to read from the file
 	void readFromFile(const std::string &file);
 
