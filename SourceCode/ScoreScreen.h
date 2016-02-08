@@ -45,6 +45,7 @@ private:
 	//Text elements to display all of the scores
 	irr::gui::IGUIStaticText *finalScore;
 	irr::gui::IGUIStaticText *instructionsText;
+	irr::gui::IGUIEditBox *playerName;
 	irr::gui::IGUIStaticText *scoreNumbers[MAX_DISPLAY];
 
 	//Structure used for sorting

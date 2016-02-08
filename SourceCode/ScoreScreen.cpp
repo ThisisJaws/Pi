@@ -11,16 +11,21 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	//Init all gui elements then hide them
 	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 800, 40), true);
 	finalScore->setVisible(false);
+
 	instructionsText = guienv->addStaticText(L"Enter your name then press R", irr::core::rect<irr::s32>(0, 50, 800, 80), true);
 	instructionsText->setVisible(false);
-	int x = 10, y = 100;
+
+	int x = 10, y = 160;
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		irr::core::stringw count;
 		count += (i + 1);
-		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 30), true);
+		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 40), true);
 		scoreNumbers[i]->setVisible(false);
 		y += 35;
 	}
+
+	playerName = guienv->addEditBox(L"NAME", irr::core::rect<irr::s32>(0, 90, 800, 120), true);
+	playerName->setVisible(false);
 
 	//Make sure the text variables are reset
 	resfreshScreen();
@@ -55,6 +60,9 @@ void ScoreScreen::displayScore(const bool &display){
 
 	//Display the 'instructions'
 	instructionsText->setVisible(display);
+
+	//Display the player's name
+	playerName->setVisible(display);
 
 	//Set the visibility of the numbers
 	for(int i = 0; i < MAX_DISPLAY; i++){
