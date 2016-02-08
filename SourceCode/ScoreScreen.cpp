@@ -60,7 +60,7 @@ void ScoreScreen::displayScore(const bool &display){
 	}
 }
 
-void ScoreScreen::readFromFile(std::string file){
+void ScoreScreen::readFromFile(const std::string &file){
 	//Open the file
 	std::ifstream scoreFile(file);
 	//The string that will hold each line of the file
@@ -88,7 +88,7 @@ void ScoreScreen::readFromFile(std::string file){
 	}
 }
 
-void ScoreScreen::writeToFile(std::string file){
+void ScoreScreen::writeToFile(const std::string &file){
 	//Open the file
 	std::ofstream scoreFile(file);
 

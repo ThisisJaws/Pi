@@ -69,10 +69,10 @@ public:
 
 private:
 	//Call to read from the file
-	void readFromFile(std::string file);
+	void readFromFile(const std::string &file);
 
 	//Call to write the score to file
-	void writeToFile(std::string file);
+	void writeToFile(const std::string &file);
 
 	//Sorts a vector from highest to lowest
 	void sortVector(std::vector<scoreData> &vectorToSort);
