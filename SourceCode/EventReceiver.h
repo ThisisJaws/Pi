@@ -43,7 +43,7 @@ public:
 	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
 
 	//Returns the first key that it finds that is being pressed down
-	virtual irr::EKEY_CODE keyCode getAnyKeyPressed();
+	virtual irr::EKEY_CODE getAnyKeyPressed();
 
 };
 
