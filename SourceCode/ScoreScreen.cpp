@@ -9,7 +9,7 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	//Init all gui elements then hide them
 	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 600, 40), true);
 	finalScore->setVisible(false);
-	instructionsText = guienv->addStaticText(L"Enter your name: TEST", irr::core::rect<irr::s32>(0, 50, 500, 80), true);
+	instructionsText = guienv->addStaticText(L"Enter your name then press ENTER", irr::core::rect<irr::s32>(0, 50, 500, 80), true);
 	instructionsText->setVisible(false);
 	int x = 10, y = 100;
 	for(int i = 0; i < MAX_DISPLAY; i++){
