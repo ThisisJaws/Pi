@@ -3,6 +3,9 @@
 ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	guienv = guiEnvironment;
 
+	//Read in the data from the file
+	readFromFile(SCORE_FILE);
+
 	//Init all gui elements then hide them
 	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 600, 40), true);
 	finalScore->setVisible(false);
@@ -20,10 +23,10 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 
 ScoreScreen::~ScoreScreen(){
 	//Write to file on destruct
-	writeToFile();
+	writeToFile(SCORE_FILE);
 }
 
-void ScoreScreen::addScore(const irr::core::stringw &playerName, const unsigned int &score){
+void ScoreScreen::addScore(const irr::core::stringc &playerName, const unsigned int &score){
 	//Add it onto the vector
 	scores.push_back(scoreData(playerName, score));
 	//Then sort the vector
@@ -57,9 +60,48 @@ void ScoreScreen::displayScore(const bool &display){
 	}
 }
 
-void ScoreScreen::writeToFile(){
+void ScoreScreen::readFromFile(std::string file){
 	//Open the file
+	std::ifstream scoreFile(file);
+	//The string that will hold each line of the file
+	std::string line;
 
+	if(scoreFile.is_open()){
+		//Loop through each line
+		while(std::getline(scoreFile, line)){
+			//Get each 'word' (name then score) line by line
+			std::stringstream stream(line);
+			//Variables to hold the data
+			std::string name;
+			unsigned int score;
+			//Insert the data into the variables
+			stream >> name;
+			stream >> score;
+			//Push the scores onto the vector
+			scores.push_back(scoreData(name.c_str(), score));
+		}
+
+		//Close the file when done
+		scoreFile.close();
+	} else{
+		printf("Unable to open score file for reading");
+	}
+}
+
+void ScoreScreen::writeToFile(std::string file){
+	//Open the file
+	std::ofstream scoreFile(file);
+
+	if(scoreFile.is_open()){
+		//Write in the score data
+		for(int i = 0; i < scores.size(); i++){
+			scoreFile << scores.at(i).playerName.c_str() << " " << scores.at(i).finalScore << "\n";
+		}
+		//Close the file
+		scoreFile.close();
+	} else{
+		printf("Unable to open score file for writing");
+	}
 }
 
 void ScoreScreen::sortVector(std::vector<scoreData> &vectorToSort){

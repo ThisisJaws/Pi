@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
+#include <string>
 
 #include "irrlicht.h"
 
@@ -26,9 +28,9 @@ private:
 
 	//Structure to hold the score and name
 	struct scoreData{
-		irr::core::stringw playerName;
+		irr::core::stringc playerName;
 		unsigned int finalScore;
-		scoreData(const irr::core::stringw &name, const unsigned int &score){
+		scoreData(const irr::core::stringc &name, const unsigned int &score){
 			playerName = name;
 			finalScore = score;
 		}
@@ -60,14 +62,17 @@ public:
 	~ScoreScreen();
 
 	//Adds a score onto the vector
-	void addScore(const irr::core::stringw &playerName, const unsigned int &score);
+	void addScore(const irr::core::stringc &playerName, const unsigned int &score);
 
 	//Displays the score on screen
 	void displayScore(const bool &display);
 
 private:
+	//Call to read from the file
+	void readFromFile(std::string file);
+
 	//Call to write the score to file
-	void writeToFile();
+	void writeToFile(std::string file);
 
 	//Sorts a vector from highest to lowest
 	void sortVector(std::vector<scoreData> &vectorToSort);
