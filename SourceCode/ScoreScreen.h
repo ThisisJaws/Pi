@@ -36,6 +36,9 @@ private:
 		}
 	};
 
+	//Most recent score for easy display
+	unsigned int mostRecentScore;
+
 	//Vector of scores
 	std::vector<scoreData> scores;
 
@@ -59,7 +62,7 @@ public:
 	~ScoreScreen();
 
 	//Adds a score onto the vector
-	void addScore(const irr::core::stringc &playerName, const unsigned int &score);
+	void addName(const irr::core::stringc &playerName);
 
 	//Displays the score on screen
 	void displayScore(const bool &display);

@@ -6,6 +6,8 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	//Read in the data from the file
 	readFromFile(SCORE_FILE);
 
+	mostRecentScore = 0;
+
 	//Init all gui elements then hide them
 	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 800, 40), true);
 	finalScore->setVisible(false);
@@ -26,15 +28,15 @@ ScoreScreen::~ScoreScreen(){
 	writeToFile(SCORE_FILE);
 }
 
-void ScoreScreen::addScore(const irr::core::stringc &playerName, const unsigned int &score){
+void ScoreScreen::addName(const irr::core::stringc &playerName){
 	//Add it onto the vector
-	scores.push_back(scoreData(playerName, score));
+	scores.push_back(scoreData(playerName, mostRecentScore));
 	//Then sort the vector
 	sortVector(scores);
 
 	//Set the most recent score
 	irr::core::stringw finalScoreText("Final Score: ");
-	finalScoreText += score;
+	finalScoreText += mostRecentScore;
 	finalScore->setText(finalScoreText.c_str());
 
 	//Update each score text
