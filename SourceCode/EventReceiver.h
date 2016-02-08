@@ -41,6 +41,10 @@ public:
 
 	//Returns true on the frame the key is released
 	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
+
+	//Returns the first key that it finds that is being pressed down
+	virtual irr::EKEY_CODE keyCode getAnyKeyPressed();
+
 };
 
 #endif	/* EVENTRECEIVER_H */
