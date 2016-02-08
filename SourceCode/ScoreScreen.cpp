@@ -18,6 +18,11 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	}
 }
 
+ScoreScreen::~ScoreScreen(){
+	//Write to file on destruct
+	writeToFile();
+}
+
 void ScoreScreen::addScore(const irr::core::stringw &playerName, const unsigned int &score){
 	//Add it onto the vector
 	scores.push_back(scoreData(playerName, score));
@@ -53,7 +58,8 @@ void ScoreScreen::displayScore(const bool &display){
 }
 
 void ScoreScreen::writeToFile(){
-	//UNFINISHED
+	//Open the file
+
 }
 
 void ScoreScreen::sortVector(std::vector<scoreData> &vectorToSort){

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 #include "irrlicht.h"
 
@@ -55,6 +56,8 @@ private:
 public:
 	//constructor
 	ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment);
+	//destructor
+	~ScoreScreen();
 
 	//Adds a score onto the vector
 	void addScore(const irr::core::stringw &playerName, const unsigned int &score);
@@ -62,10 +65,10 @@ public:
 	//Displays the score on screen
 	void displayScore(const bool &display);
 
+private:
 	//Call to write the score to file
 	void writeToFile();
 
-private:
 	//Sorts a vector from highest to lowest
 	void sortVector(std::vector<scoreData> &vectorToSort);
 };
