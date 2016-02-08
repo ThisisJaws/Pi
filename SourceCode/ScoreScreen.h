@@ -9,6 +9,9 @@
 //How many names to display
 #define MAX_DISPLAY 10
 
+//Location of the score file
+#define SCORE_FILE "Assets/Score.sts"
+
 /*
  * Score screen class will hold all of the data for the scores and 
  * read and write any files associated with such
