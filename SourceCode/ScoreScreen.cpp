@@ -21,7 +21,7 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 		count += (i + 1);
 		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 40), true);
 		scoreNumbers[i]->setVisible(false);
-		y += 35;
+		y += 45;
 	}
 
 	playerName = guienv->addEditBox(L"NAME", irr::core::rect<irr::s32>(0, 90, 800, 120), true);
