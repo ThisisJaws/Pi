@@ -28,16 +28,19 @@ ScoreScreen::~ScoreScreen(){
 	writeToFile(SCORE_FILE);
 }
 
+void ScoreScreen::addScore(unsigned int score){
+	//Set the most recent score
+	mostRecentScore = score;
+	irr::core::stringw finalScoreText("Final Score: ");
+	finalScoreText += score;
+	finalScore->setText(finalScoreText.c_str());
+}
+
 void ScoreScreen::addName(const irr::core::stringc &playerName){
 	//Add it onto the vector
 	scores.push_back(scoreData(playerName, mostRecentScore));
 	//Then sort the vector
 	sortVector(scores);
-
-	//Set the most recent score
-	irr::core::stringw finalScoreText("Final Score: ");
-	finalScoreText += mostRecentScore;
-	finalScore->setText(finalScoreText.c_str());
 
 	//Update each score text
 	for(int i = 0; i < MAX_DISPLAY; i++){

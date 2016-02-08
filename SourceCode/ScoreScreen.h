@@ -61,7 +61,10 @@ public:
 	//destructor
 	~ScoreScreen();
 
-	//Adds a score onto the vector
+	//Add on the most recent score
+	void addScore(unsigned int score);
+
+	//Associates a name with the most recent score
 	void addName(const irr::core::stringc &playerName);
 
 	//Displays the score on screen
