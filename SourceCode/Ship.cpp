@@ -32,7 +32,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = ps->createPointEmitter(
-		irr::core::vector3df(0.0f, 0.0f, -0.0001f),			// direction, also acts as speed
+		irr::core::vector3df(0.0f, 0.0f, 0.1f * -moveDir),	// direction, also acts as speed
 		50U, 70U,											// emit rate
 		irr::video::SColor(0, 255, 255, 255),				// darkest color
 		irr::video::SColor(0, 255, 255, 255),				// brightest color
