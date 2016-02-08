@@ -3,7 +3,7 @@
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID, const bool &checkCollisionFromBoundingBox){
 	//Make the ID of the object the current object count
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
@@ -26,7 +26,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
     //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
     if(spawnOnConstruct){
-        spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference);
+        spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, checkCollisionFromBoundingBox);
     }
 }
 
