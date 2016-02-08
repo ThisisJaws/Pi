@@ -31,6 +31,9 @@ protected:
 
 	std::vector<irr::core::vector3df> cannonPositions;
 
+	//Particle system scene node
+	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
+
 private:
     //if the ship is able to fire
     bool canFire;
@@ -48,9 +51,6 @@ private:
 
 	//The lives this ship has - or how many hits it can take
 	unsigned short lives;
-
-	//Particle system scene node
-	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
     //FUNCTIONS
 public:
