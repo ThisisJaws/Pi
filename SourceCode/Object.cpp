@@ -79,6 +79,10 @@ irr::s32 Object::checkCollision(int direction){
 	}
 }
 
+bool Object::beenSpawned(){
+	return objectSpawned;
+}
+
 void Object::updatePosition(const irr::core::vector3df &newPosition){
     objectNode->setPosition(getPosition() + newPosition);
 }
@@ -99,7 +103,7 @@ void Object::updateRotation(const irr::core::vector3df &angle){
 	objectNode->setRotation(getRotation() + angle);
 }
 
-void Object::updateRotation(const float &x, const float &y, const float &z){
+void Object::updateRotation(const float &x, const float &y, const float & z){
 	updateRotation(irr::core::vector3df(x, y, z));
 }
 

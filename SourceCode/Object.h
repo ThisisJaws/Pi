@@ -25,6 +25,9 @@ private:
     
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
+
+    //keep track if the object has been spawned or not
+    bool objectSpawned;
     
     //mark an object for delete to remove it o update
     bool markedForDelete;
@@ -37,10 +40,6 @@ private:
 	//This holds the unique ID of the object so it can be found when searching through lists
 	irr::s32 uniqueID;
 
-protected:
-	//keep track if the object has been spawned or not
-	bool objectSpawned;
-    
     //FUNCTIONS
 public:
     //constructor
@@ -88,6 +87,9 @@ public:
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;
     virtual irr::s32 checkCollision(int direction);
+
+	//Returns true if the object si spawned
+	bool beenSpawned();
     
     //spawns the object into the scene if it hasn't happened already
     virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
