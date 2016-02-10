@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 					score.displayScore(false);
 					nameEntered = false;
 				} else{
-					score.addName(score.getTextBoxName());
+					score.addNameToRecentScore(score.getTextBoxName());
 					nameEntered = true;
 				}
 			}

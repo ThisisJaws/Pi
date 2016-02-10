@@ -44,7 +44,7 @@ void ScoreScreen::addScore(unsigned int score){
 	finalScore->setText(finalScoreText.c_str());
 }
 
-void ScoreScreen::addName(const irr::core::stringc &playerName){
+void ScoreScreen::addNameToRecentScore(const irr::core::stringc &playerName){
 	//Add it onto the vector
 	scores.push_back(scoreData(playerName, mostRecentScore));
 	//Then sort the vector
