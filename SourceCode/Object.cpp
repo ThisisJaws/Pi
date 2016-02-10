@@ -3,7 +3,7 @@
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID, const bool &checkCollisionFromBoundingBox){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID, const bool &checkCollisionFromBoundingBox){
 	//Make the ID of the object the current object count
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
@@ -26,7 +26,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 	//create the scene node using loaded mesh
 	objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
-	objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
+	objectNode->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture(pathOfTexture));
 
 	//Let the object cast shadows
 	objectNode->addShadowVolumeSceneNode();
