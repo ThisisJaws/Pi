@@ -25,9 +25,6 @@ private:
     
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
-
-    //keep track if the object has been spawned or not
-    bool objectSpawned;
     
     //mark an object for delete to remove it o update
     bool markedForDelete;
@@ -43,7 +40,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct = true, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE, const bool &checkCollisionFromBoundingBox = false);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE, const bool &checkCollisionFromBoundingBox = false);
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
@@ -90,9 +87,6 @@ protected:
 
 	//Returns true if the object si spawned
 	bool beenSpawned();
-    
-    //spawns the object into the scene if it hasn't happened already
-	virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &checkCollisionFromBoundingBox = false);
 };
 
 #endif	/* OBJECT_H */

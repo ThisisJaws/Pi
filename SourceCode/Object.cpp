@@ -3,7 +3,7 @@
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
 
-Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID, const bool &checkCollisionFromBoundingBox){
+Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::core::vector3df &spawnPos, const irr::s32 &objectTypeID, const bool &checkCollisionFromBoundingBox){
 	//Make the ID of the object the current object count
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
@@ -15,19 +15,39 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
     //set the spawn position
     this->spawnPos = spawnPos;
 
-    //default this to false, no object has been spawned yet
-    objectSpawned = false;
-
     //dont want it to get deleted straight away
     markedForDelete = false;
 
 	//Make sure the collisionManager points to nothing
 	collMan = 0;
 
-    //if we want the object to be spawned into the scene when the constructor is called (defaulted as true)
-    if(spawnOnConstruct){
-        spawnObject(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, checkCollisionFromBoundingBox);
-    }
+	//load the mesh
+	objectMesh = sceneManagerReference->getMesh(pathOfMesh);
+
+	//create the scene node using loaded mesh
+	objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
+	objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
+
+	//Let the object cast shadows
+	objectNode->addShadowVolumeSceneNode();
+
+	//Create a triangle selector of this object
+	irr::scene::ITriangleSelector *selector;
+	if(checkCollisionFromBoundingBox){
+		selector = sceneManagerReference->createTriangleSelectorFromBoundingBox(objectNode);
+	} else{
+		selector = sceneManagerReference->createTriangleSelector(objectNode);
+	}
+	//Give the node the newly created selector
+	objectNode->setTriangleSelector(selector);
+	//Drop the selector to remove it from memory
+	selector->drop();
+
+	//Create a reference to the collision Manager, to use when the collision function is called
+	collMan = sceneManagerReference->getSceneCollisionManager();
+
+	objectSpawned = true;
+}
 }
 
 bool Object::isMarkedForDelete(){
@@ -113,36 +133,4 @@ void Object::changeRotation(const irr::core::vector3df &angle){
 
 void Object::removeFromScene(){
     objectNode->remove();
-}
-
-void Object::spawnObject(const irr::io::path &pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference, const bool &checkCollisionFromBoundingBox){
-    //if the object hasn't been 'spawned' then place it into the scene
-    if(!objectSpawned){
-        //load the mesh
-        objectMesh = sceneManagerReference->getMesh(pathOfMesh);
-
-        //create the scene node using loaded mesh
-        objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
-        objectNode->setMaterialTexture(0, driverReference->getTexture(pathOfTexture));
-		
-		//Let the object cast shadows
-		objectNode->addShadowVolumeSceneNode();
-
-		//Create a triangle selector of this object
-		irr::scene::ITriangleSelector *selector;
-		if(checkCollisionFromBoundingBox){
-			selector = sceneManagerReference->createTriangleSelectorFromBoundingBox(objectNode);
-		} else{
-			selector = sceneManagerReference->createTriangleSelector(objectNode);
-		}
-		//Give the node the newly created selector
-		objectNode->setTriangleSelector(selector);
-		//Drop the selector to remove it from memory
-		selector->drop();
-
-		//Create a reference to the collision Manager, to use when the collision function is called
-		collMan = sceneManagerReference->getSceneCollisionManager();
-
-        objectSpawned = true;
-    }
 }
