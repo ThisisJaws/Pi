@@ -16,7 +16,7 @@ protected:
     //FUNCTIONS
 public:
     //constructor
-    Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
     
     virtual void activate(PlayerShip *player) override;
 };

@@ -70,7 +70,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference);
 
     virtual void tick(irr::f32 deltaTime) override;
 

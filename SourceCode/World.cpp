@@ -46,19 +46,19 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
 	for(int i = 0; i < 2; i++){
 		//basic
-		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		Game::addObjectToUpdate(basicEnemy);
 
 		z += 1200;
 
 		//strong
-		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		Game::addObjectToUpdate(strongEnemy);
 
 		z += 2800;
 
 		//fast
-		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, driver);
+		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		Game::addObjectToUpdate(fastEnemy);
 
 		z += 800;
@@ -70,7 +70,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	for(int i = 0; i < 3; i++){
 		y = rand() % 20 + 1;
 		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), smgr, driver);
+		gem = new Gem(irr::core::vector3df(x, y, z), smgr);
 
 		Game::addObjectToUpdate(gem);
 
@@ -225,7 +225,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
 				//For land piece
-				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), device->getVideoDriver(), false);
+				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
 				terrainPiece->changeRotation(objectRot);
 				terrainPiece->getSceneNode()->setScale(objectScale);
 
@@ -237,7 +237,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 
 			} else if(nameOfObject.at(0) == 'O'){
 				//For StaticObjects
-				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), device->getVideoDriver(), false);
+				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
 				Obsticle->changeRotation(objectRot);
 				Obsticle->getSceneNode()->setScale(objectScale);
 
@@ -248,12 +248,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), device->getVideoDriver());
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager());
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
-					Gem *gem = new Gem(objectPos, device->getSceneManager(), device->getVideoDriver());
+					Gem *gem = new Gem(objectPos, device->getSceneManager());
 					//Add to the update vector
 					Game::addObjectToUpdate(gem);
 				}

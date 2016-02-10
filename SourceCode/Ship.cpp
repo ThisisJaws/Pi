@@ -1,8 +1,8 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnPosition, objectTypeID){
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID){
 
     //set up variables
     moveSpeed = movementSpeed;
@@ -23,7 +23,6 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
     //reference the pointers
     smgr = sceneManagerReference;
-    drv = driverReference;
 
 	//Set the lives
 	lives = startingLives;
@@ -46,7 +45,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Change the materials of the particle system
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	engineParticleSystem->setMaterialTexture(0, driverReference->getTexture("Assets/FireParticle_b.png"));
+	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Move the system back slighty to line up with the engine
@@ -56,7 +55,6 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 Ship::~Ship(){
     //clear references (these get deleted properly elsewhere)
     smgr = 0;
-    drv = 0;
     bullet = 0;
 }
 
@@ -119,7 +117,7 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 		//For each position to fire from
 		for(int i = 0; i < firingPositions.size(); i++){
 			//construct a new bullet
-			bullet = new Bullet(smgr, drv);
+			bullet = new Bullet(smgr);
 
 			//then fire the bullet
 			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);

@@ -2,8 +2,8 @@
 
 #include "Game.h"
 
-StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, bool rotate)
-    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnPosition, TYPE_STATIC_OBJECT){
+StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, bool rotate)
+    : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_STATIC_OBJECT){
 
     //set up the rotation variables
 	if(rotate){

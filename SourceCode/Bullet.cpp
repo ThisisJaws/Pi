@@ -3,8 +3,8 @@
 #include "Game.h"
 
 //pass everythig through the constructor
-Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneManagerReference, driverReference, irr::core::vector3df(0), TYPE_BULLET){
+Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference) 
+    : Object("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneManagerReference, irr::core::vector3df(0), TYPE_BULLET){
     
     fired = false;
     moveSpeed = 250.0f;
@@ -14,13 +14,11 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
-    drvrRef = driverReference;
 }
 
 Bullet::~Bullet(){
     //clear the pointers reference (will get properly deleted elsewhere)
     sceneMRef = 0;
-    drvrRef = 0;
 }
 
 void Bullet::tick(irr::f32 deltaTime){

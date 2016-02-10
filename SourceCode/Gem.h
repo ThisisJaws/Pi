@@ -16,7 +16,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
  
     virtual void activate(PlayerShip *player) override;
 };

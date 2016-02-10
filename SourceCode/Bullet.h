@@ -28,12 +28,11 @@ private:
     
     //bellow variables are for constructing the bullet later
     irr::scene::ISceneManager *sceneMRef;
-    irr::video::IVideoDriver *drvrRef;
     
     //FUNCTIONS
 public:
     //constructor
-    Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    Bullet(irr::scene::ISceneManager *sceneManagerReference);
     //destructor
     ~Bullet();
     
