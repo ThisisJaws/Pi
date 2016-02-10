@@ -46,8 +46,6 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//Create a reference to the collision Manager, to use when the collision function is called
 	collMan = sceneManagerReference->getSceneCollisionManager();
 
-	objectSpawned = true;
-}
 }
 
 bool Object::isMarkedForDelete(){
@@ -97,10 +95,6 @@ irr::s32 Object::checkCollision(int direction){
 	} else{
 		return 0;
 	}
-}
-
-bool Object::beenSpawned(){
-	return objectSpawned;
 }
 
 void Object::updatePosition(const irr::core::vector3df &newPosition){

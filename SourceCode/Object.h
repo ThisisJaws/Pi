@@ -84,9 +84,6 @@ public:
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;
     virtual irr::s32 checkCollision(int direction);
-
-	//Returns true if the object si spawned
-	bool beenSpawned();
 };
 
 #endif	/* OBJECT_H */
