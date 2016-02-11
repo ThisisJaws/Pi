@@ -25,6 +25,7 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	}
 
 	playerName = guienv->addEditBox(L"NAME", irr::core::rect<irr::s32>(0, 90, 800, 120), true);
+	playerName->setMax(20);
 	playerName->setVisible(false);
 
 	//Make sure the text variables are reset
@@ -70,6 +71,7 @@ void ScoreScreen::displayScore(const bool &display){
 
 	//Display the player's name
 	playerName->setVisible(display);
+	playerName->setEnabled(display);
 
 	//Set the visibility of the numbers
 	for(int i = 0; i < MAX_DISPLAY; i++){
