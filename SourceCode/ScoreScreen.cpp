@@ -45,8 +45,11 @@ void ScoreScreen::addScore(unsigned int score){
 }
 
 void ScoreScreen::addNameToRecentScore(const irr::core::stringc &playerName){
+	//Remove any spaces from the string
+	std::string newName = playerName.c_str();
+	newName.erase(std::remove_if(newName.begin(), newName.end(), isspace), newName.end());
 	//Add it onto the vector
-	scores.push_back(scoreData(playerName, mostRecentScore));
+	scores.push_back(scoreData(newName.c_str(), mostRecentScore));
 	//Then sort the vector
 	sortVector(scores);
 
