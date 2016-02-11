@@ -9,9 +9,6 @@
 
 #include "irrlicht.h"
 
-//How many names to display
-#define MAX_DISPLAY 10
-
 //Location of the score file
 #define SCORE_FILE "Assets/Score.sts"
 
@@ -25,6 +22,9 @@ class ScoreScreen{
 private:
 	//Reference to the gui environment
 	irr::gui::IGUIEnvironment *guienv;
+
+	//How many names to display
+	const int MAX_DISPLAY = 10;
 
 	//Structure to hold the score and name
 	struct scoreData{
