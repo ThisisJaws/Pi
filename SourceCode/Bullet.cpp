@@ -3,8 +3,8 @@
 #include "Game.h"
 
 //pass everythig through the constructor
-Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference) 
-    : Object("", "", sceneManagerReference, driverReference, false, irr::core::vector3df(0), TYPE_BULLET){
+Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference) 
+    : Object("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneManagerReference, irr::core::vector3df(0), TYPE_BULLET){
     
     fired = false;
     moveSpeed = 250.0f;
@@ -14,13 +14,11 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference, irr::video::IVi
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
-    drvrRef = driverReference;
 }
 
 Bullet::~Bullet(){
     //clear the pointers reference (will get properly deleted elsewhere)
     sceneMRef = 0;
-    drvrRef = 0;
 }
 
 void Bullet::tick(irr::f32 deltaTime){
@@ -52,9 +50,6 @@ void Bullet::tick(irr::f32 deltaTime){
 }
 
 void Bullet::fire(const irr::core::vector3df &firePos, const irr::core::vector3df &direction, const float &shipSpeed, const int &targetTypeID){
-    //spawn the object into the scene
-    spawnObject("Assets/Ships/LaserBullet1.obj", "Assets/Ships/LaserBulletTex.jpg", sceneMRef, drvrRef);
-
 	this->targetTypeID = targetTypeID;
 	
 	//Work out the speed of the bullet

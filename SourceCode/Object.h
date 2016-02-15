@@ -25,9 +25,6 @@ private:
     
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
-
-    //keep track if the object has been spawned or not
-    bool objectSpawned;
     
     //mark an object for delete to remove it o update
     bool markedForDelete;
@@ -39,11 +36,11 @@ private:
 	static irr::s32 objectCount;
 	//This holds the unique ID of the object so it can be found when searching through lists
 	irr::s32 uniqueID;
-    
+
     //FUNCTIONS
 public:
     //constructor
-    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const bool &spawnOnConstruct = true, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE);
+    Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE, const bool &checkCollisionFromBoundingBox = false);
     
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
@@ -87,9 +84,6 @@ public:
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;
     virtual irr::s32 checkCollision(int direction);
-    
-    //spawns the object into the scene if it hasn't happened already
-    virtual void spawnObject(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
 };
 
 #endif	/* OBJECT_H */

@@ -3,8 +3,8 @@
 #include "Game.h"
 #include "SoundManager.h"
 
-Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, true, spawnPosition, TYPE_COLLECTABLE){
+Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference)
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_COLLECTABLE, true){
 
     //set the rotation speed
     rotSpeed = 75.0f;
@@ -27,7 +27,7 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
 	//Add change the materials of the particle system
 	ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	ps->setMaterialTexture(0, driverReference->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
+	ps->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Resize all collectibles, might be temp
@@ -43,5 +43,4 @@ void Collectable::activate(PlayerShip * player){
 	markForDelete();
 	SoundManager::playSFXPickup();
 }
-
 

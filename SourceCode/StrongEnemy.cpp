@@ -1,7 +1,7 @@
 #include "StrongEnemy.h"
 
-StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference)
-	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/StrongShip.obj", "Assets/Ships/EnemyShips/StrongShipTexture.jpg", sceneManagerReference, driverReference, 1){
+StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference)
+	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/StrongShip.obj", "Assets/Ships/EnemyShips/StrongShipTexture.jpg", sceneManagerReference, 1){
 
 	//Start the ship at the bottom
 	changePosition(irr::core::vector3df(getPosition().X, -45, getPosition().Z));

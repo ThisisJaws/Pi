@@ -1,12 +1,12 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference, const irr::s32 &objectTypeID, const unsigned short &startingLives, const bool &spawnOnConstruct)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, driverReference, spawnOnConstruct, spawnPosition, objectTypeID){
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID){
 
     //set up variables
     moveSpeed = movementSpeed;
-    turnSpeed = 75;
+    turnSpeed = moveSpeed / 2;
     //direction of movement +1 is along the positive Z axis, -1 is along the negative Z axis
     moveDir = movementDirection;
 
@@ -23,40 +23,38 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
     //reference the pointers
     smgr = sceneManagerReference;
-    drv = driverReference;
 
 	//Set the lives
 	lives = startingLives;
 
 	//Create a prticle effect for the thruster
-	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
+	engineParticleSystem = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
-	irr::scene::IParticleEmitter* em = ps->createPointEmitter(
-		irr::core::vector3df(0.0f, 0.0f, -0.0001f),			// direction, also acts as speed
-		50U, 70U,											// emit rate
-		irr::video::SColor(0, 255, 255, 255),				// darkest color
-		irr::video::SColor(0, 255, 255, 255),				// brightest color
-		50, 100, 0,											// min and max age, angle
-		irr::core::dimension2df(0.5f, 0.5f),				// min size
-		irr::core::dimension2df(2.0f, 2.0f));				// max size
+	irr::scene::IParticleEmitter* em = engineParticleSystem->createPointEmitter(
+		irr::core::vector3df(0.0f, 0.0f, -0.0001f),		// direction, also acts as speed
+		50U, 70U,										// emit rate
+		irr::video::SColor(0, 255, 255, 255),			// darkest color
+		irr::video::SColor(0, 255, 255, 255),			// brightest color
+		50, 100, 0,										// min and max age, angle
+		irr::core::dimension2df(0.5f, 0.5f),			// min size
+		irr::core::dimension2df(2.0f, 2.0f));			// max size
 
-	ps->setEmitter(em); //Give the emitter to the system
-	em->drop();			//Safe to drop now we don't need it
+	engineParticleSystem->setEmitter(em);	//Give the emitter to the system
+	em->drop();								//Safe to drop now we don't need it
 
 	//Change the materials of the particle system
-	ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	ps->setMaterialTexture(0, driverReference->getTexture("Assets/FireParticle_b.png"));
-	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
+	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
+	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Move the system back slighty to line up with the engine
-	ps->setPosition(irr::core::vector3df(0, 0.5f, -7));
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
 }
 
 Ship::~Ship(){
     //clear references (these get deleted properly elsewhere)
     smgr = 0;
-    drv = 0;
     bullet = 0;
 }
 
@@ -119,7 +117,7 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 		//For each position to fire from
 		for(int i = 0; i < firingPositions.size(); i++){
 			//construct a new bullet
-			bullet = new Bullet(smgr, drv);
+			bullet = new Bullet(smgr);
 
 			//then fire the bullet
 			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);

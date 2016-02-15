@@ -23,7 +23,7 @@ class Collectable : public Object{
     //FUNCTIONS
 public:
     //constructor
-    Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::video::IVideoDriver *driverReference);
+    Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference);
     
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;

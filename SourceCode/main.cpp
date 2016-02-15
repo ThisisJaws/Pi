@@ -21,7 +21,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 6
-#define CURRENT_VERSION_REVISION 0
+#define CURRENT_VERSION_REVISION 5
 
 /*
  * program entry point
@@ -35,6 +35,8 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver);
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
+	//Keep track if the player has entered their name
+	bool nameEntered = false;
 
 	//Change the window name
 	irr::core::stringw windowName(L"Space Trip - Version: ");
@@ -82,31 +84,41 @@ int main(int argc, char** argv) {
             device->closeDevice();
         }
 
-        //Start the game when enter is pressed
-        if(receiver.isKeyPressed(irr::KEY_RETURN)){
-            if(gameState == startMenu){
-                gameState = gamePlaying;
-                menuImage->setVisible(false);
-            }else if(gameState == scoreScreen){
-				gameState = startMenu;
-				menuImage->setVisible(true);
-				score.displayScore(false);
-			}
-        }
-
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
+		//Listen for enter key
+		if(gameState == startMenu){
+			if(receiver.isKeyPressed(irr::KEY_RETURN)){
+				gameState = gamePlaying;
+				menuImage->setVisible(false);
+			}
+		}
 		//Update the game if it is playing
 		if(gameState == gamePlaying){
 			if(!game.isLoaded()){
 				game.load(camera);
 			}
-			if(game.play()){
-				//play() will be true when the game is over
+			if(game.play()){ //play() will be true when the game is over
+				//Set and display the scores
 				gameState = scoreScreen;
-				score.addScore("???", game.getFinalScore());
 				score.displayScore(true);
+				score.addScore(game.getFinalScore());
+			}
+		}
+		//Update the score screen
+		if(gameState == scoreScreen){
+			//When the user presses enter, return to menu
+			if(receiver.isKeyPressed(irr::KEY_RETURN)){
+				if(nameEntered){
+					gameState = startMenu;
+					menuImage->setVisible(true);
+					score.displayScore(false);
+					nameEntered = false;
+				} else{
+					score.addNameToRecentScore(score.getTextBoxName());
+					nameEntered = true;
+				}
 			}
 		}
 

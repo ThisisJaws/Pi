@@ -41,6 +41,7 @@ public:
 
 	//Returns true on the frame the key is released
 	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
+
 };
 
 #endif	/* EVENTRECEIVER_H */

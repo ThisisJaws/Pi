@@ -1,7 +1,7 @@
 #include "FastEnemy.h"
 
-FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, irr::video::IVideoDriver* driverReference) 
-	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference, driverReference){
+FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference) 
+	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference){
 
 	//Start at the top of the screen
 	changePosition(irr::core::vector3df(getPosition().X, 45, getPosition().Z));
