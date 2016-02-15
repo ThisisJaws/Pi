@@ -39,18 +39,8 @@ private:
     int sideViewDistance;   //distance from the side of the player
     int sideViewOffset;     //offset in front of the player
 
-    //camera position gets adjusted by these offsets
-    float cameraYOffset, maxYOffset, minYOffset;
-    float cameraXOffset, maxXOffset;
-
-	//This holds the 'base' position, the one that will be considered 0, 0, 0 if the player moves
-	irr::core::vector3df basePosition;
-
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;
-    //vectors to switch between the two camera positions
-    irr::core::vector3df thirdPersonPosition;
-    irr::core::vector3df sideViewPosition;
 
     //to be able to receive events
     EventReceiver *eReceiver;
@@ -114,8 +104,6 @@ protected:
 	virtual void turnRight(const float &speed, const irr::f32 &deltaTime) override;
 
 private:
-    //updates the two camera positions
-    void updateCameraPositions();
 
     //updates the camera based on the current mode
     void updateCamera(irr::scene::ICameraSceneNode* sceneCamera);

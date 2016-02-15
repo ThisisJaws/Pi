@@ -26,17 +26,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     sideViewDistance = 75;
     sideViewOffset = 60;
 
-    //set up the current offsets as the flying mode ones for the camera
-    cameraYOffset = 0;
-    maxYOffset = 20;
-    minYOffset = 8;
-
-    cameraXOffset = 0;
-    maxXOffset = 20;
-
-	//Set the base position, will always start at 0, 0, 0
-	basePosition = irr::core::vector3df(0);
-
     //set the ship's default mode
     currentMode = flying;
 
@@ -145,7 +134,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		}
 
 		//Perform camera updates after movement
-		updateCameraPositions();
 		updateCamera(camera);
 
 		//check if fire key was pressed
@@ -194,13 +182,6 @@ void PlayerShip::increaseScore(unsigned int amount){
 void PlayerShip::changePosition(irr::core::vector3df newPosition){
 	//Call the super function
 	Ship::changePosition(newPosition);
-
-	//Adjust the base position
-	basePosition = newPosition;
-
-	//Reset the camera offsets
-	cameraXOffset = 0;
-	cameraYOffset = 0;
 }
 
 void PlayerShip::markForDelete(){
@@ -228,72 +209,56 @@ bool PlayerShip::areControlsLocked(){
 }
 
 void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
-    //if ship is still inside screen
-    if(getPosition().Y < basePosition.Y + maxYOffset){
-        float moveBy = speed * deltaTime;
+	//if ship is still inside screen
+	float moveBy = speed * deltaTime;
 
-        //move the ship up
-        updatePosition(0.0f, moveBy, 0.0f);
-        //move the camera down
-        cameraYOffset -= moveBy;
+	//move the ship up
+	updatePosition(0.0f, moveBy, 0.0f);
 
-		//Rotate the ship up
-		if(getRotation().X > -maxXRotate){
-			updateRotation(-rotSpeed * deltaTime, 0, 0);
-			rotateBackX = false;
-		}
-    }
+	//Rotate the ship up
+	if(getRotation().X > -maxXRotate){
+		updateRotation(-rotSpeed * deltaTime, 0, 0);
+		rotateBackX = false;
+	}
 }
 void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
-    //if ship is still inside screen
-    if(getPosition().Y > basePosition.Y - minYOffset){
-        float moveBy = speed * deltaTime;
+	//if ship is still inside screen
+	float moveBy = speed * deltaTime;
 
-        //move the ship down
-        updatePosition(0.0f, -moveBy, 0.0f);
-        //move the camera up
-        cameraYOffset += moveBy;
+	//move the ship down
+	updatePosition(0.0f, -moveBy, 0.0f);
 
-		//Rotate the ship down
-		if(getRotation().X < maxXRotate){
-			updateRotation(rotSpeed * deltaTime, 0, 0);
-			rotateBackX = false;
-		}
-    }
+	//Rotate the ship down
+	if(getRotation().X < maxXRotate){
+		updateRotation(rotSpeed * deltaTime, 0, 0);
+		rotateBackX = false;
+	}
 }
 void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
 	if(currentMode == flying){
-		if(getPosition().X > basePosition.X - maxXOffset){
-			float moveBy = speed * deltaTime;
+		float moveBy = speed * deltaTime;
 
-			//move the ship to the left
-			updatePosition(-moveBy, 0.0f, 0.0f);
-			//move the camera to the right
-			cameraXOffset += moveBy;
+		//move the ship to the left
+		updatePosition(-moveBy, 0.0f, 0.0f);
 
-			//Rotate the ship to the left
-			if(getRotation().Z < maxZRotate){
-				updateRotation(0, 0, rotSpeed * deltaTime);
-				rotateBackY = false;
-			}
+		//Rotate the ship to the left
+		if(getRotation().Z < maxZRotate){
+			updateRotation(0, 0, rotSpeed * deltaTime);
+			rotateBackY = false;
 		}
 	}
 }
 void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
 	if(currentMode == flying){
-		if(getPosition().X < basePosition.X + maxXOffset){
-			float moveBy = speed * deltaTime;
+		float moveBy = speed * deltaTime;
 
-			//move the ship to the right
-			updatePosition(moveBy, 0.0f, 0.0f);
-			//move the camera to the left
-			cameraXOffset -= moveBy;
+		//move the ship to the right
+		updatePosition(moveBy, 0.0f, 0.0f);
 
-			//Rotate the ship to the right
-			if(getRotation().Z > -maxZRotate){
-				updateRotation(0, 0, -rotSpeed * deltaTime);
-				rotateBackY = false;
-			}
+		//Rotate the ship to the right
+		if(getRotation().Z > -maxZRotate){
+			updateRotation(0, 0, -rotSpeed * deltaTime);
+			rotateBackY = false;
 		}
 	}
 }
@@ -302,34 +267,13 @@ void PlayerShip::changeMode(const int &increaseSpeedByFactor){
     if(currentMode == flying){
         //switch the enum
         currentMode = shooting;
-
-        //update the offsets
-        maxYOffset = 50;
-        minYOffset = maxYOffset;
-
     }else{
         //switch the enum
         currentMode = flying;
-
-        //update the offsets
-        maxYOffset = 20;
-        minYOffset = 8;
     }
 
 	//Increase the player's speed
 	moveSpeed += 25 * increaseSpeedByFactor;
-}
-
-void PlayerShip::updateCameraPositions(){
-    //third person view update
-    thirdPersonPosition.X = getPosition().X;
-    thirdPersonPosition.Y = getPosition().Y + tpOffset;
-    thirdPersonPosition.Z = getPosition().Z - tpDistance;
-
-    //side view update
-    sideViewPosition.X = getPosition().X + sideViewDistance;
-    sideViewPosition.Y = getPosition().Y;
-    sideViewPosition.Z = getPosition().Z + sideViewOffset;
 }
 
 void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
@@ -339,18 +283,20 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
     //update the camera's position
     if(currentMode == flying){
         //update position
-        cameraPosition = thirdPersonPosition;
-        cameraPosition.Y += cameraYOffset;
-        cameraPosition.X += cameraXOffset;
+        cameraPosition = getPosition();
+		cameraPosition.X = 0;
+        cameraPosition.Y = tpOffset;
+        cameraPosition.Z -= tpDistance;
 
         //update look at
         cameraLookAt = cameraPosition;
         cameraLookAt.Z += 1;
     }else if(currentMode == shooting){
         //update position
-        cameraPosition = sideViewPosition;
-        cameraPosition.Y += cameraYOffset;
-        cameraPosition.X += cameraXOffset;
+        cameraPosition = getPosition();
+        cameraPosition.X += sideViewDistance;
+		cameraPosition.Y = 0;
+		cameraPosition.Z += sideViewOffset;
 
         //update look at
         cameraLookAt = cameraPosition;
