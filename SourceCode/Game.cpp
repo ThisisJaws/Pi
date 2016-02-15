@@ -246,6 +246,15 @@ Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
 	return NULL;
 }
 
+PlayerShip* Game::getCurrentPlayer(){
+	//Loop through the vector as work around for the non static variable
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getTypeID() == TYPE_SHIP_PLAYER){
+			return dynamic_cast<PlayerShip*>(*objectIterator);
+		}
+	}
+}
+
 bool Game::checkBehidPlayer(const irr::f32 &zPos){
     //Loop through the static vector to find the player
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){

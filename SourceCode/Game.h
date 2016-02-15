@@ -103,6 +103,9 @@ public:
 	//Returns the object if the loop contains the ID
 	static Object* getObjectReferenceByID(const irr::s32 &objectID);
 
+	//Returns a pointer to the current player
+	static PlayerShip* getCurrentPlayer();
+
     //Returns true if the position is behind the player
     static bool checkBehidPlayer(const irr::f32 &zPos);
 
