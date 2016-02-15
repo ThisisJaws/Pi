@@ -240,7 +240,7 @@ void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
 		//Rotate the ship up
 		if(getRotation().X > -maxXRotate){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
-			rotateBack = false;
+			rotateBackX = false;
 		}
     }
 }
@@ -257,7 +257,7 @@ void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
 		//Rotate the ship down
 		if(getRotation().X < maxXRotate){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
-			rotateBack = false;
+			rotateBackX = false;
 		}
     }
 }
@@ -274,7 +274,7 @@ void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
 			//Rotate the ship to the left
 			if(getRotation().Z < maxZRotate){
 				updateRotation(0, 0, rotSpeed * deltaTime);
-				rotateBack = false;
+				rotateBackY = false;
 			}
 		}
 	}
@@ -292,7 +292,7 @@ void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
 			//Rotate the ship to the right
 			if(getRotation().Z > -maxZRotate){
 				updateRotation(0, 0, -rotSpeed * deltaTime);
-				rotateBack = false;
+				rotateBackY = false;
 			}
 		}
 	}

@@ -27,7 +27,8 @@ protected:
 	//How fast the ship will rotate
 	float rotSpeed;
 	//Keep track of the ship if it needs to rotate back
-	bool rotateBack;
+	bool rotateBackX;
+	bool rotateBackY;
 
 	std::vector<irr::core::vector3df> cannonPositions;
 

@@ -67,7 +67,7 @@ void Ship::tick(irr::f32 deltaTime){
     }
 
 	//Check if the ship needs to be rotated back
-	if(rotateBack){
+	if(rotateBackX){
 		//DOWN
 		if(getRotation().X < 0){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
@@ -76,6 +76,8 @@ void Ship::tick(irr::f32 deltaTime){
 		if(getRotation().X > 0){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
 		}
+	}
+	if(rotateBackY){
 		//RIGHT
 		if(getRotation().Z > 0){
 			updateRotation(0, 0, -rotSpeed * deltaTime);
@@ -87,7 +89,8 @@ void Ship::tick(irr::f32 deltaTime){
 	}
 
 	//Set this to true at the end of each loop
-	rotateBack = true;
+	rotateBackX = true;
+	rotateBackY = true;
 }
 
 float Ship::getMovementSpeed(){
@@ -153,7 +156,7 @@ void Ship::moveUp(const float &speed, const irr::f32 &deltaTime){
 	//Rotate the ship up
 	if(getRotation().X > -maxXRotate){
 		updateRotation(-rotSpeed * deltaTime, 0, 0);
-		rotateBack = false;
+		rotateBackX = false;
 	}
 }
 
@@ -163,7 +166,7 @@ void Ship::moveDown(const float &speed, const irr::f32 &deltaTime){
 	//Rotate the ship down
 	if(getRotation().X < maxXRotate){
 		updateRotation(rotSpeed * deltaTime, 0, 0);
-		rotateBack = false;
+		rotateBackX = false;
 	}
 }
 
@@ -173,7 +176,7 @@ void Ship::turnLeft(const float & speed, const irr::f32 &deltaTime){
 	//Rotate the ship to the left
 	if(getRotation().Z < maxZRotate){
 		updateRotation(0, 0, rotSpeed * deltaTime);
-		rotateBack = false;
+		rotateBackY = false;
 	}
 }
 
@@ -183,6 +186,6 @@ void Ship::turnRight(const float & speed, const irr::f32 &deltaTime){
 	//Rotate the ship to the right
 	if(getRotation().Z > -maxZRotate){
 		updateRotation(0, 0, -rotSpeed * deltaTime);
-		rotateBack = false;
+		rotateBackY = false;
 	}
 }
