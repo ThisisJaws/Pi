@@ -71,7 +71,7 @@ public:
 	//Loops through the array of terrain nodes and deletes them
 	virtual void clearTerrains();
 
-	//Returns the skydome location for the world
+	//Returns the skydome location (file path) for the world
 	irr::io::path getSkydomeLocation();
 
 	//Resets the world

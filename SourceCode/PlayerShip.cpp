@@ -54,6 +54,24 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 
 	//Let the player cast shadows
 	//getSceneNode()->addShadowVolumeSceneNode();
+
+	//Create the prticle effect for phase 2
+	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
+	//Set up an emitter for the system to use
+	irr::scene::IParticleEmitter* em = phase2AmbientParticles->createBoxEmitter(irr::core::aabbox3df(-50, -150, -150, 50, 150, 150), irr::core::vector3df(0), 10U, 20U);
+	//Give the emitter to the system
+	phase2AmbientParticles->setEmitter(em);
+	//Safe to drop now we don't need it
+	em->drop();
+	//Adjust position
+	phase2AmbientParticles->setPosition(irr::core::vector3df(0, 0, 100));
+	//Change the materials of the particle system
+	phase2AmbientParticles->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	phase2AmbientParticles->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
+	phase2AmbientParticles->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
+	phase2AmbientParticles->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+	//Turn off visibility
+	phase2AmbientParticles->setVisible(false);
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
@@ -294,6 +312,9 @@ void PlayerShip::changeMode(const int &increaseSpeedByFactor){
 		//Change the player constrain
 		constrainTop = shootingTop;
 		constrainBottom = shootingBottom;
+
+		//Activate the particles
+		phase2AmbientParticles->setVisible(true);
     }else{
         //Switch the enum
         currentMode = flying;
@@ -301,6 +322,9 @@ void PlayerShip::changeMode(const int &increaseSpeedByFactor){
 		//Change the player constrain
 		constrainTop = flyingTop;
 		constrainBottom = flyingBottom;
+
+		//Deactivate the particles
+		phase2AmbientParticles->setVisible(false);
     }
 
 	//Increase the player's speed

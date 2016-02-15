@@ -68,6 +68,9 @@ private:
         shooting,
     } currentMode;
 
+	//The particle system for phase 2
+	irr::scene::IParticleSystemSceneNode *phase2AmbientParticles;
+
     //FUNCTIONS
 public:
     //constructor
