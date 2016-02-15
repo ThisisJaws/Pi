@@ -28,9 +28,6 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
 	objectNode->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture(pathOfTexture));
 
-	//Let the object cast shadows
-	objectNode->addShadowVolumeSceneNode();
-
 	//Create a triangle selector of this object
 	irr::scene::ITriangleSelector *selector;
 	if(checkCollisionFromBoundingBox){

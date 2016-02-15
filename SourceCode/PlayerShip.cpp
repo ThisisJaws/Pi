@@ -41,7 +41,8 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     currentMode = flying;
 
     //Set up the light
-    light = sceneManagerReference->addLightSceneNode(0, irr::core::vector3df(0, 1000, 0));
+	lightPos = irr::core::vector3df(0, 1000, -500);
+    light = sceneManagerReference->addLightSceneNode(0, lightPos);
     light->setRadius(10000);
 
 	controlsLocked = false;
@@ -52,6 +53,9 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	//Set the cannon positions
 	cannonPositions.push_back(irr::core::vector3df( 1, 1.5f, -1.5f));
 	cannonPositions.push_back(irr::core::vector3df(-1, 1.5f, -1.5f));
+
+	//Let the player cast shadows
+	//getSceneNode()->addShadowVolumeSceneNode();
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
@@ -114,9 +118,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
 	//Move the light along the Z axis
-	irr::core::vector3df lightPos = getPosition();
-	lightPos.Y = 1000;
-	lightPos.X = 0;
+	lightPos.Z = getPosition().Z - 500;
 	light->setPosition(lightPos);
 
 	//Check if the player can control the ship

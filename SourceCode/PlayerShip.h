@@ -57,6 +57,8 @@ private:
 
     //The light to light the level
     irr::scene::ILightSceneNode *light;
+	//Offset of position
+	irr::core::vector3df lightPos;
 
 	//Stops the player moving the ship
 	bool controlsLocked;
