@@ -33,11 +33,20 @@ private:
 	//Will be true if the player loses
 	bool lost;
 
-    //variables to control the camera pos
+    //Variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
     int sideViewDistance;   //distance from the side of the player
     int sideViewOffset;     //offset in front of the player
+	//Different constrain variables for flying and shooting
+	float flyingTop;
+	float flyingBottom;
+	float shootingTop;
+	float shootingBottom;
+	//Stop the player moving off the screen
+	float constrainX;
+	float constrainTop;
+	float constrainBottom;
 
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;

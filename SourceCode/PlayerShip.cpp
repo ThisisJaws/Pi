@@ -19,15 +19,24 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     ammo = 20;
     this->eReceiver = eReceiver;
 
-    //init the camera variables
+    //Init the camera variables
     tpDistance = 30;
     tpOffset = 7;
-
     sideViewDistance = 75;
     sideViewOffset = 60;
 
+	//Set the default contrains for the different modes
+	flyingTop = 22;
+	flyingBottom = -11;
+	shootingTop = 44;
+	shootingBottom = -44;
+
     //set the ship's default mode
     currentMode = flying;
+	//Set the contrain variables for the above mode
+	constrainX = 23;
+	constrainTop = flyingTop;
+	constrainBottom = flyingBottom;
 
     //Set up the light
 	lightPos = irr::core::vector3df(0, 1000, -500);
@@ -209,67 +218,89 @@ bool PlayerShip::areControlsLocked(){
 }
 
 void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
-	//if ship is still inside screen
+	//Get the doistance to move by
 	float moveBy = speed * deltaTime;
 
-	//move the ship up
-	updatePosition(0.0f, moveBy, 0.0f);
+	//If player is still inside the screen
+	if(getPosition().Y + moveBy < constrainTop){
+		//Move the ship up
+		updatePosition(0.0f, moveBy, 0.0f);
 
-	//Rotate the ship up
-	if(getRotation().X > -maxXRotate){
-		updateRotation(-rotSpeed * deltaTime, 0, 0);
-		rotateBackX = false;
+		//Rotate the ship up
+		if(getRotation().X > -maxXRotate){
+			updateRotation(-rotSpeed * deltaTime, 0, 0);
+			rotateBackX = false;
+		}
 	}
 }
 void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
-	//if ship is still inside screen
+	//Get the doistance to move by
 	float moveBy = speed * deltaTime;
 
-	//move the ship down
-	updatePosition(0.0f, -moveBy, 0.0f);
+	//If player is still inside the screen
+	if(getPosition().Y - moveBy > constrainBottom){
+		//Move the ship down
+		updatePosition(0.0f, -moveBy, 0.0f);
 
-	//Rotate the ship down
-	if(getRotation().X < maxXRotate){
-		updateRotation(rotSpeed * deltaTime, 0, 0);
-		rotateBackX = false;
+		//Rotate the ship down
+		if(getRotation().X < maxXRotate){
+			updateRotation(rotSpeed * deltaTime, 0, 0);
+			rotateBackX = false;
+		}
 	}
 }
 void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
 	if(currentMode == flying){
+		//Get the doistance to move by
 		float moveBy = speed * deltaTime;
 
-		//move the ship to the left
-		updatePosition(-moveBy, 0.0f, 0.0f);
+		//If player is still inside the screen
+		if(getPosition().X - moveBy > -constrainX){
+			//Move the ship to the left
+			updatePosition(-moveBy, 0.0f, 0.0f);
 
-		//Rotate the ship to the left
-		if(getRotation().Z < maxZRotate){
-			updateRotation(0, 0, rotSpeed * deltaTime);
-			rotateBackY = false;
+			//Rotate the ship to the left
+			if(getRotation().Z < maxZRotate){
+				updateRotation(0, 0, rotSpeed * deltaTime);
+				rotateBackY = false;
+			}
 		}
 	}
 }
 void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
 	if(currentMode == flying){
+		//Get the doistance to move by
 		float moveBy = speed * deltaTime;
 
-		//move the ship to the right
-		updatePosition(moveBy, 0.0f, 0.0f);
+		//If player is still inside the screen
+		if(getPosition().X + moveBy < constrainX){
+			//Move the ship to the right
+			updatePosition(moveBy, 0.0f, 0.0f);
 
-		//Rotate the ship to the right
-		if(getRotation().Z > -maxZRotate){
-			updateRotation(0, 0, -rotSpeed * deltaTime);
-			rotateBackY = false;
+			//Rotate the ship to the right
+			if(getRotation().Z > -maxZRotate){
+				updateRotation(0, 0, -rotSpeed * deltaTime);
+				rotateBackY = false;
+			}
 		}
 	}
 }
 
 void PlayerShip::changeMode(const int &increaseSpeedByFactor){
     if(currentMode == flying){
-        //switch the enum
+        //Switch the enum
         currentMode = shooting;
+
+		//Change the player constrain
+		constrainTop = shootingTop;
+		constrainBottom = shootingBottom;
     }else{
-        //switch the enum
+        //Switch the enum
         currentMode = flying;
+
+		//Change the player constrain
+		constrainTop = flyingTop;
+		constrainBottom = flyingBottom;
     }
 
 	//Increase the player's speed
