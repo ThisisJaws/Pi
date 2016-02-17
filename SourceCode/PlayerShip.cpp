@@ -74,6 +74,14 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	phase2AmbientParticles->setVisible(false);
 }
 
+PlayerShip::~PlayerShip(){
+	//Make sure the light gets removed
+	if(light){
+		light->remove();
+	}
+	//Particles get cleaned up anyeway because they are a child
+}
+
 void PlayerShip::tick(irr::f32 deltaTime){
 	Ship::tick(deltaTime);
 
