@@ -7,7 +7,7 @@ namespace SoundManager{
 	audiere::OutputStreamPtr mainMenu = audiere::OpenSound(device, "Assets/Sound/ingame.wav");
 	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(device, "Assets/Sound/ButtonPress.mp3");
 	audiere::OutputStreamPtr pickup = audiere::OpenSound(device, "Assets/Sound/Pickup.mp3");
-	audiere::OutputStreamPtr shoot = audiere::OpenSound(device, "Assets/Sound/Shooting.mp3");
+	audiere::OutputStreamPtr shoot = audiere::OpenSound(device, "Assets/Sound/Shoot.mp3");
 	
 	//FUNCTION DEFINITIONS
 
@@ -26,10 +26,12 @@ namespace SoundManager{
 	}
 
 	void playSFXPickup(){
+		pickup->reset();
 		pickup->play();
 	}
 
 	void playSFXShoot(){
+		shoot->reset();
 		shoot->play();
 	}
 
