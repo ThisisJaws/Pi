@@ -58,6 +58,8 @@ private:
     irr::scene::ILightSceneNode *light;
 	//Offset of position
 	irr::core::vector3df lightPos;
+	//Keep track of the z offset
+	const float zOffSet = 700;
 
 	//Stops the player moving the ship
 	bool controlsLocked;

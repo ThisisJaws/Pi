@@ -39,7 +39,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	constrainBottom = flyingBottom;
 
     //Set up the light
-	lightPos = irr::core::vector3df(0, 1000, -500);
+	lightPos = irr::core::vector3df(0, 1000, -zOffSet);
     light = sceneManagerReference->addLightSceneNode(0, lightPos);
     light->setRadius(10000);
 
@@ -134,7 +134,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
 	//Move the light along the Z axis
-	lightPos.Z = getPosition().Z - 500;
+	lightPos.Z = getPosition().Z - zOffSet;
 	light->setPosition(lightPos);
 
 	//Check if the player can control the ship
