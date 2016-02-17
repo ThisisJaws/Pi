@@ -45,7 +45,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 }
 
-Object::~Object(){}
+Object::~Object(){
+	//needs a virtual destructor to make sure all derived object's constructors get called
+}
 
 bool Object::isMarkedForDelete(){
     return markedForDelete;
