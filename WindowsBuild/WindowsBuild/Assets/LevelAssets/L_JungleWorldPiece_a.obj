@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 09.02.2016 03:05:13
+# File Created: 15.02.2016 16:50:17
 
 mtllib L_JungleWorldPiece_a.mtl
 
@@ -7944,7 +7944,7 @@ vt 0.5272 0.9896 0.0000
 # 1721 texture coords
 
 g L_JungleWorldPiece_a
-usemtl Material__2
+usemtl Material__25
 s 1
 f 1/1/1 2/2/2 3/3/3 
 f 4/4/4 5/5/5 6/6/6 
