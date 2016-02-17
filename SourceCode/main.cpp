@@ -90,6 +90,7 @@ int main(int argc, char** argv) {
 		//Listen for enter key
 		if(gameState == startMenu){
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
+				SoundManager::playSFXButtonPress();
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
 			}
