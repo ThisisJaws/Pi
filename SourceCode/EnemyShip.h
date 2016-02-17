@@ -32,7 +32,7 @@ public:
     //constructor
     EnemyShip(PlayerShip *player, irr::core::vector3df spawnPos, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const unsigned short &startingLives = 0);
     //destructor
-    ~EnemyShip();
+    virtual ~EnemyShip();
 
     virtual void tick(irr::f32 deltaTime) override;
 

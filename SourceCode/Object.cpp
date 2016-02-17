@@ -45,6 +45,8 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 
 }
 
+Object::~Object(){}
+
 bool Object::isMarkedForDelete(){
     return markedForDelete;
 }

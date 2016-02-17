@@ -41,7 +41,9 @@ private:
 public:
     //constructor
     Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE, const bool &checkCollisionFromBoundingBox = false);
-    
+    //destructor
+	virtual ~Object();
+
     //this will be called every update of the main game loop
     virtual void tick(irr::f32 deltaTime) = 0;
     

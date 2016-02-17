@@ -77,6 +77,8 @@ private:
 public:
     //constructor
     PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference);
+	//destructor
+	virtual ~PlayerShip();
 
     virtual void tick(irr::f32 deltaTime) override;
 

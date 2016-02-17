@@ -183,16 +183,17 @@ bool Game::play(){
 }
 
 void Game::cleanUp(){
-    //loop through object vector and delete all pointers
+    //Loop through object list and remove everything from the scene graph
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
 		Object *toDelete = *objectIterator;
-		toDelete->getSceneNode()->remove();
+		toDelete->removeFromScene();
 		delete toDelete;
 	}
-    objectsToUpdate.resize(0);
+	objectsToUpdate.resize(0);
 
-    //clear the player pointer
-    g_player = 0;
+	//Clear the player
+	g_player = 0;
+
 
     //Remove the static text objects
     scoreText->remove();

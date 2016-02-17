@@ -34,7 +34,7 @@ public:
     //constructor
     Bullet(irr::scene::ISceneManager *sceneManagerReference);
     //destructor
-    ~Bullet();
+    virtual ~Bullet();
     
     void tick(irr::f32 deltatime) override;
     
