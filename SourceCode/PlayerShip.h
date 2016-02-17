@@ -91,9 +91,6 @@ public:
     unsigned int getScore();
     void increaseScore(unsigned int amount);
 
-	//Overriden to make sure the cameraOffsets get updated
-	virtual void changePosition(irr::core::vector3df newPosition);
-
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;
 
