@@ -21,7 +21,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 6
-#define CURRENT_VERSION_REVISION 9
+#define CURRENT_VERSION_REVISION 10
 
 /*
  * program entry point
@@ -40,11 +40,7 @@ int main(int argc, char** argv) {
 
 	//Change the window name
 	irr::core::stringw windowName(L"Space Trip - Version: ");
-	windowName += CURRENT_VERSION_MAJOR;
-	windowName += ".";
-	windowName += CURRENT_VERSION_MINOR;
-	windowName += ".";
-	windowName += CURRENT_VERSION_REVISION;
+	windowName += CURRENT_VERSION_MAJOR; windowName += "."; windowName += CURRENT_VERSION_MINOR; windowName += "."; windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
 
     //Create a texture variable to draw the menu
