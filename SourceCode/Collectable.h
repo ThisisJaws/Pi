@@ -20,6 +20,13 @@ class Collectable : public Object{
 	 //Particle system scene node
 	 irr::scene::IParticleSystemSceneNode *ps;
 
+	 //Audoiere device and pick up sfx
+	 audiere::AudioDevicePtr audDevice;
+	 audiere::OutputStreamPtr pickupSFX;
+	 //Bool's to control the sound
+	 bool soundStarted;
+	 bool actionPefromed;
+
     //FUNCTIONS
 public:
     //constructor
@@ -28,8 +35,11 @@ public:
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;
     
-    //pure virtual function which gets called when the player player collides
-    virtual void activate(PlayerShip *player);
+    //Gets called when the player collides with the colelctable
+    void activate(PlayerShip *player);
+
+	//Pure virtual function that performs the action the colecltible does, (i.e.e increase score)
+	virtual void performAction(PlayerShip *player) = 0;
 };
 
 #endif	/* COLLLECTABLE_H */

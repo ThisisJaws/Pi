@@ -18,7 +18,7 @@ public:
     //constructor
     Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
     
-    virtual void activate(PlayerShip *player) override;
+    virtual void performAction(PlayerShip *player) override;
 };
 
 #endif	/* AMMO_H */

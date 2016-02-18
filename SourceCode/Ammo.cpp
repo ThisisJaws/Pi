@@ -6,9 +6,7 @@ Ammo::Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneM
     ammoIncrease = 10;
 }
 
-void Ammo::activate(PlayerShip* player){
-	//Call base
-	Collectable::activate(player);
+void Ammo::performAction(PlayerShip* player){
 	//Increase ammo
     player->increaseAmmo(ammoIncrease);
 }

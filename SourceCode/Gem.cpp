@@ -6,9 +6,7 @@ Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneMan
     scoreIncrease = 10000;
 }
 
-void Gem::activate(PlayerShip* player){
-	//Call base
-	Collectable::activate(player);
+void Gem::performAction(PlayerShip* player){
 	//Increase score
     player->increaseScore(scoreIncrease);
 }
