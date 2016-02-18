@@ -11,13 +11,15 @@ class StrongEnemy : public EnemyShip{
     //VARIABLES
 private:
 	//How many times to loop through the manouver
-	const unsigned short combatLoop = 2;
+	const unsigned short COMBAT_LOOP_COUNT = 2;
 	unsigned short currentLoop;
-	bool speedChanged;
 
 	//keep track of shots fired
 	unsigned short shotsFired;
-	const unsigned short maxShotCount = 3;
+	const unsigned short MAX_SHOT_COUNT = 3;
+
+	//Time elapsed so the ship waits before leaving
+	float timeElapsed;
 
 	//What stage of combat the Enemy is in
 	enum combatStage{

@@ -10,7 +10,8 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 
 	currentStage = stageA;
 
-	speedChanged = false;
+	timeElapsed = 0;
+
 	shotsFired = 0;
 
 	//adjust turn speed
@@ -37,15 +38,11 @@ void StrongEnemy::combatManouver(irr::f32 deltaTime){
 		case stageC:
 			combatStageC(deltaTime);
 			break;
-
-		default:
-			//Do nothing as default
-			break;
 	}
 }
 
 void StrongEnemy::combatStageA(irr::f32 deltaTime){
-	if(shotsFired < maxShotCount){
+	if(shotsFired < MAX_SHOT_COUNT){
 		//Shoots 3 bullets
 		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
@@ -63,7 +60,7 @@ void StrongEnemy::combatStageA(irr::f32 deltaTime){
 }
 
 void StrongEnemy::combatStageB(irr::f32 deltaTime){
-	if(shotsFired < maxShotCount){
+	if(shotsFired < MAX_SHOT_COUNT){
 		//Shoots 3 bullets
 		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
@@ -81,17 +78,17 @@ void StrongEnemy::combatStageB(irr::f32 deltaTime){
 }
 
 void StrongEnemy::combatStageC(irr::f32 deltaTime){
-	if(shotsFired != maxShotCount){
+	if(shotsFired != MAX_SHOT_COUNT){
 		if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions)){
 			shotsFired++;
 		}
 	}else{
-		if(currentLoop < combatLoop){
+		if(currentLoop < COMBAT_LOOP_COUNT){
 			//Moves to the bottom of the screen
 			if(getPosition().Y > -45){
 				moveDown(turnSpeed, deltaTime);
 			}else{
-				if(currentLoop != combatLoop){
+				if(currentLoop != COMBAT_LOOP_COUNT){
 					//Reset shout count, increment loop count and reset stage
 					shotsFired = 0;
 					currentLoop++;
@@ -100,8 +97,12 @@ void StrongEnemy::combatStageC(irr::f32 deltaTime){
 			}
 		}else{
 			//If the loop count is reached then leave the area
-			moveSpeed /= 2;
-			currentStage = stageEnd;
+			if(timeElapsed > 1){
+				moveSpeed /= 2;
+				currentStage = stageEnd;
+			} else{
+				timeElapsed += deltaTime;
+			}
 		}
 	}
 }

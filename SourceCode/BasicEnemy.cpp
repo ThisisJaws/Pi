@@ -5,6 +5,7 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
 
 	currentStage = stageA;
 	timeElapsed = 0;
+	stageCTimeElpased = 0;
 
 	//adjust turn speed
 	turnSpeed /= 2;
@@ -61,6 +62,10 @@ void BasicEnemy::combatStageB(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageC(irr::f32 deltaTime){
 	//Makes the ship leave the area
-	moveSpeed /= 2;
-	currentStage = stageEnd;
+	if(stageCTimeElpased > 1){
+		moveSpeed /= 2;
+		currentStage = stageEnd;
+	} else{
+		stageCTimeElpased += deltaTime;
+	}
 }
