@@ -21,7 +21,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 6
-#define CURRENT_VERSION_REVISION 8
+#define CURRENT_VERSION_REVISION 9
 
 /*
  * program entry point
