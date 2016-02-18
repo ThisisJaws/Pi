@@ -18,8 +18,6 @@ private:
 		stageEnd
 	} currentStage;
 
-	//How long has passed (deltaTime) for the whole combat manouver
-	float timeElapsed;
 	//elapsed for stage c
 	float stageCTimeElpased;
 
