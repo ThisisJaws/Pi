@@ -75,9 +75,6 @@
     <ClCompile Include="..\..\SourceCode\LavaWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SourceCode\SoundManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\SourceCode\ScoreScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -144,9 +141,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\LavaWorld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SourceCode\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\ScoreScreen.h">
