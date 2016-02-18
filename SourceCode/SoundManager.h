@@ -12,18 +12,16 @@
 // Using a namespace and declaring non-memeber functions is better than an 'all static' class
 namespace SoundManager{
 	//Enum for level types
-	enum LevelType{
+	enum MusicType{
+		MENU,
+		SCORE,
 		LAVA,
 		ICE,
 		JUNGLE
 	};
 
-
-	//Plays the menu music
-	extern void playMusicMenu(const bool &repeat = true);
-
 	//Plays the correct music for the level
-	extern void playMusicLevel(const LevelType &level, const bool &repeat = true);
+	extern void playMusic(const MusicType &level, const bool &repeat = true);
 
 	//Plays the button SFX
 	extern void playSFXButtonPress();
@@ -33,8 +31,5 @@ namespace SoundManager{
 
 	//Plays the shooting SFX
 	extern void playSFXShoot();
-
-	//Stops all sounds
-	extern void stopAllSounds();
 }
 #endif
