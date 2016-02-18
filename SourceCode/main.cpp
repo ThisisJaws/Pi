@@ -32,9 +32,10 @@ int main(int argc, char** argv) {
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
     //Create the device to play audio
-	audiere::AudioDevicePtr audDevice = (audiere::OpenDevice());
+	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
 	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 	//Create the score class which will handle all of the score
@@ -63,6 +64,8 @@ int main(int argc, char** argv) {
     } gameState;
     gameState = startMenu;
 
+	//Play the main music
+	mainMusic->setVolume(0.75f);
 	mainMusic->play();
 	mainMusic->setRepeat(true);
 
@@ -87,11 +90,12 @@ int main(int argc, char** argv) {
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-		//Listen for enter key
+		//Wait on the start menu
 		if(gameState == startMenu){
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
+				buttonPress->play();
 			}
 		}
 		//Update the game if it is playing
