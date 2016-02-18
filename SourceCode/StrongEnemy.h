@@ -18,6 +18,9 @@ private:
 	unsigned short shotsFired;
 	const unsigned short MAX_SHOT_COUNT = 3;
 
+	//Time elapsed before stage start
+	float timeElapsed;
+
 	//What stage of combat the Enemy is in
 	enum combatStage{
 		stageA,

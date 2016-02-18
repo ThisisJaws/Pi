@@ -18,7 +18,9 @@ private:
 		stageEnd
 	} currentStage;
 
-	//elapsed for stage c
+	//Time elapsed before stage start
+	float timeElapsed;
+	//Elapsed for stage c
 	float stageCTimeElpased;
 
     //FUNCTIONS
