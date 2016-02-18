@@ -1,6 +1,5 @@
 #include "Ship.h"
 #include "Game.h"
-#include "SoundManager.h"
 
 Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
@@ -131,9 +130,6 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 
 			//clear the pointer to prevent memory leaks
 			bullet = 0;
-
-			//Play the bullet firing sound
-			SoundManager::playSFXShoot();
 		}
 
         //stop the ship firing immediately after

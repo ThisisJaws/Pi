@@ -6,11 +6,11 @@
  */
 
 #include "irrlicht.h"
+#include "audiere.h"
 
 #include "Game.h"
 #include "ScoreScreen.h"
 #include "EventReceiver.h"
-#include "SoundManager.h"
 
 //so it can work on windows
 #ifdef _IRR_WINDOWS_
@@ -31,7 +31,11 @@ int main(int argc, char** argv) {
     EventReceiver receiver;
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-    //Create the class that will handle the actual playing of the game
+    //Create the device to play audio
+	audiere::AudioDevicePtr audDevice = (audiere::OpenDevice());
+	//Load in some sounds
+	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
@@ -59,7 +63,8 @@ int main(int argc, char** argv) {
     } gameState;
     gameState = startMenu;
 
-	SoundManager::playMusic(SoundManager::MENU, true);
+	mainMusic->play();
+	mainMusic->setRepeat(true);
 
     //Show the player's score
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));
@@ -85,7 +90,6 @@ int main(int argc, char** argv) {
 		//Listen for enter key
 		if(gameState == startMenu){
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
-				SoundManager::playSFXButtonPress();
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
 			}
