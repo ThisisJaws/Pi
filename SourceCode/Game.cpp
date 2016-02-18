@@ -254,6 +254,8 @@ PlayerShip* Game::getCurrentPlayer(){
 			return dynamic_cast<PlayerShip*>(*objectIterator);
 		}
 	}
+
+	return NULL;
 }
 
 bool Game::checkBehidPlayer(const irr::f32 &zPos){
@@ -263,6 +265,8 @@ bool Game::checkBehidPlayer(const irr::f32 &zPos){
 			return (*objectIterator)->getPosition().Z > zPos;
 		}
 	}
+
+	return false;
 }
 
 bool Game::isLoaded(){
