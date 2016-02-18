@@ -50,6 +50,10 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
 	//Move the system back slighty to line up with the engine
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
+
+	//Init the audio device
+	audDevice = audiere::OpenDevice();
+	shootSFX = audiere::OpenSound(audDevice, "Assets/Sound/Shoot.mp3");
 }
 
 Ship::~Ship(){
@@ -127,6 +131,10 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 
 			//add it onto the list to be updated
 			Game::addObjectToUpdate(bullet);
+
+			//Play the sound
+			shootSFX->stop();
+			shootSFX->play();
 
 			//clear the pointer to prevent memory leaks
 			bullet = 0;

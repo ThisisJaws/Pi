@@ -8,6 +8,8 @@
 
 #include <vector>
 
+#include "audiere.h"
+
 #include "Object.h"
 #include "Bullet.h"
 
@@ -30,10 +32,15 @@ protected:
 	bool rotateBackX;
 	bool rotateBackY;
 
+	//The cannon positions for each ship to set
 	std::vector<irr::core::vector3df> cannonPositions;
 
 	//Particle system scene node
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
+
+	//Audio device and sound effects
+	audiere::AudioDevicePtr audDevice;
+	audiere::OutputStreamPtr shootSFX;
 
 private:
     //if the ship is able to fire
