@@ -13,8 +13,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
 	//Set the rotation variables
 	maxZRotate = 45;
-	maxXRotate = 25;
-	rotSpeed = 100;
+	maxXRotate = 35;
+	rotSpeed = 175;
 
     //time between each bullet firing 1000 = 1 second
     timeBetweenShots = firingSpeed;
