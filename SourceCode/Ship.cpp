@@ -133,7 +133,7 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 			Game::addObjectToUpdate(bullet);
 
 			//Play the sound
-			shootSFX->stop();
+			shootSFX->reset();
 			shootSFX->play();
 
 			//clear the pointer to prevent memory leaks
