@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
 	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
 	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver);
@@ -108,6 +109,8 @@ int main(int argc, char** argv) {
 				gameState = scoreScreen;
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
+				//mainMusic->stop();
+				//scoreMusic->play();
 			}
 		}
 		//Update the score screen
@@ -119,6 +122,8 @@ int main(int argc, char** argv) {
 					menuImage->setVisible(true);
 					score.displayScore(false);
 					nameEntered = false;
+					//scoreMusic->stop();
+					//mainMusic->play();
 				} else{
 					score.addNameToRecentScore(score.getTextBoxName());
 					nameEntered = true;
