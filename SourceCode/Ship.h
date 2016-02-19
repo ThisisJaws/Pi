@@ -41,6 +41,7 @@ protected:
 	//Audio device and sound effects
 	audiere::AudioDevicePtr audDevice;
 	audiere::OutputStreamPtr shootSFX;
+	audiere::OutputStreamPtr damageSFX;
 
 private:
     //if the ship is able to fire

@@ -54,6 +54,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Init the audio device
 	audDevice = audiere::OpenDevice();
 	shootSFX = audiere::OpenSound(audDevice, "Assets/Sound/Shoot.mp3");
+	damageSFX = audiere::OpenSound(audDevice, "Assets/Sound/Damage.mp3");
 }
 
 Ship::~Ship(){
@@ -110,6 +111,9 @@ void Ship::increaseLives(const unsigned short &amount){
 }
 
 void Ship::dealDamage(const unsigned short &amount){
+	//Play the damange sound effect
+	damageSFX->play();
+
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){
 		markForDelete();
