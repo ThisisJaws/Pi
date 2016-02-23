@@ -9,4 +9,7 @@ Ammo::Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneM
 void Ammo::performAction(PlayerShip* player){
 	//Increase ammo
     player->increaseAmmo(ammoIncrease);
+
+	//Display text
+	displayText(ammoIncrease, "Ammo", player->getPosition());
 }

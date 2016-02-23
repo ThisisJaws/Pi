@@ -9,4 +9,7 @@ Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneMan
 void Gem::performAction(PlayerShip* player){
 	//Increase score
     player->increaseScore(scoreIncrease);
+
+	//Display text
+	displayText(scoreIncrease, "Score", player->getPosition());
 }
