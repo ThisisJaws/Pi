@@ -9,7 +9,8 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
     rotSpeed = 75.0f;
 
 	//Init the static text
-
+	animatedText = sceneManagerReference->getGUIEnvironment()->addStaticText(L"Test", irr::core::rect<irr::s32>(300, 400, 400, 500));
+	animatedText->setVisible(false);
 
 	//Create a prticle effect around the collectible
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
@@ -58,8 +59,15 @@ void Collectible::activate(PlayerShip *player){
 		pickupSFX->play();
 		performAction(player);
 		getSceneNode()->setVisible(false);
+		displayText(0, "");
 		actionPefromed = true;
 		soundStarted = true;
 	}
 }
+
+void Collectible::displayText(const float & amount, const irr::core::stringw & text){
+	//Set the text visible
+	animatedText->setVisible(true);
+}
+
 

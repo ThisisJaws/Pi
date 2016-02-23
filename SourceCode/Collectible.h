@@ -21,6 +21,9 @@ class Collectible : public Object{
 	 //Particle system scene node
 	 irr::scene::IParticleSystemSceneNode *ps;
 
+	 //Text to animate when item is collected
+	 irr::gui::IGUIStaticText *animatedText;
+
 	 //Audoiere device and pick up sfx
 	 audiere::OutputStreamPtr pickupSFX;
 	 //Bool's to control the sound
@@ -40,6 +43,10 @@ public:
 
 	//Pure virtual function that performs the action the colecltible does, (i.e.e increase score)
 	virtual void performAction(PlayerShip *player) = 0;
+
+protected:
+	//Displays the text on screen
+	void displayText(const float &amount, const irr::core::stringw &text);
 };
 
 #endif	/* COLLLECTABLE_H */
