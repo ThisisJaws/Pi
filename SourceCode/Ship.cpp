@@ -1,7 +1,7 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
 
     //set up variables
@@ -51,10 +51,9 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Move the system back slighty to line up with the engine
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
 
-	//Init the audio device
-	audDevice = audiere::OpenDevice();
-	shootSFX = audiere::OpenSound(audDevice, "Assets/Sound/Shoot.mp3");
-	damageSFX = audiere::OpenSound(audDevice, "Assets/Sound/Damage.mp3");
+	//Init the audio
+	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Shoot.mp3");
+	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Damage.mp3");
 }
 
 Ship::~Ship(){

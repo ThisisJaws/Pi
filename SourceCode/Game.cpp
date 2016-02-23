@@ -37,7 +37,7 @@ Game::~Game(){
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
     //Create a ship for the player
-    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr);
+    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, audiereDevice);
     //Give the player the camera
     player->addCamera(camera);
     //Add the player oto the update list

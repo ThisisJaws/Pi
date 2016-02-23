@@ -46,19 +46,19 @@ void World::loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audD
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
 	for(int i = 0; i < 2; i++){
 		//basic
-		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(basicEnemy);
 
 		z += 1200;
 
 		//strong
-		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(strongEnemy);
 
 		z += 2800;
 
 		//fast
-		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(fastEnemy);
 
 		z += 800;

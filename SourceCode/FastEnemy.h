@@ -23,7 +23,7 @@ private:
 	//FUNCTIONS
 public:
     //constructor
-    FastEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference);
+    FastEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
     
 	//What the enemy will do when in range of the player
 	virtual void combatManouver(irr::f32 deltaTime) override;
