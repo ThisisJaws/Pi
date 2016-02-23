@@ -33,8 +33,7 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	getSceneNode()->setScale(irr::core::vector3df(2));
 
 	//Init the audio device
-	audDevice = audiere::OpenDevice();
-	pickupSFX = audiere::OpenSound(audDevice, "Assets/Sound/Pickup.mp3");
+	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Pickup.mp3");
 
 	soundStarted = false;
 	actionPefromed = false;

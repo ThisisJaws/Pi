@@ -22,7 +22,6 @@ class Collectible : public Object{
 	 irr::scene::IParticleSystemSceneNode *ps;
 
 	 //Audoiere device and pick up sfx
-	 audiere::AudioDevicePtr audDevice;
 	 audiere::OutputStreamPtr pickupSFX;
 	 //Bool's to control the sound
 	 bool soundStarted;
