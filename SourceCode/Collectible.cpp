@@ -8,9 +8,13 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
     //set the rotation speed
     rotSpeed = 75.0f;
 
-	//Init the static text
-	animatedText = sceneManagerReference->getGUIEnvironment()->addStaticText(L"Test", irr::core::rect<irr::s32>(0, 0, 300, 30));
-	animatedText->setVisible(false);
+	//Used by the static text
+	animateText = false;
+	textPos = irr::core::vector2di(0);
+	scene = sceneManagerReference;
+
+	//Set the collision manager
+	collMan = sceneManagerReference->getSceneCollisionManager();
 
 	//Create a prticle effect around the collectible
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
@@ -82,17 +86,20 @@ void Collectible::displayText(const int &amount, const irr::core::stringw &text,
 	displayText += amount;
 	displayText += " ";
 	displayText += text;
-	animatedText->setText(displayText.c_str());
+	//Change the length of the box
+	float length = displayText.size() * 22;
 
-	//Set the poistion to above the player
-	textPos = irr::core::vector2di(400, 400);
-	animatedText->setRelativePosition(textPos);
-	
+	//Convert the player pos to screen coordinates
+	textPos = collMan->getScreenCoordinatesFrom3DPosition(playerPos);
+
+	//Init the variable
+	animatedText = scene->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
+
+	//Center the text
+	textPos.X -= animatedText->getAbsolutePosition().getWidth() / 2;
+
 	//Make sure to animate it
 	animateText = true;
-
-	//Set the text visible
-	animatedText->setVisible(true);
 }
 
 

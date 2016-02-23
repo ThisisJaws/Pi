@@ -24,9 +24,14 @@ class Collectible : public Object{
 	 //Text to animate when item is collected
 	 irr::gui::IGUIStaticText *animatedText;
 	 //Used to animated the text
-	 bool animateText = false;
+	 bool animateText;
 	 //Poistion to animate from
 	 irr::core::vector2di textPos;
+
+	 //Used to get the screen/world coordinates
+	 irr::scene::ISceneCollisionManager *collMan;
+
+	 irr::scene::ISceneManager *scene;
 
 	 //Audoiere device and pick up sfx
 	 audiere::OutputStreamPtr pickupSFX;
