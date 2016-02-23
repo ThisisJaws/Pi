@@ -5,9 +5,9 @@
 #ifndef AMMO_H
 #define	AMMO_H
 
-#include "Collectable.h"
+#include "Collectible.h"
 
-class Ammo : public Collectable{
+class Ammo : public Collectible{
     //VARIABLES
 protected:
     //how much ammo to give

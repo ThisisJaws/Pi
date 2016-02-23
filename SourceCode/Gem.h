@@ -5,9 +5,9 @@
 #ifndef GEM_H
 #define	GEM_H
 
-#include "Collectable.h"
+#include "Collectible.h"
 
-class Gem : public Collectable{
+class Gem : public Collectible{
     //VARIABLES
 private:
     //how much to increase score by

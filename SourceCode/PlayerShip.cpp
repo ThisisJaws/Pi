@@ -127,7 +127,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 
 				case TYPE_COLLECTABLE:
 					//Dynamic cast to a collectable to see the activate function
-					Collectable *collectible = dynamic_cast<Collectable *>(collidedObject);
+					Collectible *collectible = dynamic_cast<Collectible *>(collidedObject);
 					collectible->activate(this);
 					break;
 			}
