@@ -43,6 +43,12 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	actionPefromed = false;
 }
 
+Collectible::~Collectible(){
+	if(animatedText){
+		animatedText->remove();
+	}
+}
+
 void Collectible::tick(irr::f32 deltaTime){
     //Make the collectable rotate
     updateRotation(0, rotSpeed * deltaTime, 0);
@@ -59,13 +65,20 @@ void Collectible::activate(PlayerShip *player){
 		pickupSFX->play();
 		performAction(player);
 		getSceneNode()->setVisible(false);
-		displayText(0, "");
 		actionPefromed = true;
 		soundStarted = true;
 	}
 }
 
-void Collectible::displayText(const float & amount, const irr::core::stringw & text){
+void Collectible::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos){
+	//Set the value of the text
+	irr::core::stringw displayText;
+	displayText += "+";
+	displayText += amount;
+	displayText += " ";
+	displayText += text;
+	animatedText->setText(displayText.c_str());
+
 	//Set the text visible
 	animatedText->setVisible(true);
 }

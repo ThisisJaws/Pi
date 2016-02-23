@@ -35,6 +35,9 @@ public:
     //constructor
     Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
     
+	//destructor
+	virtual ~Collectible();
+
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;
     
@@ -46,7 +49,7 @@ public:
 
 protected:
 	//Displays the text on screen
-	void displayText(const float &amount, const irr::core::stringw &text);
+	void displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos);
 };
 
 #endif	/* COLLLECTABLE_H */
