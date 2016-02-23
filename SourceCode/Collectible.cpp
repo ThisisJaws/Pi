@@ -20,13 +20,13 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = ps->createPointEmitter(
-		irr::core::vector3df(0.0f, 0.01f, 0.0f),			// direction, also acts as speed
-		5U, 10U,											// emit rate
+		irr::core::vector3df(0.0f, 0.025f, 0.0f),			// direction, also acts as speed
+		1U, 5U,												// emit rate
 		irr::video::SColor(0, 255, 255, 255),				// darkest color
 		irr::video::SColor(0, 255, 255, 255),				// brightest color
 		500, 1000, 0,										// min and max age, angle
-		irr::core::dimension2df(5.0f, 5.0f),				// min size
-		irr::core::dimension2df(10.0f, 10.0f));				// max size
+		irr::core::dimension2df(10.0f, 10.0f),				// min size
+		irr::core::dimension2df(20.0f, 20.0f));				// max size
 	
 	ps->setEmitter(em); //Give the emitter to the system
 	em->drop();			//Safe to drop now we don't need it
