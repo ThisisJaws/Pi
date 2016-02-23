@@ -30,7 +30,7 @@ class Collectible : public Object{
     //FUNCTIONS
 public:
     //constructor
-    Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::gui::IGUIEnvironment *guiEnvironment, audiere::AudioDevicePtr audiereDevice);
+    Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
     
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;

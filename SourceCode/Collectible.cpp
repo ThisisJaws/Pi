@@ -2,11 +2,14 @@
 
 #include "Game.h"
 
-Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, irr::gui::IGUIEnvironment *guiEnvironment, audiere::AudioDevicePtr audiereDevice)
+Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_COLLECTABLE, true){
 
     //set the rotation speed
     rotSpeed = 75.0f;
+
+	//Init the static text
+
 
 	//Create a prticle effect around the collectible
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());

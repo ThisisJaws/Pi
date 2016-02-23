@@ -70,7 +70,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audD
 	for(int i = 0; i < 3; i++){
 		y = rand() % 20 + 1;
 		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), smgr, device->getGUIEnvironment(), audDevice);
+		gem = new Gem(irr::core::vector3df(x, y, z), smgr, audDevice);
 
 		Game::addObjectToUpdate(gem);
 
@@ -248,12 +248,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), device->getGUIEnvironment(), audDevice);
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
-					Gem *gem = new Gem(objectPos, device->getSceneManager(), device->getGUIEnvironment(), audDevice);
+					Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(gem);
 				}
