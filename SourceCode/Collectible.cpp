@@ -56,7 +56,7 @@ Collectible::~Collectible(){
 void Collectible::tick(irr::f32 deltaTime){
     //Make the collectable rotate
     updateRotation(0, rotSpeed * deltaTime, 0);
-	//Wait for the sound to stop before deleting
+	//Wait for the sound to stop before deleting (gives the text time to move up)
 	if(soundStarted){
 		if(!pickupSFX->isPlaying()){
 			markForDelete();
