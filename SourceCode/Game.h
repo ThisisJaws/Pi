@@ -84,7 +84,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr *audiereDevice);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice);
 	//destructor
 	~Game();
 

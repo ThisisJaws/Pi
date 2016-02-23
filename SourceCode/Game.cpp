@@ -6,7 +6,7 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr *audiereDevice){
+Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice){
     //get a pointer to the irrlicht device
     this->device = device;
 
