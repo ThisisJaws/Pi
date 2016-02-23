@@ -23,6 +23,10 @@ class Collectible : public Object{
 
 	 //Text to animate when item is collected
 	 irr::gui::IGUIStaticText *animatedText;
+	 //Used to animated the text
+	 bool animateText = false;
+	 //Poistion to animate from
+	 irr::core::vector2di textPos;
 
 	 //Audoiere device and pick up sfx
 	 audiere::OutputStreamPtr pickupSFX;
@@ -44,7 +48,7 @@ public:
     //Gets called when the player collides with the colelctable
     void activate(PlayerShip *player);
 
-	//Pure virtual function that performs the action the colecltible does, (i.e.e increase score)
+	//Pure virtual function that performs the action the colecltible does, (i.e. increase score)
 	virtual void performAction(PlayerShip *player) = 0;
 
 protected:

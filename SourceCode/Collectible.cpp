@@ -9,7 +9,7 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
     rotSpeed = 75.0f;
 
 	//Init the static text
-	animatedText = sceneManagerReference->getGUIEnvironment()->addStaticText(L"Test", irr::core::rect<irr::s32>(300, 400, 400, 500));
+	animatedText = sceneManagerReference->getGUIEnvironment()->addStaticText(L"Test", irr::core::rect<irr::s32>(0, 0, 300, 30));
 	animatedText->setVisible(false);
 
 	//Create a prticle effect around the collectible
@@ -58,6 +58,11 @@ void Collectible::tick(irr::f32 deltaTime){
 			markForDelete();
 		}
 	}
+	//Move the text upwards
+	if(animateText){
+		textPos.Y--;
+		animatedText->setRelativePosition(textPos);
+	}
 }
 
 void Collectible::activate(PlayerShip *player){
@@ -78,6 +83,13 @@ void Collectible::displayText(const int &amount, const irr::core::stringw &text,
 	displayText += " ";
 	displayText += text;
 	animatedText->setText(displayText.c_str());
+
+	//Set the poistion to above the player
+	textPos = irr::core::vector2di(400, 400);
+	animatedText->setRelativePosition(textPos);
+	
+	//Make sure to animate it
+	animateText = true;
 
 	//Set the text visible
 	animatedText->setVisible(true);
