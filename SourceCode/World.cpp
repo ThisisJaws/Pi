@@ -14,9 +14,9 @@ World::World(PlayerShip *player, const std::string &levelLocation, const irr::io
 	phase2Complete = false;
 }
 
-void World::loadPhase1(irr::IrrlichtDevice * device){
+void World::loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
 	//Load the map file
-	loadMapFile(levelLocation, device);
+	loadMapFile(levelLocation, device, audDevice);
 
 	//Reset the player's position
 	player->changePosition(irr::core::vector3df(0, 0, -500));
@@ -25,7 +25,7 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	phase1Loaded = true;
 }
 
-void World::loadPhase2(irr::IrrlichtDevice *device){
+void World::loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
 	//Unload the terrains from the scene
 	clearTerrains();
 
@@ -46,19 +46,19 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
 	for(int i = 0; i < 2; i++){
 		//basic
-		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(basicEnemy);
 
 		z += 1200;
 
 		//strong
-		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(strongEnemy);
 
 		z += 2800;
 
 		//fast
-		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
+		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		Game::addObjectToUpdate(fastEnemy);
 
 		z += 800;
@@ -70,7 +70,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device){
 	for(int i = 0; i < 3; i++){
 		y = rand() % 20 + 1;
 		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), smgr);
+		gem = new Gem(irr::core::vector3df(x, y, z), smgr, audDevice);
 
 		Game::addObjectToUpdate(gem);
 
@@ -158,7 +158,7 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
+void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
 	//Create a variable to read the file
 	std::ifstream file;
 	//The string that will hold each line of the file
@@ -248,12 +248,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-					Ammo *ammo = new Ammo(objectPos, device->getSceneManager());
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
-					Gem *gem = new Gem(objectPos, device->getSceneManager());
+					Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(gem);
 				}

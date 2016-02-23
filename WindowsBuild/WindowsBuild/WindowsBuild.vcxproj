@@ -158,7 +158,7 @@
     <ClCompile Include="..\..\SourceCode\Ammo.cpp" />
     <ClCompile Include="..\..\SourceCode\BasicEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Bullet.cpp" />
-    <ClCompile Include="..\..\SourceCode\Collectable.cpp" />
+    <ClCompile Include="..\..\SourceCode\Collectible.cpp" />
     <ClCompile Include="..\..\SourceCode\EnemyShip.cpp" />
     <ClCompile Include="..\..\SourceCode\EventReceiver.cpp" />
     <ClCompile Include="..\..\SourceCode\FastEnemy.cpp" />
@@ -181,7 +181,7 @@
     <ClInclude Include="..\..\SourceCode\Ammo.h" />
     <ClInclude Include="..\..\SourceCode\BasicEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Bullet.h" />
-    <ClInclude Include="..\..\SourceCode\Collectable.h" />
+    <ClInclude Include="..\..\SourceCode\Collectible.h" />
     <ClInclude Include="..\..\SourceCode\EnemyShip.h" />
     <ClInclude Include="..\..\SourceCode\EnemyTypes.h" />
     <ClInclude Include="..\..\SourceCode\EventReceiver.h" />

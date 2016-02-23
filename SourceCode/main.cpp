@@ -20,8 +20,8 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 6
-#define CURRENT_VERSION_REVISION 12
+#define CURRENT_VERSION_MINOR	 7
+#define CURRENT_VERSION_REVISION 0
 
 /*
  * program entry point
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
 	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
 	//Create the class that will handle the actual playing of the game
-    Game game = Game(device, &receiver);
+    Game game = Game(device, &receiver, audDevice);
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 	//Keep track if the player has entered their name

@@ -5,9 +5,9 @@
 #ifndef GEM_H
 #define	GEM_H
 
-#include "Collectable.h"
+#include "Collectible.h"
 
-class Gem : public Collectable{
+class Gem : public Collectible{
     //VARIABLES
 private:
     //how much to increase score by
@@ -16,7 +16,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
+    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
  
     virtual void performAction(PlayerShip *player) override;
 };

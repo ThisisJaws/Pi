@@ -57,8 +57,8 @@ public:
 
 	/** abstract functions to load the levels
 		Takes the device to load everything into the scene*/
-	virtual void loadPhase1(irr::IrrlichtDevice *device);
-	virtual void loadPhase2(irr::IrrlichtDevice *device);
+	virtual void loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
+	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
 
 	//Check if each phase is loaded
 	bool isPhase1Loaded();
@@ -79,7 +79,7 @@ public:
 
 protected:
 	//Loads in the map file for the level
-	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
+	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
 };
 
 #endif /* WORLD_H */

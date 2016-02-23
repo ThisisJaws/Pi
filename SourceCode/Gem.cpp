@@ -1,7 +1,7 @@
 #include "Gem.h"
 
-Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference)
-        : Collectable(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", "Assets/Collectables/SpaceGemBronze.jpg", sceneManagerReference){
+Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+        : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", "Assets/Collectables/SpaceGemBronze.jpg", sceneManagerReference, audiereDevice){
 
     scoreIncrease = 10000;
 }
@@ -9,4 +9,7 @@ Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneMan
 void Gem::performAction(PlayerShip* player){
 	//Increase score
     player->increaseScore(scoreIncrease);
+
+	//Display text
+	displayText(scoreIncrease, "Points", player->getPosition());
 }

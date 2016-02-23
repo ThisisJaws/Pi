@@ -2,8 +2,8 @@
 
 #include "Game.h"
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference)
-    : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, TYPE_SHIP_PLAYER, 3){
+PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+    : Ship(irr::core::vector3df(0, 0, 0), 150.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, audiereDevice, TYPE_SHIP_PLAYER, 3){
 
     //init variables
     score = 0;
@@ -127,7 +127,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 
 				case TYPE_COLLECTABLE:
 					//Dynamic cast to a collectable to see the activate function
-					Collectable *collectible = dynamic_cast<Collectable *>(collidedObject);
+					Collectible *collectible = dynamic_cast<Collectible *>(collidedObject);
 					collectible->activate(this);
 					break;
 			}
