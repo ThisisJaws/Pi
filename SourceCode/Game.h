@@ -31,16 +31,19 @@
 class Game{
     //VARIABLES
 private:
-    //irrlicht device, this is the root for EVERYTHING within the engine
+    //Irrlicht device, this is the root for EVERYTHING within the engine
     irr::IrrlichtDevice *device;
-    //a pointer to the video driver
+    //A pointer to the video driver
     irr::video::IVideoDriver *driver;
-    //a pointer to the scene manager
+    //A pointer to the scene manager
     irr::scene::ISceneManager *smgr;
-    //a pointer to the gui iterface
+    //A pointer to the gui iterface
     irr::gui::IGUIEnvironment *guienv;
-    //object to receive keyboard input
+    //Object to receive keyboard input
     EventReceiver *eReceiver;
+	//Pointer to the audiere device
+	audiere::AudioDevicePtr audiereDevice;
+
 
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
@@ -81,7 +84,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr *audiereDevice);
 	//destructor
 	~Game();
 

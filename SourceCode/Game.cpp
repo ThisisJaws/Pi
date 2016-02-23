@@ -6,7 +6,7 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
+Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr *audiereDevice){
     //get a pointer to the irrlicht device
     this->device = device;
 
@@ -15,6 +15,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
+	this->audiereDevice = audiereDevice;
 
 	//Init default variables
 	previousScore = 0;
@@ -50,7 +51,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	worlds[2] = new JungleWorld(g_player);
 
 	//Load the first world
-	worlds[currentWorld]->loadPhase1(device);
+	worlds[currentWorld]->loadPhase1(device, audiereDevice);
 
     //Load in the sky dome's for the worlds
 	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
@@ -149,7 +150,7 @@ bool Game::play(){
 				//Change mode first because of speed increase
 				g_player->changeMode();
 				//Load in the next phase
-				worlds[currentWorld]->loadPhase2(device);
+				worlds[currentWorld]->loadPhase2(device, audiereDevice);
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate();
@@ -164,12 +165,12 @@ bool Game::play(){
 					//Change mode
 					g_player->changeMode();
 					//Load the next world
-					worlds[currentWorld]->loadPhase1(device);
+					worlds[currentWorld]->loadPhase1(device, audiereDevice);
 				} else{
 					//Start again but increment speed by double
 					currentWorld = 0;
 					g_player->changeMode(2);
-					worlds[currentWorld]->loadPhase1(device);
+					worlds[currentWorld]->loadPhase1(device, audiereDevice);
 				}
 				//Turn on the next skydome
 				skyDome[currentWorld]->setVisible(true);
