@@ -1,9 +1,9 @@
 #include "Gem.h"
 
-Gem::Gem(irr::core::vector3df spawnPosition, irr::io::path textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+Gem::Gem(irr::core::vector3df spawnPosition, const unsigned int &scoreIncrease, const irr::io::path &textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
         : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", textPath, sceneManagerReference, audiereDevice){
 
-    scoreIncrease = 10000;
+    this->scoreIncrease = scoreIncrease;
 }
 
 void Gem::performAction(PlayerShip* player){
