@@ -3,7 +3,7 @@
 
 #include "Gem.h"
 
-class BronzeGem : Gem{
+class BronzeGem : public Gem{
 public:
 	//Just changes the constructor
 	BronzeGem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);

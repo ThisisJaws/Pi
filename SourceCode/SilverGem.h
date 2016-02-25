@@ -3,7 +3,7 @@
 
 #include "Gem.h"
 
-class SilverGem : Gem{
+class SilverGem : public Gem{
 public:
 	//Just changes the constructor
 	SilverGem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
