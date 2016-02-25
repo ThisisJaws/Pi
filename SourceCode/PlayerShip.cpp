@@ -211,6 +211,9 @@ void PlayerShip::increaseScore(unsigned int amount){
 
 		//Make a new score for the player to reach
 		previousLifeIncrease += lifeIncreasePoints;
+
+		//Animate some text
+		displayText(1, "Life", getPosition());
 	}
 }
 
