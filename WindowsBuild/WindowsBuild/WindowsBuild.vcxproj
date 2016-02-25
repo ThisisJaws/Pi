@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\SourceCode\Ammo.cpp" />
     <ClCompile Include="..\..\SourceCode\BasicEnemy.cpp" />
+    <ClCompile Include="..\..\SourceCode\BronzeGem.cpp" />
     <ClCompile Include="..\..\SourceCode\Bullet.cpp" />
     <ClCompile Include="..\..\SourceCode\Collectible.cpp" />
     <ClCompile Include="..\..\SourceCode\EnemyShip.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="..\..\SourceCode\FastEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Game.cpp" />
     <ClCompile Include="..\..\SourceCode\Gem.cpp" />
+    <ClCompile Include="..\..\SourceCode\GoldGem.cpp" />
     <ClCompile Include="..\..\SourceCode\IceWorld.cpp" />
     <ClCompile Include="..\..\SourceCode\JungleWorld.cpp" />
     <ClCompile Include="..\..\SourceCode\LavaWorld.cpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="..\..\SourceCode\PlayerShip.cpp" />
     <ClCompile Include="..\..\SourceCode\ScoreScreen.cpp" />
     <ClCompile Include="..\..\SourceCode\Ship.cpp" />
+    <ClCompile Include="..\..\SourceCode\SilverGem.cpp" />
     <ClCompile Include="..\..\SourceCode\StaticObject.cpp" />
     <ClCompile Include="..\..\SourceCode\StrongEnemy.cpp" />
     <ClCompile Include="..\..\SourceCode\Testing.cpp" />
@@ -180,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\SourceCode\Ammo.h" />
     <ClInclude Include="..\..\SourceCode\BasicEnemy.h" />
+    <ClInclude Include="..\..\SourceCode\BronzeGem.h" />
     <ClInclude Include="..\..\SourceCode\Bullet.h" />
     <ClInclude Include="..\..\SourceCode\Collectible.h" />
     <ClInclude Include="..\..\SourceCode\EnemyShip.h" />
@@ -188,6 +192,7 @@
     <ClInclude Include="..\..\SourceCode\FastEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Game.h" />
     <ClInclude Include="..\..\SourceCode\Gem.h" />
+    <ClInclude Include="..\..\SourceCode\GoldGem.h" />
     <ClInclude Include="..\..\SourceCode\IceWorld.h" />
     <ClInclude Include="..\..\SourceCode\JungleWorld.h" />
     <ClInclude Include="..\..\SourceCode\LavaWorld.h" />
@@ -196,6 +201,7 @@
     <ClInclude Include="..\..\SourceCode\PlayerShip.h" />
     <ClInclude Include="..\..\SourceCode\ScoreScreen.h" />
     <ClInclude Include="..\..\SourceCode\Ship.h" />
+    <ClInclude Include="..\..\SourceCode\SilverGem.h" />
     <ClInclude Include="..\..\SourceCode\StaticObject.h" />
     <ClInclude Include="..\..\SourceCode\StrongEnemy.h" />
     <ClInclude Include="..\..\SourceCode\Testing.h" />
