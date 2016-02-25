@@ -70,9 +70,9 @@ void World::loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audD
 	for(int i = 0; i < 3; i++){
 		y = rand() % 20 + 1;
 		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), "Assets/Collectables/SpaceGem_Bronze.jpg", smgr, audDevice);
+		//gem = new Gem(irr::core::vector3df(x, y, z), "Assets/Collectables/SpaceGem_Bronze.jpg", smgr, audDevice);
 
-		Game::addObjectToUpdate(gem);
+		//Game::addObjectToUpdate(gem);
 
 		z += rand() % 3000 + 100;
 	}
@@ -257,17 +257,18 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					//For Gem - get the texture to use
 					std::string gemType;
 					if(nameOfObject.at(2) == 'B'){
-						gemType = "Bronze.jpg";
+						//Bronze
+						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
+						//Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'S'){
-						gemType = "Silver.jpg";
+						//Silver
+						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
+						//Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'G'){
-						gemType = "Gold.jpg";
+						//Gold
+						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
+						//Game::addObjectToUpdate(gem);
 					}
-					std::string fullGemPath = gemPath + gemType;
-					//Make the gem with the new texture
-					Gem *gem = new Gem(objectPos, fullGemPath.c_str(), device->getSceneManager(), audDevice);
-					//Add to the update vector
-					Game::addObjectToUpdate(gem);
 				}
 			}
 		}
