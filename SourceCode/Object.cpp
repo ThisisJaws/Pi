@@ -64,7 +64,7 @@ void Object::tick(irr::f32 deltaTime){
 		textPos.Y--;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
-			animatedText->remove();
+			//animatedText->remove();
 			animTimePast = 0;
 			animateText = false;
 		} else{
@@ -159,7 +159,7 @@ void Object::removeFromScene(){
     objectNode->remove();
 }
 
-void Object::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos){
+void Object::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &worldPos){
 	//Set the value of the text
 	irr::core::stringw displayText;
 	displayText += "+";
@@ -170,7 +170,7 @@ void Object::displayText(const int &amount, const irr::core::stringw &text, cons
 	float length = displayText.size() * 22;
 
 	//Convert the player pos to screen coordinates
-	textPos = collMan->getScreenCoordinatesFrom3DPosition(playerPos);
+	textPos = collMan->getScreenCoordinatesFrom3DPosition(worldPos);
 
 	//Init the variable
 	animatedText = sceneMan->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
