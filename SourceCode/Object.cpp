@@ -64,7 +64,8 @@ void Object::tick(irr::f32 deltaTime){
 		textPos.Y--;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
-			//animatedText->remove();
+			animatedText->remove();
+			animatedText = NULL;
 			animTimePast = 0;
 			animateText = false;
 		} else{
