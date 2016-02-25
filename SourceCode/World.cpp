@@ -265,7 +265,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					}
 					std::string fullGemPath = gemPath + gemType;
 					//Make the gem with the new texture
-					Gem *gem = new Gem(objectPos, fullGemPath.c_str(); , device->getSceneManager(), audDevice);
+					Gem *gem = new Gem(objectPos, fullGemPath.c_str(), device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(gem);
 				}
