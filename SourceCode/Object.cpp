@@ -66,6 +66,7 @@ void Object::tick(irr::f32 deltaTime){
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();
 			animTimePast = 0;
+			animateText = false;
 		} else{
 			animTimePast += deltaTime;
 		}
