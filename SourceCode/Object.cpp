@@ -85,6 +85,7 @@ bool Object::isMarkedForDelete(){
 
 void Object::markForDelete(){
     markedForDelete = true;
+	objectNode->setVisible(false);
 }
 
 irr::s32 Object::getTypeID(){

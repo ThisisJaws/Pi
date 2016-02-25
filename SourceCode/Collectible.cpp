@@ -48,7 +48,6 @@ void Collectible::activate(PlayerShip *player){
 	if(!actionPefromed){
 		pickupSFX->play();
 		performAction(player);
-		getSceneNode()->setVisible(false);
 		markForDelete();
 		actionPefromed = true;
 	}
