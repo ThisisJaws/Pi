@@ -1,7 +1,7 @@
 #include "Gem.h"
 
-Gem::Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-        : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", "Assets/Collectables/SpaceGemBronze.jpg", sceneManagerReference, audiereDevice){
+Gem::Gem(irr::core::vector3df spawnPosition, irr::io::path textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+        : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", textPath, sceneManagerReference, audiereDevice){
 
     scoreIncrease = 10000;
 }

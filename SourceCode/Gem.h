@@ -16,7 +16,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
+    Gem(irr::core::vector3df spawnPosition, irr::io::path textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
  
     virtual void performAction(PlayerShip *player) override;
 };
