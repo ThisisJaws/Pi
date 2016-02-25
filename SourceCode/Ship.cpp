@@ -63,6 +63,7 @@ Ship::~Ship(){
 }
 
 void Ship::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     //check how long is left before the ship can fire again
     if(!canFire){
         if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){

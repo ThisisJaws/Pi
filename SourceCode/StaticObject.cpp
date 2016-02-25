@@ -15,6 +15,7 @@ StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr:
 }
 
 void StaticObject::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     if(rotate){
 		//Rotate the object around random axis
 		updateRotation(rotAxis * deltaTime);
