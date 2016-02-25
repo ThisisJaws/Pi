@@ -12,11 +12,14 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//set the ID of the object
     typeID = objectTypeID;
 
+	sceneMan = sceneManagerReference;
+
     //set the spawn position
     this->spawnPos = spawnPos;
 
-    //dont want it to get deleted straight away
+    //Dont want it to get deleted straight away
     markedForDelete = false;
+	deleteReady = false;
 
 	//Make sure the collisionManager points to nothing
 	collMan = 0;
@@ -43,14 +46,39 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//Create a reference to the collision Manager, to use when the collision function is called
 	collMan = sceneManagerReference->getSceneCollisionManager();
 
+	//Used by the static text
+	animateText = false;
+	textPos = irr::core::vector2di(0);
+	animTimePast = 0;
 }
 
 Object::~Object(){
-	//needs a virtual destructor to make sure all derived object's constructors get called
+	if(animatedText){
+		animatedText->remove();
+	}
+}
+
+void Object::tick(irr::f32 deltaTime){
+	//Move the text upwards
+	if(animateText){
+		textPos.Y--;
+		animatedText->setRelativePosition(textPos);
+		if(animTimePast > ANIMATE_TIME){
+			animatedText->remove();
+			animTimePast = 0;
+		} else{
+			animTimePast += deltaTime;
+		}
+	} else{
+		//Check if the object is ready to be deleted
+		if(markedForDelete){
+			deleteReady = true;
+		}
+	}
 }
 
 bool Object::isMarkedForDelete(){
-    return markedForDelete;
+    return markedForDelete && deleteReady;
 }
 
 void Object::markForDelete(){
@@ -128,4 +156,27 @@ void Object::changeRotation(const irr::core::vector3df &angle){
 
 void Object::removeFromScene(){
     objectNode->remove();
+}
+
+void Object::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos){
+	//Set the value of the text
+	irr::core::stringw displayText;
+	displayText += "+";
+	displayText += amount;
+	displayText += " ";
+	displayText += text;
+	//Change the length of the box
+	float length = displayText.size() * 22;
+
+	//Convert the player pos to screen coordinates
+	textPos = collMan->getScreenCoordinatesFrom3DPosition(playerPos);
+
+	//Init the variable
+	animatedText = sceneMan->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
+
+	//Center the text
+	textPos.X -= animatedText->getAbsolutePosition().getWidth() / 2;
+
+	//Make sure to animate it
+	animateText = true;
 }
