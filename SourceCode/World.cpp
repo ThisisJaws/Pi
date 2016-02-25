@@ -70,7 +70,7 @@ void World::loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audD
 	for(int i = 0; i < 3; i++){
 		y = rand() % 20 + 1;
 		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), smgr, audDevice);
+		gem = new Gem(irr::core::vector3df(x, y, z), "Assets/Collectables/SpaceGem_Bronze.jpg", smgr, audDevice);
 
 		Game::addObjectToUpdate(gem);
 
@@ -164,7 +164,9 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 	//The string that will hold each line of the file
 	std::string line;
 	//Path to the level segments
-	const std::string path = "Assets/LevelAssets/";
+	const std::string levelPath = "Assets/LevelAssets/";
+	//Path to the gem's textures
+	const std::string gemPath = "Assets/Collectables/SpaceGem_"; //Colour gets added on below
 
 	//The name of the object + a temp variable to hold float data
 	std::string nameOfObject, tempHold;
@@ -215,12 +217,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 			stream >> tempHold;
 			objectScale.Z = std::stof(tempHold.c_str());
 
-			//Store the path of the mesh
-			std::string meshPath = path + nameOfObject + ".obj";
+			//Store the levelPath of the mesh
+			std::string meshPath = levelPath + nameOfObject + ".obj";
 			//Remove the last two letters off of the string to make setting the textures easier
 			nameOfObject.erase(nameOfObject.end() - 2, nameOfObject.end());
-			//Set the texture path
-			std::string textPath = path + nameOfObject + ".jpg";
+			//Set the texture levelPath
+			std::string textPath = levelPath + nameOfObject + ".jpg";
 
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
@@ -252,8 +254,18 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
-					//For Gem
-					Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
+					//For Gem - get the texture to use
+					std::string gemType;
+					if(nameOfObject.at(2) == 'B'){
+						gemType = "Bronze.jpg";
+					} else if(nameOfObject.at(2) == 'S'){
+						gemType = "Silver.jpg";
+					} else if(nameOfObject.at(2) == 'G'){
+						gemType = "Gold.jpg";
+					}
+					std::string fullGemPath = gemPath + gemType;
+					//Make the gem with the new texture
+					Gem *gem = new Gem(objectPos, fullGemPath.c_str(); , device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(gem);
 				}
