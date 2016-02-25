@@ -165,8 +165,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 	std::string line;
 	//Path to the level segments
 	const std::string levelPath = "Assets/LevelAssets/";
-	//Path to the gem's textures
-	const std::string gemPath = "Assets/Collectables/SpaceGem_"; //Colour gets added on below
 
 	//The name of the object + a temp variable to hold float data
 	std::string nameOfObject, tempHold;
@@ -258,16 +256,16 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					std::string gemType;
 					if(nameOfObject.at(2) == 'B'){
 						//Bronze
-						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
-						//Game::addObjectToUpdate(gem);
+						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'S'){
 						//Silver
-						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
-						//Game::addObjectToUpdate(gem);
+						SilverGem *gem = new SilverGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'G'){
 						//Gold
-						//Gem *gem = new Gem(objectPos, device->getSceneManager(), audDevice);
-						//Game::addObjectToUpdate(gem);
+						GoldGem *gem = new GoldGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
 					}
 				}
 			}
