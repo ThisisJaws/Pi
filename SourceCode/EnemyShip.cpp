@@ -59,6 +59,7 @@ void EnemyShip::markForDelete(){
     //check if the player should get some score
     if(rewardScore){
         playerTarget->increaseScore(scoreAmount);
+		displayText(scoreAmount, "Points", getPosition());
     }
     //call the base function
     Object::markForDelete();
