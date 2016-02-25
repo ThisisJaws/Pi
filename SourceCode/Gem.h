@@ -2,8 +2,8 @@
  * The gem collectable, just adds more score
  */
 
-#ifndef GEM_H
-#define	GEM_H
+#ifndef _GEM_H
+#define	_GEM_H
 
 #include "Collectible.h"
 
@@ -21,5 +21,5 @@ public:
     virtual void performAction(PlayerShip *player) override;
 };
 
-#endif	/* GEM_H */
+#endif	/* _GEM_H */
 
