@@ -47,7 +47,7 @@ private:
 	//Poistion to animate from
 	irr::core::vector2di textPos;
 	//How long to animate for
-	const float ANIMATE_TIME = 1;
+	const float ANIMATE_TIME = 1.25f;
 	float animTimePast;
 
     //FUNCTIONS
