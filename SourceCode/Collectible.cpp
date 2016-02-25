@@ -8,14 +8,6 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
     //set the rotation speed
     rotSpeed = 75.0f;
 
-	//Used by the static text
-	animateText = false;
-	textPos = irr::core::vector2di(0);
-	scene = sceneManagerReference;
-
-	//Set the collision manager
-	collMan = sceneManagerReference->getSceneCollisionManager();
-
 	//Create a prticle effect around the collectible
 	ps = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
@@ -43,30 +35,13 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	//Init the audio device
 	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Pickup.mp3");
 
-	soundStarted = false;
 	actionPefromed = false;
 }
 
-Collectible::~Collectible(){
-	if(animatedText){
-		animatedText->remove();
-	}
-}
-
 void Collectible::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     //Make the collectable rotate
     updateRotation(0, rotSpeed * deltaTime, 0);
-	//Wait for the sound to stop before deleting (gives the text time to move up)
-	if(soundStarted){
-		if(!pickupSFX->isPlaying()){
-			markForDelete();
-		}
-	}
-	//Move the text upwards
-	if(animateText){
-		textPos.Y--;
-		animatedText->setRelativePosition(textPos);
-	}
 }
 
 void Collectible::activate(PlayerShip *player){
@@ -74,32 +49,9 @@ void Collectible::activate(PlayerShip *player){
 		pickupSFX->play();
 		performAction(player);
 		getSceneNode()->setVisible(false);
+		markForDelete();
 		actionPefromed = true;
-		soundStarted = true;
 	}
-}
-
-void Collectible::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos){
-	//Set the value of the text
-	irr::core::stringw displayText;
-	displayText += "+";
-	displayText += amount;
-	displayText += " ";
-	displayText += text;
-	//Change the length of the box
-	float length = displayText.size() * 22;
-
-	//Convert the player pos to screen coordinates
-	textPos = collMan->getScreenCoordinatesFrom3DPosition(playerPos);
-
-	//Init the variable
-	animatedText = scene->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
-
-	//Center the text
-	textPos.X -= animatedText->getAbsolutePosition().getWidth() / 2;
-
-	//Make sure to animate it
-	animateText = true;
 }
 
 

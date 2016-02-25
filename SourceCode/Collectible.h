@@ -21,31 +21,16 @@ class Collectible : public Object{
 	 //Particle system scene node
 	 irr::scene::IParticleSystemSceneNode *ps;
 
-	 //Text to animate when item is collected
-	 irr::gui::IGUIStaticText *animatedText;
-	 //Used to animated the text
-	 bool animateText;
-	 //Poistion to animate from
-	 irr::core::vector2di textPos;
-
-	 //Used to get the screen/world coordinates
-	 irr::scene::ISceneCollisionManager *collMan;
-
-	 irr::scene::ISceneManager *scene;
-
 	 //Audoiere device and pick up sfx
 	 audiere::OutputStreamPtr pickupSFX;
-	 //Bool's to control the sound
-	 bool soundStarted;
+
+	 //So it doesnt activate more than once
 	 bool actionPefromed;
 
     //FUNCTIONS
 public:
     //constructor
     Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
-    
-	//destructor
-	virtual ~Collectible();
 
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;
@@ -55,10 +40,6 @@ public:
 
 	//Pure virtual function that performs the action the colecltible does, (i.e. increase score)
 	virtual void performAction(PlayerShip *player) = 0;
-
-protected:
-	//Displays the text on screen
-	void displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &playerPos);
 };
 
 #endif	/* COLLLECTABLE_H */
