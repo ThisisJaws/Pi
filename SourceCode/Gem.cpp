@@ -11,5 +11,5 @@ void Gem::performAction(PlayerShip* player){
     player->increaseScore(scoreIncrease);
 
 	//Display text
-	displayText(scoreIncrease, "Points", player->getPosition());
+	displayText(scoreIncrease, "Points", getPosition());
 }
