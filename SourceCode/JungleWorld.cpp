@@ -25,37 +25,40 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDeviceP
 
 	//array of Enemies - these get deleted once they move off screen
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
-	for(int i = 0; i < 2; i++){
+	for(int i = 0; i < 20; i++){
 		//basic
-		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-		Game::addObjectToUpdate(basicEnemy);
-
-		z += 1200;
-
-		//strong
-		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-		Game::addObjectToUpdate(strongEnemy);
-
-		z += 2800;
-
-		//fast
-		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-		Game::addObjectToUpdate(fastEnemy);
-
-		z += 800;
+		int spawnNum = rand() % 100 + 1;
+		if(spawnNum <= 45){
+			BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			Game::addObjectToUpdate(basicEnemy);
+		} else if(spawnNum <= 75){
+			//fast
+			FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			Game::addObjectToUpdate(fastEnemy);
+		} else if(spawnNum <= 100){
+			//strong
+			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			Game::addObjectToUpdate(strongEnemy);
+		}
+		z += 750;
 	}
 
 	//Add some gems to the level
 	x = 0; y = 0; z = 1200;
-	//Gem *gem;
 	for(int i = 0; i < 3; i++){
-		y = rand() % 20 + 1;
-		y -= 10;
-		//gem = new Gem(irr::core::vector3df(x, y, z), "Assets/Collectables/SpaceGem_Bronze.jpg", smgr, audDevice);
+		y = (rand() % 40 + 1) - 20;
+		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr, audDevice);
+		Game::addObjectToUpdate(gem);
+		z += rand() % 3000 + 1000;
+	}
 
-		//Game::addObjectToUpdate(gem);
-
-		z += rand() % 3000 + 100;
+	//Add some asteroids to the level
+	x = 0; y = 0; z = 2000;
+	for(int i = 0; i < 8; i++){
+		y = (rand() % 50 + 1) - 25;
+		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager());
+		Game::addObjectToUpdate(Obsticle);
+		z += rand() % 1000 + 1000;
 	}
 
 	phase2Loaded = true;
