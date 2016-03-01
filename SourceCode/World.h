@@ -58,10 +58,9 @@ public:
 	//constructor
 	World(PlayerShip *player, const std::string &levelLocation, const irr::io::path &skyDomeLocation);
 
-	/** abstract functions to load the levels
-		Takes the device to load everything into the scene*/
+	//Functions to load the Stages for each level
 	virtual void loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
-	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
+	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice) = 0;
 
 	//Check if each phase is loaded
 	bool isPhase1Loaded();
