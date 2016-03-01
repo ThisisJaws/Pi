@@ -124,7 +124,7 @@ void Ship::dealDamage(const unsigned short &amount){
 }
 
 bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID, const std::vector<irr::core::vector3df> &firingPositions){
-    if(canFire){
+	if(canFire && getSceneNode()->isVisible()){
 		//For each position to fire from
 		for(int i = 0; i < firingPositions.size(); i++){
 			//construct a new bullet
