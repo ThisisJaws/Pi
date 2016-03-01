@@ -9,7 +9,8 @@ public:
 	//constructor
 	IceWorld(PlayerShip *player);
 
-protected:
+	//Override phase 2
+	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice) override;
 
 };
 
