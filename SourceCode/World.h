@@ -28,6 +28,10 @@ protected:
 	//Reference to the player
 	PlayerShip *player;
 
+	//Keep track of which phase has been loaded
+	bool phase1Loaded;
+	bool phase2Loaded;
+
 private:
 	//String to the level data
 	std::string levelLocation;
@@ -37,10 +41,6 @@ private:
 
 	//Location of the skydome file
 	irr::io::path skyDomeLocation;
-
-	//Keep track of which phase has been loaded
-	bool phase1Loaded;
-	bool phase2Loaded;
 
 	//Keep track of what has been completed
 	bool phase1Complete;
