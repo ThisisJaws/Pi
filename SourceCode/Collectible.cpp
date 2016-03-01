@@ -29,9 +29,6 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
-	//Resize all collectibles, might be temp
-	getSceneNode()->setScale(irr::core::vector3df(2));
-
 	//Init the audio device
 	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Pickup.mp3");
 
