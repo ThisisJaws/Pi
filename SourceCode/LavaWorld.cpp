@@ -51,8 +51,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr
 
 		Game::addObjectToUpdate(gem);
 
-		z += rand() % 3000 + 100;
+		z += rand() % 3000 + 1000;
 	}
-
 	phase2Loaded = true;
 }
