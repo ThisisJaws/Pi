@@ -8,7 +8,7 @@ StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr:
     //set up the rotation variables
 	if(rotate){
 		this->rotate = rotate;
-		rotSpeed = rand() % 50 + 1;
+		rotSpeed = (float)(rand() % 50 + 1);
 		//make the x y z 0 - 3 the multiply by the speed
 		rotAxis = irr::core::vector3df((rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed);
 	}
