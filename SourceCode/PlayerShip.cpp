@@ -342,8 +342,8 @@ void PlayerShip::updateCamera(irr::scene::ICameraSceneNode *sceneCamera){
         //update position
         cameraPosition = getPosition();
 		cameraPosition.X = 0;
-        cameraPosition.Y = tpOffset;
-        cameraPosition.Z -= tpDistance;
+        cameraPosition.Y = (irr::f32)tpOffset;
+        cameraPosition.Z -= (irr::f32)tpDistance;
 
         //update look at
         cameraLookAt = cameraPosition;

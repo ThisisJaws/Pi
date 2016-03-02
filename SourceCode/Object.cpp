@@ -64,7 +64,7 @@ Object::~Object(){
 void Object::tick(irr::f32 deltaTime){
 	//Move the text upwards
 	if(animateText){
-		textPos.Y -= deltaTime;
+		textPos.Y -= (irr::s32)deltaTime;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();

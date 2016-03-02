@@ -46,7 +46,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr
 	//Add some gems to the level
 	x = 0; y = 0; z = 1200;
 	for(int i = 0; i < 3; i++){
-		y = (rand() % 40 + 1) - 20;
+		y = (irr::f32)((rand() % 40 + 1) - 20);
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr, audDevice);
 		Game::addObjectToUpdate(gem);
 		z += rand() % 3000 + 1000;
