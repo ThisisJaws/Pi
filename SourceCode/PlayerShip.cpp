@@ -213,7 +213,7 @@ void PlayerShip::increaseScore(unsigned int amount){
 		previousLifeIncrease += lifeIncreasePoints;
 
 		//Animate some text
-		displayText(1, "Life", getPosition());
+		displayText("Life", getPosition(), 1);
 	}
 }
 

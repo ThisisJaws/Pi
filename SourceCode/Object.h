@@ -101,7 +101,7 @@ protected:
     virtual irr::s32 checkCollision(int direction);
 
 	//Displays the text on screen
-	void displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &worldPos);
+	void displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount = 0);
 };
 
 #endif	/* OBJECT_H */
