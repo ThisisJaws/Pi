@@ -46,6 +46,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//Create a reference to the collision Manager, to use when the collision function is called
 	collMan = sceneManagerReference->getSceneCollisionManager();
 
+	//Make sure it has been initialised
+	animatedText = 0;
+
 	//Used by the static text
 	animateText = false;
 	textPos = irr::core::vector2di(0);
@@ -61,7 +64,7 @@ Object::~Object(){
 void Object::tick(irr::f32 deltaTime){
 	//Move the text upwards
 	if(animateText){
-		textPos.Y--;
+		textPos.Y -= (irr::s32)(deltaTime + 1);
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();
