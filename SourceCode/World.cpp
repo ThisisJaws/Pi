@@ -180,14 +180,17 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 				Game::addObjectToUpdate(terrainPiece);
 
 			} else if(nameOfObject.at(0) == 'O'){
-				//For StaticObjects
-				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
-				Obsticle->changeRotation(objectRot);
-				Obsticle->getSceneNode()->setScale(objectScale);
+				if(nameOfObject == "O_LavaWorldPlume"){
+					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
+				} else{
+					//For StaticObjects
+					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
+					Obsticle->changeRotation(objectRot);
+					Obsticle->getSceneNode()->setScale(objectScale);
 
-				//Add to the update vector
-				Game::addObjectToUpdate(Obsticle);
-
+					//Add to the update vector
+					Game::addObjectToUpdate(Obsticle);
+				}
 			} else if(nameOfObject.at(0) == 'C'){
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
