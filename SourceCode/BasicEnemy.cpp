@@ -1,10 +1,11 @@
 #include "BasicEnemy.h"
 
-BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference)
-            : EnemyShip(player, spawnPosition, 750, timerReference, "Assets/Ships/EnemyShips/BasicShip.obj", "Assets/Ships/EnemyShips/BasicShipTexture.jpg", sceneManagerReference){
+BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+            : EnemyShip(player, spawnPosition, 750, timerReference, "Assets/Ships/EnemyShips/BasicShip.obj", "Assets/Ships/EnemyShips/BasicShipTexture.jpg", sceneManagerReference, audiereDevice){
 
 	currentStage = stageA;
 	timeElapsed = 0;
+	stageCTimeElpased = 0;
 
 	//adjust turn speed
 	turnSpeed /= 2;
@@ -41,7 +42,7 @@ void BasicEnemy::combatManouver(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageA(irr::f32 deltaTime){
 	//Moves the ship to the top of the screen while shooting
-	if(getPosition().Y < 45){
+	if(getPosition().Y < 40){
 		moveUp(turnSpeed, deltaTime);
 		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
@@ -51,7 +52,7 @@ void BasicEnemy::combatStageA(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageB(irr::f32 deltaTime){
 	//Moves the ship to the bottom of the screen while shooting
-	if(getPosition().Y > -45){
+	if(getPosition().Y > -40){
 		moveDown(turnSpeed, deltaTime);
 		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
@@ -61,6 +62,10 @@ void BasicEnemy::combatStageB(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageC(irr::f32 deltaTime){
 	//Makes the ship leave the area
-	moveSpeed /= 2;
-	currentStage = stageEnd;
+	if(stageCTimeElpased > 1){
+		moveSpeed /= 2;
+		currentStage = stageEnd;
+	} else{
+		stageCTimeElpased += deltaTime;
+	}
 }

@@ -12,11 +12,14 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//set the ID of the object
     typeID = objectTypeID;
 
+	sceneMan = sceneManagerReference;
+
     //set the spawn position
     this->spawnPos = spawnPos;
 
-    //dont want it to get deleted straight away
+    //Dont want it to get deleted straight away
     markedForDelete = false;
+	deleteReady = false;
 
 	//Make sure the collisionManager points to nothing
 	collMan = 0;
@@ -27,9 +30,6 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//create the scene node using loaded mesh
 	objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
 	objectNode->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture(pathOfTexture));
-
-	//Let the object cast shadows
-	objectNode->addShadowVolumeSceneNode();
 
 	//Create a triangle selector of this object
 	irr::scene::ITriangleSelector *selector;
@@ -46,14 +46,46 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//Create a reference to the collision Manager, to use when the collision function is called
 	collMan = sceneManagerReference->getSceneCollisionManager();
 
+	//Used by the static text
+	animateText = false;
+	textPos = irr::core::vector2di(0);
+	animTimePast = 0;
+}
+
+Object::~Object(){
+	if(animatedText){
+		animatedText->remove();
+	}
+}
+
+void Object::tick(irr::f32 deltaTime){
+	//Move the text upwards
+	if(animateText){
+		textPos.Y--;
+		animatedText->setRelativePosition(textPos);
+		if(animTimePast > ANIMATE_TIME){
+			animatedText->remove();
+			animatedText = NULL;
+			animTimePast = 0;
+			animateText = false;
+		} else{
+			animTimePast += deltaTime;
+		}
+	} else{
+		//Check if the object is ready to be deleted
+		if(markedForDelete){
+			deleteReady = true;
+		}
+	}
 }
 
 bool Object::isMarkedForDelete(){
-    return markedForDelete;
+    return markedForDelete && deleteReady;
 }
 
 void Object::markForDelete(){
     markedForDelete = true;
+	objectNode->setVisible(false);
 }
 
 irr::s32 Object::getTypeID(){
@@ -127,4 +159,29 @@ void Object::changeRotation(const irr::core::vector3df &angle){
 
 void Object::removeFromScene(){
     objectNode->remove();
+}
+
+void Object::displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount){
+	//Set the value of the text
+	irr::core::stringw displayText;
+	if(amount > 0){
+		displayText += "+";
+		displayText += amount;
+	}
+	displayText += " ";
+	displayText += text;
+	//Change the length of the box
+	float length = displayText.size() * 22;
+
+	//Convert the player pos to screen coordinates
+	textPos = collMan->getScreenCoordinatesFrom3DPosition(worldPos);
+
+	//Init the variable
+	animatedText = sceneMan->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
+
+	//Center the text
+	textPos.X -= animatedText->getAbsolutePosition().getWidth() / 2;
+
+	//Make sure to animate it
+	animateText = true;
 }

@@ -1,7 +1,6 @@
 #include "Collectable.h"
 
 #include "Game.h"
-#include "SoundManager.h"
 
 Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_COLLECTABLE, true){
@@ -32,15 +31,33 @@ Collectable::Collectable(irr::core::vector3df spawnPosition, const irr::io::path
 
 	//Resize all collectibles, might be temp
 	getSceneNode()->setScale(irr::core::vector3df(2));
+
+	//Init the audio device
+	audDevice = audiere::OpenDevice();
+	pickupSFX = audiere::OpenSound(audDevice, "Assets/Sound/Pickup.mp3");
+
+	soundStarted = false;
+	actionPefromed = false;
 }
 
 void Collectable::tick(irr::f32 deltaTime){
-    //make the collectable rotate
+    //Make the collectable rotate
     updateRotation(0, rotSpeed * deltaTime, 0);
+	//Wait for the sound to stop before deleting
+	if(soundStarted){
+		if(!pickupSFX->isPlaying()){
+			markForDelete();
+		}
+	}
 }
 
-void Collectable::activate(PlayerShip * player){
-	markForDelete();
-	SoundManager::playSFXPickup();
+void Collectable::activate(PlayerShip *player){
+	if(!actionPefromed){
+		pickupSFX->play();
+		performAction(player);
+		getSceneNode()->setVisible(false);
+		actionPefromed = true;
+		soundStarted = true;
+	}
 }
 

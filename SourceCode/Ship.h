@@ -8,6 +8,8 @@
 
 #include <vector>
 
+#include "audiere.h"
+
 #include "Object.h"
 #include "Bullet.h"
 
@@ -27,12 +29,18 @@ protected:
 	//How fast the ship will rotate
 	float rotSpeed;
 	//Keep track of the ship if it needs to rotate back
-	bool rotateBack;
+	bool rotateBackX;
+	bool rotateBackY;
 
+	//The cannon positions for each ship to set
 	std::vector<irr::core::vector3df> cannonPositions;
 
 	//Particle system scene node
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
+
+	//Audio device and sound effects
+	audiere::OutputStreamPtr shootSFX;
+	audiere::OutputStreamPtr damageSFX;
 
 private:
     //if the ship is able to fire
@@ -54,9 +62,9 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
+    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
     //destructor
-    ~Ship();
+    virtual ~Ship();
 
     //checks the cool down on shooting
     virtual void tick(irr::f32 deltaTime) override;

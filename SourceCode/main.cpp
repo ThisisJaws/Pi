@@ -6,11 +6,11 @@
  */
 
 #include "irrlicht.h"
+#include "audiere.h"
 
 #include "Game.h"
 #include "ScoreScreen.h"
 #include "EventReceiver.h"
-#include "SoundManager.h"
 
 //so it can work on windows
 #ifdef _IRR_WINDOWS_
@@ -20,8 +20,8 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 6
-#define CURRENT_VERSION_REVISION 5
+#define CURRENT_VERSION_MINOR	 8
+#define CURRENT_VERSION_REVISION 1
 
 /*
  * program entry point
@@ -30,9 +30,15 @@ int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
     //Create the device the run the game
-    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, false, false, &receiver);
-    //Create the class that will handle the actual playing of the game
-    Game game = Game(device, &receiver);
+    irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
+    //Create the device to play audio
+	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
+	//Load in some sounds
+	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
+	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
+	//Create the class that will handle the actual playing of the game
+    Game game = Game(device, &receiver, audDevice);
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 	//Keep track if the player has entered their name
@@ -40,11 +46,7 @@ int main(int argc, char** argv) {
 
 	//Change the window name
 	irr::core::stringw windowName(L"Space Trip - Version: ");
-	windowName += CURRENT_VERSION_MAJOR;
-	windowName += ".";
-	windowName += CURRENT_VERSION_MINOR;
-	windowName += ".";
-	windowName += CURRENT_VERSION_REVISION;
+	windowName += CURRENT_VERSION_MAJOR; windowName += "."; windowName += CURRENT_VERSION_MINOR; windowName += "."; windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
 
     //Create a texture variable to draw the menu
@@ -63,13 +65,15 @@ int main(int argc, char** argv) {
     } gameState;
     gameState = startMenu;
 
+	//Play the main music
+	mainMusic->setVolume(0.75f);
+	mainMusic->play();
+	mainMusic->setRepeat(true);
+
     //Show the player's score
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));
     scoreText->setVisible(false);
     irr::core::stringw scoreCount(L"Empty");
-
-	//Loop the menu music
-	SoundManager::playMusicMenu();
 
     //The main loop of the entire program
     while(device->run()){
@@ -87,11 +91,12 @@ int main(int argc, char** argv) {
         //Begin the scene
         device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
 
-		//Listen for enter key
+		//Wait on the start menu
 		if(gameState == startMenu){
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
+				buttonPress->play();
 			}
 		}
 		//Update the game if it is playing
@@ -104,6 +109,8 @@ int main(int argc, char** argv) {
 				gameState = scoreScreen;
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
+				//mainMusic->stop();
+				//scoreMusic->play();
 			}
 		}
 		//Update the score screen
@@ -115,6 +122,8 @@ int main(int argc, char** argv) {
 					menuImage->setVisible(true);
 					score.displayScore(false);
 					nameEntered = false;
+					//scoreMusic->stop();
+					//mainMusic->play();
 				} else{
 					score.addNameToRecentScore(score.getTextBoxName());
 					nameEntered = true;

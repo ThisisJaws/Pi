@@ -19,6 +19,8 @@ private:
     irr::scene::IAnimatedMesh *objectMesh;
     //reference to the scene node the object will use
     irr::scene::IAnimatedMeshSceneNode *objectNode;
+	//Pointer to the scene manager
+	irr::scene::ISceneManager *sceneMan;
     
 	//Pointer to the collision manager to check for collisions
 	irr::scene::ISceneCollisionManager *collMan;
@@ -26,8 +28,9 @@ private:
     //the spawn position of the Object
     irr::core::vector3df spawnPos;
     
-    //mark an object for delete to remove it o update
+    //Mark an object for delete to remove it from update
     bool markedForDelete;
+	bool deleteReady;
 
 	//The typeID is what type of object this is (see ObjectTypes.h) stored to quickly check what type of an object it is
 	irr::s32 typeID;
@@ -37,13 +40,25 @@ private:
 	//This holds the unique ID of the object so it can be found when searching through lists
 	irr::s32 uniqueID;
 
+	//Text to animate
+	irr::gui::IGUIStaticText *animatedText;
+	//Used to animated the text
+	bool animateText;
+	//Poistion to animate from
+	irr::core::vector2di textPos;
+	//How long to animate for
+	const float ANIMATE_TIME = 0.75f;
+	float animTimePast;
+
     //FUNCTIONS
 public:
     //constructor
     Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::core::vector3df &spawnPos = irr::core::vector3df(0, 0, 0), const irr::s32 &objectTypeID = TYPE_UNDEFINED_TYPE, const bool &checkCollisionFromBoundingBox = false);
-    
+    //destructor
+	virtual ~Object();
+
     //this will be called every update of the main game loop
-    virtual void tick(irr::f32 deltaTime) = 0;
+    virtual void tick(irr::f32 deltaTime);
     
     //check if the object needs to be deleted
     virtual bool isMarkedForDelete();
@@ -84,6 +99,9 @@ public:
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;
     virtual irr::s32 checkCollision(int direction);
+
+	//Displays the text on screen
+	void displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount = 0);
 };
 
 #endif	/* OBJECT_H */

@@ -5,9 +5,9 @@
 #ifndef AMMO_H
 #define	AMMO_H
 
-#include "Collectable.h"
+#include "Collectible.h"
 
-class Ammo : public Collectable{
+class Ammo : public Collectible{
     //VARIABLES
 protected:
     //how much ammo to give
@@ -16,9 +16,9 @@ protected:
     //FUNCTIONS
 public:
     //constructor
-    Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
+	Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
     
-    virtual void activate(PlayerShip *player) override;
+    virtual void performAction(PlayerShip *player) override;
 };
 
 #endif	/* AMMO_H */

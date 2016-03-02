@@ -1,8 +1,8 @@
 #include "Ship.h"
 #include "Game.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID){
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives)
+        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
 
     //set up variables
     moveSpeed = movementSpeed;
@@ -12,8 +12,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
 	//Set the rotation variables
 	maxZRotate = 45;
-	maxXRotate = 25;
-	rotSpeed = 100;
+	maxXRotate = 35;
+	rotSpeed = 175;
 
     //time between each bullet firing 1000 = 1 second
     timeBetweenShots = firingSpeed;
@@ -50,6 +50,10 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 
 	//Move the system back slighty to line up with the engine
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
+
+	//Init the audio
+	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Shoot.mp3");
+	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Damage.mp3");
 }
 
 Ship::~Ship(){
@@ -59,6 +63,7 @@ Ship::~Ship(){
 }
 
 void Ship::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     //check how long is left before the ship can fire again
     if(!canFire){
         if((timeSinceLastFire + timeBetweenShots) < timerReference->getRealTime()){
@@ -67,7 +72,7 @@ void Ship::tick(irr::f32 deltaTime){
     }
 
 	//Check if the ship needs to be rotated back
-	if(rotateBack){
+	if(rotateBackX){
 		//DOWN
 		if(getRotation().X < 0){
 			updateRotation(rotSpeed * deltaTime, 0, 0);
@@ -76,6 +81,8 @@ void Ship::tick(irr::f32 deltaTime){
 		if(getRotation().X > 0){
 			updateRotation(-rotSpeed * deltaTime, 0, 0);
 		}
+	}
+	if(rotateBackY){
 		//RIGHT
 		if(getRotation().Z > 0){
 			updateRotation(0, 0, -rotSpeed * deltaTime);
@@ -87,7 +94,8 @@ void Ship::tick(irr::f32 deltaTime){
 	}
 
 	//Set this to true at the end of each loop
-	rotateBack = true;
+	rotateBackX = true;
+	rotateBackY = true;
 }
 
 float Ship::getMovementSpeed(){
@@ -103,6 +111,9 @@ void Ship::increaseLives(const unsigned short &amount){
 }
 
 void Ship::dealDamage(const unsigned short &amount){
+	//Play the damange sound effect
+	damageSFX->play();
+
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){
 		markForDelete();
@@ -113,7 +124,7 @@ void Ship::dealDamage(const unsigned short &amount){
 }
 
 bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID, const std::vector<irr::core::vector3df> &firingPositions){
-    if(canFire){
+	if(canFire && getSceneNode()->isVisible()){
 		//For each position to fire from
 		for(int i = 0; i < firingPositions.size(); i++){
 			//construct a new bullet
@@ -124,6 +135,10 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 
 			//add it onto the list to be updated
 			Game::addObjectToUpdate(bullet);
+
+			//Play the sound
+			shootSFX->reset();
+			shootSFX->play();
 
 			//clear the pointer to prevent memory leaks
 			bullet = 0;
@@ -153,7 +168,7 @@ void Ship::moveUp(const float &speed, const irr::f32 &deltaTime){
 	//Rotate the ship up
 	if(getRotation().X > -maxXRotate){
 		updateRotation(-rotSpeed * deltaTime, 0, 0);
-		rotateBack = false;
+		rotateBackX = false;
 	}
 }
 
@@ -163,7 +178,7 @@ void Ship::moveDown(const float &speed, const irr::f32 &deltaTime){
 	//Rotate the ship down
 	if(getRotation().X < maxXRotate){
 		updateRotation(rotSpeed * deltaTime, 0, 0);
-		rotateBack = false;
+		rotateBackX = false;
 	}
 }
 
@@ -173,7 +188,7 @@ void Ship::turnLeft(const float & speed, const irr::f32 &deltaTime){
 	//Rotate the ship to the left
 	if(getRotation().Z < maxZRotate){
 		updateRotation(0, 0, rotSpeed * deltaTime);
-		rotateBack = false;
+		rotateBackY = false;
 	}
 }
 
@@ -183,6 +198,6 @@ void Ship::turnRight(const float & speed, const irr::f32 &deltaTime){
 	//Rotate the ship to the right
 	if(getRotation().Z > -maxZRotate){
 		updateRotation(0, 0, -rotSpeed * deltaTime);
-		rotateBack = false;
+		rotateBackY = false;
 	}
 }

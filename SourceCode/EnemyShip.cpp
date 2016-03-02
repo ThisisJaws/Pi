@@ -1,8 +1,8 @@
 # include "EnemyShip.h"
 #include "Ammo.h"
 
-EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, const unsigned short &startingLives)
-        : Ship(spawnPosition, player->getMovementSpeed(), firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, TYPE_SHIP_ENEMY, startingLives){
+EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int firingSpeed, irr::ITimer* timerReference, const irr::io::path& pathOfMesh, const irr::io::path& pathOfTexture, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const unsigned short &startingLives)
+        : Ship(spawnPosition, player->getMovementSpeed(), firingSpeed, -1, timerReference, pathOfMesh, pathOfTexture, sceneManagerReference, audiereDevice, TYPE_SHIP_ENEMY, startingLives){
 
     //rotate to the right position
     getSceneNode()->setRotation(irr::core::vector3df(0, 180, 0));
@@ -20,7 +20,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int
     scoreAmount = 1000;
 
 	//Change the direction of the particle system
-	engineParticleSystem->getEmitter()->setDirection(irr::core::vector3df(0, 0, 0.1f));
+	engineParticleSystem->getEmitter()->setDirection(irr::core::vector3df(0, 0, player->getMovementSpeed() / 1000));
 }
 
 EnemyShip::~EnemyShip(){
@@ -59,6 +59,7 @@ void EnemyShip::markForDelete(){
     //check if the player should get some score
     if(rewardScore){
         playerTarget->increaseScore(scoreAmount);
+		displayText("Points", getPosition(), scoreAmount);
     }
     //call the base function
     Object::markForDelete();

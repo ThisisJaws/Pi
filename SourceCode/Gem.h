@@ -2,12 +2,12 @@
  * The gem collectable, just adds more score
  */
 
-#ifndef GEM_H
-#define	GEM_H
+#ifndef _GEM_H
+#define	_GEM_H
 
-#include "Collectable.h"
+#include "Collectible.h"
 
-class Gem : public Collectable{
+class Gem : public Collectible{
     //VARIABLES
 private:
     //how much to increase score by
@@ -16,10 +16,10 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Gem(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
+    Gem(irr::core::vector3df spawnPosition, const unsigned int &scoreIncrease, const irr::io::path &textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
  
-    virtual void activate(PlayerShip *player) override;
+    virtual void performAction(PlayerShip *player) override;
 };
 
-#endif	/* GEM_H */
+#endif	/* _GEM_H */
 

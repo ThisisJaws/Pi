@@ -31,16 +31,19 @@
 class Game{
     //VARIABLES
 private:
-    //irrlicht device, this is the root for EVERYTHING within the engine
+    //Irrlicht device, this is the root for EVERYTHING within the engine
     irr::IrrlichtDevice *device;
-    //a pointer to the video driver
+    //A pointer to the video driver
     irr::video::IVideoDriver *driver;
-    //a pointer to the scene manager
+    //A pointer to the scene manager
     irr::scene::ISceneManager *smgr;
-    //a pointer to the gui iterface
+    //A pointer to the gui iterface
     irr::gui::IGUIEnvironment *guienv;
-    //object to receive keyboard input
+    //Object to receive keyboard input
     EventReceiver *eReceiver;
+	//Pointer to the audiere device
+	audiere::AudioDevicePtr audiereDevice;
+
 
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
@@ -74,14 +77,14 @@ private:
     //check if the game has been loaded
     bool loaded;
 
-	//Howlong to wait after the player has finished the stage to start another
+	//Howlong to waitOneTick after the player has finished the stage to start another
 	float stageWaitTime;
 	float stageWaitPast;
 
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice);
 	//destructor
 	~Game();
 
@@ -102,6 +105,9 @@ public:
 
 	//Returns the object if the loop contains the ID
 	static Object* getObjectReferenceByID(const irr::s32 &objectID);
+
+	//Returns a pointer to the current player
+	static PlayerShip* getCurrentPlayer();
 
     //Returns true if the position is behind the player
     static bool checkBehidPlayer(const irr::f32 &zPos);

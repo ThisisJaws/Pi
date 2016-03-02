@@ -14,9 +14,9 @@ World::World(PlayerShip *player, const std::string &levelLocation, const irr::io
 	phase2Complete = false;
 }
 
-void World::loadPhase1(irr::IrrlichtDevice * device){
+void World::loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
 	//Load the map file
-	loadMapFile(levelLocation, device);
+	loadMapFile(levelLocation, device, audDevice);
 
 	//Reset the player's position
 	player->changePosition(irr::core::vector3df(0, 0, -500));
@@ -24,62 +24,6 @@ void World::loadPhase1(irr::IrrlichtDevice * device){
 	//Phase is now loaded
 	phase1Loaded = true;
 }
-
-void World::loadPhase2(irr::IrrlichtDevice *device){
-	//Unload the terrains from the scene
-	clearTerrains();
-
-	//Make sure the previous phase is no longer considered loaded
-	phase1Loaded = false;
-
-	//Get the references
-	irr::scene::ISceneManager *smgr = device->getSceneManager();
-	irr::video::IVideoDriver *driver = device->getVideoDriver();
-
-	//Set the random seed
-	srand(1);
-
-	//Reset the player position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
-
-	//array of Enemies - these get deleted once they move off screen
-	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
-	for(int i = 0; i < 2; i++){
-		//basic
-		BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
-		Game::addObjectToUpdate(basicEnemy);
-
-		z += 1200;
-
-		//strong
-		StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
-		Game::addObjectToUpdate(strongEnemy);
-
-		z += 2800;
-
-		//fast
-		FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
-		Game::addObjectToUpdate(fastEnemy);
-
-		z += 800;
-	}
-
-	//Add some gems to the level
-	x = 0; y = 0; z = 1200;
-	Gem *gem;
-	for(int i = 0; i < 3; i++){
-		y = rand() % 20 + 1;
-		y -= 10;
-		gem = new Gem(irr::core::vector3df(x, y, z), smgr);
-
-		Game::addObjectToUpdate(gem);
-
-		z += rand() % 3000 + 100;
-	}
-
-	phase2Loaded = true;
-}
-
 
 bool World::isPhase1Loaded(){
 	return phase1Loaded;
@@ -122,7 +66,7 @@ bool World::isPhase2Complete(){
 		if(phase2Complete){
 			return true;
 		} else{
-			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
+			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY) && !Game::objectToUpdateContainsAnyType(TYPE_BULLET)){
 				phase2Complete = true;
 				return true;
 			} else{
@@ -158,13 +102,13 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
+void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
 	//Create a variable to read the file
 	std::ifstream file;
 	//The string that will hold each line of the file
 	std::string line;
 	//Path to the level segments
-	const std::string path = "Assets/LevelAssets/";
+	const std::string levelPath = "Assets/LevelAssets/";
 
 	//The name of the object + a temp variable to hold float data
 	std::string nameOfObject, tempHold;
@@ -215,12 +159,12 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			stream >> tempHold;
 			objectScale.Z = std::stof(tempHold.c_str());
 
-			//Store the path of the mesh
-			std::string meshPath = path + nameOfObject + ".obj";
+			//Store the levelPath of the mesh
+			std::string meshPath = levelPath + nameOfObject + ".obj";
 			//Remove the last two letters off of the string to make setting the textures easier
 			nameOfObject.erase(nameOfObject.end() - 2, nameOfObject.end());
-			//Set the texture path
-			std::string textPath = path + nameOfObject + ".jpg";
+			//Set the texture levelPath
+			std::string textPath = levelPath + nameOfObject + ".jpg";
 
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
@@ -236,26 +180,43 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				Game::addObjectToUpdate(terrainPiece);
 
 			} else if(nameOfObject.at(0) == 'O'){
-				//For StaticObjects
-				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
-				Obsticle->changeRotation(objectRot);
-				Obsticle->getSceneNode()->setScale(objectScale);
+				if(nameOfObject == "O_LavaWorldPlume"){
+					//Spawn in the lava plumes to be handled speratley
+					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
+					//Add to the update vector
+					Game::addObjectToUpdate(lavalPlume);
+				} else{
+					//For StaticObjects
+					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
+					Obsticle->changeRotation(objectRot);
+					Obsticle->getSceneNode()->setScale(objectScale);
 
-				//Add to the update vector
-				Game::addObjectToUpdate(Obsticle);
-
+					//Add to the update vector
+					Game::addObjectToUpdate(Obsticle);
+				}
 			} else if(nameOfObject.at(0) == 'C'){
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-					Ammo *ammo = new Ammo(objectPos, device->getSceneManager());
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), audDevice);
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
-					//For Gem
-					Gem *gem = new Gem(objectPos, device->getSceneManager());
-					//Add to the update vector
-					Game::addObjectToUpdate(gem);
+					//For Gem - get the texture to use
+					std::string gemType;
+					if(nameOfObject.at(2) == 'B'){
+						//Bronze
+						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
+					} else if(nameOfObject.at(2) == 'S'){
+						//Silver
+						SilverGem *gem = new SilverGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
+					} else if(nameOfObject.at(2) == 'G'){
+						//Gold
+						GoldGem *gem = new GoldGem(objectPos, device->getSceneManager(), audDevice);
+						Game::addObjectToUpdate(gem);
+					}
 				}
 			}
 		}

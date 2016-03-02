@@ -22,6 +22,7 @@ Bullet::~Bullet(){
 }
 
 void Bullet::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     if(fired){
         //move the bullet forward
         updatePosition(direction * (moveSpeed * deltaTime));

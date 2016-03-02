@@ -8,6 +8,9 @@ class LavaWorld : public World{
 public:
 	//constructor
 	LavaWorld(PlayerShip *player);
+
+	//Override phase 2
+	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice) override;
 };
 
 

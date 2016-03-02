@@ -15,13 +15,14 @@ StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr:
 }
 
 void StaticObject::tick(irr::f32 deltaTime){
+	Object::tick(deltaTime);
     if(rotate){
 		//Rotate the object around random axis
 		updateRotation(rotAxis * deltaTime);
     }
 
     //If this object is behind the player then delete it
-    if(Game::checkBehidPlayer(getSceneNode()->getTransformedBoundingBox().MaxEdge.Z)){
+    if(Game::checkBehidPlayer(getSceneNode()->getTransformedBoundingBox().MaxEdge.Z + 20)){
         markForDelete();
     }
 }

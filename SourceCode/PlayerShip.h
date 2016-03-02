@@ -33,30 +33,33 @@ private:
 	//Will be true if the player loses
 	bool lost;
 
-    //variables to control the camera pos
+    //Variables to control the camera pos
     int tpDistance;         //distance behind the player
     int tpOffset;           //offset above player
     int sideViewDistance;   //distance from the side of the player
     int sideViewOffset;     //offset in front of the player
-
-    //camera position gets adjusted by these offsets
-    float cameraYOffset, maxYOffset, minYOffset;
-    float cameraXOffset, maxXOffset;
-
-	//This holds the 'base' position, the one that will be considered 0, 0, 0 if the player moves
-	irr::core::vector3df basePosition;
+	//Different constrain variables for flying and shooting
+	float flyingTop;
+	float flyingBottom;
+	float shootingTop;
+	float shootingBottom;
+	//Stop the player moving off the screen
+	float constrainX;
+	float constrainTop;
+	float constrainBottom;
 
     //to control the camera being used in the scene
     irr::scene::ICameraSceneNode *camera;
-    //vectors to switch between the two camera positions
-    irr::core::vector3df thirdPersonPosition;
-    irr::core::vector3df sideViewPosition;
 
     //to be able to receive events
     EventReceiver *eReceiver;
 
     //The light to light the level
     irr::scene::ILightSceneNode *light;
+	//Offset of position
+	irr::core::vector3df lightPos;
+	//Keep track of the z offset
+	const float zOffSet = 700;
 
 	//Stops the player moving the ship
 	bool controlsLocked;
@@ -67,10 +70,15 @@ private:
         shooting,
     } currentMode;
 
+	//The particle system for phase 2
+	irr::scene::IParticleSystemSceneNode *phase2AmbientParticles;
+
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference);
+    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevices);
+	//destructor
+	virtual ~PlayerShip();
 
     virtual void tick(irr::f32 deltaTime) override;
 
@@ -82,9 +90,6 @@ public:
     void increaseAmmo(unsigned short amount);
     unsigned int getScore();
     void increaseScore(unsigned int amount);
-
-	//Overriden to make sure the cameraOffsets get updated
-	virtual void changePosition(irr::core::vector3df newPosition);
 
 	//when the player collides or gets shot we don't want to delete it, just lose the game
 	virtual void markForDelete() override;
@@ -112,8 +117,6 @@ protected:
 	virtual void turnRight(const float &speed, const irr::f32 &deltaTime) override;
 
 private:
-    //updates the two camera positions
-    void updateCameraPositions();
 
     //updates the camera based on the current mode
     void updateCamera(irr::scene::ICameraSceneNode* sceneCamera);

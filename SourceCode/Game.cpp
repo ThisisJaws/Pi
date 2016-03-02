@@ -6,7 +6,7 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
+Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice){
     //get a pointer to the irrlicht device
     this->device = device;
 
@@ -15,6 +15,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
+	this->audiereDevice = audiereDevice;
 
 	//Init default variables
 	previousScore = 0;
@@ -36,7 +37,7 @@ Game::~Game(){
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
     //Create a ship for the player
-    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr);
+    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, audiereDevice);
     //Give the player the camera
     player->addCamera(camera);
     //Add the player oto the update list
@@ -50,7 +51,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	worlds[2] = new JungleWorld(g_player);
 
 	//Load the first world
-	worlds[currentWorld]->loadPhase1(device);
+	worlds[currentWorld]->loadPhase1(device, audiereDevice);
 
     //Load in the sky dome's for the worlds
 	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
@@ -65,9 +66,9 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     //Set the colour
 	guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
 	//Load in the static text variables
-    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(500, 10, 1000, 40));
-	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(10, 40, 500, 70));
-    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
+    scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
+	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(630, 40, 800, 70));
+    ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(630, 10, 800, 40));
     FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 550, 300, 580));
 	stageCompleteText = guienv->addStaticText(L"STAGE COMPLETE", irr::core::rect<irr::s32>(260, 250, 700, 300));
 	stageCompleteText->setVisible(false);
@@ -149,7 +150,7 @@ bool Game::play(){
 				//Change mode first because of speed increase
 				g_player->changeMode();
 				//Load in the next phase
-				worlds[currentWorld]->loadPhase2(device);
+				worlds[currentWorld]->loadPhase2(device, audiereDevice);
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate();
@@ -164,12 +165,12 @@ bool Game::play(){
 					//Change mode
 					g_player->changeMode();
 					//Load the next world
-					worlds[currentWorld]->loadPhase1(device);
+					worlds[currentWorld]->loadPhase1(device, audiereDevice);
 				} else{
 					//Start again but increment speed by double
 					currentWorld = 0;
 					g_player->changeMode(2);
-					worlds[currentWorld]->loadPhase1(device);
+					worlds[currentWorld]->loadPhase1(device, audiereDevice);
 				}
 				//Turn on the next skydome
 				skyDome[currentWorld]->setVisible(true);
@@ -183,16 +184,17 @@ bool Game::play(){
 }
 
 void Game::cleanUp(){
-    //loop through object vector and delete all pointers
+    //Loop through object list and remove everything from the scene graph
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
 		Object *toDelete = *objectIterator;
-		toDelete->getSceneNode()->remove();
+		toDelete->removeFromScene();
 		delete toDelete;
 	}
-    objectsToUpdate.resize(0);
+	objectsToUpdate.resize(0);
 
-    //clear the player pointer
-    g_player = 0;
+	//Clear the player
+	g_player = 0;
+
 
     //Remove the static text objects
     scoreText->remove();
@@ -246,6 +248,17 @@ Object* Game::getObjectReferenceByID(const irr::s32 &objectID){
 	return NULL;
 }
 
+PlayerShip* Game::getCurrentPlayer(){
+	//Loop through the vector as work around for the non static variable
+	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
+		if((*objectIterator)->getTypeID() == TYPE_SHIP_PLAYER){
+			return dynamic_cast<PlayerShip*>(*objectIterator);
+		}
+	}
+
+	return NULL;
+}
+
 bool Game::checkBehidPlayer(const irr::f32 &zPos){
     //Loop through the static vector to find the player
     for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
@@ -253,6 +266,8 @@ bool Game::checkBehidPlayer(const irr::f32 &zPos){
 			return (*objectIterator)->getPosition().Z > zPos;
 		}
 	}
+
+	return false;
 }
 
 bool Game::isLoaded(){
