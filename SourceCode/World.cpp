@@ -181,7 +181,10 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 
 			} else if(nameOfObject.at(0) == 'O'){
 				if(nameOfObject == "O_LavaWorldPlume"){
+					//Spawn in the lava plumes to be handled speratley
 					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
+					//Add to the update vector
+					Game::addObjectToUpdate(lavalPlume);
 				} else{
 					//For StaticObjects
 					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
