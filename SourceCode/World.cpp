@@ -205,8 +205,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					//Add to the update vector
 					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
-					//For Gem - get the texture to use
-					std::string gemType;
+					//For Gem
 					if(nameOfObject.at(2) == 'B'){
 						//Bronze
 						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager(), audDevice);
