@@ -52,9 +52,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	cannonPositions.push_back(irr::core::vector3df( 1, 1.5f, -1.5f));
 	cannonPositions.push_back(irr::core::vector3df(-1, 1.5f, -1.5f));
 
-	//Let the player cast shadows
-	getSceneNode()->addShadowVolumeSceneNode();
-
 	//Create the prticle effect for phase 2
 	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
