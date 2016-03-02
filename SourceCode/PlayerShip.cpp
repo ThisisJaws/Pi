@@ -235,6 +235,8 @@ void PlayerShip::dealDamage(const unsigned short &amount){
 
 void PlayerShip::setControlLock(const bool &lock){
 	controlsLocked = lock;
+	//Deactivate the particles
+	phase2AmbientParticles->setVisible(false);
 }
 
 bool PlayerShip::areControlsLocked(){
@@ -328,9 +330,6 @@ void PlayerShip::changeMode(const int &increaseSpeedByFactor){
 		//Change the player constrain
 		constrainTop = flyingTop;
 		constrainBottom = flyingBottom;
-
-		//Deactivate the particles
-		phase2AmbientParticles->setVisible(false);
     }
 
 	//Increase the player's speed
