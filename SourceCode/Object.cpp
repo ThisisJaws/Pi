@@ -46,6 +46,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//Create a reference to the collision Manager, to use when the collision function is called
 	collMan = sceneManagerReference->getSceneCollisionManager();
 
+	//Make sure it has been initialised
+	animatedText = 0;
+
 	//Used by the static text
 	animateText = false;
 	textPos = irr::core::vector2di(0);
