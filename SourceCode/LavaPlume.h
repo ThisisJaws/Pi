@@ -18,6 +18,9 @@ private:
 	//Speed to move
 	float moveSpeed;
 
+	//Make the plume wait 1 tick before chaning direction
+	bool wait;
+
 	//FUNCTIONS
 public:
 	LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISceneManager *sceneManagerReference);

@@ -12,6 +12,9 @@ LavaPlume::LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISce
 	//Set the movespeed of the plume
 	srand(1);
 	moveSpeed = rand() % 100 + 100;
+
+	//Set the waitOneTick variable
+	waitOneTick = false;
 }
 
 void LavaPlume::tick(irr::f32 deltaTime){
@@ -20,8 +23,14 @@ void LavaPlume::tick(irr::f32 deltaTime){
 	//Move the plumes
 	updatePosition(0, moveSpeed * deltaTime, 0);
 
-	//Make sure the plume doesn't go too high or too low
-	if(getPosition().Y >= maxHeight || getPosition().Y <= minHeight){
-		moveSpeed *= -1;
+	//Check if the plume needs to waitOneTick - will prevent the plume from getting stuck
+	if(!waitOneTick){
+		//Make sure the plume doesn't go too high or too low
+		if(getPosition().Y >= maxHeight || getPosition().Y <= minHeight){
+			moveSpeed *= -1;
+			waitOneTick = true;
+		}
+	} else{
+		waitOneTick = false;
 	}
 }
