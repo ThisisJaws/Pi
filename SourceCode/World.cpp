@@ -66,7 +66,7 @@ bool World::isPhase2Complete(){
 		if(phase2Complete){
 			return true;
 		} else{
-			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
+			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY) && !Game::objectToUpdateContainsAnyType(TYPE_BULLET)){
 				phase2Complete = true;
 				return true;
 			} else{
