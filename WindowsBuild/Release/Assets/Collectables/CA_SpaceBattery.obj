@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 25.02.2016 18:52:42
+# File Created: 25.02.2016 18:53:44
 
-mtllib SpaceBattery_a.mtl
+mtllib CA_SpaceBattery.mtl
 
 #
 # object CA_SpaceBattery
