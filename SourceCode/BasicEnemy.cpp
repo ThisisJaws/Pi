@@ -42,7 +42,7 @@ void BasicEnemy::combatManouver(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageA(irr::f32 deltaTime){
 	//Moves the ship to the top of the screen while shooting
-	if(getPosition().Y < 45){
+	if(getPosition().Y < 40){
 		moveUp(turnSpeed, deltaTime);
 		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
@@ -52,7 +52,7 @@ void BasicEnemy::combatStageA(irr::f32 deltaTime){
 
 void BasicEnemy::combatStageB(irr::f32 deltaTime){
 	//Moves the ship to the bottom of the screen while shooting
-	if(getPosition().Y > -45){
+	if(getPosition().Y > -40){
 		moveDown(turnSpeed, deltaTime);
 		shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_PLAYER, cannonPositions);
 	} else{
