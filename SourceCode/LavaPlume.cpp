@@ -7,10 +7,21 @@ LavaPlume::LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISce
 	maxHeight = spawnPosition.Y;
 
 	//Set the minimun position to move up from
-	minHeight = -10;
+	minHeight = -220;
+
+	//Set the movespeed of the plume
+	srand(1);
+	moveSpeed = rand() % 100 + 100;
 }
 
 void LavaPlume::tick(irr::f32 deltaTime){
 	StaticObject::tick(deltaTime);
 
+	//Move the plumes
+	updatePosition(0, moveSpeed * deltaTime, 0);
+
+	//Make sure the plume doesn't go too high or too low
+	if(getPosition().Y >= maxHeight || getPosition().Y <= minHeight){
+		moveSpeed *= -1;
+	}
 }
