@@ -11,7 +11,7 @@ LavaPlume::LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISce
 
 	//Set the movespeed of the plume
 	srand(1);
-	moveSpeed = rand() % 100 + 100;
+	moveSpeed = (float)(rand() % 100 + 100);
 
 	//Set the waitOneTick variable
 	waitOneTick = false;

@@ -171,13 +171,13 @@ void Object::displayText(const irr::core::stringw &text, const irr::core::vector
 	displayText += " ";
 	displayText += text;
 	//Change the length of the box
-	float length = displayText.size() * 22;
+	float length = (float)displayText.size() * 22;
 
 	//Convert the player pos to screen coordinates
 	textPos = collMan->getScreenCoordinatesFrom3DPosition(worldPos);
 
 	//Init the variable
-	animatedText = sceneMan->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, length, 30));
+	animatedText = sceneMan->getGUIEnvironment()->addStaticText(displayText.c_str(), irr::core::rect<irr::s32>(0, 0, (irr::s32)length, 30));
 
 	//Center the text
 	textPos.X -= animatedText->getAbsolutePosition().getWidth() / 2;

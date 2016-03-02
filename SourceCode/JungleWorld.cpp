@@ -46,7 +46,7 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDeviceP
 	//Add some gems to the level
 	x = 0; y = 0; z = 1200;
 	for(int i = 0; i < 3; i++){
-		y = (rand() % 40 + 1) - 20;
+		y = (irr::f32)(rand() % 40 + 1) - 20;
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr, audDevice);
 		Game::addObjectToUpdate(gem);
 		z += rand() % 3000 + 1000;
@@ -55,7 +55,7 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDeviceP
 	//Add some asteroids to the level
 	x = 0; y = 0; z = 2000;
 	for(int i = 0; i < 16; i++){
-		y = (rand() % 70 + 1) - 35;
+		y = (irr::f32)(rand() % 70 + 1) - 35;
 		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager());
 		Game::addObjectToUpdate(Obsticle);
 		z += rand() % 500 + 500;
