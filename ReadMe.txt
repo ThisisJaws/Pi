@@ -9,6 +9,8 @@ To run and play Space Trip on a Pi machine do the following
 		sudo apt-get install libgl1-mesa-glx
 		sudo apt-get install libgles1-mesa-dev
 		sudo apt-get install libgles2-mesa-dev
+	--Used to compile the game
+		sudo apt-get install gcc-4.7
 2. Navigate to the irrlicht source directory (Irrlicht_1.9.0_OGL-ES/source/Irrlicht) and type 'make' to compile the engine
 3. Navigate to the audiere directory (audiere-1.9.4) and type './configure && make && sudo make install' to compile the audiere engine
 4. After audiere has finished make sure to type 'sudo ldconfig' to make sure all libraries are linked
