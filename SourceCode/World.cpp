@@ -66,7 +66,7 @@ bool World::isPhase2Complete(){
 		if(phase2Complete){
 			return true;
 		} else{
-			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY)){
+			if(!Game::objectToUpdateContainsAnyType(TYPE_SHIP_ENEMY) && !Game::objectToUpdateContainsAnyType(TYPE_BULLET)){
 				phase2Complete = true;
 				return true;
 			} else{
@@ -180,14 +180,20 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 				Game::addObjectToUpdate(terrainPiece);
 
 			} else if(nameOfObject.at(0) == 'O'){
-				//For StaticObjects
-				StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
-				Obsticle->changeRotation(objectRot);
-				Obsticle->getSceneNode()->setScale(objectScale);
+				if(nameOfObject == "O_LavaWorldPlume"){
+					//Spawn in the lava plumes to be handled speratley
+					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
+					//Add to the update vector
+					Game::addObjectToUpdate(lavalPlume);
+				} else{
+					//For StaticObjects
+					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
+					Obsticle->changeRotation(objectRot);
+					Obsticle->getSceneNode()->setScale(objectScale);
 
-				//Add to the update vector
-				Game::addObjectToUpdate(Obsticle);
-
+					//Add to the update vector
+					Game::addObjectToUpdate(Obsticle);
+				}
 			} else if(nameOfObject.at(0) == 'C'){
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){

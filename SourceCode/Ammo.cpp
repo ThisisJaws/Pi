@@ -14,5 +14,5 @@ void Ammo::performAction(PlayerShip* player){
     player->increaseAmmo(ammoIncrease);
 
 	//Display text
-	displayText(ammoIncrease, "Ammo", getPosition());
+	displayText("Ammo", getPosition(), ammoIncrease);
 }

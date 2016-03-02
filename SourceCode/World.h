@@ -16,6 +16,8 @@
 #include "PlayerShip.h"
 
 #include "StaticObject.h"
+#include "LavaPlume.h"
+
 #include "Ammo.h"
 #include "Gem.h"
 #include "BronzeGem.h"

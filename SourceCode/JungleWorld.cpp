@@ -54,11 +54,11 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDeviceP
 
 	//Add some asteroids to the level
 	x = 0; y = 0; z = 2000;
-	for(int i = 0; i < 8; i++){
-		y = (rand() % 50 + 1) - 25;
+	for(int i = 0; i < 16; i++){
+		y = (rand() % 70 + 1) - 35;
 		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager());
 		Game::addObjectToUpdate(Obsticle);
-		z += rand() % 1000 + 1000;
+		z += rand() % 500 + 500;
 	}
 
 	phase2Loaded = true;

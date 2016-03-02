@@ -161,11 +161,13 @@ void Object::removeFromScene(){
     objectNode->remove();
 }
 
-void Object::displayText(const int &amount, const irr::core::stringw &text, const irr::core::vector3df &worldPos){
+void Object::displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount){
 	//Set the value of the text
 	irr::core::stringw displayText;
-	displayText += "+";
-	displayText += amount;
+	if(amount > 0){
+		displayText += "+";
+		displayText += amount;
+	}
 	displayText += " ";
 	displayText += text;
 	//Change the length of the box

@@ -77,7 +77,7 @@ private:
     //check if the game has been loaded
     bool loaded;
 
-	//Howlong to wait after the player has finished the stage to start another
+	//Howlong to waitOneTick after the player has finished the stage to start another
 	float stageWaitTime;
 	float stageWaitPast;
 

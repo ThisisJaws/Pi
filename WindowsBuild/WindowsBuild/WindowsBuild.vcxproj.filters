@@ -87,6 +87,9 @@
     <ClCompile Include="..\..\SourceCode\GoldGem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\SourceCode\LavaPlume.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SourceCode\Ammo.h">
@@ -162,6 +165,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SourceCode\GoldGem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SourceCode\LavaPlume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
