@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 03.03.2016 08:34:18
+# File Created: 03.03.2016 09:21:05
 
 mtllib O_IceWorldSpike_b.mtl
 
@@ -134,7 +134,7 @@ v  188.7910 -151.9937 -2626.8503
 # 124 vertices
 
 g O_IceWorldSpike_b
-usemtl 03___Default
+usemtl 04___Default
 f 1 2 3 4 
 f 2 5 6 3 
 f 5 7 8 6 
