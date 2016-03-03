@@ -17,9 +17,7 @@ private:
 
 	//Speed to move
 	float moveSpeed;
-
-	//Make the plume waitOneTick 1 tick before chaning direction
-	bool waitOneTick;
+	float currentSpeed;
 
 	//FUNCTIONS
 public:
