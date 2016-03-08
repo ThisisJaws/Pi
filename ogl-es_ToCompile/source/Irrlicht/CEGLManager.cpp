@@ -47,7 +47,7 @@ bool CEGLManager::initialize(const SIrrlichtCreationParameters& params, const SE
 	EglWindow = (NativeWindowType)Data.OpenGLLinux.X11Window;
 	//Added
 	//EglDisplay = eglGetDisplay((NativeDisplayType)Data.OpenGLLinux.X11Display);
-	EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPAY);
+	EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 	//
 #elif defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_)
 	EglWindow =	(ANativeWindow*)Data.OGLESAndroid.Window;

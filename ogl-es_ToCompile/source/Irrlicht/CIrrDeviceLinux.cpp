@@ -583,7 +583,7 @@ bool CIrrDeviceLinux::createWindow()
 
 	//Added
 	VC_RECT_T dst_rect;
-	VC_RECT_T sr_rect;
+	VC_RECT_T src_rect;
 	unsigned int w,h;
 	graphics_get_display_size(0,&w,&h);
 	dst_rect.x = 0;
@@ -596,7 +596,7 @@ bool CIrrDeviceLinux::createWindow()
 	src_rect.height = Height << 16;
 	DISPMANX_DISPLAY_HANDLE_T dispman_display = vc_dispmanx_display_open(0);
 	DISPMANX_UPDATE_HANDLE_T dispman_update = vc_dispmanx_update_start(0);
-	DISPMANX_ELEMENT_HANDLE_T dispman_element = vc_dispmanx_element_add(dispman_update, dispman_display, 0, &dst_rect, 0, &src_rect, DISPMANX_PROTECTION_NONE, 0, 0, (DISPMANX_TRANSFORM)0);
+	DISPMANX_ELEMENT_HANDLE_T dispman_element = vc_dispmanx_element_add(dispman_update, dispman_display, 0, &dst_rect, 0, &src_rect, DISPMANX_PROTECTION_NONE, 0, 0, (DISPMANX_TRANSFORM_T)0);
 	nativewindow.element = dispman_element;
 	nativewindow.width = Width;
 	nativewindow.height = height;

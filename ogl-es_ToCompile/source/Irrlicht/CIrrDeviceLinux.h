@@ -409,7 +409,8 @@ namespace irr
 		#endif
 #endif
 		//Added
-		EGL_DISPLAYMANX_WINDOW_T nativewindow;
+		EGL_DISPMANX_WINDOW_T nativewindow;
+		//
 		u32 Width, Height;
 		bool WindowHasFocus;
 		bool WindowMinimized;
