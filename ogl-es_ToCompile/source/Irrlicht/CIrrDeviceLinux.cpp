@@ -23,14 +23,10 @@
 #include "SIrrCreationParameters.h"
 #include "SExposedVideoData.h"
 #include "IGUISpriteBank.h"
-//Added
-#ifdef _IRR_COMPILE_WITH_X11
-//_
+
 #include <X11/XKBlib.h>
 #include <X11/Xatom.h>
-//Added
-#endif
-//
+
 #if defined(_IRR_COMPILE_WITH_OGLES1_) || defined(_IRR_COMPILE_WITH_OGLES2_)
 #include "CEGLManager.h"
 #endif
@@ -599,7 +595,7 @@ bool CIrrDeviceLinux::createWindow()
 	DISPMANX_ELEMENT_HANDLE_T dispman_element = vc_dispmanx_element_add(dispman_update, dispman_display, 0, &dst_rect, 0, &src_rect, DISPMANX_PROTECTION_NONE, 0, 0, (DISPMANX_TRANSFORM_T)0);
 	nativewindow.element = dispman_element;
 	nativewindow.width = Width;
-	nativewindow.height = height;
+	nativewindow.height = Height;
 	vc_dispmanx_update_submit_sync(dispman_update);
 	//
 
@@ -662,7 +658,7 @@ void CIrrDeviceLinux::createDriver()
 #ifdef _IRR_COMPILE_WITH_OGLES2_
 		{
 			video::SExposedVideoData data;
-			data.OpenGLLinux.X11Window = &nativewindow;
+			data.OpenGLLinux.X11Window = XWindow;
 			data.OpenGLLinux.X11Display = XDisplay;
 
 			ContextManager = new video::CEGLManager();
