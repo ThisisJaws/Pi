@@ -15,6 +15,11 @@
 #include "ICursorControl.h"
 #include "os.h"
 
+//Added
+#include "bcm_host.h"
+#include "EGL/eglplatform.h"
+//
+
 #ifdef _IRR_COMPILE_WITH_X11_
 
 #include <X11/Xlib.h>
@@ -403,6 +408,8 @@ namespace irr
 		Rotation OldRandrRotation;
 		#endif
 #endif
+		//Added
+		EGL_DISPLAYMANX_WINDOW_T nativewindow;
 		u32 Width, Height;
 		bool WindowHasFocus;
 		bool WindowMinimized;

@@ -23,9 +23,14 @@
 #include "SIrrCreationParameters.h"
 #include "SExposedVideoData.h"
 #include "IGUISpriteBank.h"
+//Added
+#ifdef _IRR_COMPILE_WITH_X11
+//_
 #include <X11/XKBlib.h>
 #include <X11/Xatom.h>
-
+//Added
+#endif
+//
 #if defined(_IRR_COMPILE_WITH_OGLES1_) || defined(_IRR_COMPILE_WITH_OGLES2_)
 #include "CEGLManager.h"
 #endif
@@ -76,6 +81,9 @@ namespace irr
 	}
 } // end namespace irr
 
+//Added
+#ifdef _IRR_COMPILE_WITH_X11_
+//
 namespace
 {
 	Atom X_ATOM_CLIPBOARD;
@@ -86,6 +94,9 @@ namespace
 	Atom X_ATOM_NETWM_MAXIMIZE_HORZ;
 	Atom X_ATOM_NETWM_STATE;	
 };
+//Added
+#endif
+//
 
 namespace irr
 {
@@ -108,6 +119,10 @@ CIrrDeviceLinux::CIrrDeviceLinux(const SIrrlichtCreationParameters& param)
 	#ifdef _DEBUG
 	setDebugName("CIrrDeviceLinux");
 	#endif
+
+	//Added
+	bcm_host_init();
+	//
 
 	// print version, distribution etc.
 	// thx to LynxLuna for pointing me to the uname function
@@ -220,6 +235,9 @@ CIrrDeviceLinux::~CIrrDeviceLinux()
 		}
 	}
 #endif
+	//Added
+	bcm_host_deinit();
+	//
 }
 
 
@@ -554,6 +572,7 @@ bool CIrrDeviceLinux::createWindow()
 	}
 
 	initXAtoms();
+
 	
 	// check netwm support
 	Atom WMCheck = XInternAtom(XDisplay, "_NET_SUPPORTING_WM_CHECK", true);
@@ -561,6 +580,29 @@ bool CIrrDeviceLinux::createWindow()
 		HasNetWM = true;
 
 #endif // #ifdef _IRR_COMPILE_WITH_X11_
+
+	//Added
+	VC_RECT_T dst_rect;
+	VC_RECT_T sr_rect;
+	unsigned int w,h;
+	graphics_get_display_size(0,&w,&h);
+	dst_rect.x = 0;
+	dst_rect.y = 0;
+	dst_rect.width = Width;
+	dst_rect.height = Height;
+	src_rect.x = 0;
+	src_rect.y = 0;
+	src_rect.width = Width << 16;
+	src_rect.height = Height << 16;
+	DISPMANX_DISPLAY_HANDLE_T dispman_display = vc_dispmanx_display_open(0);
+	DISPMANX_UPDATE_HANDLE_T dispman_update = vc_dispmanx_update_start(0);
+	DISPMANX_ELEMENT_HANDLE_T dispman_element = vc_dispmanx_element_add(dispman_update, dispman_display, 0, &dst_rect, 0, &src_rect, DISPMANX_PROTECTION_NONE, 0, 0, (DISPMANX_TRANSFORM)0);
+	nativewindow.element = dispman_element;
+	nativewindow.width = Width;
+	nativewindow.height = height;
+	vc_dispmanx_update_submit_sync(dispman_update);
+	//
+
 	return true;
 }
 
@@ -620,7 +662,7 @@ void CIrrDeviceLinux::createDriver()
 #ifdef _IRR_COMPILE_WITH_OGLES2_
 		{
 			video::SExposedVideoData data;
-			data.OpenGLLinux.X11Window = XWindow;
+			data.OpenGLLinux.X11Window = &nativewindow;
 			data.OpenGLLinux.X11Display = XDisplay;
 
 			ContextManager = new video::CEGLManager();

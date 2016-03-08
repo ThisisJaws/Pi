@@ -45,7 +45,10 @@ bool CEGLManager::initialize(const SIrrlichtCreationParameters& params, const SE
 	EglDisplay = eglGetDisplay((NativeDisplayType)Data.OpenGLWin32.HDc);
 #elif defined(_IRR_COMPILE_WITH_X11_DEVICE_)
 	EglWindow = (NativeWindowType)Data.OpenGLLinux.X11Window;
-	EglDisplay = eglGetDisplay((NativeDisplayType)Data.OpenGLLinux.X11Display);
+	//Added
+	//EglDisplay = eglGetDisplay((NativeDisplayType)Data.OpenGLLinux.X11Display);
+	EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPAY);
+	//
 #elif defined(_IRR_COMPILE_WITH_ANDROID_DEVICE_)
 	EglWindow =	(ANativeWindow*)Data.OGLESAndroid.Window;
 	EglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -146,9 +149,9 @@ bool CEGLManager::generateSurface()
 		EGL_STENCIL_SIZE, Params.Stencilbuffer,
 		EGL_SAMPLE_BUFFERS, Params.AntiAlias ? 1:0,
 		EGL_SAMPLES, Params.AntiAlias,
-#ifdef EGL_VERSION_1_3
+//#ifdef EGL_VERSION_1_3
 		EGL_RENDERABLE_TYPE, EglOpenGLBIT,
-#endif
+//#endif
 		EGL_NONE, 0
 	};
 
