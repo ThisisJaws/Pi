@@ -64,7 +64,7 @@ Object::~Object(){
 void Object::tick(irr::f32 deltaTime){
 	//Move the text upwards
 	if(animateText){
-		textPos.Y -= (irr::s32)(deltaTime + 1);
+		textPos.Y -= deltaTime;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();
@@ -116,7 +116,7 @@ irr::s32 Object::checkCollision(int direction){
 	irr::core::line3df ray;
 	ray.start = getPosition();
 	ray.end = ray.start;
-	ray.end.Z += 1 * direction;
+	ray.end.Z += 2 * direction;
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit
