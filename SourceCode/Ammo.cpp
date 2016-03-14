@@ -4,9 +4,6 @@ Ammo::Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneM
         : Collectible(spawnPosition, "Assets/Collectables/SpaceBattery_b.obj", "Assets/Collectables/SpaceBattery_b.jpg", sceneManagerReference, audiereDevice){
 
     ammoIncrease = 10;
-
-	//Resize
-	getSceneNode()->setScale(irr::core::vector3df(2));
 }
 
 void Ammo::performAction(PlayerShip* player){
