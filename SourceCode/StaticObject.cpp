@@ -13,9 +13,9 @@ StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr:
 		rotAxis = irr::core::vector3df((rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed);
 	}
 
-	//Remove the collision of the object
+	//Change to undefined type to stop collision checks
 	if(!checkForCollision){
-		getSceneNode()->getTriangleSelector()->drop();
+		typeID = TYPE_UNDEFINED_TYPE;
 	}
 }
 
