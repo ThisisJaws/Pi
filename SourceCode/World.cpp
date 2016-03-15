@@ -229,5 +229,11 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 		//Sort the vector to put all objects in ascending order of the Z pos
 		//This will mean checking the player position for the end of the level will work better
 		std::sort(terrainSegments.begin(), terrainSegments.end(), less_than_key());
+
+		//Get the piece at the end of the vector then put the portal there
+		irr::core::vector3d<irr::f32> edges[8];
+		terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox().getEdges(edges);
+		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, edges[2].Z + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
+		Game::addObjectToUpdate(portal);
 	}
 }
