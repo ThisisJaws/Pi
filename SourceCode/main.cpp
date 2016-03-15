@@ -41,10 +41,8 @@ int main(int argc, char** argv) {
     Game game = Game(device, &receiver, audDevice);
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
-	//Set the font
-	device->getGUIEnvironment()->getSkin()->setFont(device->getGUIEnvironment()->getFont("Assets/Font.png"));
-	//Set the colour
-	device->getGUIEnvironment()->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
+	//Keep track if the player has entered their name
+	bool nameEntered = false;
 
 	//Change the window name
 	irr::core::stringw windowName(L"Space Trip - Version: ");

@@ -61,6 +61,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	skyDome[1]->setVisible(false);
 	skyDome[2]->setVisible(false);
 
+    //Set the font
+	guienv->getSkin()->setFont(guienv->getFont("Assets/Font.png"));
+    //Set the colour
+	guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
 	//Load in the static text variables
     scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
 	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(630, 40, 800, 70));
