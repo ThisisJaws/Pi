@@ -28,6 +28,9 @@ void StaticObject::tick(irr::f32 deltaTime){
 
     //If this object is behind the player then delete it
     if(Game::checkBehidPlayer(getSceneNode()->getTransformedBoundingBox().MaxEdge.Z + 20)){
-        markForDelete();
+        //Quick fix for portals -- CHANGE
+		if(typeID != 0){
+			markForDelete();
+		}
     }
 }
