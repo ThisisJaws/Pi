@@ -21,7 +21,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 8
-#define CURRENT_VERSION_REVISION 2
+#define CURRENT_VERSION_REVISION 4
 
 /*
  * program entry point
@@ -109,24 +109,18 @@ int main(int argc, char** argv) {
 				gameState = scoreScreen;
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
-				//mainMusic->stop();
-				//scoreMusic->play();
 			}
 		}
 		//Update the score screen
 		if(gameState == scoreScreen){
-			//When the user presses enter, return to menu
-			if(receiver.isKeyPressed(irr::KEY_RETURN)){
-				if(nameEntered){
+			//Wait for the player to enter their name
+			if(score.waitForPlayerName(&receiver, device->getTimer()->getRealTime())){
+				//When the player is done entering their name, wait to go back to start
+				if(receiver.isKeyPressed(irr::KEY_RETURN)){
 					gameState = startMenu;
 					menuImage->setVisible(true);
 					score.displayScore(false);
-					nameEntered = false;
-					//scoreMusic->stop();
-					//mainMusic->play();
-				} else{
-					score.addNameToRecentScore(score.getTextBoxName());
-					nameEntered = true;
+					score.reset();
 				}
 			}
 		}

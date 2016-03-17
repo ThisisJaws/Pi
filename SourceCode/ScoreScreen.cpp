@@ -7,34 +7,102 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	readFromFile(SCORE_FILE);
 
 	mostRecentScore = 0;
+	currentLetter = 0;
+	nameEntered = false;
+	now = 0;
+	then = 0;
+	frameDeltaTime = 0;
+	flashCurrent = 0;
+	flashWait = 0.25f;
 
-	//Init all gui elements then hide them
-	finalScore = guienv->addStaticText(L"Final Score: DISPLAY TEST", irr::core::rect<irr::s32>(0, 10, 800, 40), true);
-	finalScore->setVisible(false);
+	//Init all gui elements
+	finalScore = guienv->addStaticText(L"Final Score: ERROR", irr::core::rect<irr::s32>(0, 10, 800, 40));
+	finalScore->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
+	instructionsText = guienv->addStaticText(L"Enter your name below then press ENTER", irr::core::rect<irr::s32>(0, 50, 800, 80));
+	
+	int x = 336, y = 100;
+	for(int i = 0; i < NAME_LENGTH; i++){
+		playerName[i] = guienv->addStaticText(L"A", irr::core::rect<irr::s32>(x, y, x + 30, y + 40));
+		x += 34;
+	}
 
-	instructionsText = guienv->addStaticText(L"Enter your name below then press ENTER", irr::core::rect<irr::s32>(0, 50, 800, 80), true);
-	instructionsText->setVisible(false);
-
-	int x = 10, y = 160;
+	x = 10; y = 160;
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		irr::core::stringw count;
 		count += (i + 1);
-		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 40), true);
+		scoreNumbers[i] = guienv->addStaticText(count.c_str(), irr::core::rect<irr::s32>(x, y, x + 780, y + 40));
 		scoreNumbers[i]->setVisible(false);
 		y += 45;
 	}
 
-	playerName = guienv->addEditBox(L"NAME", irr::core::rect<irr::s32>(0, 90, 800, 120), true);
-	playerName->setMax(20);
-	playerName->setVisible(false);
+	//Hide all the elements
+	displayScore(false);
 
 	//Make sure the text variables are reset
-	resfreshScreen();
+	resfreshScoreBoard();
 }
 
 ScoreScreen::~ScoreScreen(){
 	//Write to file on destruct
 	writeToFile(SCORE_FILE);
+}
+
+bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
+	if(nameEntered){
+		return true;
+	}
+
+	//Work out frame delta time to make the letters flash
+	now = realTime;
+	frameDeltaTime = (irr::f32)(now - then) / 1000.0f;
+	then = now;
+
+	//If the player presses enter then add the name to the score
+	if(receiver->isKeyPressed(irr::KEY_RETURN)){
+		irr::core::stringc name;
+		for(int i = 0; i < NAME_LENGTH; i++){
+			name += playerName[i]->getText();
+		}
+		addNameToRecentScore(name);
+		playerName[currentLetter]->setVisible(true);
+		nameEntered = true;
+	}
+
+	//Chane the letter when the player presses up or down
+	if(receiver->isKeyPressed(irr::KEY_KEY_W)){
+		//Get the letter in each box, increment, then set
+		irr::core::stringw letter = playerName[currentLetter]->getText();
+		letter[0]++;
+		playerName[currentLetter]->setText(letter.c_str());
+	} else if(receiver->isKeyPressed(irr::KEY_KEY_S)){
+		//Get the letter in each box, de-increment, then set
+		irr::core::stringw letter = playerName[currentLetter]->getText();
+		letter[0]--;
+		playerName[currentLetter]->setText(letter.c_str());
+	}
+
+	//Move to the next letter when the player presses right
+	if(receiver->isKeyPressed(irr::KEY_KEY_D)){
+		if(currentLetter < NAME_LENGTH){
+			playerName[currentLetter]->setVisible(true);
+			currentLetter++;
+		}
+	}
+
+	//Make the current letter flash
+	if(flashCurrent >= flashWait){
+		if(playerName[currentLetter]->isVisible()){
+			playerName[currentLetter]->setVisible(false);
+		} else{
+			playerName[currentLetter]->setVisible(true);
+		}
+		flashCurrent = 0;
+	} else{
+		flashCurrent += frameDeltaTime;
+	}
+
+
+	return false;
 }
 
 void ScoreScreen::addScore(unsigned int score){
@@ -43,6 +111,29 @@ void ScoreScreen::addScore(unsigned int score){
 	irr::core::stringw finalScoreText("Final Score: ");
 	finalScoreText += score;
 	finalScore->setText(finalScoreText.c_str());
+}
+
+void ScoreScreen::displayScore(const bool &display){
+	//Display the final score
+	finalScore->setVisible(display);
+
+	//Display the 'instructions'
+	instructionsText->setVisible(display);
+
+	//Display the player's name
+	for(int i = 0; i < NAME_LENGTH; i++){
+		playerName[i]->setVisible(display);
+	}
+
+	//Set the visibility of the numbers
+	for(int i = 0; i < MAX_DISPLAY; i++){
+		scoreNumbers[i]->setVisible(display);
+	}
+}
+
+void ScoreScreen::reset(){
+	currentLetter = 0;
+	nameEntered = false;
 }
 
 void ScoreScreen::addNameToRecentScore(const irr::core::stringc &playerName){
@@ -55,31 +146,10 @@ void ScoreScreen::addNameToRecentScore(const irr::core::stringc &playerName){
 	sortVector(scores);
 
 	//Make sure the text variables are reset
-	resfreshScreen();
+	resfreshScoreBoard();
 }
 
-irr::core::stringc ScoreScreen::getTextBoxName(){
-	return playerName->getText();
-}
-
-void ScoreScreen::displayScore(const bool &display){
-	//Display the final score
-	finalScore->setVisible(display);
-
-	//Display the 'instructions'
-	instructionsText->setVisible(display);
-
-	//Display the player's name
-	playerName->setVisible(display);
-	playerName->setEnabled(display);
-
-	//Set the visibility of the numbers
-	for(int i = 0; i < MAX_DISPLAY; i++){
-		scoreNumbers[i]->setVisible(display);
-	}
-}
-
-void ScoreScreen::resfreshScreen(){
+void ScoreScreen::resfreshScoreBoard(){
 	//Update each score text
 	for(int i = 0; i < MAX_DISPLAY; i++){
 		//Change the text to the score data
