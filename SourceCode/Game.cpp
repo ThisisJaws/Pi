@@ -62,7 +62,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	skyDome[2]->setVisible(false);
 
     //Set the font
-	guienv->getSkin()->setFont(guienv->getFont("Assets/myfont.xml"));
+	guienv->getSkin()->setFont(guienv->getFont("Assets/TheFont.xml"));
     //Set the colour
 	guienv->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 0, 255, 0)); //ARGB
 	//Load in the static text variables
