@@ -83,19 +83,20 @@ bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
 
 	//Move to the next letter when the player presses right
 	if(receiver->isKeyPressed(irr::KEY_KEY_D)){
-		if(currentLetter < NAME_LENGTH){
+		if(currentLetter + 1 < NAME_LENGTH){
 			playerName[currentLetter]->setVisible(true);
 			currentLetter++;
+		}
+	} else if(receiver->isKeyPressed(irr::KEY_KEY_A)){
+		if(currentLetter > 0){
+			playerName[currentLetter]->setVisible(true);
+			currentLetter--;
 		}
 	}
 
 	//Make the current letter flash
 	if(flashCurrent >= flashWait){
-		if(playerName[currentLetter]->isVisible()){
-			playerName[currentLetter]->setVisible(false);
-		} else{
-			playerName[currentLetter]->setVisible(true);
-		}
+		playerName[currentLetter]->setVisible(!playerName[currentLetter]->isVisible());
 		flashCurrent = 0;
 	} else{
 		flashCurrent += frameDeltaTime;
