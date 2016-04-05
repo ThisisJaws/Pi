@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Game.h"
 
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
@@ -53,6 +54,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	animateText = false;
 	textPos = irr::core::vector2di(0);
 	animTimePast = 0;
+
+	//Add this object onto the update vector
+	Game::addObjectToUpdate(this);
 }
 
 Object::~Object(){
