@@ -187,6 +187,7 @@
     <ClInclude Include="..\..\SourceCode\BronzeGem.h" />
     <ClInclude Include="..\..\SourceCode\Bullet.h" />
     <ClInclude Include="..\..\SourceCode\Collectible.h" />
+    <ClInclude Include="..\..\SourceCode\CollectibleTypes.h" />
     <ClInclude Include="..\..\SourceCode\EnemyShip.h" />
     <ClInclude Include="..\..\SourceCode\EnemyTypes.h" />
     <ClInclude Include="..\..\SourceCode\EventReceiver.h" />

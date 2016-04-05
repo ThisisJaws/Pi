@@ -170,5 +170,8 @@
     <ClInclude Include="..\..\SourceCode\LavaPlume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SourceCode\CollectibleTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
