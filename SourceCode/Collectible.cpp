@@ -30,7 +30,7 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Init the audio device
-	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Pickup.mp3");
+	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Pickup/Pickup.mp3");
 
 	actionPefromed = false;
 }
