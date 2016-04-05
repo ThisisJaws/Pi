@@ -235,5 +235,10 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 		terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox().getEdges(edges);
 		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, edges[2].Z + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
 		Game::addObjectToUpdate(portal);
+
+		//Add the transparent grid
+		StaticObject *grid = new StaticObject(irr::core::vector3df(0, -20, 0), "Assets/LevelAssets/O_LevelGrid_a.obj", "Assets/LevelAssets/O_LevelGrid.png", device->getSceneManager(), false, false);
+		grid->getSceneNode()->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+		Game::addObjectToUpdate(grid);
 	}
 }
