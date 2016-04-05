@@ -54,6 +54,12 @@ int main(int argc, char** argv) {
     //Add the texture to the gui
     irr::gui::IGUIImage *menuImage = device->getGUIEnvironment()->addImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
 
+	//Create a gui image for the score screen
+	irr::gui::IGUIImage *scoreImage = device->getGUIEnvironment()->addImage(device->getVideoDriver()->getTexture("Assets/Scoreboard.jpg"), irr::core::position2d<irr::s32>(0, 0));
+	scoreImage->setVisible(false);
+	//Set the right drawing order
+	scoreImage->getParent()->sendToBack(scoreImage);
+
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
 
@@ -107,6 +113,7 @@ int main(int argc, char** argv) {
 			if(game.play()){ //play() will be true when the game is over
 				//Set and display the scores
 				gameState = scoreScreen;
+				scoreImage->setVisible(true);
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
 			}
@@ -121,6 +128,7 @@ int main(int argc, char** argv) {
 					menuImage->setVisible(true);
 					score.displayScore(false);
 					score.reset();
+					scoreImage->setVisible(false);
 				}
 			}
 		}
