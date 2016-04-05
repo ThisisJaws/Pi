@@ -40,8 +40,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, audiereDevice);
     //Give the player the camera
     player->addCamera(camera);
-    //Add the player oto the update list
-    addObjectToUpdate(player);
     //Add to the global variable
     g_player = player;
 
