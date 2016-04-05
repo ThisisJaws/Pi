@@ -1,2 +1,3 @@
 *.sts
 [Dd]ebug/
+WindowsBuild/WindowsBuild/Release/
