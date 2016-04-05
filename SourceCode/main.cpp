@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 	bool nameEntered = false;
 
 	//Change the window name
-	irr::core::stringw windowName(L"Space Trip - Version: ");
+	irr::core::stringw windowName(L"Space Trip: ");
 	windowName += CURRENT_VERSION_MAJOR; windowName += "."; windowName += CURRENT_VERSION_MINOR; windowName += "."; windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
 
