@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
     //Create the device to play audio
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
-	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav");
 	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
-	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
+	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver, audDevice);
 	//Create the score class which will handle all of the score

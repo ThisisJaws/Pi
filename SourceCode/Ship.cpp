@@ -52,8 +52,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
 
 	//Init the audio
-	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Shoot.mp3");
-	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Damage.mp3");
+	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
+	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Taking Damage/Damage.mp3");
 }
 
 Ship::~Ship(){
