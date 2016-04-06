@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Game.h"
 
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
@@ -53,6 +54,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	animateText = false;
 	textPos = irr::core::vector2di(0);
 	animTimePast = 0;
+
+	//Add this object onto the update vector
+	Game::addObjectToUpdate(this);
 }
 
 Object::~Object(){
@@ -64,7 +68,7 @@ Object::~Object(){
 void Object::tick(irr::f32 deltaTime){
 	//Move the text upwards
 	if(animateText){
-		textPos.Y -= (irr::s32)(deltaTime + 1);
+		textPos.Y -= ceil(deltaTime) * 1;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();
@@ -116,7 +120,7 @@ irr::s32 Object::checkCollision(int direction){
 	irr::core::line3df ray;
 	ray.start = getPosition();
 	ray.end = ray.start;
-	ray.end.Z += 1 * direction;
+	ray.end.Z += direction * 2;
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit

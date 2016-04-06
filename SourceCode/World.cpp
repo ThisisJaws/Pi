@@ -1,5 +1,4 @@
 #include "World.h"
-
 #include "Game.h"
 
 World::World(PlayerShip *player, const std::string &levelLocation, const irr::io::path &skyDomeLocation){
@@ -175,49 +174,34 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 
 				//Add to the internal vector
 				terrainSegments.push_back(terrainPiece);
-
-				//Add to the update vector
-				Game::addObjectToUpdate(terrainPiece);
-
 			} else if(nameOfObject.at(0) == 'O'){
 				if(nameOfObject == "O_LavaWorldPlume"){
 					//Spawn in the lava plumes to be handled speratley
 					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
 					lavalPlume->changeRotation(objectRot);
 					lavalPlume->getSceneNode()->setScale(objectScale);
-					
-					//Add to the update vector
-					Game::addObjectToUpdate(lavalPlume);
 				} else{
 					//For StaticObjects
 					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
 					Obsticle->changeRotation(objectRot);
 					Obsticle->getSceneNode()->setScale(objectScale);
-
-					//Add to the update vector
-					Game::addObjectToUpdate(Obsticle);
 				}
 			} else if(nameOfObject.at(0) == 'C'){
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
 					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), audDevice);
-					//Add to the update vector
-					Game::addObjectToUpdate(ammo);
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
 					if(nameOfObject.at(2) == 'B'){
 						//Bronze
 						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager(), audDevice);
-						Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'S'){
 						//Silver
 						SilverGem *gem = new SilverGem(objectPos, device->getSceneManager(), audDevice);
-						Game::addObjectToUpdate(gem);
 					} else if(nameOfObject.at(2) == 'G'){
 						//Gold
 						GoldGem *gem = new GoldGem(objectPos, device->getSceneManager(), audDevice);
-						Game::addObjectToUpdate(gem);
 					}
 				}
 			}
@@ -229,5 +213,23 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 		//Sort the vector to put all objects in ascending order of the Z pos
 		//This will mean checking the player position for the end of the level will work better
 		std::sort(terrainSegments.begin(), terrainSegments.end(), less_than_key());
+
+		//Get the piece at the end of the vector then put the portal there
+		irr::core::vector3d<irr::f32> edges[8];
+		terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox().getEdges(edges);
+		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, edges[2].Z + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
+
+		//Add the transparent grid until it reaches the end
+		StaticObject *grid;
+		irr::core::vector3df pos = irr::core::vector3df(0, -20, 0);
+		do{
+			//Spawn in the grid
+			grid = new StaticObject(pos, "Assets/LevelAssets/O_LevelGrid_a.obj", "Assets/LevelAssets/O_LevelGrid.png", device->getSceneManager(), false, false);
+			grid->getSceneNode()->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+
+			//Increase the position
+			grid->getSceneNode()->getBoundingBox().getEdges(edges);
+			pos.Z += edges[2].Z;
+		} while(pos.Z < portal->getPosition().Z);
 	}
 }

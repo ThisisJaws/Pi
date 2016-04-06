@@ -30,15 +30,12 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr 
 		int spawnNum = rand() % 100 + 1;
 		if(spawnNum <= 45){
 			BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-			Game::addObjectToUpdate(basicEnemy);
 		} else if(spawnNum <= 75){
 			//fast
 			FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-			Game::addObjectToUpdate(fastEnemy);
 		} else if(spawnNum <= 100){
 			//strong
 			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-			Game::addObjectToUpdate(strongEnemy);
 		}
 		z += 1500;
 	}
@@ -48,7 +45,6 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr 
 	for(int i = 0; i < 3; i++){
 		y = (irr::f32)(rand() % 40 + 1) - 20;
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr, audDevice);
-		Game::addObjectToUpdate(gem);
 		z += rand() % 3000 + 1000;
 	}
 
@@ -57,7 +53,6 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr 
 	for(int i = 0; i < 16; i++){
 		y = (irr::f32)(rand() % 70 + 1) - 35;
 		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager());
-		Game::addObjectToUpdate(Obsticle);
 		z += rand() % 500 + 500;
 	}
 

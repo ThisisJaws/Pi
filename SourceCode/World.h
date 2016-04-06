@@ -18,11 +18,7 @@
 #include "StaticObject.h"
 #include "LavaPlume.h"
 
-#include "Ammo.h"
-#include "Gem.h"
-#include "BronzeGem.h"
-#include "SilverGem.h"
-#include "GoldGem.h"
+#include "CollectibleTypes.h"
 
 class World{
 	//VARIABLES

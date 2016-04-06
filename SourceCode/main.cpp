@@ -20,7 +20,7 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 8
+#define CURRENT_VERSION_MINOR	 9
 #define CURRENT_VERSION_REVISION 2
 
 /*
@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
     //Create the device to play audio
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
-	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/ingame.wav");
+	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav");
 	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
-	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/ButtonPress.mp3");
+	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver, audDevice);
 	//Create the score class which will handle all of the score
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 	bool nameEntered = false;
 
 	//Change the window name
-	irr::core::stringw windowName(L"Space Trip - Version: ");
+	irr::core::stringw windowName(L"Space Trip: ");
 	windowName += CURRENT_VERSION_MAJOR; windowName += "."; windowName += CURRENT_VERSION_MINOR; windowName += "."; windowName += CURRENT_VERSION_REVISION;
 	device->setWindowCaption(windowName.c_str());
 
@@ -53,6 +53,12 @@ int main(int argc, char** argv) {
     irr::video::ITexture *menuScreen = device->getVideoDriver()->getTexture("Assets/PlaceHolders/AsteroidMenu800x600.jpg");
     //Add the texture to the gui
     irr::gui::IGUIImage *menuImage = device->getGUIEnvironment()->addImage(menuScreen, irr::core::position2d<irr::s32>(0, 0));
+
+	//Create a gui image for the score screen
+	irr::gui::IGUIImage *scoreImage = device->getGUIEnvironment()->addImage(device->getVideoDriver()->getTexture("Assets/Scoreboard.jpg"), irr::core::position2d<irr::s32>(0, 0));
+	scoreImage->setVisible(false);
+	//Set the right drawing order
+	scoreImage->getParent()->sendToBack(scoreImage);
 
     //Create a camera to use
     irr::scene::ICameraSceneNode *camera = device->getSceneManager()->addCameraSceneNode();
@@ -107,26 +113,22 @@ int main(int argc, char** argv) {
 			if(game.play()){ //play() will be true when the game is over
 				//Set and display the scores
 				gameState = scoreScreen;
+				scoreImage->setVisible(true);
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
-				//mainMusic->stop();
-				//scoreMusic->play();
 			}
 		}
 		//Update the score screen
 		if(gameState == scoreScreen){
-			//When the user presses enter, return to menu
-			if(receiver.isKeyPressed(irr::KEY_RETURN)){
-				if(nameEntered){
+			//Wait for the player to enter their name
+			if(score.waitForPlayerName(&receiver, device->getTimer()->getRealTime())){
+				//When the player is done entering their name, wait to go back to start
+				if(receiver.isKeyPressed(irr::KEY_RETURN)){
 					gameState = startMenu;
 					menuImage->setVisible(true);
 					score.displayScore(false);
-					nameEntered = false;
-					//scoreMusic->stop();
-					//mainMusic->play();
-				} else{
-					score.addNameToRecentScore(score.getTextBoxName());
-					nameEntered = true;
+					score.reset();
+					scoreImage->setVisible(false);
 				}
 			}
 		}

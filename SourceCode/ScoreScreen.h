@@ -9,8 +9,12 @@
 
 #include "irrlicht.h"
 
+#include "EventReceiver.h"
+
 //How many names to display
 #define MAX_DISPLAY 10
+//Max player character name
+#define NAME_LENGTH 3
 //Location of the score file
 #define SCORE_FILE "Assets/Score.sts"
 
@@ -24,8 +28,6 @@ class ScoreScreen{
 private:
 	//Reference to the gui environment
 	irr::gui::IGUIEnvironment *guienv;
-
-
 
 	//Structure to hold the score and name
 	struct scoreData{
@@ -46,8 +48,20 @@ private:
 	//Text elements to display all of the scores
 	irr::gui::IGUIStaticText *finalScore;
 	irr::gui::IGUIStaticText *instructionsText;
-	irr::gui::IGUIEditBox *playerName;
+	irr::gui::IGUIStaticText *playerName[NAME_LENGTH];
 	irr::gui::IGUIStaticText *scoreNumbers[MAX_DISPLAY];
+
+	//Which letter to edit (for when the player is entering the name)
+	int currentLetter;
+
+	//If the name has been entered
+	bool nameEntered;
+
+	//Variables for delta time
+	irr::f32 now, then, frameDeltaTime;
+
+	//Make the text flash
+	irr::f32 flashWait, flashCurrent;
 
 	//Structure used for sorting
 	struct more_than_sort{
@@ -63,21 +77,24 @@ public:
 	//destructor
 	~ScoreScreen();
 
-	//Add on the most recent score
+	//Waits for the player to enter their name, returns true when done
+	bool waitForPlayerName(EventReceiver *receiver, irr::u32 realTime);
+
+	//Add on the most recent score before player has entered their name
 	void addScore(unsigned int score);
-
-	//Associates a name with the most recent score
-	void addNameToRecentScore(const irr::core::stringc &playerName);
-
-	//Returns the name in the text box
-	irr::core::stringc getTextBoxName();
 
 	//Displays the score on screen
 	void displayScore(const bool &display);
 
+	//Resets any variables set while entering the player's name
+	void reset();
+
 private:
+	//Associates a name with the most recent score
+	void addNameToRecentScore(const irr::core::stringc &playerName);
+
 	//Call to refresh the score screen
-	void resfreshScreen();
+	void resfreshScoreBoard();
 
 	//Call to read from the file
 	void readFromFile(const std::string &file);
