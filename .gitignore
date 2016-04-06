@@ -1,2 +1,6 @@
 *.sts
 [Dd]ebug/
+WindowsBuild/WindowsBuild/Release/
+*.VC.opendb
+*.suo
+*.sdf

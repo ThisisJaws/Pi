@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Game.h"
 
 //Init static member here - 0 is reserved for no collision, 1 is reserved for terrain
 irr::s32 Object::objectCount = 2;
@@ -8,7 +9,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
 	objectCount++;
-	
+
 	//set the ID of the object
     typeID = objectTypeID;
 
@@ -53,6 +54,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	animateText = false;
 	textPos = irr::core::vector2di(0);
 	animTimePast = 0;
+
+	//Add this object onto the update vector
+	Game::addObjectToUpdate(this);
 }
 
 Object::~Object(){
@@ -117,6 +121,7 @@ irr::s32 Object::checkCollision(int direction){
 	ray.start = getPosition();
 	ray.end = ray.start;
 	ray.end.Z += 2 * direction;
+
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit
@@ -124,7 +129,7 @@ irr::s32 Object::checkCollision(int direction){
 
 	//Perform the ray cast and return the scene node
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
-	
+
 	if(objectTest != NULL && objectTest != objectNode){
 		return objectTest->getID();
 	} else{

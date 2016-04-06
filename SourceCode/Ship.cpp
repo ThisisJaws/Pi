@@ -1,5 +1,4 @@
 #include "Ship.h"
-#include "Game.h"
 
 Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
@@ -52,8 +51,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
 
 	//Init the audio
-	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Shoot.mp3");
-	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Damage.mp3");
+	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
+	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Taking Damage/Damage.mp3");
 }
 
 Ship::~Ship(){
@@ -132,9 +131,6 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 
 			//then fire the bullet
 			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);
-
-			//add it onto the list to be updated
-			Game::addObjectToUpdate(bullet);
 
 			//Play the sound
 			shootSFX->reset();

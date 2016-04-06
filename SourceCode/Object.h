@@ -14,6 +14,10 @@
 
 class Object{
     //VARIABLES
+protected:
+	//The typeID is what type of object this is (see ObjectTypes.h) stored to quickly check what type of an object it is
+	irr::s32 typeID;
+
 private:
     //reference to the object's mesh
     irr::scene::IAnimatedMesh *objectMesh;
@@ -31,9 +35,6 @@ private:
     //Mark an object for delete to remove it from update
     bool markedForDelete;
 	bool deleteReady;
-
-	//The typeID is what type of object this is (see ObjectTypes.h) stored to quickly check what type of an object it is
-	irr::s32 typeID;
 
 	//This increments every time an object is created
 	static irr::s32 objectCount;
