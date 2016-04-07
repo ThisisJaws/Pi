@@ -35,7 +35,7 @@ void Bullet::tick(irr::f32 deltaTime){
         }
         
         //Check the type of collision
-		irr::s32 collidedObjectUniqueID = checkCollision(-1, deltaTime);
+		irr::s32 collidedObjectUniqueID = checkCollision(-1);
 		if(collidedObjectUniqueID > 1){
 			Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
 			if(collidedObject != NULL && collidedObject->getTypeID() == targetTypeID){
