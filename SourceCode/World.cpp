@@ -168,7 +168,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 			//Check thefirst letter of the name to find out what the object is
 			if(nameOfObject.at(0) == 'L'){
 				//For land piece
-				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
+				StaticObject *terrainPiece = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager());
 				terrainPiece->changeRotation(objectRot);
 				terrainPiece->getSceneNode()->setScale(objectScale);
 
@@ -182,7 +182,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 					lavalPlume->getSceneNode()->setScale(objectScale);
 				} else{
 					//For StaticObjects
-					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), false);
+					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager());
 					Obsticle->changeRotation(objectRot);
 					Obsticle->getSceneNode()->setScale(objectScale);
 				}
