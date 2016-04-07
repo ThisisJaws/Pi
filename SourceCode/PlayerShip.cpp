@@ -43,6 +43,10 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
     light = sceneManagerReference->addLightSceneNode(0, lightPos);
     light->setRadius(10000);
 
+	//Turn on shadows for this scene node
+	getSceneNode()->addShadowVolumeSceneNode(0, -1, false);
+
+	//Make sure the controls aren't locked
 	controlsLocked = false;
 
 	//Default is false
