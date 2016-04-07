@@ -99,7 +99,7 @@ public:
     
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;
-    virtual irr::s32 checkCollision(int direction, irr::f32 deltaTime);
+    virtual irr::s32 checkCollision(int direction);
 
 	//Displays the text on screen
 	void displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount = 0);

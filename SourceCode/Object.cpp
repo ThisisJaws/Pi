@@ -115,12 +115,12 @@ irr::core::vector3df Object::getPosition(){
     return objectNode->getPosition();
 }
 
-irr::s32 Object::checkCollision(int direction, irr::f32 deltaTime){
+irr::s32 Object::checkCollision(int direction){
 	//Cast a ray from the object to slightly infront of the object
 	irr::core::line3df ray;
 	ray.start = getPosition();
 	ray.end = ray.start;
-	ray.end.Z += direction * 2 * deltaTime;
+	ray.end.Z += direction * 2;
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit
