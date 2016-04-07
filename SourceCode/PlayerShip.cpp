@@ -111,7 +111,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	}
 
 	//check for collision with static Objects
-	irr::s32 collidedObjectUniqueID = checkCollision(moveDir);
+	irr::s32 collidedObjectUniqueID = checkCollision(moveDir, deltaTime);
 	if(collidedObjectUniqueID > 0){
 		//If the ID is greater than 0 (0 is no collision) then search for the object
 		Object *collidedObject = Game::getObjectReferenceByID(collidedObjectUniqueID);
