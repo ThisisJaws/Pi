@@ -1,7 +1,7 @@
 # Makefile for Irrlicht Examples
 # It's usually sufficient to change just the target name and source file list
 # and be sure that CXX is set to a valid compiler
-Target = linuxBuild
+Target = SpaceTrip
 Sources = main.cpp EventReceiver.cpp Game.cpp Testing.cpp Object.cpp Bullet.cpp Ship.cpp PlayerShip.cpp EnemyShip.cpp StaticObject.cpp LavaPlume.cpp BasicEnemy.cpp StrongEnemy.cpp FastEnemy.cpp Collectible.cpp Gem.cpp BronzeGem.cpp SilverGem.cpp GoldGem.cpp Ammo.cpp World.cpp LavaWorld.cpp IceWorld.cpp JungleWorld.cpp ScoreScreen.cpp
 
 #for use with g++ 4.7
