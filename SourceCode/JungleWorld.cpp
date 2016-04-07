@@ -52,7 +52,7 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDeviceP
 	x = 0; y = 0; z = 2000;
 	for(int i = 0; i < 16; i++){
 		y = (irr::f32)(rand() % 70 + 1) - 35;
-		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager());
+		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager(), true);
 		z += rand() % 500 + 500;
 	}
 
