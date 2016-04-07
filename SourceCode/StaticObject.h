@@ -21,7 +21,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    StaticObject(const irr::core::vector3df &spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, bool updateRotation = false, bool checkForCollision = true);
+    StaticObject(const irr::core::vector3df &spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, bool rotate = false, bool checkForCollision = true);
 
     virtual void tick(irr::f32 deltaTime) override;
 };
