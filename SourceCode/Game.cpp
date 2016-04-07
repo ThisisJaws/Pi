@@ -193,15 +193,14 @@ void Game::cleanUp(){
 	//Clear the player
 	g_player = 0;
 
+	//Reset the current world
+	currentWorld = 0;
 
     //Remove the static text objects
     scoreText->remove();
 	livesText->remove();
     ammoText->remove();
     FPSText->remove();
-
-    //Game is not loaded
-    loaded = false;
 
 	//Loop through all worlds
 	for(int i = 0; i < NUM_WORLDS; i++){
@@ -212,6 +211,9 @@ void Game::cleanUp(){
 		//And remove the skydomes
 		skyDome[i]->remove();
 	}
+
+	//Game is no longer loaded
+	loaded = false;
 }
 
 void Game::addObjectToUpdate(Object *toAdd){
