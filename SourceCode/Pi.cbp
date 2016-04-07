@@ -49,8 +49,9 @@
 		<Unit filename="BasicEnemy.h" />
 		<Unit filename="Bullet.cpp" />
 		<Unit filename="Bullet.h" />
-		<Unit filename="Collectable.cpp" />
-		<Unit filename="Collectable.h" />
+		<Unit filename="Collectible.cpp" />
+		<Unit filename="Collectible.h" />
+		<Unit filename="CollectibleTypes.h" />
 		<Unit filename="EnemyShip.cpp" />
 		<Unit filename="EnemyShip.h" />
 		<Unit filename="EventReceiver.cpp" />
