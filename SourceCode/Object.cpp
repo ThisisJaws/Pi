@@ -31,6 +31,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	//create the scene node using loaded mesh
 	objectNode = sceneManagerReference->addAnimatedMeshSceneNode(objectMesh, NULL, uniqueID, spawnPos);
 	objectNode->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture(pathOfTexture));
+	objectNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 
 	//Create a triangle selector of this object
 	irr::scene::ITriangleSelector *selector;

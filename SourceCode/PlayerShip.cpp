@@ -38,11 +38,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	constrainTop = flyingTop;
 	constrainBottom = flyingBottom;
 
-    //Set up the light
-	lightPos = irr::core::vector3df(0, 1000, -zOffSet);
-    light = sceneManagerReference->addLightSceneNode(0, lightPos);
-    light->setRadius(10000);
-
 	//Turn on shadows for this scene node
 	getSceneNode()->addShadowVolumeSceneNode(0, -1, false);
 
@@ -73,14 +68,6 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	phase2AmbientParticles->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	//Turn off visibility
 	phase2AmbientParticles->setVisible(false);
-}
-
-PlayerShip::~PlayerShip(){
-	//Make sure the light gets removed
-	if(light){
-		light->remove();
-	}
-	//Particles get cleaned up anyeway because they are a child
 }
 
 void PlayerShip::tick(irr::f32 deltaTime){
@@ -142,9 +129,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//work out the distance traveled
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
-	//Move the light along the Z axis
-	lightPos.Z = getPosition().Z - zOffSet;
-	light->setPosition(lightPos);
 
 	//Check if the player can control the ship
 	if(!controlsLocked){
