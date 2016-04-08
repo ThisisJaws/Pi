@@ -54,6 +54,13 @@ private:
     //to be able to receive events
     EventReceiver *eReceiver;
 
+    //The light to light the level
+    irr::scene::ILightSceneNode *light;
+	//Offset of position
+	irr::core::vector3df lightPos;
+	//Keep track of the z offset
+	const float zOffSet = 700;
+
 	//Stops the player moving the ship
 	bool controlsLocked;
 
@@ -70,6 +77,8 @@ private:
 public:
     //constructor
     PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevices);
+	//destructor
+	virtual ~PlayerShip();
 
     virtual void tick(irr::f32 deltaTime) override;
 
