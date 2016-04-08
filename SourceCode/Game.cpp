@@ -278,12 +278,17 @@ unsigned int Game::getFinalScore(){
     return previousScore;
 }
 
-void Game::resetObjectsToUpdate(){
+void Game::resetObjectsToUpdate(bool keepPlayer){
 	//loop through object vector and delete all pointers
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
 		if((*objectIterator)->getTypeID() != g_player->getTypeID()){
+			//Get a reference to the object
 			Object *toDelete = *objectIterator;
+			//Clear its texture from memory
+			device->getVideoDriver()->removeTexture(toDelete->getSceneNode()->getMaterial(0).getTexture(0));
+			//Remove it from the scene
 			toDelete->getSceneNode()->remove();
+			//Delete the object from memory
 			delete toDelete;
 		}
 	}
