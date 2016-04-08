@@ -21,7 +21,7 @@
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 0
 #define CURRENT_VERSION_MINOR	 9
-#define CURRENT_VERSION_REVISION 5
+#define CURRENT_VERSION_REVISION 6
 
 /*
  * program entry point
@@ -31,7 +31,9 @@ int main(int argc, char** argv) {
     EventReceiver receiver;
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-    //Create the device to play audio
+    //Force all textures to be 16 bit
+	device->getVideoDriver()->setTextureCreationFlag(irr::video::ETCF_ALWAYS_16_BIT, true);
+	//Create the device to play audio
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
 	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav");
