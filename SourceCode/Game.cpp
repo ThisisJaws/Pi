@@ -144,14 +144,14 @@ bool Game::play(){
 			//Then check what needs to be loaded
 			if(!worlds[currentWorld]->isPhase2Loaded()){
 				//Load phase 2
-				resetObjectsToUpdate();
+				resetObjectsToUpdate(true);
 				//Change mode first because of speed increase
 				g_player->changeMode();
 				//Load in the next phase
 				worlds[currentWorld]->loadPhase2(device, audiereDevice);
 			} else{
 				//Reset the objects
-				resetObjectsToUpdate();
+				resetObjectsToUpdate(true);
 				//Reset the world
 				worlds[currentWorld]->reset();
 				//Turn off the dome
@@ -182,13 +182,7 @@ bool Game::play(){
 }
 
 void Game::cleanUp(){
-    //Loop through object list and remove everything from the scene graph
-	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-		Object *toDelete = *objectIterator;
-		toDelete->removeFromScene();
-		delete toDelete;
-	}
-	objectsToUpdate.resize(0);
+	resetObjectsToUpdate(false);
 
 	//Clear the player
 	g_player = 0;
@@ -278,14 +272,20 @@ unsigned int Game::getFinalScore(){
     return previousScore;
 }
 
-void Game::resetObjectsToUpdate(){
+void Game::resetObjectsToUpdate(bool keepPlayer){
 	//loop through object vector and delete all pointers
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-		if((*objectIterator)->getTypeID() != g_player->getTypeID()){
-			Object *toDelete = *objectIterator;
-			toDelete->getSceneNode()->remove();
-			delete toDelete;
+		if(keepPlayer && (*objectIterator)->getTypeID() == g_player->getTypeID()){
+			continue;
 		}
+			//Get a reference to the object
+			Object *toDelete = *objectIterator;
+			//Clear its texture from memory
+			device->getVideoDriver()->removeTexture(toDelete->getSceneNode()->getMaterial(0).getTexture(0));
+			//Remove it from the scene
+			toDelete->getSceneNode()->remove();
+			//Delete the object from memory
+			delete toDelete;
 	}
-	objectsToUpdate.resize(1);
+	objectsToUpdate.resize(keepPlayer ? 1 : 0);
 }

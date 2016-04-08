@@ -118,7 +118,8 @@ public:
     //Returns the score when the game is finished
     unsigned int getFinalScore();
 
-	void resetObjectsToUpdate();
+	//Resets all objects in the update vector
+	void resetObjectsToUpdate(bool keepPlayer = false);
 };
 
 #endif	/* GAME_H */
