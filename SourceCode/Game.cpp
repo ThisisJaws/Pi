@@ -275,7 +275,7 @@ unsigned int Game::getFinalScore(){
 void Game::resetObjectsToUpdate(bool keepPlayer){
 	//loop through object vector and delete all pointers
 	for(std::list<Object*>::iterator objectIterator = objectsToUpdate.begin(); objectIterator != objectsToUpdate.end(); ++objectIterator){
-		if(keepPlayer && (*objectIterator)->getTypeID() != g_player->getTypeID()){
+		if(keepPlayer && (*objectIterator)->getTypeID() == g_player->getTypeID()){
 			continue;
 		}
 			//Get a reference to the object
