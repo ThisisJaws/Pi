@@ -10,7 +10,7 @@ public:
 	IceWorld(PlayerShip *player);
 
 	//Override phase 2
-	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice) override;
+	virtual void loadPhase2(irr::IrrlichtDevice *device) override;
 
 };
 

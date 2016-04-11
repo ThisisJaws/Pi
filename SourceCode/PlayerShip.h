@@ -76,7 +76,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevices);
+    PlayerShip(EventReceiver *eReceiver, irr::ITimer *timer, irr::scene::ISceneManager *sceneManagerReference);
 	//destructor
 	virtual ~PlayerShip();
 

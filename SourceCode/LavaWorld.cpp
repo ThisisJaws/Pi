@@ -6,7 +6,7 @@ LavaWorld::LavaWorld(PlayerShip *player)
 	: World(player, "Assets/LevelAssets/LevelMaps/LavaWorld.stm", "Assets/SkyDomes/LavaSkydome_small.jpg"){
 }
 
-void LavaWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr audDevice){
+void LavaWorld::loadPhase2(irr::IrrlichtDevice * device){
 	//Unload the terrains from the scene
 	clearTerrains();
 
@@ -31,11 +31,11 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr
 	for(int i = 0; i < 20; i++){
 		//Deside which enemy to place
 		if(spawnOrder[i] == 1){
-			BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		} else if(spawnOrder[i] == 2){
-			FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		} else if(spawnOrder[i] == 3){
-			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
+			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		}
 		z += 1500;
 	}
@@ -44,7 +44,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr
 	x = 0; y = 0; z = 1200;
 	for(int i = 0; i < 3; i++){
 		y = (irr::f32)((rand() % 40 + 1) - 20);
-		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr, audDevice);
+		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr);
 		z += rand() % 3000 + 1000;
 	}
 

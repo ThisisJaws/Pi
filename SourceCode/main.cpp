@@ -6,7 +6,6 @@
  */
 
 #include "irrlicht.h"
-#include "audiere.h"
 
 #include "Game.h"
 #include "ScoreScreen.h"
@@ -36,15 +35,8 @@ int main(int argc, char** argv) {
 	//Force all textures to be 16 bit
 	device->getVideoDriver()->setTextureCreationFlag(irr::video::ETCF_ALWAYS_16_BIT, true);
 	
-	//Create the device to play audio
-	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
-	//Load in some sounds
-	//audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav", true);
-	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
-	//audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
-	
 	//Create the class that will handle the actual playing of the game
-    Game game = Game(device, &receiver, audDevice);
+    Game game = Game(device, &receiver);
 	
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
@@ -78,11 +70,6 @@ int main(int argc, char** argv) {
         scoreScreen
     } gameState;
     gameState = startMenu;
-
-	//Play the main music
-	/*mainMusic->setVolume(0.75f);
-	mainMusic->play();
-	mainMusic->setRepeat(true);*/
 
     //Show the player's score
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));

@@ -2,8 +2,8 @@
 
 #include "Game.h"
 
-PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-    : Ship(irr::core::vector3df(0, 0, 0), 200.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, audiereDevice, TYPE_SHIP_PLAYER, 3){
+PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, irr::scene::ISceneManager *sceneManagerReference)
+    : Ship(irr::core::vector3df(0, 0, 0), 200.0f, 250, 1, timerReference, "Assets/Ships/PlayerShip.obj", "Assets/Ships/PlayerShipTexture.jpg", sceneManagerReference, TYPE_SHIP_PLAYER, 3){
 
     //init variables
     score = 0;

@@ -8,8 +8,6 @@
 
 #include <vector>
 
-#include "audiere.h"
-
 #include "Object.h"
 #include "Bullet.h"
 
@@ -62,7 +60,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
+    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
     //destructor
     virtual ~Ship();
 
