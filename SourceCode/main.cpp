@@ -6,6 +6,7 @@
  */
 
 #include "irrlicht.h"
+#include "SFML/Audio.hpp"
 
 #include "Game.h"
 #include "ScoreScreen.h"
@@ -40,6 +41,12 @@ int main(int argc, char** argv) {
 	
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
+
+	//Variable to stream sounds
+	sf::Music menuMusic;
+	menuMusic.openFromFile("Assets/Sound/Old/ingame.wav");
+	menuMusic.setVolume(75);
+	menuMusic.play();
 	
 	//Keep track if the player has entered their name
 	bool nameEntered = false;
