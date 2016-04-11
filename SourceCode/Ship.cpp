@@ -30,12 +30,12 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = engineParticleSystem->createPointEmitter(
-		irr::core::vector3df(0.0f, 0.0f, -0.0001f),		// direction, also acts as speed
-		50U, 70U,										// emit rate
+		irr::core::vector3df(0.0f, 0.0f, -0.025f * moveDir),		// direction, also acts as speed
+		70U, 100U,										// emit rate
 		irr::video::SColor(0, 255, 255, 255),			// darkest color
 		irr::video::SColor(0, 255, 255, 255),			// brightest color
 		50, 100, 0,										// min and max age, angle
-		irr::core::dimension2df(0.5f, 0.5f),			// min size
+		irr::core::dimension2df(1.5f, 1.5f),			// min size
 		irr::core::dimension2df(2.0f, 2.0f));			// max size
 
 	engineParticleSystem->setEmitter(em);	//Give the emitter to the system
@@ -47,9 +47,10 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//using this texture doesn't work? engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
 	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+	engineParticleSystem->setParticlesAreGlobal(false);	//Stop the particles moving in world space
 
 	//Move the system back slighty to line up with the engine
-	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5, -7));
 
 	//Init the audio
 	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
