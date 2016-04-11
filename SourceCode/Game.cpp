@@ -52,18 +52,18 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	worlds[currentWorld]->loadPhase1(device, audiereDevice);
 
 	//Add the sounds into the array
-	worldMusic[0] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Lava Level/Lava Level.mp3", true, audiere::FF_MP3);
-	worldMusic[1] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Ice Level/Ice Level.mp3", true, audiere::FF_MP3);
-	worldMusic[2] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Forest Level/Forest Level.mp3", true, audiere::FF_MP3);
+	//worldMusic[0] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Lava Level/Lava Level.mp3", true, audiere::FF_MP3);
+	//worldMusic[1] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Ice Level/Ice Level.mp3", true, audiere::FF_MP3);
+	//worldMusic[2] = audiere::OpenSound(audiereDevice, "Assets/Sound/Levels/Forest Level/Forest Level.mp3", true, audiere::FF_MP3);
 
 	//Set the volume and repeat
-	for(int i = 0; i < NUM_WORLDS; i++){
+	/*for(int i = 0; i < NUM_WORLDS; i++){
 		worldMusic[i]->setRepeat(true);
 		worldMusic[i]->setVolume(0.75);
-	}
+	}*/
 
 	//Play the current world music
-	worldMusic[currentWorld]->play();
+	//worldMusic[currentWorld]->play();
 
     //Load in the sky dome's for the worlds
 	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));

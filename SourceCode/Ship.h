@@ -39,8 +39,8 @@ protected:
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
 	//Audio device and sound effects
-	audiere::OutputStreamPtr shootSFX;
-	audiere::OutputStreamPtr damageSFX;
+	//audiere::OutputStreamPtr shootSFX;
+	//audiere::OutputStreamPtr damageSFX;
 
 private:
     //if the ship is able to fire

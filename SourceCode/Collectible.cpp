@@ -30,7 +30,7 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Init the audio device
-	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/PickUp/Pickup.mp3");
+	//pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/PickUp/Pickup.mp3");
 
 	actionPefromed = false;
 }
@@ -43,7 +43,7 @@ void Collectible::tick(irr::f32 deltaTime){
 
 void Collectible::activate(PlayerShip *player){
 	if(!actionPefromed){
-		pickupSFX->play();
+		//pickupSFX->play();
 		performAction(player);
 		markForDelete();
 		actionPefromed = true;

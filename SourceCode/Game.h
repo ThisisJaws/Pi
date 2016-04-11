@@ -45,7 +45,7 @@ private:
 	//Pointer to the audiere device
 	audiere::AudioDevicePtr audiereDevice;
 	//The level music
-	audiere::OutputStreamPtr worldMusic[NUM_WORLDS];
+	//audiere::OutputStreamPtr worldMusic[NUM_WORLDS];
 
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;

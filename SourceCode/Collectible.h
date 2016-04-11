@@ -22,7 +22,7 @@ class Collectible : public Object{
 	 irr::scene::IParticleSystemSceneNode *ps;
 
 	 //Audoiere device and pick up sfx
-	 audiere::OutputStreamPtr pickupSFX;
+	 //audiere::OutputStreamPtr pickupSFX;
 
 	 //So it doesnt activate more than once
 	 bool actionPefromed;

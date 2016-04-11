@@ -39,9 +39,9 @@ int main(int argc, char** argv) {
 	//Create the device to play audio
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
-	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav", true);
+	//audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav", true);
 	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
-	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
+	//audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
 	
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver, audDevice);
@@ -80,9 +80,9 @@ int main(int argc, char** argv) {
     gameState = startMenu;
 
 	//Play the main music
-	mainMusic->setVolume(0.75f);
+	/*mainMusic->setVolume(0.75f);
 	mainMusic->play();
-	mainMusic->setRepeat(true);
+	mainMusic->setRepeat(true);*/
 
     //Show the player's score
     irr::gui::IGUIStaticText *scoreText = device->getGUIEnvironment()->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 600, 40));
@@ -110,8 +110,8 @@ int main(int argc, char** argv) {
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
-				mainMusic->stop();
-				buttonPress->play();
+				/*mainMusic->stop();
+				buttonPress->play();*/
 			}
 		}
 		//Update the game if it is playing

@@ -52,8 +52,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -7));
 
 	//Init the audio
-	shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
-	damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Taking Damage/Damage.mp3");
+	//shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
+	//damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Taking Damage/Damage.mp3");
 }
 
 Ship::~Ship(){
@@ -112,7 +112,7 @@ void Ship::increaseLives(const unsigned short &amount){
 
 void Ship::dealDamage(const unsigned short &amount){
 	//Play the damange sound effect
-	damageSFX->play();
+	//damageSFX->play();
 
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){
@@ -134,8 +134,8 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);
 
 			//Play the sound
-			shootSFX->reset();
-			shootSFX->play();
+			//shootSFX->reset();
+			//shootSFX->play();
 
 			//clear the pointer to prevent memory leaks
 			bullet = 0;
