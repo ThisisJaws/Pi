@@ -10,7 +10,7 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference)
     moveSpeed = 250.0f;
     
     currentLifeTime = 0;
-    maxLifeTime = 2.0f;
+    maxLifeTime = 1.3f;
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
