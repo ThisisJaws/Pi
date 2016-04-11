@@ -44,7 +44,8 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Change the materials of the particle system
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
+	//using this texture doesn't work? engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
+	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
 	//Move the system back slighty to line up with the engine
