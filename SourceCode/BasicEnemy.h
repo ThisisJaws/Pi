@@ -26,7 +26,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    BasicEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
+    BasicEnemy(PlayerShip *player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference);
 
 	//What the enemy will do when in range of the player
 	virtual void combatManouver(irr::f32 deltaTime) override;

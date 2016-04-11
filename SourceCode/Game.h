@@ -41,9 +41,6 @@ private:
     irr::gui::IGUIEnvironment *guienv;
     //Object to receive keyboard input
     EventReceiver *eReceiver;
-	//Pointer to the audiere device
-	audiere::AudioDevicePtr audiereDevice;
-
 
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
@@ -84,7 +81,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
 	//destructor
 	~Game();
 

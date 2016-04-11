@@ -1,7 +1,7 @@
 #include "BasicEnemy.h"
 
-BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-            : EnemyShip(player, spawnPosition, 750, timerReference, "Assets/Ships/EnemyShips/BasicShip.obj", "Assets/Ships/EnemyShips/BasicShipTexture.jpg", sceneManagerReference, audiereDevice){
+BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference)
+            : EnemyShip(player, spawnPosition, 750, timerReference, "Assets/Ships/EnemyShips/BasicShip.obj", "Assets/Ships/EnemyShips/BasicShipTexture.jpg", sceneManagerReference){
 
 	currentStage = stageA;
 	timeElapsed = 0;
@@ -13,6 +13,9 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
 	//Set up the shooting positions
 	cannonPositions.push_back(irr::core::vector3df(1, 0, -10));
 	cannonPositions.push_back(irr::core::vector3df(-1, 0, -10));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.3f, -4));
 }
 
 void BasicEnemy::combatManouver(irr::f32 deltaTime){

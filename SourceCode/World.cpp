@@ -13,9 +13,9 @@ World::World(PlayerShip *player, const std::string &levelLocation, const irr::io
 	phase2Complete = false;
 }
 
-void World::loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
+void World::loadPhase1(irr::IrrlichtDevice *device){
 	//Load the map file
-	loadMapFile(levelLocation, device, audDevice);
+	loadMapFile(levelLocation, device);
 
 	//Reset the player's position
 	player->changePosition(irr::core::vector3df(0, 0, -500));
@@ -101,7 +101,7 @@ void World::reset(){
 	phase2Complete = false;
 }
 
-void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice){
+void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device){
 	//Create a variable to read the file
 	std::ifstream file;
 	//The string that will hold each line of the file
@@ -190,18 +190,18 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device,
 				//For Collectibles
 				if(nameOfObject.at(1) == 'A'){
 					//For Ammo
-					Ammo *ammo = new Ammo(objectPos, device->getSceneManager(), audDevice);
+					Ammo *ammo = new Ammo(objectPos, device->getSceneManager());
 				} else if(nameOfObject.at(1) == 'G'){
 					//For Gem
 					if(nameOfObject.at(2) == 'B'){
 						//Bronze
-						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager(), audDevice);
+						BronzeGem *gem = new BronzeGem(objectPos, device->getSceneManager());
 					} else if(nameOfObject.at(2) == 'S'){
 						//Silver
-						SilverGem *gem = new SilverGem(objectPos, device->getSceneManager(), audDevice);
+						SilverGem *gem = new SilverGem(objectPos, device->getSceneManager());
 					} else if(nameOfObject.at(2) == 'G'){
 						//Gold
-						GoldGem *gem = new GoldGem(objectPos, device->getSceneManager(), audDevice);
+						GoldGem *gem = new GoldGem(objectPos, device->getSceneManager());
 					}
 				}
 			}

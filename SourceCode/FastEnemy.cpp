@@ -1,7 +1,7 @@
 #include "FastEnemy.h"
 
-FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference, audiereDevice){
+FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference)
+	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/FastShip.obj", "Assets/Ships/EnemyShips/FastShipTexture.jpg", sceneManagerReference){
 
 	//Start at the top of the screen
 	changePosition(irr::core::vector3df(getPosition().X, 45, getPosition().Z));
@@ -11,6 +11,9 @@ FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr
 
 	//Set the cannon position
 	cannonPositions.push_back(irr::core::vector3df(0, 0, -3));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -5));
 }
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){

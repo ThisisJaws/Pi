@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
+Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_COLLECTABLE, true){
 
     //set the rotation speed
@@ -29,9 +29,6 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
-	//Init the audio device
-	pickupSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/PickUp/Pickup.mp3");
-
 	actionPefromed = false;
 }
 
@@ -43,7 +40,6 @@ void Collectible::tick(irr::f32 deltaTime){
 
 void Collectible::activate(PlayerShip *player){
 	if(!actionPefromed){
-		pickupSFX->play();
 		performAction(player);
 		markForDelete();
 		actionPefromed = true;
