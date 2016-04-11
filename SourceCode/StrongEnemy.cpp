@@ -22,6 +22,9 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 	cannonPositions.push_back(irr::core::vector3df(-1, -1.5f, -1));
 	cannonPositions.push_back(irr::core::vector3df( 1,  1.5f, -1));
 	cannonPositions.push_back(irr::core::vector3df(-1,  1.5f, -1));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -4));
 }
 
 void StrongEnemy::combatManouver(irr::f32 deltaTime){

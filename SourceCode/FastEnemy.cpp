@@ -11,6 +11,9 @@ FastEnemy::FastEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr
 
 	//Set the cannon position
 	cannonPositions.push_back(irr::core::vector3df(0, 0, -3));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -5));
 }
 
 void FastEnemy::combatManouver(irr::f32 deltaTime){
