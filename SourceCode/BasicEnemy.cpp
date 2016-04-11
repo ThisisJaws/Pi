@@ -13,6 +13,9 @@ BasicEnemy::BasicEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, i
 	//Set up the shooting positions
 	cannonPositions.push_back(irr::core::vector3df(1, 0, -10));
 	cannonPositions.push_back(irr::core::vector3df(-1, 0, -10));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.3f, -4));
 }
 
 void BasicEnemy::combatManouver(irr::f32 deltaTime){

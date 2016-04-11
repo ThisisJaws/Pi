@@ -20,21 +20,18 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device, audiere::AudioDevicePtr 
 	//Set the random seed
 	srand(1);
 
-	//Reset the player position
-	player->changePosition(irr::core::vector3df(0, 0, 0));
+	//Make an array for the spawn order
+	int spawnOrder[10] = {1, 1, 2, 1, 2, 3, 1, 1, 2, 2};
 
-	//array of Enemies - these get deleted once they move off screen
+	//Set up the enemy positions
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
-	for(int i = 0; i < 10; i++){
-		//basic
-		int spawnNum = rand() % 100 + 1;
-		if(spawnNum <= 45){
+	for(int i = 0; i < 20; i++){
+		//Deside which enemy to place
+		if(spawnOrder[i] == 1){
 			BasicEnemy *basicEnemy = new BasicEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-		} else if(spawnNum <= 75){
-			//fast
+		} else if(spawnOrder[i] == 2){
 			FastEnemy *fastEnemy = new FastEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
-		} else if(spawnNum <= 100){
-			//strong
+		} else if(spawnOrder[i] == 3){
 			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr, audDevice);
 		}
 		z += 1500;

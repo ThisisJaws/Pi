@@ -18,9 +18,6 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int
 
     rewardScore = true;
     scoreAmount = 1000;
-
-	//Change the direction of the particle system
-	engineParticleSystem->getEmitter()->setDirection(irr::core::vector3df(0, 0, player->getMovementSpeed() / 1000));
 }
 
 EnemyShip::~EnemyShip(){
