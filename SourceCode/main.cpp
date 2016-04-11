@@ -29,20 +29,26 @@
 int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
-    //Create the device the run the game
+    
+	//Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
-    //Force all textures to be 16 bit
+    
+	//Force all textures to be 16 bit
 	device->getVideoDriver()->setTextureCreationFlag(irr::video::ETCF_ALWAYS_16_BIT, true);
+	
 	//Create the device to play audio
 	audiere::AudioDevicePtr audDevice = audiere::OpenDevice();
 	//Load in some sounds
-	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav");
+	audiere::OutputStreamPtr mainMusic = audiere::OpenSound(audDevice, "Assets/Sound/Old/ingame.wav", true);
 	//audiere::OutputStreamPtr scoreMusic = audiere::OpenSound(audDevice, "Assets/Sound/ScoreScreen.mp3");
 	audiere::OutputStreamPtr buttonPress = audiere::OpenSound(audDevice, "Assets/Sound/Button Press/ButtonPress.mp3");
+	
 	//Create the class that will handle the actual playing of the game
     Game game = Game(device, &receiver, audDevice);
+	
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
+	
 	//Keep track if the player has entered their name
 	bool nameEntered = false;
 
@@ -104,6 +110,7 @@ int main(int argc, char** argv) {
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
+				mainMusic->stop();
 				buttonPress->play();
 			}
 		}
