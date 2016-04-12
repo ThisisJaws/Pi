@@ -42,11 +42,25 @@ int main(int argc, char** argv) {
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 
-	//Variable to stream sounds
-	sf::Music menuMusic;
-	menuMusic.openFromFile("Assets/Sound/Old/ingame.wav");
-	menuMusic.setVolume(75);
-	menuMusic.play();
+	//Set up the menu music and play it
+	//sf::Music menuMusic;
+	//if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav")){
+	//	return -1;
+	//}
+	////menuMusic.openFromFile("Assets/Sound/Old/ingame.wav");
+	//menuMusic.setVolume(75);
+	//menuMusic.play();
+
+	////Set up the score screen music
+	//sf::Music scoreScreenMusic;
+	//scoreScreenMusic.openFromFile("Assets/Sound/Menus/Score Screen/ScoreScreen.wav");
+	//scoreScreenMusic.setVolume(75);
+
+	////Button press sound effect
+	//sf::SoundBuffer buttonPressBuffer;
+	//buttonPressBuffer.loadFromFile("Assets/Sound/Button Press/ButtonPress.wav");
+	//sf::Sound buttonPress;
+	//buttonPress.setBuffer(buttonPressBuffer);
 	
 	//Keep track if the player has entered their name
 	bool nameEntered = false;
@@ -104,8 +118,8 @@ int main(int argc, char** argv) {
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
-				/*mainMusic->stop();
-				buttonPress->play();*/
+				//menuMusic.stop();
+				//buttonPress.play();
 			}
 		}
 		//Update the game if it is playing
