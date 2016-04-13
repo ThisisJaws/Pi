@@ -45,7 +45,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
 	//using this texture doesn't work? engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
-	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
+	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/Particles/rsz_ship_flame_3.png"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	engineParticleSystem->setParticlesAreGlobal(false);	//Stop the particles moving in world space
 
