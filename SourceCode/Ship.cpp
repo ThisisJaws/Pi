@@ -31,12 +31,12 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = engineParticleSystem->createPointEmitter(
 		irr::core::vector3df(0.0f, 0.0f, -0.03f * moveDir),		// direction, also acts as speed
-		70U, 100U,										// emit rate
-		irr::video::SColor(0, 255, 255, 255),			// darkest color
-		irr::video::SColor(0, 255, 255, 255),			// brightest color
-		50, 100, 0,										// min and max age, angle
-		irr::core::dimension2df(1.5f, 1.5f),			// min size
-		irr::core::dimension2df(2.0f, 2.0f));			// max size
+		50U, 100U,												// emit rate min/max
+		irr::video::SColor(0, 255, 255, 255),					// darkest color
+		irr::video::SColor(0, 255, 255, 255),					// brightest color
+		50, 100, 0,												// min and max age, angle
+		irr::core::dimension2df(0.5f, 0.5f),					// min size
+		irr::core::dimension2df(2.0f, 2.0f));					// max size
 
 	engineParticleSystem->setEmitter(em);	//Give the emitter to the system
 	em->drop();								//Safe to drop now we don't need it
@@ -44,7 +44,6 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Change the materials of the particle system
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	//using this texture doesn't work? engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
 	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/Particles/rsz_ship_flame_3.png"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	engineParticleSystem->setParticlesAreGlobal(false);	//Stop the particles moving in world space
