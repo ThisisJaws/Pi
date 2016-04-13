@@ -43,13 +43,13 @@ int main(int argc, char** argv) {
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 
 	//Set up the menu music and play it
-	//sf::Music menuMusic;
-	//if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav")){
-	//	return -1;
-	//}
-	////menuMusic.openFromFile("Assets/Sound/Old/ingame.wav");
-	//menuMusic.setVolume(75);
-	//menuMusic.play();
+	sf::Music menuMusic;
+	if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly 20Khz.wav")){
+		return -1;
+	}
+	menuMusic.setVolume(75);
+	menuMusic.setLoop(true);
+	menuMusic.play();
 
 	////Set up the score screen music
 	//sf::Music scoreScreenMusic;
@@ -118,7 +118,7 @@ int main(int argc, char** argv) {
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
-				//menuMusic.stop();
+				menuMusic.stop();
 				//buttonPress.play();
 			}
 		}
