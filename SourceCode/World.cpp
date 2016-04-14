@@ -218,6 +218,7 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 		irr::core::vector3d<irr::f32> edges[8];
 		terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox().getEdges(edges);
 		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, edges[2].Z + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
+		portal->changeRotation(irr::core::vector3df(0, 180, 0));
 
 		//Add the transparent grid until it reaches the end
 		StaticObject *grid;
