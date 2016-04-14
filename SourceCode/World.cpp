@@ -179,7 +179,10 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 					//Spawn in the lava plumes to be handled speratley
 					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
 					lavalPlume->getSceneNode()->setScale(objectScale);
-				} else{
+				}else if(nameOfObject == "O_LavaWorldRock"){
+					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager(), true);
+					Obsticle->getSceneNode()->setScale(objectScale);
+				}else{
 					//For StaticObjects
 					StaticObject *Obsticle = new StaticObject(objectPos, meshPath.c_str(), textPath.c_str(), device->getSceneManager());
 					Obsticle->changeRotation(objectRot);
