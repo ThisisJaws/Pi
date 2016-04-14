@@ -11,7 +11,7 @@ StaticObject::StaticObject(const irr::core::vector3df &spawnPosition, const irr:
 	if(rotate){
 		rotSpeed = (float)(rand() % 200 + 1);
 		//make the x y z 0 - 3 the multiply by the speed
-		rotAxis = irr::core::vector3df((rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed, (rand() % 4) * rotSpeed);
+		rotAxis = irr::core::vector3df((float)rand() / (RAND_MAX) * rotSpeed, (float)rand() / (RAND_MAX)* rotSpeed, (float)rand() / (RAND_MAX)* rotSpeed);
 	}
 
 	//Change to undefined type to stop collision checks
