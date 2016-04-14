@@ -33,20 +33,11 @@ bool World::isPhase2Loaded(){
 }
 
 bool World::isPhase1Complete(){
-	//Check if the player has complete phase 1
 	if(phase1Loaded){
-		//Return if it is already complete to avoid uneccesary calculations
 		if(phase1Complete){
 			return true;
 		} else{
-			//Get an array to hold all of the edges
-			irr::core::vector3d<irr::f32> edges[8];
-			//Get the counding box of the mesh
-			irr::core::aabbox3d<irr::f32> boundingBox = terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox();
-			//Get the edges of the box
-			boundingBox.getEdges(edges);
-
-			if(player->getPosition().Z >= edges[2].Z){
+			if(player->getPosition().Z >= phase1EndPointZ){
 				phase1Complete = true;
 				return true;
 			} else{
@@ -216,10 +207,16 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 		//This will mean checking the player position for the end of the level will work better
 		std::sort(terrainSegments.begin(), terrainSegments.end(), less_than_key());
 
-		//Get the piece at the end of the vector then put the portal there
+		//Get an array to hold all of the edges
 		irr::core::vector3d<irr::f32> edges[8];
-		terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox().getEdges(edges);
-		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, edges[2].Z + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
+		//Get the counding box of the mesh
+		irr::core::aabbox3d<irr::f32> boundingBox = terrainSegments.at(terrainSegments.size() - 1)->getSceneNode()->getTransformedBoundingBox();
+		//Get the edges of the box
+		boundingBox.getEdges(edges);
+		//Set the end point
+		phase1EndPointZ = edges[2].Z;
+
+		StaticObject *portal = new StaticObject(irr::core::vector3df(0.0f, 0.0f, phase1EndPointZ + 10), "Assets/LevelAssets/O_Portal_a.obj", "Assets/LevelAssets/O_Portal.jpg", device->getSceneManager(), false, false);
 		portal->changeRotation(irr::core::vector3df(0, 180, 0));
 
 		//Add the transparent grid until it reaches the end
@@ -233,6 +230,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 			//Increase the position
 			grid->getSceneNode()->getBoundingBox().getEdges(edges);
 			pos.Z += edges[2].Z;
-		} while(pos.Z < portal->getPosition().Z);
+		} while(pos.Z < phase1EndPointZ);
 	}
 }

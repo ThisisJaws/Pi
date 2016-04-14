@@ -51,6 +51,9 @@ private:
 		}
 	};
 
+	//Where the player has to pass for phase 1 to end
+	float phase1EndPointZ;
+
 	//FUNCTIONS
 public:
 	//constructor
