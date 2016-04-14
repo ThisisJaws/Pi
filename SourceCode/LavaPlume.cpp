@@ -10,8 +10,8 @@ LavaPlume::LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISce
 	minHeight = -220;
 
 	//Set the movespeed of the plume
-	srand(1);
-	moveSpeed = (float)(rand() % 100 + 100);
+	srand(spawnPosition.Z + spawnPosition.Y);
+	moveSpeed = (float)((rand() % 200) + 10);
 	currentSpeed = moveSpeed;
 }
 
