@@ -178,7 +178,6 @@ void World::loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device)
 				if(nameOfObject == "O_LavaWorldPlume"){
 					//Spawn in the lava plumes to be handled speratley
 					LavaPlume *lavalPlume = new LavaPlume(objectPos, device->getSceneManager());
-					lavalPlume->changeRotation(objectRot);
 					lavalPlume->getSceneNode()->setScale(objectScale);
 				} else{
 					//For StaticObjects
