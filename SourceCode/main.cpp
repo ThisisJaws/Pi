@@ -44,17 +44,16 @@ int main(int argc, char** argv) {
 
 	//Set up the menu music and play it
 	sf::Music menuMusic;
-	if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav")){
-		return -1;
-	}
+	menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav");
 	menuMusic.setVolume(75);
 	menuMusic.setLoop(true);
 	menuMusic.play();
 
-	////Set up the score screen music
-	//sf::Music scoreScreenMusic;
-	//scoreScreenMusic.openFromFile("Assets/Sound/Menus/Score Screen/ScoreScreen.wav");
-	//scoreScreenMusic.setVolume(75);
+	//Set up the score screen music
+	sf::Music scoreScreenMusic;
+	scoreScreenMusic.openFromFile("Assets/Sound/Menus/Score Screen/ScoreScreen.wav");
+	scoreScreenMusic.setVolume(75);
+	scoreScreenMusic.setLoop(true);
 
 	//Button press sound effect
 	sf::SoundBuffer buttonPressBuffer;
@@ -130,6 +129,7 @@ int main(int argc, char** argv) {
 			if(game.play()){ //play() will be true when the game is over
 				//Set and display the scores
 				gameState = scoreScreen;
+				scoreScreenMusic.play();
 				scoreImage->setVisible(true);
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
@@ -147,6 +147,7 @@ int main(int argc, char** argv) {
 					score.displayScore(false);
 					score.reset();
 					scoreImage->setVisible(false);
+					scoreScreenMusic.stop();
 				}
 			}
 		}
