@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
 	//Set up the menu music and play it
 	sf::Music menuMusic;
-	if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly 20Khz.wav")){
+	if(!menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav")){
 		return -1;
 	}
 	menuMusic.setVolume(75);
@@ -56,11 +56,11 @@ int main(int argc, char** argv) {
 	//scoreScreenMusic.openFromFile("Assets/Sound/Menus/Score Screen/ScoreScreen.wav");
 	//scoreScreenMusic.setVolume(75);
 
-	////Button press sound effect
-	//sf::SoundBuffer buttonPressBuffer;
-	//buttonPressBuffer.loadFromFile("Assets/Sound/Button Press/ButtonPress.wav");
-	//sf::Sound buttonPress;
-	//buttonPress.setBuffer(buttonPressBuffer);
+	//Button press sound effect
+	sf::SoundBuffer buttonPressBuffer;
+	buttonPressBuffer.loadFromFile("Assets/Sound/Button Press/ButtonPress.wav");
+	sf::Sound buttonPress;
+	buttonPress.setBuffer(buttonPressBuffer);
 	
 	//Keep track if the player has entered their name
 	bool nameEntered = false;
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
 				menuMusic.stop();
-				//buttonPress.play();
+				buttonPress.play();
 			}
 		}
 		//Update the game if it is playing
