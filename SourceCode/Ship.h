@@ -10,6 +10,7 @@
 
 #include "Object.h"
 #include "Bullet.h"
+#include "SFML\Audio.hpp"
 
 class Ship : public Object{
     //VARIABLES
@@ -36,9 +37,11 @@ protected:
 	//Particle system scene node
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
-	//Audio device and sound effects
-	//audiere::OutputStreamPtr shootSFX;
-	//audiere::OutputStreamPtr damageSFX;
+	//Sound effects
+	sf::SoundBuffer shootBuff;
+	sf::Sound shootSFX;
+	sf::SoundBuffer damageBuff;
+	sf::Sound damageSFX;
 
 private:
     //if the ship is able to fire
