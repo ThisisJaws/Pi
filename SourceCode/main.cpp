@@ -142,6 +142,7 @@ int main(int argc, char** argv) {
 				//When the player is done entering their name, wait to go back to start
 				if(receiver.isKeyPressed(irr::KEY_RETURN)){
 					gameState = startMenu;
+					menuMusic.play();
 					menuImage->setVisible(true);
 					score.displayScore(false);
 					score.reset();
