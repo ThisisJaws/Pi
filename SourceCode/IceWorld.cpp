@@ -20,6 +20,9 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 	//Set the random seed
 	srand(1);
 
+	//Reset the player position
+	player->changePosition(irr::core::vector3df(0, 0, 0));
+
 	//Make an array for the spawn order
 	int spawnOrder[10] = {1, 1, 2, 1, 2, 3, 1, 1, 2, 2};
 
