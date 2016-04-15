@@ -24,7 +24,7 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Make an array for the spawn order
-	int spawnOrder[20] = {1, 1, 2, 1, 2, 3, 1, 1, 2, 2, 3, 1, 3, 1, 1, 1, 3, 3, 3, 3};
+	int spawnOrder[20] = {1, 1, 2, 1, 2, 3, 1, 1, 3, 2, 3, 1, 3, 1, 2, 1, 3, 3, 2, 3};
 
 	//Set up the enemy positions
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
