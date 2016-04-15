@@ -8,10 +8,13 @@
 
 //so we can use the engine
 #include "irrlicht.h"
+#include "SFML/Audio.hpp"
 
 //other includes
 #include <cstdlib>
 #include <list>
+#include <vector>
+#include <memory>
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
@@ -41,9 +44,6 @@ private:
     irr::gui::IGUIEnvironment *guienv;
     //Object to receive keyboard input
     EventReceiver *eReceiver;
-	//Pointer to the audiere device
-	audiere::AudioDevicePtr audiereDevice;
-
 
     //all objects to get drawn/updated will get placed in this list
     static std::list<Object*> objectsToUpdate;
@@ -81,10 +81,13 @@ private:
 	float stageWaitTime;
 	float stageWaitPast;
 
+	//Array of music associated with each world
+	std::vector<std::unique_ptr<sf::Music>> levelMusic; //sf::Music cant be copied so you have to do this weird pointer stuff
+
     //FUNCTIONS
 public:
     //constructor
-    Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice);
+    Game(irr::IrrlichtDevice *device, EventReceiver *receiver);
 	//destructor
 	~Game();
 

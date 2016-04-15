@@ -16,7 +16,7 @@ protected:
     //FUNCTIONS
 public:
     //constructor
-	Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
+	Ammo(irr::core::vector3df spawnPosition, irr::scene::ISceneManager *sceneManagerReference);
     
     virtual void performAction(PlayerShip *player) override;
 };

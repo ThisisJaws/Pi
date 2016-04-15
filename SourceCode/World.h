@@ -51,14 +51,17 @@ private:
 		}
 	};
 
+	//Where the player has to pass for phase 1 to end
+	float phase1EndPointZ;
+
 	//FUNCTIONS
 public:
 	//constructor
 	World(PlayerShip *player, const std::string &levelLocation, const irr::io::path &skyDomeLocation);
 
 	//Functions to load the Stages for each level
-	virtual void loadPhase1(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
-	virtual void loadPhase2(irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice) = 0;
+	virtual void loadPhase1(irr::IrrlichtDevice *device);
+	virtual void loadPhase2(irr::IrrlichtDevice *device) = 0;
 
 	//Check if each phase is loaded
 	bool isPhase1Loaded();
@@ -79,7 +82,7 @@ public:
 
 protected:
 	//Loads in the map file for the level
-	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device, audiere::AudioDevicePtr audDevice);
+	void loadMapFile(const std::string &mapFile, irr::IrrlichtDevice *device);
 };
 
 #endif /* WORLD_H */

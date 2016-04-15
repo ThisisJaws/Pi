@@ -30,7 +30,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    EnemyShip(PlayerShip *player, irr::core::vector3df spawnPos, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const unsigned short &startingLives = 0);
+    EnemyShip(PlayerShip *player, irr::core::vector3df spawnPos, int firingSpeed, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const unsigned short &startingLives = 0);
     //destructor
     virtual ~EnemyShip();
 

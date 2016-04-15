@@ -1,7 +1,7 @@
 #include "Gem.h"
 
-Gem::Gem(irr::core::vector3df spawnPosition, const unsigned int &scoreIncrease, const irr::io::path &textPath, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-        : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", textPath, sceneManagerReference, audiereDevice){
+Gem::Gem(irr::core::vector3df spawnPosition, const unsigned int &scoreIncrease, const irr::io::path &textPath, irr::scene::ISceneManager *sceneManagerReference)
+        : Collectible(spawnPosition, "Assets/Collectables/SpaceGem_a.obj", textPath, sceneManagerReference){
 
     this->scoreIncrease = scoreIncrease;
 }

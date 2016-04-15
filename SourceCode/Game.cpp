@@ -6,7 +6,7 @@
 std::list<Object*> Game::objectsToUpdate;
 
 //init all the global variables
-Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioDevicePtr audiereDevice){
+Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
     //get a pointer to the irrlicht device
     this->device = device;
 
@@ -15,7 +15,6 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioD
     smgr = device->getSceneManager();
     guienv = device->getGUIEnvironment();
     eReceiver = receiver;
-	this->audiereDevice = audiereDevice;
 
 	//Init default variables
 	previousScore = 0;
@@ -23,6 +22,9 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver, audiere::AudioD
 
 	stageWaitTime = 5;
 	stageWaitPast = 0;
+
+	//init the vector to correct length
+	levelMusic = std::vector<std::unique_ptr<sf::Music>>(NUM_WORLDS);
 
 	loaded = false;
 }
@@ -37,7 +39,7 @@ Game::~Game(){
 
 void Game::load(irr::scene::ICameraSceneNode *camera){
     //Create a ship for the player
-    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr, audiereDevice);
+    PlayerShip *player = new PlayerShip(eReceiver, device->getTimer(), smgr);
     //Give the player the camera
     player->addCamera(camera);
     //Add to the global variable
@@ -49,15 +51,36 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	worlds[2] = new JungleWorld(g_player);
 
 	//Load the first world
-	worlds[currentWorld]->loadPhase1(device, audiereDevice);
+	worlds[currentWorld]->loadPhase1(device);
+
+	//Add the audio tracks for each world (messiest code ever)
+	auto ptr1 = std::make_unique<sf::Music>();
+	ptr1->openFromFile("Assets/Sound/Levels/Lava Level/Lava Level.wav");
+	levelMusic[0] = std::move(ptr1);
+	auto ptr2 = std::make_unique<sf::Music>();
+	ptr2->openFromFile("Assets/Sound/Levels/Ice Level/Ice Level.wav");
+	levelMusic[1] = std::move(ptr2);
+	auto ptr3 = std::make_unique<sf::Music>();
+	ptr3->openFromFile("Assets/Sound/Levels/Forest Level/Forest Level.wav");
+	levelMusic[2] = std::move(ptr3);
+	for(int i = 0; i < NUM_WORLDS; i++){
+		levelMusic[i]->setVolume(75);
+		levelMusic[i]->setLoop(true);
+	}
+
+	//Play the current track
+	levelMusic[currentWorld]->play();
 
     //Load in the sky dome's for the worlds
 	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
 	skyDome[1] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[1]->getSkydomeLocation()));
 	skyDome[2] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[2]->getSkydomeLocation()));
-
+	
+	skyDome[0]->setVisible(false);
 	skyDome[1]->setVisible(false);
 	skyDome[2]->setVisible(false);
+
+	skyDome[currentWorld]->setVisible(true);
 
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/TheFont.xml"));
@@ -124,6 +147,7 @@ bool Game::play(){
     //If the player loses, end this current game
 	if(g_player->playerLost()){
 		previousScore = g_player->getScore();
+		levelMusic[currentWorld]->stop();
 		cleanUp();
 		return true;
 	}
@@ -148,7 +172,7 @@ bool Game::play(){
 				//Change mode first because of speed increase
 				g_player->changeMode();
 				//Load in the next phase
-				worlds[currentWorld]->loadPhase2(device, audiereDevice);
+				worlds[currentWorld]->loadPhase2(device);
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate(true);
@@ -156,6 +180,8 @@ bool Game::play(){
 				worlds[currentWorld]->reset();
 				//Turn off the dome
 				skyDome[currentWorld]->setVisible(false);
+				//Stop the current track
+				levelMusic[currentWorld]->stop();
 				//Increment the cuurent world tracker
 				currentWorld++;
 				//Check if there are any more worlds to load
@@ -163,15 +189,17 @@ bool Game::play(){
 					//Change mode
 					g_player->changeMode();
 					//Load the next world
-					worlds[currentWorld]->loadPhase1(device, audiereDevice);
+					worlds[currentWorld]->loadPhase1(device);
 				} else{
 					//Start again but increment speed by double
 					currentWorld = 0;
 					g_player->changeMode(2);
-					worlds[currentWorld]->loadPhase1(device, audiereDevice);
+					worlds[currentWorld]->loadPhase1(device);
 				}
 				//Turn on the next skydome
 				skyDome[currentWorld]->setVisible(true);
+				//Play the correct music
+				levelMusic[currentWorld]->play();
 			}
 		} else{
 			stageWaitPast += frameDeltaTime;

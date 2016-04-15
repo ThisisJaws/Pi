@@ -1,7 +1,7 @@
 #include "StrongEnemy.h"
 
-StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference, audiere::AudioDevicePtr audiereDevice)
-	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/StrongShip.obj", "Assets/Ships/EnemyShips/StrongShipTexture.jpg", sceneManagerReference, audiereDevice, 2){
+StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition, irr::ITimer* timerReference, irr::scene::ISceneManager* sceneManagerReference)
+	: EnemyShip(player, spawnPosition, 500, timerReference, "Assets/Ships/EnemyShips/StrongShip.obj", "Assets/Ships/EnemyShips/StrongShipTexture.jpg", sceneManagerReference, 2){
 
 	//Start the ship at the bottom
 	changePosition(irr::core::vector3df(getPosition().X, -45, getPosition().Z));
@@ -22,6 +22,9 @@ StrongEnemy::StrongEnemy(PlayerShip* player, irr::core::vector3df spawnPosition,
 	cannonPositions.push_back(irr::core::vector3df(-1, -1.5f, -1));
 	cannonPositions.push_back(irr::core::vector3df( 1,  1.5f, -1));
 	cannonPositions.push_back(irr::core::vector3df(-1,  1.5f, -1));
+
+	//Adjust the particle system's position
+	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5f, -4));
 }
 
 void StrongEnemy::combatManouver(irr::f32 deltaTime){

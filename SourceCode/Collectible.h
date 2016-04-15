@@ -10,7 +10,7 @@
 
 #include "Object.h"
 #include "PlayerShip.h"
-#include "audiere.h"
+#include "SFML/Audio.hpp"
 
 class Collectible : public Object{
     //VARIABLES
@@ -21,8 +21,9 @@ class Collectible : public Object{
 	 //Particle system scene node
 	 irr::scene::IParticleSystemSceneNode *ps;
 
-	 //Audoiere device and pick up sfx
-	 audiere::OutputStreamPtr pickupSFX;
+	 //pick up sound effect
+	 sf::SoundBuffer pickupBuff;
+	 sf::Sound pickUp;
 
 	 //So it doesnt activate more than once
 	 bool actionPefromed;
@@ -30,7 +31,7 @@ class Collectible : public Object{
     //FUNCTIONS
 public:
     //constructor
-    Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice);
+    Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference);
 
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;

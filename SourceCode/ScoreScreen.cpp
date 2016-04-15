@@ -72,13 +72,17 @@ bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
 	if(receiver->isKeyPressed(irr::KEY_KEY_W)){
 		//Get the letter in each box, increment, then set
 		irr::core::stringw letter = playerName[currentLetter]->getText();
-		letter[0]++;
-		playerName[currentLetter]->setText(letter.c_str());
+		if(letter[0] < 'Z'){
+			letter[0]++;
+			playerName[currentLetter]->setText(letter.c_str());
+		}
 	} else if(receiver->isKeyPressed(irr::KEY_KEY_S)){
 		//Get the letter in each box, de-increment, then set
 		irr::core::stringw letter = playerName[currentLetter]->getText();
-		letter[0]--;
-		playerName[currentLetter]->setText(letter.c_str());
+		if(letter[0] > 'A'){
+			letter[0]--;
+			playerName[currentLetter]->setText(letter.c_str());
+		}
 	}
 
 	//Move to the next letter when the player presses right

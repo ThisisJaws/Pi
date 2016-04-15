@@ -51,6 +51,10 @@ private:
 	const float ANIMATE_TIME = 0.75f;
 	float animTimePast;
 
+	//If true will move the object away from the player to slow it down
+	bool moveAway;
+	float awaySpeed;
+
     //FUNCTIONS
 public:
     //constructor
@@ -96,6 +100,9 @@ public:
 
 	//call the remove the object's mesh from the scene
 	void removeFromScene();
+
+	//Call to move the object away from the player depending on the player's speed
+	void moveAwayFromPlayer(const bool &move, const float &playerSpeed = 0);
     
 protected:
     //returns the unique ID of the object that collided, direction will be either 1 or -1;

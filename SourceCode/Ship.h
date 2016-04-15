@@ -8,10 +8,9 @@
 
 #include <vector>
 
-#include "audiere.h"
-
 #include "Object.h"
 #include "Bullet.h"
+#include "SFML\Audio.hpp"
 
 class Ship : public Object{
     //VARIABLES
@@ -38,9 +37,11 @@ protected:
 	//Particle system scene node
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
-	//Audio device and sound effects
-	audiere::OutputStreamPtr shootSFX;
-	audiere::OutputStreamPtr damageSFX;
+	//Sound effects
+	sf::SoundBuffer shootBuff;
+	sf::Sound shootSFX;
+	sf::SoundBuffer damageBuff;
+	sf::Sound damageSFX;
 
 private:
     //if the ship is able to fire
@@ -62,7 +63,7 @@ private:
     //FUNCTIONS
 public:
     //constructor
-    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, audiere::AudioDevicePtr audiereDevice, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
+    Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives = 0);
     //destructor
     virtual ~Ship();
 
