@@ -30,6 +30,8 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/Particles/ship flame small red.png"));
 	ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 
+	ps->setParticlesAreGlobal(false);
+
 	//Set the aduio
 	pickupBuff.loadFromFile("Assets/Sound/PickUp/Pickup.wav");
 	pickUp.setBuffer(pickupBuff);
