@@ -45,6 +45,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device){
 	for(int i = 0; i < 3; i++){
 		y = (irr::f32)((rand() % 40 + 1) - 20);
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr);
+		gem->moveAwayFromPlayer(true, Game::getCurrentPlayer()->getMovementSpeed());
 		z += rand() % 3000 + 1000;
 	}
 
