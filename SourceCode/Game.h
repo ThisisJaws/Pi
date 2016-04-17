@@ -8,10 +8,13 @@
 
 //so we can use the engine
 #include "irrlicht.h"
+#include "SFML/Audio.hpp"
 
 //other includes
 #include <cstdlib>
 #include <list>
+#include <vector>
+#include <memory>
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
@@ -77,6 +80,9 @@ private:
 	//Howlong to waitOneTick after the player has finished the stage to start another
 	float stageWaitTime;
 	float stageWaitPast;
+
+	//Array of music associated with each world
+	std::vector<std::unique_ptr<sf::Music>> levelMusic; //sf::Music cant be copied so you have to do this weird pointer stuff
 
     //FUNCTIONS
 public:

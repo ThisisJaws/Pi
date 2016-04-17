@@ -19,8 +19,8 @@
 #endif
 
 //Defines for version number
-#define CURRENT_VERSION_MAJOR	 0
-#define CURRENT_VERSION_MINOR	 10
+#define CURRENT_VERSION_MAJOR	 1
+#define CURRENT_VERSION_MINOR	 0
 #define CURRENT_VERSION_REVISION 0
 
 /*
@@ -40,11 +40,24 @@ int main(int argc, char** argv) {
 	//Create the score class which will handle all of the score
 	ScoreScreen score = ScoreScreen(device->getGUIEnvironment());
 
-	//Variable to stream sounds
+	//Set up the menu music and play it
 	sf::Music menuMusic;
-	menuMusic.openFromFile("Assets/Sound/Old/ingame.wav");
+	menuMusic.openFromFile("Assets/Sound/Menus/DST-XToFly.wav");
 	menuMusic.setVolume(75);
+	menuMusic.setLoop(true);
 	menuMusic.play();
+
+	//Set up the score screen music
+	sf::Music scoreScreenMusic;
+	scoreScreenMusic.openFromFile("Assets/Sound/Menus/Score Screen/ScoreScreen.wav");
+	scoreScreenMusic.setVolume(75);
+	scoreScreenMusic.setLoop(true);
+
+	//Button press sound effect
+	sf::SoundBuffer buttonPressBuffer;
+	buttonPressBuffer.loadFromFile("Assets/Sound/Button Press/ButtonPress.wav");
+	sf::Sound buttonPress;
+	buttonPress.setBuffer(buttonPressBuffer);
 	
 	//Keep track if the player has entered their name
 	bool nameEntered = false;
@@ -102,8 +115,8 @@ int main(int argc, char** argv) {
 			if(receiver.isKeyPressed(irr::KEY_RETURN)){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
-				/*mainMusic->stop();
-				buttonPress->play();*/
+				menuMusic.stop();
+				buttonPress.play();
 			}
 		}
 		//Update the game if it is playing
@@ -114,6 +127,7 @@ int main(int argc, char** argv) {
 			if(game.play()){ //play() will be true when the game is over
 				//Set and display the scores
 				gameState = scoreScreen;
+				scoreScreenMusic.play();
 				scoreImage->setVisible(true);
 				score.displayScore(true);
 				score.addScore(game.getFinalScore());
@@ -126,10 +140,12 @@ int main(int argc, char** argv) {
 				//When the player is done entering their name, wait to go back to start
 				if(receiver.isKeyPressed(irr::KEY_RETURN)){
 					gameState = startMenu;
+					menuMusic.play();
 					menuImage->setVisible(true);
 					score.displayScore(false);
 					score.reset();
 					scoreImage->setVisible(false);
+					scoreScreenMusic.stop();
 				}
 			}
 		}

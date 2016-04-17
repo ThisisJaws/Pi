@@ -1,30 +1,30 @@
 #include "LavaPlume.h"
 
 LavaPlume::LavaPlume(const irr::core::vector3df &spawnPosition, irr::scene::ISceneManager *sceneManagerReference)
-	: StaticObject(spawnPosition, "Assets/LevelAssets/O_LavaWorldPlume_a.obj", "Assets/LevelAssets/O_LavaWorldPlume.jpg", sceneManagerReference, false){
+	: StaticObject(spawnPosition, "Assets/LevelAssets/O_LavaWorldPlume_a.obj", "Assets/LevelAssets/O_LavaWorldPlume.jpg", sceneManagerReference, true){
 
 	//Set the max height to move down from
-	maxHeight = spawnPosition.Y;
+	maxHeight = spawnPosition.Y + 30;
 
 	//Set the minimun position to move up from
 	minHeight = -220;
 
 	//Set the movespeed of the plume
-	srand(1);
-	moveSpeed = (float)(rand() % 100 + 100);
+	srand(spawnPosition.X + spawnPosition.Y + spawnPosition.Z);
+	moveSpeed = ((float)rand() / (RAND_MAX) + 2); // 2 < r < 3
 	currentSpeed = moveSpeed;
 }
 
 void LavaPlume::tick(irr::f32 deltaTime){
 	StaticObject::tick(deltaTime);
 
-	//Move the plumes
-	updatePosition(0, currentSpeed * deltaTime, 0);
+	//Move the plumes 50% of the distance to the target
+	updatePosition(0, ((maxHeight - getPosition().Y)) * currentSpeed * deltaTime, 0);
 
 	//Make sure the plume doesn't go too high or too low
-	if(getPosition().Y >= maxHeight){
-		currentSpeed = -moveSpeed;
-	} else if(getPosition().Y <= minHeight){
-		currentSpeed = moveSpeed;
+	if(getPosition().Y >= maxHeight - 5){
+		currentSpeed = -moveSpeed;	//using negative movespeed so it slowly mvoes away from the target
+	} else if(getPosition().Y <= minHeight + 5){
+		currentSpeed =  moveSpeed;
 	}
 }

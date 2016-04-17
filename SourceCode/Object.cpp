@@ -9,7 +9,7 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	uniqueID = objectCount;
 	//Increment the object count when the ID has been used
 	objectCount++;
-
+	
 	//set the ID of the object
     typeID = objectTypeID;
 
@@ -55,6 +55,9 @@ Object::Object(const irr::io::path &pathOfMesh, const irr::io::path &pathOfTextu
 	textPos = irr::core::vector2di(0);
 	animTimePast = 0;
 
+	moveAway = false;
+	awaySpeed = 0;
+
 	//Add this object onto the update vector
 	Game::addObjectToUpdate(this);
 }
@@ -68,7 +71,7 @@ Object::~Object(){
 void Object::tick(irr::f32 deltaTime){
 	//Move the text upwards
 	if(animateText){
-		textPos.Y -= deltaTime;
+		textPos.Y -= ceil(deltaTime) * 1;
 		animatedText->setRelativePosition(textPos);
 		if(animTimePast > ANIMATE_TIME){
 			animatedText->remove();
@@ -83,6 +86,11 @@ void Object::tick(irr::f32 deltaTime){
 		if(markedForDelete){
 			deleteReady = true;
 		}
+	}
+
+	//Move away from player 
+	if(moveAway){
+		updatePosition(0, 0, awaySpeed * deltaTime);
 	}
 }
 
@@ -120,8 +128,7 @@ irr::s32 Object::checkCollision(int direction){
 	irr::core::line3df ray;
 	ray.start = getPosition();
 	ray.end = ray.start;
-	ray.end.Z += 2 * direction;
-
+	ray.end.Z += direction * 20;
 	//Current interection of a level or a mesh
 	irr::core::vector3df interesection;
 	//The triangle that was hit
@@ -129,7 +136,7 @@ irr::s32 Object::checkCollision(int direction){
 
 	//Perform the ray cast and return the scene node
 	irr::scene::ISceneNode *objectTest = collMan->getSceneNodeAndCollisionPointFromRay(ray, interesection, hitTriangle);
-
+	
 	if(objectTest != NULL && objectTest != objectNode){
 		return objectTest->getID();
 	} else{
@@ -168,6 +175,14 @@ void Object::changeRotation(const irr::core::vector3df &angle){
 void Object::removeFromScene(){
     objectNode->remove();
 }
+
+void Object::moveAwayFromPlayer(const bool &move, const float &playerSpeed){
+	moveAway = move;
+	if(playerSpeed > 0){
+		awaySpeed = playerSpeed * 0.3f; //Make the away speed 30% of the players
+	}
+}
+
 
 void Object::displayText(const irr::core::stringw &text, const irr::core::vector3df &worldPos, const int &amount){
 	//Set the value of the text

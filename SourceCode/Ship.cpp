@@ -31,12 +31,12 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = engineParticleSystem->createPointEmitter(
 		irr::core::vector3df(0.0f, 0.0f, -0.03f * moveDir),		// direction, also acts as speed
-		70U, 100U,										// emit rate
-		irr::video::SColor(0, 255, 255, 255),			// darkest color
-		irr::video::SColor(0, 255, 255, 255),			// brightest color
-		50, 100, 0,										// min and max age, angle
-		irr::core::dimension2df(1.5f, 1.5f),			// min size
-		irr::core::dimension2df(2.0f, 2.0f));			// max size
+		50U, 100U,												// emit rate min/max
+		irr::video::SColor(0, 255, 255, 255),					// darkest color
+		irr::video::SColor(0, 255, 255, 255),					// brightest color
+		50, 100, 0,												// min and max age, angle
+		irr::core::dimension2df(0.5f, 0.5f),					// min size
+		irr::core::dimension2df(2.0f, 2.0f));					// max size
 
 	engineParticleSystem->setEmitter(em);	//Give the emitter to the system
 	em->drop();								//Safe to drop now we don't need it
@@ -44,17 +44,19 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Change the materials of the particle system
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	engineParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	//using this texture doesn't work? engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/FireParticle_b.png"));
-	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/PlaceHolders/particlegreen.jpg"));
+	engineParticleSystem->setMaterialTexture(0, sceneManagerReference->getVideoDriver()->getTexture("Assets/Particles/rsz_ship_flame_3.png"));
 	engineParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	engineParticleSystem->setParticlesAreGlobal(false);	//Stop the particles moving in world space
 
 	//Move the system back slighty to line up with the engine
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5, -7));
 
-	//Init the audio
-	//shootSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Old/Shoot.mp3");
-	//damageSFX = audiere::OpenSound(audiereDevice, "Assets/Sound/Taking Damage/Damage.mp3");
+	//Set the audio
+	shootBuff.loadFromFile("Assets/Sound/Shooting/Shooting.wav");
+	shootSFX.setBuffer(shootBuff);
+
+	damageBuff.loadFromFile("Assets/Sound/Taking Damage/Damage.wav");
+	damageSFX.setBuffer(damageBuff);
 }
 
 Ship::~Ship(){
@@ -113,7 +115,7 @@ void Ship::increaseLives(const unsigned short &amount){
 
 void Ship::dealDamage(const unsigned short &amount){
 	//Play the damange sound effect
-	//damageSFX->play();
+	damageSFX.play();
 
 	//If there are no lives left, mark the ship for delete
 	if(lives == 0){
@@ -135,8 +137,7 @@ bool Ship::shoot(const irr::core::vector3df &direction, const int &targetTypeID,
 			bullet->fire(firingPositions.at(i) + getPosition(), direction, moveSpeed, targetTypeID);
 
 			//Play the sound
-			//shootSFX->reset();
-			//shootSFX->play();
+			shootSFX.play();
 
 			//clear the pointer to prevent memory leaks
 			bullet = 0;

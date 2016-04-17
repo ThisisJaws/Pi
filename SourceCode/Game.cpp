@@ -23,6 +23,9 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	stageWaitTime = 5;
 	stageWaitPast = 0;
 
+	//init the vector to correct length
+	levelMusic = std::vector<std::unique_ptr<sf::Music>>(NUM_WORLDS);
+
 	loaded = false;
 }
 
@@ -50,13 +53,34 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	//Load the first world
 	worlds[currentWorld]->loadPhase1(device);
 
+	//Add the audio tracks for each world (messiest code ever)
+	auto ptr1 = std::make_unique<sf::Music>();
+	ptr1->openFromFile("Assets/Sound/Levels/Lava Level/Lava Level.wav");
+	levelMusic[0] = std::move(ptr1);
+	auto ptr2 = std::make_unique<sf::Music>();
+	ptr2->openFromFile("Assets/Sound/Levels/Ice Level/Ice Level.wav");
+	levelMusic[1] = std::move(ptr2);
+	auto ptr3 = std::make_unique<sf::Music>();
+	ptr3->openFromFile("Assets/Sound/Levels/Forest Level/Forest Level.wav");
+	levelMusic[2] = std::move(ptr3);
+	for(int i = 0; i < NUM_WORLDS; i++){
+		levelMusic[i]->setVolume(75);
+		levelMusic[i]->setLoop(true);
+	}
+
+	//Play the current track
+	levelMusic[currentWorld]->play();
+
     //Load in the sky dome's for the worlds
 	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
 	skyDome[1] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[1]->getSkydomeLocation()));
 	skyDome[2] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[2]->getSkydomeLocation()));
-
+	
+	skyDome[0]->setVisible(false);
 	skyDome[1]->setVisible(false);
 	skyDome[2]->setVisible(false);
+
+	skyDome[currentWorld]->setVisible(true);
 
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/TheFont.xml"));
@@ -123,6 +147,7 @@ bool Game::play(){
     //If the player loses, end this current game
 	if(g_player->playerLost()){
 		previousScore = g_player->getScore();
+		levelMusic[currentWorld]->stop();
 		cleanUp();
 		return true;
 	}
@@ -155,6 +180,8 @@ bool Game::play(){
 				worlds[currentWorld]->reset();
 				//Turn off the dome
 				skyDome[currentWorld]->setVisible(false);
+				//Stop the current track
+				levelMusic[currentWorld]->stop();
 				//Increment the cuurent world tracker
 				currentWorld++;
 				//Check if there are any more worlds to load
@@ -171,6 +198,8 @@ bool Game::play(){
 				}
 				//Turn on the next skydome
 				skyDome[currentWorld]->setVisible(true);
+				//Play the correct music
+				levelMusic[currentWorld]->play();
 			}
 		} else{
 			stageWaitPast += frameDeltaTime;

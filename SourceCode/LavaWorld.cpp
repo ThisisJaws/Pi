@@ -24,7 +24,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device){
 	player->changePosition(irr::core::vector3df(0, 0, 0));
 
 	//Make an array for the spawn order
-	int spawnOrder[10] = {1, 1, 2, 1, 2, 3, 1, 1, 2, 2};
+	int spawnOrder[10] = {1, 1, 2, 1, 2, 3, 1, 1, 3, 2};
 
 	//Set up the enemy positions
 	irr::f32 x = 0; irr::f32 y = 0; irr::f32 z = 500;
@@ -45,6 +45,7 @@ void LavaWorld::loadPhase2(irr::IrrlichtDevice * device){
 	for(int i = 0; i < 3; i++){
 		y = (irr::f32)((rand() % 40 + 1) - 20);
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr);
+		gem->moveAwayFromPlayer(true, Game::getCurrentPlayer()->getMovementSpeed());
 		z += rand() % 3000 + 1000;
 	}
 

@@ -10,6 +10,7 @@
 
 #include "Object.h"
 #include "PlayerShip.h"
+#include "SFML/Audio.hpp"
 
 class Collectible : public Object{
     //VARIABLES
@@ -20,8 +21,9 @@ class Collectible : public Object{
 	 //Particle system scene node
 	 irr::scene::IParticleSystemSceneNode *ps;
 
-	 //Audoiere device and pick up sfx
-	 //audiere::OutputStreamPtr pickupSFX;
+	 //pick up sound effect
+	 sf::SoundBuffer pickupBuff;
+	 sf::Sound pickUp;
 
 	 //So it doesnt activate more than once
 	 bool actionPefromed;
