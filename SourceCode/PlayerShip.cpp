@@ -151,23 +151,10 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		//increase score by the difference above
 		increaseScore(difference);
 
-		//check for and apply all position changes
-		//Left
-		if(eReceiver->isKeyDown(irr::KEY_KEY_A)){
-			turnLeft(turnSpeed, deltaTime);
-		}
-		//Right
-		if(eReceiver->isKeyDown(irr::KEY_KEY_D)){
-			turnRight(turnSpeed, deltaTime);
-		}
-		//Up
-		if(eReceiver->isKeyDown(irr::KEY_KEY_W)){
-			moveUp(turnSpeed, deltaTime);
-		}
-		//Down
-		if(eReceiver->isKeyDown(irr::KEY_KEY_S)){
-			moveDown(turnSpeed, deltaTime);
-		}
+		//Move horizontally or vertically depending on input
+		moveVertical(turnSpeed * eReceiver->getVerticalValue(), deltaTime);
+		moveHorizontal(turnSpeed * eReceiver->getHorizontalValue(), deltaTime);
+
 
 		//Perform camera updates after movement
 		updateCamera(camera);
@@ -244,70 +231,70 @@ bool PlayerShip::areControlsLocked(){
 	return controlsLocked;
 }
 
-void PlayerShip::moveUp(const float &speed, const irr::f32 &deltaTime){
+void PlayerShip::moveVertical(const float &speed, const irr::f32 &deltaTime){
 	//Get the doistance to move by
 	float moveBy = speed * deltaTime;
 
-	//If player is still inside the screen
-	if(getPosition().Y + moveBy < constrainTop){
-		//Move the ship up
-		updatePosition(0.0f, moveBy, 0.0f);
-
-		//Rotate the ship up
-		if(getRotation().X > -maxXRotate){
-			updateRotation(-rotSpeed * deltaTime, 0, 0);
-			rotateBackX = false;
-		}
-	}
-}
-void PlayerShip::moveDown(const float &speed, const irr::f32 &deltaTime){
-	//Get the doistance to move by
-	float moveBy = speed * deltaTime;
-
-	//If player is still inside the screen
-	if(getPosition().Y - moveBy > constrainBottom){
-		//Move the ship down
-		updatePosition(0.0f, -moveBy, 0.0f);
-
-		//Rotate the ship down
-		if(getRotation().X < maxXRotate){
-			updateRotation(rotSpeed * deltaTime, 0, 0);
-			rotateBackX = false;
-		}
-	}
-}
-void PlayerShip::turnLeft(const float &speed, const irr::f32 &deltaTime){
-	if(currentMode == flying){
-		//Get the doistance to move by
-		float moveBy = speed * deltaTime;
-
+	if(moveBy > 0){
 		//If player is still inside the screen
-		if(getPosition().X - moveBy > -constrainX){
-			//Move the ship to the left
-			updatePosition(-moveBy, 0.0f, 0.0f);
+		if(getPosition().Y + moveBy < constrainTop){
+			//Move the ship up
+			updatePosition(0.0f, moveBy, 0.0f);
 
-			//Rotate the ship to the left
-			if(getRotation().Z < maxZRotate){
-				updateRotation(0, 0, rotSpeed * deltaTime);
-				rotateBackY = false;
+			//Rotate the ship up
+			if(getRotation().X > -maxXRotate){
+				updateRotation(-rotSpeed * deltaTime, 0, 0);
+				rotateBackX = false;
+			}
+		}
+	} else if(moveBy < 0){
+		//If player is still inside the screen
+		if(getPosition().Y - moveBy > constrainBottom){
+			//Move the ship down
+			updatePosition(0.0f, -moveBy, 0.0f);
+
+			//Rotate the ship down
+			if(getRotation().X < maxXRotate){
+				updateRotation(rotSpeed * deltaTime, 0, 0);
+				rotateBackX = false;
 			}
 		}
 	}
 }
-void PlayerShip::turnRight(const float &speed, const irr::f32 &deltaTime){
+
+void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
 	if(currentMode == flying){
 		//Get the doistance to move by
 		float moveBy = speed * deltaTime;
 
-		//If player is still inside the screen
-		if(getPosition().X + moveBy < constrainX){
-			//Move the ship to the right
-			updatePosition(moveBy, 0.0f, 0.0f);
+		if(moveBy > 0){
+			if(currentMode == flying){
+				//Get the doistance to move by
+				float moveBy = speed * deltaTime;
 
-			//Rotate the ship to the right
-			if(getRotation().Z > -maxZRotate){
-				updateRotation(0, 0, -rotSpeed * deltaTime);
-				rotateBackY = false;
+				//If player is still inside the screen
+				if(getPosition().X + moveBy < constrainX){
+					//Move the ship to the right
+					updatePosition(moveBy, 0.0f, 0.0f);
+
+					//Rotate the ship to the right
+					if(getRotation().Z > -maxZRotate){
+						updateRotation(0, 0, -rotSpeed * deltaTime);
+						rotateBackY = false;
+					}
+				}
+			}
+		} else if(moveBy < 0){
+			//If player is still inside the screen
+			if(getPosition().X - moveBy > -constrainX){
+				//Move the ship to the left
+				updatePosition(-moveBy, 0.0f, 0.0f);
+
+				//Rotate the ship to the left
+				if(getRotation().Z < maxZRotate){
+					updateRotation(0, 0, rotSpeed * deltaTime);
+					rotateBackY = false;
+				}
 			}
 		}
 	}
