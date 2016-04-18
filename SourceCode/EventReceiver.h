@@ -33,6 +33,13 @@ private:
 		BUTTON_B,
 		BUTTON_X
 	};
+
+	//The deadzone for the joystick
+	const float DEAD_ZONE = 0.05f;
+
+	//Movement axis for the joystick from -1 - 1
+	float xValue;
+	float yValue;
     
     //FUNCTIONS
 public:
@@ -65,6 +72,12 @@ public:
 
 	//Returns true on the frame the fire button is pressed
 	bool isFirePressed();
+
+	//Returns the amount for horizontal movement (1 if D -1 if A)
+	float getHorizontalValue();
+
+	//Returns the amount for vertical movement (1 if W -1 if S)
+	float getVerticalValue();
 };
 
 #endif	/* EVENTRECEIVER_H */

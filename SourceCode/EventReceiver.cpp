@@ -35,6 +35,10 @@ bool EventReceiver::OnEvent(const irr::SEvent &event) {
 		//Save the state for axis input
 		joystickState = event.JoystickEvent;
 
+		//Set the axis value
+		xValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+		yValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
+
 		//Check the state of each button
 		for(int i = 0; i < 3; i++){
 			if(joystickState.IsButtonPressed(i)){
@@ -106,4 +110,24 @@ bool EventReceiver::isExitPressed(){
 
 bool EventReceiver::isFirePressed(){
 	return isKeyPressed(irr::KEY_KEY_J) || buttonKey[BUTTON_X] == Pressed;
+}
+
+float EventReceiver::getHorizontalValue(){
+	if(isKeyDown(irr::KEY_KEY_A)){
+		return -1;
+	} else if(isKeyDown(irr::KEY_KEY_D)){
+		return 1;
+	} else{
+		return xValue;
+	}
+}
+
+float EventReceiver::getVerticalValue(){
+	if(isKeyDown(irr::KEY_KEY_W)){
+		return -1;
+	} else if(isKeyDown(irr::KEY_KEY_S)){
+		return 1;
+	} else{
+		return yValue;
+	}
 }
