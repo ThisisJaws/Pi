@@ -29,6 +29,10 @@ bool EventReceiver::OnEvent(const irr::SEvent &event) {
 			}
 		}
 	}
+	//If the event is a joystick event
+	if(event.EventType == irr::EET_JOYSTICK_INPUT_EVENT && event.JoystickEvent.Joystick == 0){
+		JoystickState = event.JoystickEvent;
+	}
     
     return false;
 }
@@ -61,8 +65,16 @@ bool EventReceiver::isKeyReleased(irr::EKEY_CODE keyCode){
 	return keyState[keyCode] == Released;
 }
 
-irr::SEvent::SJoystickEvent& EventReceiver::getJoyStickState(){
+irr::SEvent::SJoystickEvent EventReceiver::getJoyStickState(){
 	return JoystickState;
+}
+
+bool EventReceiver::isStartPressed(){
+	return isKeyPressed(irr::KEY_RETURN) || JoystickState.IsButtonPressed(0);
+}
+
+bool EventReceiver::isExitPressed(){
+	return isKeyPressed(irr::KEY_ESCAPE) || JoystickState.IsButtonPressed(1);
 }
 
 

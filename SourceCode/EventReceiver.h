@@ -45,8 +45,14 @@ public:
 	//Returns true on the frame the key is released
 	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
 
-	//Returns by reference they joystick state
-	irr::SEvent::SJoystickEvent& getJoyStickState();
+	//Returns the joystick state
+	irr::SEvent::SJoystickEvent getJoyStickState();
+
+	//Returns true on the frame the start button is pressed
+	bool isStartPressed();
+
+	//Returns true on the frame the exit button is pressed
+	bool isExitPressed();
 };
 
 #endif	/* EVENTRECEIVER_H */
