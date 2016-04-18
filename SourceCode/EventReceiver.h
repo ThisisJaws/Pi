@@ -35,7 +35,7 @@ private:
 	};
 
 	//The deadzone for the joystick
-	const float DEAD_ZONE = 0.05f;
+	const float DEAD_ZONE = 0.15f;
 
 	//Movement axis for the joystick from -1 - 1
 	float xValue;
