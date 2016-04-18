@@ -162,42 +162,38 @@ void Ship::move(const float &speed, const irr::f32 &deltaTime){
     updatePosition(0.0f, 0.0f, speed * deltaTime);
 }
 
-void Ship::moveUp(const float &speed, const irr::f32 &deltaTime){
+void Ship::moveVertical(const float &speed, const irr::f32 &deltaTime){
+	//Move the ship
 	float moveBy = speed * deltaTime;
 	updatePosition(0.0f, moveBy, 0.0f);
-	//Rotate the ship up
-	if(getRotation().X > -maxXRotate){
-		updateRotation(-rotSpeed * deltaTime, 0, 0);
-		rotateBackX = false;
+	//Rotate the ship
+	if(moveBy > 0){
+		if(getRotation().X > -maxXRotate){
+			updateRotation(-rotSpeed * deltaTime, 0, 0);
+			rotateBackX = false;
+		}
+	} else if(moveBy < 0){
+		if(getRotation().X < maxXRotate){
+			updateRotation(rotSpeed * deltaTime, 0, 0);
+			rotateBackX = false;
+		}
 	}
 }
 
-void Ship::moveDown(const float &speed, const irr::f32 &deltaTime){
-	float moveBy = speed * deltaTime;
-	updatePosition(0.0f, -moveBy, 0.0f);
-	//Rotate the ship down
-	if(getRotation().X < maxXRotate){
-		updateRotation(rotSpeed * deltaTime, 0, 0);
-		rotateBackX = false;
-	}
-}
-
-void Ship::turnLeft(const float & speed, const irr::f32 &deltaTime){
-	float moveBy = speed * deltaTime;
-	updatePosition(-moveBy, 0.0f, 0.0f);
-	//Rotate the ship to the left
-	if(getRotation().Z < maxZRotate){
-		updateRotation(0, 0, rotSpeed * deltaTime);
-		rotateBackY = false;
-	}
-}
-
-void Ship::turnRight(const float & speed, const irr::f32 &deltaTime){
+void Ship::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
+	//Moce the ship
 	float moveBy = speed * deltaTime;
 	updatePosition(moveBy, 0.0f, 0.0f);
-	//Rotate the ship to the right
-	if(getRotation().Z > -maxZRotate){
-		updateRotation(0, 0, -rotSpeed * deltaTime);
-		rotateBackY = false;
+	//Rotate the ship
+	if(moveBy > 0){
+		if(getRotation().Z > -maxZRotate){
+			updateRotation(0, 0, -rotSpeed * deltaTime);
+			rotateBackY = false;
+		}
+	} else if(moveBy < 0){
+		if(getRotation().Z > -maxZRotate){
+			updateRotation(0, 0, -rotSpeed * deltaTime);
+			rotateBackY = false;
+		}
 	}
 }
