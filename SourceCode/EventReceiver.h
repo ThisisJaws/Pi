@@ -21,6 +21,9 @@ private:
 
     //use this array to store the state of each key
 	keyStates keyState[irr::KEY_KEY_CODES_COUNT];
+
+	//Variable to hold the joystick state
+	irr::SEvent::SJoystickEvent JoystickState;
     
     //FUNCTIONS
 public:
@@ -42,6 +45,8 @@ public:
 	//Returns true on the frame the key is released
 	virtual bool isKeyReleased(irr::EKEY_CODE keyCode);
 
+	//Returns by reference they joystick state
+	irr::SEvent::SJoystickEvent& getJoyStickState();
 };
 
 #endif	/* EVENTRECEIVER_H */

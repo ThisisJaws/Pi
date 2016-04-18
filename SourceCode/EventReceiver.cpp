@@ -53,7 +53,6 @@ bool EventReceiver::isKeyPressed(irr::EKEY_CODE keyCode){
 	return keyState[keyCode] == Pressed;
 }
 
-//return if that key is pressed or not
 bool EventReceiver::isKeyDown(irr::EKEY_CODE keyCode){
 	return keyState[keyCode] == Down || keyState[keyCode] == Pressed;
 }
@@ -61,3 +60,9 @@ bool EventReceiver::isKeyDown(irr::EKEY_CODE keyCode){
 bool EventReceiver::isKeyReleased(irr::EKEY_CODE keyCode){
 	return keyState[keyCode] == Released;
 }
+
+irr::SEvent::SJoystickEvent& EventReceiver::getJoyStickState(){
+	return JoystickState;
+}
+
+
