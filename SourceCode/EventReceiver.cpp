@@ -131,10 +131,10 @@ float EventReceiver::getHorizontalValue(){
 
 float EventReceiver::getVerticalValue(){
 	if(isKeyDown(irr::KEY_KEY_W)){
-		return -1;
-	} else if(isKeyDown(irr::KEY_KEY_S)){
 		return 1;
+	} else if(isKeyDown(irr::KEY_KEY_S)){
+		return -1;
 	} else{
-		return yValue;
+		return yValue * -1;
 	}
 }
