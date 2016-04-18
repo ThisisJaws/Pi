@@ -173,7 +173,7 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		updateCamera(camera);
 
 		//check if fire key was pressed
-		if(eReceiver->isKeyDown(irr::KEY_KEY_J) && currentMode == shooting){
+		if(eReceiver->isFirePressed() && currentMode == shooting){
 			//check the ammo count
 			if(ammo > 0){
 				if(shoot(irr::core::vector3df(0, 0, moveDir), TYPE_SHIP_ENEMY, cannonPositions)){
