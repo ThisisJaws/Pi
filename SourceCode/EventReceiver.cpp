@@ -37,7 +37,14 @@ bool EventReceiver::OnEvent(const irr::SEvent &event) {
 
 		//Set the axis value
 		xValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+		if(fabs(xValue) < DEAD_ZONE){
+			xValue = 0;
+		}
+		
 		yValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
+		if(fabs(yValue) < DEAD_ZONE){
+			yValue = 0;
+		}
 
 		//Check the state of each button
 		for(int i = 0; i < 3; i++){
