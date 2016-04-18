@@ -266,36 +266,31 @@ void PlayerShip::moveHorizontal(const float &speed, const float &force, const ir
 		//Get the doistance to move by
 		float moveBy = speed * force * deltaTime;
 
-		if(currentMode == flying){
-			if(moveBy > 0){
-				//Get the doistance to move by
-				float moveBy = speed * deltaTime;
+		if(moveBy > 0){
+			//If player is still inside the screen
+			if(getPosition().X + moveBy < constrainX){
+				//Move the ship to the right
+				updatePosition(moveBy, 0.0f, 0.0f);
 
-				//If player is still inside the screen
-				if(getPosition().X + moveBy < constrainX){
-					//Move the ship to the right
-					updatePosition(moveBy, 0.0f, 0.0f);
-
-					//Rotate the ship to the right
-					if(getRotation().Z > -maxZRotate * fabs(force)){
-						updateRotation(0, 0, rotSpeed * -force * deltaTime);
-						rotateBackY = false;
-					}
-				}
-			} else if(moveBy < 0){
-				//If player is still inside the screen
-				if(getPosition().X + moveBy > -constrainX){
-					//Move the ship to the left
-					updatePosition(moveBy, 0.0f, 0.0f);
-
-					//Rotate the ship to the left
-					if(getRotation().Z < maxZRotate * fabs(force)){
-						updateRotation(0, 0, rotSpeed * -force * deltaTime);
-						rotateBackY = false;
-					}
+				//Rotate the ship to the right
+				if(getRotation().Z > -maxZRotate * fabs(force)){
+					updateRotation(0, 0, rotSpeed * -force * deltaTime);
+					rotateBackY = false;
 				}
 			}
-		} 
+		} else if(moveBy < 0){
+			//If player is still inside the screen
+			if(getPosition().X + moveBy > -constrainX){
+				//Move the ship to the left
+				updatePosition(moveBy, 0.0f, 0.0f);
+
+				//Rotate the ship to the left
+				if(getRotation().Z < maxZRotate * fabs(force)){
+					updateRotation(0, 0, rotSpeed * -force * deltaTime);
+					rotateBackY = false;
+				}
+			}
+		}
 	}
 }
 
