@@ -23,7 +23,16 @@ private:
 	keyStates keyState[irr::KEY_KEY_CODES_COUNT];
 
 	//Variable to hold the joystick state
-	irr::SEvent::SJoystickEvent JoystickState;
+	irr::SEvent::SJoystickEvent joystickState;
+
+	//The three buttons we listen for on the joystick
+	keyStates buttonKey[3]; //only check for 3 buttons 0: A 1: B 2: X
+
+	enum buttons{
+		BUTTON_A,
+		BUTTON_B,
+		BUTTON_X
+	};
     
     //FUNCTIONS
 public:
@@ -53,6 +62,9 @@ public:
 
 	//Returns true on the frame the exit button is pressed
 	bool isExitPressed();
+
+	//Returns true on the frame the fire button is pressed
+	bool isFirePressed();
 };
 
 #endif	/* EVENTRECEIVER_H */

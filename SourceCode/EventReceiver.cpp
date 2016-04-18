@@ -29,9 +29,26 @@ bool EventReceiver::OnEvent(const irr::SEvent &event) {
 			}
 		}
 	}
+	
 	//If the event is a joystick event
 	if(event.EventType == irr::EET_JOYSTICK_INPUT_EVENT && event.JoystickEvent.Joystick == 0){
-		JoystickState = event.JoystickEvent;
+		//Save the state for axis input
+		joystickState = event.JoystickEvent;
+
+		//Check the state of each button
+		for(int i = 0; i < 3; i++){
+			if(joystickState.IsButtonPressed(i)){
+				if(buttonKey[i] != Down){
+					buttonKey[i] = Pressed;
+				} else{
+					buttonKey[i] = Down;
+				}
+			} else{
+				if(buttonKey[i] != Up){
+					buttonKey[i] = Released;
+				}
+			}
+		}
 	}
     
     return false;
@@ -51,6 +68,16 @@ void EventReceiver::endOfLoop(){
 			keyState[i] = Down;
 		}
 	}
+
+	//Do the same for the joy buttons
+	for(int i = 0; i < 3; i++){
+		if(buttonKey[i] == Released){
+			buttonKey[i] = Up;
+		}
+		if(buttonKey[i] == Pressed){
+			buttonKey[i] = Down;
+		}
+	}
 }
 
 bool EventReceiver::isKeyPressed(irr::EKEY_CODE keyCode){
@@ -66,15 +93,17 @@ bool EventReceiver::isKeyReleased(irr::EKEY_CODE keyCode){
 }
 
 irr::SEvent::SJoystickEvent EventReceiver::getJoyStickState(){
-	return JoystickState;
+	return joystickState;
 }
 
 bool EventReceiver::isStartPressed(){
-	return isKeyPressed(irr::KEY_RETURN) || JoystickState.IsButtonPressed(0);
+	return isKeyPressed(irr::KEY_RETURN) || buttonKey[BUTTON_A] == Pressed;
 }
 
 bool EventReceiver::isExitPressed(){
-	return isKeyPressed(irr::KEY_ESCAPE) || JoystickState.IsButtonPressed(1);
+	return isKeyPressed(irr::KEY_ESCAPE) || buttonKey[BUTTON_B] == Pressed;
 }
 
-
+bool EventReceiver::isFirePressed(){
+	return isKeyPressed(irr::KEY_KEY_J) || buttonKey[BUTTON_X] == Pressed;
+}
