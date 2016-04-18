@@ -162,37 +162,37 @@ void Ship::move(const float &speed, const irr::f32 &deltaTime){
     updatePosition(0.0f, 0.0f, speed * deltaTime);
 }
 
-void Ship::moveVertical(const float &speed, const irr::f32 &deltaTime){
+void Ship::moveVertical(const float &speed, const float &force, const irr::f32 &deltaTime){
 	//Move the ship
-	float moveBy = speed * deltaTime;
+	float moveBy = speed * force * deltaTime;
 	updatePosition(0.0f, moveBy, 0.0f);
 	//Rotate the ship
 	if(moveBy > 0){
-		if(getRotation().X > -maxXRotate){
-			updateRotation(-rotSpeed * deltaTime, 0, 0);
+		if(getRotation().X > -maxXRotate * fabs(force)){
+			updateRotation(rotSpeed * -force * deltaTime, 0, 0);
 			rotateBackX = false;
 		}
 	} else if(moveBy < 0){
-		if(getRotation().X < maxXRotate){
-			updateRotation(rotSpeed * deltaTime, 0, 0);
+		if(getRotation().X < maxXRotate * fabs(force)){
+			updateRotation(rotSpeed * -force * deltaTime, 0, 0);
 			rotateBackX = false;
 		}
 	}
 }
 
-void Ship::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
+void Ship::moveHorizontal(const float &speed, const float &force, const irr::f32 &deltaTime){
 	//Moce the ship
-	float moveBy = speed * deltaTime;
+	float moveBy = speed * force * deltaTime;
 	updatePosition(moveBy, 0.0f, 0.0f);
 	//Rotate the ship
 	if(moveBy > 0){
-		if(getRotation().Z > -maxZRotate){
-			updateRotation(0, 0, -rotSpeed * deltaTime);
+		if(getRotation().Z > -maxZRotate * fabs(force)){
+			updateRotation(0, 0, rotSpeed * -force * deltaTime);
 			rotateBackY = false;
 		}
 	} else if(moveBy < 0){
-		if(getRotation().Z > -maxZRotate){
-			updateRotation(0, 0, -rotSpeed * deltaTime);
+		if(getRotation().Z > -maxZRotate * fabs(force)){
+			updateRotation(0, 0, rotSpeed * -force * deltaTime);
 			rotateBackY = false;
 		}
 	}

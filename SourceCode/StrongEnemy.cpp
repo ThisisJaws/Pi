@@ -53,7 +53,7 @@ void StrongEnemy::combatStageA(irr::f32 deltaTime){
 	} else{
 		//Moves to the middle of the screen
 		if(getPosition().Y < 0){
-			moveVertical(turnSpeed, deltaTime);
+			moveVertical(turnSpeed, 1, deltaTime);
 		} else{
 			//Reset shot count and advance stage
 			shotsFired = 0;
@@ -71,7 +71,7 @@ void StrongEnemy::combatStageB(irr::f32 deltaTime){
 	} else{
 		//Moves to the top of the screen
 		if(getPosition().Y < 45){
-			moveVertical(turnSpeed, deltaTime);
+			moveVertical(turnSpeed, 1, deltaTime);
 		} else{
 			//Reset shot count and advance stage
 			shotsFired = 0;
@@ -89,7 +89,7 @@ void StrongEnemy::combatStageC(irr::f32 deltaTime){
 		if(currentLoop < COMBAT_LOOP_COUNT){
 			//Moves to the bottom of the screen
 			if(getPosition().Y > -45){
-				moveVertical(-turnSpeed, deltaTime);
+				moveVertical(turnSpeed, -1, deltaTime);
 			}else{
 				if(currentLoop != COMBAT_LOOP_COUNT){
 					//Reset shout count, increment loop count and reset stage

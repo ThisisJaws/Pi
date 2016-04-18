@@ -111,8 +111,8 @@ public:
 
 protected:
 	//Overriden for camera controls
-	virtual void moveVertical(const float &speed, const irr::f32 &deltaTime) override;
-	virtual void moveHorizontal(const float &speed, const irr::f32 &deltaTime) override;
+	virtual void moveVertical(const float &speed, const float &force, const irr::f32 &deltaTime) override;
+	virtual void moveHorizontal(const float &speed, const float &force, const irr::f32 &deltaTime) override;
 
 private:
 

@@ -152,8 +152,8 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		increaseScore(difference);
 
 		//Move horizontally or vertically depending on input
-		moveVertical(turnSpeed * eReceiver->getVerticalValue(), deltaTime);
-		moveHorizontal(turnSpeed * eReceiver->getHorizontalValue(), deltaTime);
+		moveVertical(turnSpeed, eReceiver->getVerticalValue(), deltaTime);
+		moveHorizontal(turnSpeed, eReceiver->getHorizontalValue(), deltaTime);
 
 		//Perform camera updates after movement
 		updateCamera(camera);
@@ -230,9 +230,9 @@ bool PlayerShip::areControlsLocked(){
 	return controlsLocked;
 }
 
-void PlayerShip::moveVertical(const float &speed, const irr::f32 &deltaTime){
+void PlayerShip::moveVertical(const float &speed, const float &force, const irr::f32 &deltaTime){
 	//Get the doistance to move by
-	float moveBy = speed * deltaTime;
+	float moveBy = speed * force * deltaTime;
 
 	if(moveBy > 0){
 		//If player is still inside the screen
@@ -241,8 +241,8 @@ void PlayerShip::moveVertical(const float &speed, const irr::f32 &deltaTime){
 			updatePosition(0.0f, moveBy, 0.0f);
 
 			//Rotate the ship up
-			if(getRotation().X > -maxXRotate){
-				updateRotation(-rotSpeed * deltaTime, 0, 0);
+			if(getRotation().X > -maxXRotate * fabs(force)){
+				updateRotation(rotSpeed * -force * deltaTime, 0, 0);
 				rotateBackX = false;
 			}
 		}
@@ -253,18 +253,18 @@ void PlayerShip::moveVertical(const float &speed, const irr::f32 &deltaTime){
 			updatePosition(0.0f, moveBy, 0.0f);
 
 			//Rotate the ship down
-			if(getRotation().X < maxXRotate){
-				updateRotation(rotSpeed * deltaTime, 0, 0);
+			if(getRotation().X < maxXRotate * fabs(force)){
+				updateRotation(rotSpeed * -force * deltaTime, 0, 0);
 				rotateBackX = false;
 			}
 		}
 	}
 }
 
-void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
+void PlayerShip::moveHorizontal(const float &speed, const float &force, const irr::f32 &deltaTime){
 	if(currentMode == flying){
 		//Get the doistance to move by
-		float moveBy = speed * deltaTime;
+		float moveBy = speed * force * deltaTime;
 
 		if(currentMode == flying){
 			if(moveBy > 0){
@@ -277,8 +277,8 @@ void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
 					updatePosition(moveBy, 0.0f, 0.0f);
 
 					//Rotate the ship to the right
-					if(getRotation().Z > -maxZRotate){
-						updateRotation(0, 0, -rotSpeed * deltaTime);
+					if(getRotation().Z > -maxZRotate * fabs(force)){
+						updateRotation(0, 0, rotSpeed * -force * deltaTime);
 						rotateBackY = false;
 					}
 				}
@@ -289,8 +289,8 @@ void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
 					updatePosition(moveBy, 0.0f, 0.0f);
 
 					//Rotate the ship to the left
-					if(getRotation().Z < maxZRotate){
-						updateRotation(0, 0, rotSpeed * deltaTime);
+					if(getRotation().Z < maxZRotate * fabs(force)){
+						updateRotation(0, 0, rotSpeed * -force * deltaTime);
 						rotateBackY = false;
 					}
 				}
