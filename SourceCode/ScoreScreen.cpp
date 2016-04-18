@@ -69,14 +69,14 @@ bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
 	}
 
 	//Chane the letter when the player presses up or down
-	if(receiver->isKeyPressed(irr::KEY_KEY_W)){
+	if(receiver->isUpPressed()){
 		//Get the letter in each box, increment, then set
 		irr::core::stringw letter = playerName[currentLetter]->getText();
 		if(letter[0] < 'Z'){
 			letter[0]++;
 			playerName[currentLetter]->setText(letter.c_str());
 		}
-	} else if(receiver->isKeyPressed(irr::KEY_KEY_S)){
+	} else if(receiver->isDownPressed()){
 		//Get the letter in each box, de-increment, then set
 		irr::core::stringw letter = playerName[currentLetter]->getText();
 		if(letter[0] > 'A'){
@@ -86,12 +86,12 @@ bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
 	}
 
 	//Move to the next letter when the player presses right
-	if(receiver->isKeyPressed(irr::KEY_KEY_D)){
+	if(receiver->isRightPressed()){
 		if(currentLetter + 1 < NAME_LENGTH){
 			playerName[currentLetter]->setVisible(true);
 			currentLetter++;
 		}
-	} else if(receiver->isKeyPressed(irr::KEY_KEY_A)){
+	} else if(receiver->isLeftPressed()){
 		if(currentLetter > 0){
 			playerName[currentLetter]->setVisible(true);
 			currentLetter--;
