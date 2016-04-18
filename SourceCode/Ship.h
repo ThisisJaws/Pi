@@ -89,10 +89,8 @@ protected:
     //moves the ship forward
     void move(const float &speed, const irr::f32 &deltaTime);
 	//Moves the ship up or down
-	virtual void moveUp(const float &speed, const irr::f32 &deltaTime);
-	virtual void moveDown(const float &speed, const irr::f32 &deltaTime);
-	virtual void turnLeft(const float &speed, const irr::f32 &deltaTime);
-	virtual void turnRight(const float &speed, const irr::f32 &deltaTime);
+	virtual void moveVertical(const float &speed, const float &force, const irr::f32 &deltaTime);
+	virtual void moveHorizontal(const float &speed, const float &force, const irr::f32 &deltaTime);
 };
 
 #endif	/* _SHIP_H */

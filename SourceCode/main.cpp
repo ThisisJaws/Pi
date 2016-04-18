@@ -20,7 +20,7 @@
 
 //Defines for version number
 #define CURRENT_VERSION_MAJOR	 1
-#define CURRENT_VERSION_MINOR	 0
+#define CURRENT_VERSION_MINOR	 1
 #define CURRENT_VERSION_REVISION 0
 
 /*
@@ -29,9 +29,16 @@
 int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
+<<<<<<< HEAD
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
     //Force all textures to be 16 bit
+
+	//Activate the joystick
+	irr::core::array<irr::SJoystickInfo> joystickInfo;
+	device->activateJoysticks(joystickInfo);
+
+	//Force all textures to be 16 bit
 	device->getVideoDriver()->setTextureCreationFlag(irr::video::ETCF_ALWAYS_16_BIT, true);
 	
 	//Create the class that will handle the actual playing of the game
@@ -97,7 +104,7 @@ int main(int argc, char** argv) {
     //The main loop of the entire program
     while(device->run()){
         //If escape is pressed at any point, break the loop
-        if(receiver.isKeyDown(irr::KEY_ESCAPE)){
+        if(receiver.isExitPressed()){
 			//Make sure to clean up the game if it has been loaded
 			if(game.isLoaded()){
 				gameState = startMenu;
@@ -112,7 +119,7 @@ int main(int argc, char** argv) {
 
 		//Wait on the start menu
 		if(gameState == startMenu){
-			if(receiver.isKeyPressed(irr::KEY_RETURN)){
+			if(receiver.isStartPressed()){
 				gameState = gamePlaying;
 				menuImage->setVisible(false);
 				menuMusic.stop();
@@ -138,7 +145,7 @@ int main(int argc, char** argv) {
 			//Wait for the player to enter their name
 			if(score.waitForPlayerName(&receiver, device->getTimer()->getRealTime())){
 				//When the player is done entering their name, wait to go back to start
-				if(receiver.isKeyPressed(irr::KEY_RETURN)){
+				if(receiver.isStartPressed()){
 					gameState = startMenu;
 					menuMusic.play();
 					menuImage->setVisible(true);
