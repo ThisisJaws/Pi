@@ -58,7 +58,7 @@ bool ScoreScreen::waitForPlayerName(EventReceiver *receiver, irr::u32 realTime){
 	then = now;
 
 	//If the player presses enter then add the name to the score
-	if(receiver->isKeyPressed(irr::KEY_RETURN)){
+	if(receiver->isStartPressed()){
 		irr::core::stringc name;
 		for(int i = 0; i < NAME_LENGTH; i++){
 			name += playerName[i]->getText();
