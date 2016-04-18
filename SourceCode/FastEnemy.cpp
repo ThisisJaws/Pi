@@ -41,7 +41,7 @@ void FastEnemy::combatManouver(irr::f32 deltaTime){
 void FastEnemy::combatStageA(irr::f32 deltaTime){
 	//Moves the ship to the top of the screen while shooting
 	if(getPosition().Y > -45){
-		moveDown(turnSpeed, deltaTime);
+		moveVertical(turnSpeed, -1, deltaTime);
 	} else{
 		currentStage = stageB;
 	}
@@ -50,7 +50,7 @@ void FastEnemy::combatStageA(irr::f32 deltaTime){
 void FastEnemy::combatStageB(irr::f32 deltaTime){
 	//Moves the ship to the bottom of the screen while shooting
 	if(getPosition().Y < 45){
-		moveUp(turnSpeed, deltaTime);
+		moveVertical(turnSpeed, 1, deltaTime);
 	} else{
 		currentStage = stageA;
 	}
