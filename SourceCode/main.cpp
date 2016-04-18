@@ -29,7 +29,7 @@
 int main(int argc, char** argv) {
     //Create the device to handle input
     EventReceiver receiver;
-<<<<<<< HEAD
+
     //Create the device the run the game
     irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OGLES1, irr::core::dimension2d<irr::u32>(800, 600), 16, false, true, false, &receiver);
     //Force all textures to be 16 bit
