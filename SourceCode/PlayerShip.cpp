@@ -155,7 +155,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
 		moveVertical(turnSpeed * eReceiver->getVerticalValue(), deltaTime);
 		moveHorizontal(turnSpeed * eReceiver->getHorizontalValue(), deltaTime);
 
-
 		//Perform camera updates after movement
 		updateCamera(camera);
 
@@ -249,9 +248,9 @@ void PlayerShip::moveVertical(const float &speed, const irr::f32 &deltaTime){
 		}
 	} else if(moveBy < 0){
 		//If player is still inside the screen
-		if(getPosition().Y - moveBy > constrainBottom){
+		if(getPosition().Y + moveBy > constrainBottom){
 			//Move the ship down
-			updatePosition(0.0f, -moveBy, 0.0f);
+			updatePosition(0.0f, moveBy, 0.0f);
 
 			//Rotate the ship down
 			if(getRotation().X < maxXRotate){
@@ -267,8 +266,8 @@ void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
 		//Get the doistance to move by
 		float moveBy = speed * deltaTime;
 
-		if(moveBy > 0){
-			if(currentMode == flying){
+		if(currentMode == flying){
+			if(moveBy > 0){
 				//Get the doistance to move by
 				float moveBy = speed * deltaTime;
 
@@ -283,20 +282,20 @@ void PlayerShip::moveHorizontal(const float &speed, const irr::f32 &deltaTime){
 						rotateBackY = false;
 					}
 				}
-			}
-		} else if(moveBy < 0){
-			//If player is still inside the screen
-			if(getPosition().X - moveBy > -constrainX){
-				//Move the ship to the left
-				updatePosition(-moveBy, 0.0f, 0.0f);
+			} else if(moveBy < 0){
+				//If player is still inside the screen
+				if(getPosition().X + moveBy > -constrainX){
+					//Move the ship to the left
+					updatePosition(moveBy, 0.0f, 0.0f);
 
-				//Rotate the ship to the left
-				if(getRotation().Z < maxZRotate){
-					updateRotation(0, 0, rotSpeed * deltaTime);
-					rotateBackY = false;
+					//Rotate the ship to the left
+					if(getRotation().Z < maxZRotate){
+						updateRotation(0, 0, rotSpeed * deltaTime);
+						rotateBackY = false;
+					}
 				}
 			}
-		}
+		} 
 	}
 }
 
