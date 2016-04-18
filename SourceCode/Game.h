@@ -14,7 +14,6 @@
 #include <cstdlib>
 #include <list>
 #include <vector>
-#include <memory>
 
 #include "EventReceiver.h"
 #include "PlayerShip.h"
@@ -81,8 +80,10 @@ private:
 	float stageWaitTime;
 	float stageWaitPast;
 
-	//Array of music associated with each world
-	std::vector<std::unique_ptr<sf::Music>> levelMusic; //sf::Music cant be copied so you have to do this weird pointer stuff
+	//Vector of music associated with each world
+	std::vector<sf::Music*> levelMusic;
+	//Pointer to the space track
+	sf::Music *spaceMusic;
 
     //FUNCTIONS
 public:

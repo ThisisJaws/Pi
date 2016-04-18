@@ -24,7 +24,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	stageWaitPast = 0;
 
 	//init the vector to correct length
-	levelMusic = std::vector<std::unique_ptr<sf::Music>>(NUM_WORLDS);
+	levelMusic = std::vector<sf::Music*>(NUM_WORLDS);
 
 	loaded = false;
 }
@@ -53,20 +53,25 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	//Load the first world
 	worlds[currentWorld]->loadPhase1(device);
 
-	//Add the audio tracks for each world (messiest code ever)
-	auto ptr1 = std::make_unique<sf::Music>();
-	ptr1->openFromFile("Assets/Sound/Levels/Lava Level/Lava Level.wav");
-	levelMusic[0] = std::move(ptr1);
-	auto ptr2 = std::make_unique<sf::Music>();
-	ptr2->openFromFile("Assets/Sound/Levels/Ice Level/Ice Level.wav");
-	levelMusic[1] = std::move(ptr2);
-	auto ptr3 = std::make_unique<sf::Music>();
-	ptr3->openFromFile("Assets/Sound/Levels/Forest Level/Forest Level.wav");
-	levelMusic[2] = std::move(ptr3);
+	//Load in the music
+	levelMusic[0] = new sf::Music();
+	levelMusic[0]->openFromFile("Assets/Sound/Levels/Lava Level/Lava Level.wav");
+	levelMusic[1] = new sf::Music();
+	levelMusic[1]->openFromFile("Assets/Sound/Levels/Ice Level/Ice Level.wav");
+	levelMusic[2] = new sf::Music();
+	levelMusic[2]->openFromFile("Assets/Sound/Levels/Forest Level/Forest Level.wav");
+
+	//Set up each track
 	for(int i = 0; i < NUM_WORLDS; i++){
 		levelMusic[i]->setVolume(75);
 		levelMusic[i]->setLoop(true);
 	}
+
+	//Load in the space music
+	spaceMusic = new sf::Music();
+	spaceMusic->openFromFile("Assets/Sound/Levels/Space/Space Level.wav");
+	spaceMusic->setVolume(75);
+	spaceMusic->setLoop(true);
 
 	//Play the current track
 	levelMusic[currentWorld]->play();
@@ -167,12 +172,15 @@ bool Game::play(){
 
 			//Then check what needs to be loaded
 			if(!worlds[currentWorld]->isPhase2Loaded()){
-				//Load phase 2
+				//Reset the objects
 				resetObjectsToUpdate(true);
 				//Change mode first because of speed increase
 				g_player->changeMode();
 				//Load in the next phase
 				worlds[currentWorld]->loadPhase2(device);
+				//Change to the correct music track
+				levelMusic[currentWorld]->stop();
+				spaceMusic->play();
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate(true);
@@ -181,7 +189,7 @@ bool Game::play(){
 				//Turn off the dome
 				skyDome[currentWorld]->setVisible(false);
 				//Stop the current track
-				levelMusic[currentWorld]->stop();
+				spaceMusic->stop();
 				//Increment the cuurent world tracker
 				currentWorld++;
 				//Check if there are any more worlds to load
@@ -233,6 +241,12 @@ void Game::cleanUp(){
 		//And remove the skydomes
 		skyDome[i]->remove();
 	}
+
+	//Delete the music from memory
+	for(int i = 0; i < NUM_WORLDS; i++){
+		delete levelMusic[i];
+	}
+	delete spaceMusic;
 
 	//Game is no longer loaded
 	loaded = false;

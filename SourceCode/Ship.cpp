@@ -54,6 +54,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Set the audio
 	shootBuff.loadFromFile("Assets/Sound/Shooting/Shooting.wav");
 	shootSFX.setBuffer(shootBuff);
+	shootSFX.setVolume(50);
 
 	damageBuff.loadFromFile("Assets/Sound/Taking Damage/Damage.wav");
 	damageSFX.setBuffer(damageBuff);

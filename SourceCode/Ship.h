@@ -10,7 +10,7 @@
 
 #include "Object.h"
 #include "Bullet.h"
-#include "SFML\Audio.hpp"
+#include "SFML/Audio.hpp"
 
 class Ship : public Object{
     //VARIABLES
