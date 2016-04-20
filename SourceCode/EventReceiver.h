@@ -42,6 +42,9 @@ private:
 	//Movement axis for the joystick from -1 - 1
 	float xValue;
 	float yValue;
+
+	//Keep track of the stick
+	bool joyStickEventHappened;
     
     //FUNCTIONS
 public:
