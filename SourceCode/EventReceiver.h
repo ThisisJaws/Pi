@@ -44,7 +44,8 @@ private:
 	float yValue;
 
 	//Keep track of the stick
-	bool joyStickEventHappened;
+	bool joyStickEventHappenedX;
+	bool joyStickEventHappenedY;
     
     //FUNCTIONS
 public:

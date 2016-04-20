@@ -6,7 +6,8 @@ EventReceiver::EventReceiver(){
         keyState[i] = Up;
     }
 
-	joyStickEventHappened = false;
+	joyStickEventHappenedX = false;
+	joyStickEventHappenedY = false;
 }
 
 //called by the engine if an event has happened
@@ -41,17 +42,17 @@ bool EventReceiver::OnEvent(const irr::SEvent &event) {
 		xValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
 		if(fabs(xValue) < DEAD_ZONE){
 			xValue = 0;
-			joyStickEventHappened = false;
+			joyStickEventHappenedX = false;
 		} else{
-			joyStickEventHappened = true;
+			joyStickEventHappenedX = true;
 		}
 		
 		yValue = (float)joystickState.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
 		if(fabs(yValue) < DEAD_ZONE){
 			yValue = 0;
-			joyStickEventHappened = false;
+			joyStickEventHappenedY = false;
 		} else{
-			joyStickEventHappened = true;
+			joyStickEventHappenedY = true;
 		}
 
 		//Set the stick direction
@@ -219,7 +220,7 @@ float EventReceiver::getHorizontalValue(){
 	} else if(isKeyDown(irr::KEY_KEY_D)){
 		return 1;
 	} else{
-		if(joyStickEventHappened){
+		if(joyStickEventHappenedX){
 			return xValue;
 		} else{
 			return 0;
@@ -233,7 +234,7 @@ float EventReceiver::getVerticalValue(){
 	} else if(isKeyDown(irr::KEY_KEY_S)){
 		return -1;
 	} else{
-		if(joyStickEventHappened){
+		if(joyStickEventHappenedY){
 			return yValue;
 		} else{
 			return 0;
