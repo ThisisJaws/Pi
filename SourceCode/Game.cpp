@@ -93,6 +93,9 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
 	skyDome[currentWorld]->setVisible(true);
 
+	spaceDome = smgr->addSkyDomeSceneNode(driver->getTexture("Assets/SkyDomes/rsz_162.jpg"));
+	spaceDome->setVisible(false);
+
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/TheFont.xml"));
     //Set the colour
@@ -194,13 +197,15 @@ bool Game::play(){
 				worlds[currentWorld]->loadPhase2(device);
 				//Change to the correct music track
 				spaceMusic->play();
+				skyDome[currentWorld]->setVisible(false);
+				spaceDome->setVisible(true);
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate(true);
 				//Reset the world
 				worlds[currentWorld]->reset();
 				//Turn off the dome
-				skyDome[currentWorld]->setVisible(false);
+				spaceDome->setVisible(false);
 				//Stop the current track
 				spaceMusic->stop();
 				//Increment the cuurent world tracker
@@ -254,6 +259,7 @@ void Game::cleanUp(){
 		//And remove the skydomes
 		skyDome[i]->remove();
 	}
+	spaceDome->remove();
 
 	//Delete the music from memory
 	for(int i = 0; i < NUM_WORLDS; i++){

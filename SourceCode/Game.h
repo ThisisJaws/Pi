@@ -60,6 +60,7 @@ private:
 
     //All the sky domes we will need
     irr::scene::ISceneNode *skyDome[NUM_WORLDS];
+	irr::scene::ISceneNode *spaceDome;
 
     //GUI Static text of the Infomation
     irr::gui::IGUIStaticText *scoreText;
