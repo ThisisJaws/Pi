@@ -13,6 +13,9 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference)
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
+
+	//Always lit
+	getSceneNode()->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 }
 
 Bullet::~Bullet(){
