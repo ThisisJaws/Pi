@@ -37,7 +37,7 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 		} else if(spawnOrder[i] == 3){
 			StrongEnemy *strongEnemy = new StrongEnemy(player, irr::core::vector3df(x, y, z), device->getTimer(), smgr);
 		}
-		z += 1500;
+		z += 1500 + (player->getMovementSpeed() * 2.7f);
 	}
 
 	//Add some gems to the level
@@ -46,7 +46,7 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 		y = (irr::f32)(rand() % 40 + 1) - 20;
 		BronzeGem *gem = new BronzeGem(irr::core::vector3df(x, y, z), smgr);
 		gem->moveAwayFromPlayer(true, Game::getCurrentPlayer()->getMovementSpeed());
-		z += rand() % 3000 + 1000;
+		z += (rand() % 3000 + 1000) + (player->getMovementSpeed() * 2.7f);
 	}
 
 	//Add some asteroids to the level
@@ -55,7 +55,7 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 		y = (irr::f32)(rand() % 70 + 1) - 35;
 		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager(), true);
 		Obsticle->moveAwayFromPlayer(true, Game::getCurrentPlayer()->getMovementSpeed());
-		z += rand() % 500 + 500;
+		z += (rand() % 500 + 500) + (player->getMovementSpeed() * 2.7f);
 	}
 
 	phase2Loaded = true;
