@@ -57,7 +57,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	cannonPositions.push_back(irr::core::vector3df(-1, 1.5f, -1.5f));
 
 	//Create the prticle effect for phase 2
-	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
+	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false);
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = phase2AmbientParticles->createBoxEmitter(irr::core::aabbox3df(-50, -150, -150, 50, 150, 150), irr::core::vector3df(0), 10U, 20U);
 	//Give the emitter to the system
@@ -146,6 +146,11 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//work out the distance traveled
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
+
+	//Update the phase 2 particles
+	if(phase2AmbientParticles->isVisible()){
+		phase2AmbientParticles->setPosition(irr::core::vector3df(phase2AmbientParticles->getPosition().X, phase2AmbientParticles->getPosition().Y, getPosition().Z));
+	}
 
 	//Check if the player can control the ship
 	if(!controlsLocked){
