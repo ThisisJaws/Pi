@@ -6,6 +6,28 @@ IceWorld::IceWorld(PlayerShip *player)
 	: World(player,  "Assets/LevelAssets/LevelMaps/IceWorld.stm", "Assets/SkyDomes/IceSkydome_small.jpg"){
 }
 
+void IceWorld::loadPhase1(irr::IrrlichtDevice *device){
+	World::loadPhase1(device);
+
+	//Set up the snow particles
+	snowParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false);
+	irr::scene::IParticleEmitter* em = snowParticleSystem->createBoxEmitter(irr::core::aabbox3df(500, -100, -200, 700, 800, 20000), 
+																			irr::core::vector3df(-0.25, -0.1f, 0), 
+																			1000U, 1500U, 
+																			irr::video::SColor(255, 255, 255, 255), 
+																			irr::video::SColor(255, 255, 255, 255),
+																			4000U, 6000U, 0, 
+																			irr::core::dimension2df(5, 5), 
+																			irr::core::dimension2df(15, 15));
+	snowParticleSystem->setEmitter(em);
+	em->drop();
+	snowParticleSystem->setPosition(irr::core::vector3df(0, 0, 100));
+	snowParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	snowParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
+	snowParticleSystem->setMaterialTexture(0, device->getSceneManager()->getVideoDriver()->getTexture("Assets/Particles/rsz_snow.png"));
+	snowParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+}
+
 void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 	//Unload the terrains from the scene
 	clearTerrains();
@@ -59,4 +81,13 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 	}
 
 	phase2Loaded = true;
+}
+
+void IceWorld::clearTerrains(){
+	World::clearTerrains();
+
+	//Clear the particle system
+	if(snowParticleSystem){
+		snowParticleSystem->remove();
+	}
 }
