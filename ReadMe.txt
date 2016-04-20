@@ -13,7 +13,7 @@ To run and play Space Trip on a Pi machine do the following:
 		sudo apt-get install gcc-4.7
 	--SFML for the audio module
 		sudo apt-get install libsfml-dev
-2. Navigate to the irrlicht source directory (Irrlicht_1.9.0_OGL-ES/source/Irrlicht) and type 'make' to compile the engine
+2. Navigate to the irrlicht source directory (Irrlicht_1.9.0_OGL-ES/source/Irrlicht) and type 'make NDEBUG=1' to compile the engine
 3. Navigate to the SourceCode folder and type 'make' to compile the game
 4. Inside the SourceCode folder type ./linuxBuild to run the game
 
