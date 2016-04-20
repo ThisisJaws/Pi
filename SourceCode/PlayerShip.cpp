@@ -57,7 +57,7 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	cannonPositions.push_back(irr::core::vector3df(-1, 1.5f, -1.5f));
 
 	//Create the prticle effect for phase 2
-	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false, getSceneNode());
+	phase2AmbientParticles = sceneManagerReference->addParticleSystemSceneNode(false);
 	//Set up an emitter for the system to use
 	irr::scene::IParticleEmitter* em = phase2AmbientParticles->createBoxEmitter(irr::core::aabbox3df(-50, -150, -150, 50, 150, 150), irr::core::vector3df(0), 10U, 20U);
 	//Give the emitter to the system
@@ -73,6 +73,10 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	phase2AmbientParticles->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	//Turn off visibility
 	phase2AmbientParticles->setVisible(false);
+
+	//Assign the buffer
+	noAmmoBuff.loadFromFile("Assets/Sound/No Ammo/noammo.wav");
+	noAmmoSFX.setBuffer(noAmmoBuff);
 }
 
 PlayerShip::~PlayerShip(){
@@ -142,14 +146,20 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//work out the distance traveled
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
-	//Move the light along the Z axis
-	lightPos.Z = getPosition().Z - zOffSet;
-	light->setPosition(lightPos);
+
+	//Update the phase 2 particles
+	if(phase2AmbientParticles->isVisible()){
+		phase2AmbientParticles->setPosition(irr::core::vector3df(phase2AmbientParticles->getPosition().X, phase2AmbientParticles->getPosition().Y, getPosition().Z));
+	}
 
 	//Check if the player can control the ship
 	if(!controlsLocked){
 		//increase score by the difference above
 		increaseScore(difference);
+
+		//Move the light along the Z axis
+		lightPos.Z = getPosition().Z - zOffSet;
+		light->setPosition(lightPos);
 
 		//Move horizontally or vertically depending on input
 		moveVertical(turnSpeed, eReceiver->getVerticalValue(), deltaTime);
@@ -166,6 +176,9 @@ void PlayerShip::tick(irr::f32 deltaTime){
 					//if the ship successfully shot then take away 1 ammo
 					ammo--;
 				}
+			} else{
+				//Play the sound letting the user know that they are out of ammo
+				noAmmoSFX.play();
 			}
 		}
 	}

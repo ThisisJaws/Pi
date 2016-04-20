@@ -20,11 +20,13 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	previousScore = 0;
 	currentWorld = 0;
 
-	stageWaitTime = 5;
+	stageWaitTime = 3.5f;
 	stageWaitPast = 0;
 
 	//init the vector to correct length
 	levelMusic = std::vector<sf::Music*>(NUM_WORLDS);
+
+	played = false;
 
 	loaded = false;
 }
@@ -73,6 +75,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	spaceMusic->setVolume(75);
 	spaceMusic->setLoop(true);
 
+	//Load in the stage complete
+	stageCompleteBuff.loadFromFile("Assets/Sound/Phase Transition/Phase transition.wav");
+	stageCompleteSFX.setBuffer(stageCompleteBuff);
+
 	//Play the current track
 	levelMusic[currentWorld]->play();
 
@@ -87,6 +93,9 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 
 	skyDome[currentWorld]->setVisible(true);
 
+	spaceDome = smgr->addSkyDomeSceneNode(driver->getTexture("Assets/SkyDomes/rsz_162.jpg"));
+	spaceDome->setVisible(false);
+
     //Set the font
 	guienv->getSkin()->setFont(guienv->getFont("Assets/TheFont.xml"));
     //Set the colour
@@ -95,7 +104,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
 	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(630, 40, 800, 70));
     ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(630, 10, 800, 40));
-    FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 550, 300, 580));
 	stageCompleteText = guienv->addStaticText(L"STAGE COMPLETE", irr::core::rect<irr::s32>(260, 250, 700, 300));
 	stageCompleteText->setVisible(false);
 
@@ -144,11 +152,6 @@ bool Game::play(){
     ammoCount += g_player->getAmmo();
     ammoText->setText(ammoCount.c_str());
 
-    //Update FPS text
-    irr::core::stringw FPSCount(L"FPS: ");
-    FPSCount += driver->getFPS();;
-    FPSText->setText(FPSCount.c_str());
-
     //If the player loses, end this current game
 	if(g_player->playerLost()){
 		previousScore = g_player->getScore();
@@ -163,12 +166,20 @@ bool Game::play(){
 		g_player->setControlLock(true);
 		stageCompleteText->setVisible(true);
 
+		//If it is phase 1 that is complete play the phase sound
+		if(worlds[currentWorld]->isPhase1Complete() && !worlds[currentWorld]->isPhase2Complete() && !played){
+			stageCompleteSFX.play();
+			levelMusic[currentWorld]->stop();
+			played = true;
+		}
+
 		//Wait for a period of time
 		if(stageWaitPast > stageWaitTime){
 			//Reset the variables
 			stageWaitPast = 0;
 			g_player->setControlLock(false);
 			stageCompleteText->setVisible(false);
+			played = false;
 
 			//Then check what needs to be loaded
 			if(!worlds[currentWorld]->isPhase2Loaded()){
@@ -179,15 +190,16 @@ bool Game::play(){
 				//Load in the next phase
 				worlds[currentWorld]->loadPhase2(device);
 				//Change to the correct music track
-				levelMusic[currentWorld]->stop();
 				spaceMusic->play();
+				skyDome[currentWorld]->setVisible(false);
+				spaceDome->setVisible(true);
 			} else{
 				//Reset the objects
 				resetObjectsToUpdate(true);
 				//Reset the world
 				worlds[currentWorld]->reset();
 				//Turn off the dome
-				skyDome[currentWorld]->setVisible(false);
+				spaceDome->setVisible(false);
 				//Stop the current track
 				spaceMusic->stop();
 				//Increment the cuurent world tracker
@@ -230,7 +242,6 @@ void Game::cleanUp(){
     scoreText->remove();
 	livesText->remove();
     ammoText->remove();
-    FPSText->remove();
 
 	//Loop through all worlds
 	for(int i = 0; i < NUM_WORLDS; i++){
@@ -241,6 +252,7 @@ void Game::cleanUp(){
 		//And remove the skydomes
 		skyDome[i]->remove();
 	}
+	spaceDome->remove();
 
 	//Delete the music from memory
 	for(int i = 0; i < NUM_WORLDS; i++){

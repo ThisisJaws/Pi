@@ -17,7 +17,7 @@ EnemyShip::EnemyShip(PlayerShip *player, irr::core::vector3df spawnPosition, int
 	combatStartTime = 0.5f;
 
     rewardScore = true;
-    scoreAmount = 1000;
+    scoreAmount = 5000;
 
 	//Make the turn speed constant
 	turnSpeed = 100;

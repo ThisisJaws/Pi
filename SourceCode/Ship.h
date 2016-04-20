@@ -38,10 +38,12 @@ protected:
 	irr::scene::IParticleSystemSceneNode *engineParticleSystem;
 
 	//Sound effects
-	sf::SoundBuffer shootBuff;
+	static sf::SoundBuffer *shootBuff;
 	sf::Sound shootSFX;
-	sf::SoundBuffer damageBuff;
+	static sf::SoundBuffer *damageBuff;
 	sf::Sound damageSFX;
+	//This static counter lets the program know when to free the above pointers
+	static int bufferCount;
 
 private:
     //if the ship is able to fire

@@ -1,27 +1,32 @@
 #include "Ship.h"
 
-Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
-        : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
+//Static membes
+sf::SoundBuffer *Ship::shootBuff;
+sf::SoundBuffer *Ship::damageBuff;
+int Ship::bufferCount = 0;
 
-    //set up variables
-    moveSpeed = movementSpeed;
-    turnSpeed = moveSpeed / 2;
-    //direction of movement +1 is along the positive Z axis, -1 is along the negative Z axis
-    moveDir = movementDirection;
+Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed, const int &firingSpeed, const int &movementDirection, irr::ITimer *timerReference, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference, const irr::s32 &objectTypeID, const unsigned short &startingLives)
+	: Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, objectTypeID, true){
+
+	//set up variables
+	moveSpeed = movementSpeed;
+	turnSpeed = moveSpeed / 2;
+	//direction of movement +1 is along the positive Z axis, -1 is along the negative Z axis
+	moveDir = movementDirection;
 
 	//Set the rotation variables
 	maxZRotate = 45;
 	maxXRotate = 35;
 	rotSpeed = 175;
 
-    //time between each bullet firing 1000 = 1 second
-    timeBetweenShots = firingSpeed;
-    timeSinceLastFire = 0;
-    canFire = true;
-    this->timerReference = timerReference;
+	//time between each bullet firing 1000 = 1 second
+	timeBetweenShots = firingSpeed;
+	timeSinceLastFire = 0;
+	canFire = true;
+	this->timerReference = timerReference;
 
-    //reference the pointers
-    smgr = sceneManagerReference;
+	//reference the pointers
+	smgr = sceneManagerReference;
 
 	//Set the lives
 	lives = startingLives;
@@ -52,18 +57,38 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5, -7));
 
 	//Set the audio
-	shootBuff.loadFromFile("Assets/Sound/Shooting/Shooting.wav");
-	shootSFX.setBuffer(shootBuff);
+	if(shootBuff == NULL){
+		shootBuff = new sf::SoundBuffer();
+		shootBuff->loadFromFile("Assets/Sound/Shooting/Shooting.wav");
+	}
+	shootSFX.setBuffer(*shootBuff);
 	shootSFX.setVolume(50);
 
-	damageBuff.loadFromFile("Assets/Sound/Taking Damage/Damage.wav");
-	damageSFX.setBuffer(damageBuff);
+	if(damageBuff == NULL){
+		damageBuff = new sf::SoundBuffer();
+		damageBuff->loadFromFile("Assets/Sound/Taking Damage/Damage.wav");
+	}
+	damageSFX.setBuffer(*damageBuff);
+
+	//Increase the counter
+	bufferCount++;
 }
 
 Ship::~Ship(){
     //clear references (these get deleted properly elsewhere)
     smgr = 0;
     bullet = 0;
+
+	//Lower the counter
+	bufferCount--;
+	
+	if(bufferCount <= 0){
+		//Delete the buffers
+		delete shootBuff;
+		shootBuff = 0;
+		delete damageBuff;
+		damageBuff = 0;
+	}
 }
 
 void Ship::tick(irr::f32 deltaTime){

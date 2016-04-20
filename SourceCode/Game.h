@@ -60,12 +60,12 @@ private:
 
     //All the sky domes we will need
     irr::scene::ISceneNode *skyDome[NUM_WORLDS];
+	irr::scene::ISceneNode *spaceDome;
 
     //GUI Static text of the Infomation
     irr::gui::IGUIStaticText *scoreText;
 	irr::gui::IGUIStaticText *livesText;
     irr::gui::IGUIStaticText *ammoText;
-    irr::gui::IGUIStaticText *FPSText;
 	irr::gui::IGUIStaticText *stageCompleteText;
 
     //Handle frame independent movement
@@ -84,6 +84,12 @@ private:
 	std::vector<sf::Music*> levelMusic;
 	//Pointer to the space track
 	sf::Music *spaceMusic;
+
+	//Sound effect for completing a stage
+	sf::SoundBuffer stageCompleteBuff;
+	sf::Sound stageCompleteSFX;
+	//Check if the sound has been played
+	bool played;
 
     //FUNCTIONS
 public:
