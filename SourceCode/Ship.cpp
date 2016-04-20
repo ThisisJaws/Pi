@@ -85,7 +85,9 @@ Ship::~Ship(){
 	if(bufferCount <= 0){
 		//Delete the buffers
 		delete shootBuff;
+		shootBuff = 0;
 		delete damageBuff;
+		damageBuff = 0;
 	}
 }
 
