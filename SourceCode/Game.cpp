@@ -26,6 +26,8 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	//init the vector to correct length
 	levelMusic = std::vector<sf::Music*>(NUM_WORLDS);
 
+	played = false;
+
 	loaded = false;
 }
 
@@ -74,7 +76,7 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	spaceMusic->setLoop(true);
 
 	//Load in the stage complete
-	stageCompleteBuff.loadFromFile("Assets/Sound/Phase Transition/Phase transition speed up.wav");
+	stageCompleteBuff.loadFromFile("Assets/Sound/Phase Transition/Phase transition.wav");
 	stageCompleteSFX.setBuffer(stageCompleteBuff);
 
 	//Play the current track
@@ -168,9 +170,10 @@ bool Game::play(){
 		stageCompleteText->setVisible(true);
 
 		//If it is phase 1 that is complete play the phase sound
-		if(worlds[currentWorld]->isPhase1Complete()){
+		if(worlds[currentWorld]->isPhase1Complete() && !worlds[currentWorld]->isPhase2Complete() && !played){
 			stageCompleteSFX.play();
 			levelMusic[currentWorld]->stop();
+			played = true;
 		}
 
 		//Wait for a period of time
@@ -179,6 +182,7 @@ bool Game::play(){
 			stageWaitPast = 0;
 			g_player->setControlLock(false);
 			stageCompleteText->setVisible(false);
+			played = false;
 
 			//Then check what needs to be loaded
 			if(!worlds[currentWorld]->isPhase2Loaded()){

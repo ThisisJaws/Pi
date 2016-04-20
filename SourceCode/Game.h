@@ -88,6 +88,8 @@ private:
 	//Sound effect for completing a stage
 	sf::SoundBuffer stageCompleteBuff;
 	sf::Sound stageCompleteSFX;
+	//Check if the sound has been played
+	bool played;
 
     //FUNCTIONS
 public:
