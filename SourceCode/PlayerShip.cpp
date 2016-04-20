@@ -176,8 +176,6 @@ void PlayerShip::tick(irr::f32 deltaTime){
 			}
 		}
 	}
-
-	
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
