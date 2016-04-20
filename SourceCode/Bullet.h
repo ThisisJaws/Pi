@@ -19,9 +19,11 @@ private:
 	//The type ID of the target
 	int targetTypeID;
     
-    //how long the bullet is 'alive' for before despawning
-    float currentLifeTime;
-    float maxLifeTime;
+	//How far for the bullet to travel before despawning
+	float travelDistance;
+	float currentDistance;
+	irr::core::vector3df startPosition;
+	float shipSpeed;
     
     //when fired a direction is given and stored
     irr::core::vector3df direction;

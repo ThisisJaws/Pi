@@ -9,8 +9,7 @@ Bullet::Bullet(irr::scene::ISceneManager *sceneManagerReference)
     fired = false;
     moveSpeed = 250.0f;
     
-    currentLifeTime = 0;
-    maxLifeTime = 1.3f;
+	travelDistance = 140;
     
     //store the variables so it can be spawned later
     sceneMRef = sceneManagerReference;
@@ -27,10 +26,12 @@ void Bullet::tick(irr::f32 deltaTime){
         //move the bullet forward
         updatePosition(direction * (moveSpeed * deltaTime));
         
-        //update lifetime
-        currentLifeTime += deltaTime;
-        
-        if(currentLifeTime >= maxLifeTime){
+		//Update the distance
+		startPosition += direction * (shipSpeed * deltaTime);
+		currentDistance = startPosition.getDistanceFrom(getPosition());
+
+		//Check the distance
+        if(currentDistance >= travelDistance){
             markForDelete();
         }
         
@@ -59,10 +60,9 @@ void Bullet::fire(const irr::core::vector3df &firePos, const irr::core::vector3d
 		//Increase the forward speed by a consistent amount
 		moveSpeed += 100;
 	} else{
-		//Increase the backwards speed by a percentage amount
-		float onePercent = moveSpeed / 100;
-		int percentDecrease = 150;
-		moveSpeed -= onePercent * percentDecrease;
+		//Decrease the movespeed (100 is what percentage of movespeed)
+		float percent = (100 / moveSpeed) * 100;
+		moveSpeed -= 100 - (percent / 2);
 	}
 
     //Scale the bullets up a little bit
@@ -72,11 +72,17 @@ void Bullet::fire(const irr::core::vector3df &firePos, const irr::core::vector3d
 		changeRotation(irr::core::vector3df(0, 180, 0));
 	}
     
-    //set the direction
-    this->direction = direction;
+    //Set the direction
+    this->direction = irr::core::vector3df(0, 0, 1);
     
     //set the position
     changePosition(firePos);
+
+	//Set the start variables for checking distance
+	startPosition = firePos;
+
+	//Remeber the ship's speed
+	this->shipSpeed = shipSpeed;
     
     //bullet has now been fired
     fired = true;
