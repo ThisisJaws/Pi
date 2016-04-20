@@ -20,7 +20,7 @@ Game::Game(irr::IrrlichtDevice *device, EventReceiver *receiver){
 	previousScore = 0;
 	currentWorld = 0;
 
-	stageWaitTime = 5;
+	stageWaitTime = 3.5f;
 	stageWaitPast = 0;
 
 	//init the vector to correct length
