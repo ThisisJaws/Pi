@@ -78,7 +78,7 @@ public:
 	irr::io::path getSkydomeLocation();
 
 	//Resets the world
-	void reset();
+	virtual void reset();
 
 protected:
 	//Loads in the map file for the level
