@@ -73,7 +73,7 @@ void IceWorld::loadPhase2(irr::IrrlichtDevice * device){
 
 	//Add some asteroids to the level
 	x = 0; y = 0; z = 2000;
-	for(int i = 0; i < 16; i++){
+	for(int i = 0; i < 14; i++){
 		y = (irr::f32)(rand() % 70 + 1) - 35;
 		StaticObject *Obsticle = new StaticObject(irr::core::vector3df(x, y, z), "Assets/Environment/Asteroid/Asteroid1.obj", "Assets/Environment/Asteroid/AsteroidTextureA.jpg", device->getSceneManager(), true);
 		Obsticle->moveAwayFromPlayer(true, Game::getCurrentPlayer()->getMovementSpeed());
