@@ -85,6 +85,10 @@ private:
 	//Pointer to the space track
 	sf::Music *spaceMusic;
 
+	//Sound effect for completing a stage
+	sf::SoundBuffer stageCompleteBuff;
+	sf::Sound stageCompleteSFX;
+
     //FUNCTIONS
 public:
     //constructor

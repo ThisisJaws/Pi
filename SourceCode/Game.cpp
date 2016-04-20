@@ -73,6 +73,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	spaceMusic->setVolume(75);
 	spaceMusic->setLoop(true);
 
+	//Load in the stage complete
+	stageCompleteBuff.loadFromFile("Assets/Sound/Phase Transition/Phase transition speed up.wav");
+	stageCompleteSFX.setBuffer(stageCompleteBuff);
+
 	//Play the current track
 	levelMusic[currentWorld]->play();
 
@@ -163,6 +167,12 @@ bool Game::play(){
 		g_player->setControlLock(true);
 		stageCompleteText->setVisible(true);
 
+		//If it is phase 1 that is complete play the phase sound
+		if(worlds[currentWorld]->isPhase1Complete()){
+			stageCompleteSFX.play();
+			levelMusic[currentWorld]->stop();
+		}
+
 		//Wait for a period of time
 		if(stageWaitPast > stageWaitTime){
 			//Reset the variables
@@ -179,7 +189,6 @@ bool Game::play(){
 				//Load in the next phase
 				worlds[currentWorld]->loadPhase2(device);
 				//Change to the correct music track
-				levelMusic[currentWorld]->stop();
 				spaceMusic->play();
 			} else{
 				//Reset the objects
