@@ -66,7 +66,6 @@ private:
     irr::gui::IGUIStaticText *scoreText;
 	irr::gui::IGUIStaticText *livesText;
     irr::gui::IGUIStaticText *ammoText;
-    irr::gui::IGUIStaticText *FPSText;
 	irr::gui::IGUIStaticText *stageCompleteText;
 
     //Handle frame independent movement

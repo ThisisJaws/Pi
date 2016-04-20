@@ -104,7 +104,6 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
     scoreText = guienv->addStaticText(L"Score set up", irr::core::rect<irr::s32>(10, 10, 500, 40));
 	livesText = guienv->addStaticText(L"Lives set up", irr::core::rect<irr::s32>(630, 40, 800, 70));
     ammoText = guienv->addStaticText(L"Ammo set up", irr::core::rect<irr::s32>(630, 10, 800, 40));
-    FPSText = guienv->addStaticText(L"FPS Set up", irr::core::rect<irr::s32>(10, 550, 300, 580));
 	stageCompleteText = guienv->addStaticText(L"STAGE COMPLETE", irr::core::rect<irr::s32>(260, 250, 700, 300));
 	stageCompleteText->setVisible(false);
 
@@ -152,11 +151,6 @@ bool Game::play(){
     irr::core::stringw ammoCount(L"Ammo: ");
     ammoCount += g_player->getAmmo();
     ammoText->setText(ammoCount.c_str());
-
-    //Update FPS text
-    irr::core::stringw FPSCount(L"FPS: ");
-    FPSCount += driver->getFPS();;
-    FPSText->setText(FPSCount.c_str());
 
     //If the player loses, end this current game
 	if(g_player->playerLost()){
@@ -248,7 +242,6 @@ void Game::cleanUp(){
     scoreText->remove();
 	livesText->remove();
     ammoText->remove();
-    FPSText->remove();
 
 	//Loop through all worlds
 	for(int i = 0; i < NUM_WORLDS; i++){
