@@ -146,14 +146,15 @@ void PlayerShip::tick(irr::f32 deltaTime){
 	//work out the distance traveled
 	unsigned int newZ = (unsigned int)getPosition().Z;
 	unsigned int difference = newZ - oldZ;
-	//Move the light along the Z axis
-	lightPos.Z = getPosition().Z - zOffSet;
-	light->setPosition(lightPos);
 
 	//Check if the player can control the ship
 	if(!controlsLocked){
 		//increase score by the difference above
 		increaseScore(difference);
+
+		//Move the light along the Z axis
+		lightPos.Z = getPosition().Z - zOffSet;
+		light->setPosition(lightPos);
 
 		//Move horizontally or vertically depending on input
 		moveVertical(turnSpeed, eReceiver->getVerticalValue(), deltaTime);
