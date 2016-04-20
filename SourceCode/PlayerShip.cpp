@@ -73,6 +73,10 @@ PlayerShip::PlayerShip(EventReceiver *eReceiver, irr::ITimer *timerReference, ir
 	phase2AmbientParticles->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	//Turn off visibility
 	phase2AmbientParticles->setVisible(false);
+
+	//Assign the buffer
+	noAmmoBuff.loadFromFile("Assets/Sound/No Ammo/noammo.wav");
+	noAmmoSFX.setBuffer(noAmmoBuff);
 }
 
 PlayerShip::~PlayerShip(){
@@ -166,9 +170,14 @@ void PlayerShip::tick(irr::f32 deltaTime){
 					//if the ship successfully shot then take away 1 ammo
 					ammo--;
 				}
+			} else{
+				//Play the sound letting the user know that they are out of ammo
+				noAmmoSFX.play();
 			}
 		}
 	}
+
+	
 }
 
 void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){

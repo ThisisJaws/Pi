@@ -73,6 +73,10 @@ private:
 	//The particle system for phase 2
 	irr::scene::IParticleSystemSceneNode *phase2AmbientParticles;
 
+	//Sound effect for out of ammo
+	sf::SoundBuffer noAmmoBuff;
+	sf::Sound noAmmoSFX;
+
     //FUNCTIONS
 public:
     //constructor
