@@ -13,7 +13,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	ashParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false);
 	irr::scene::IParticleEmitter* em = ashParticleSystem->createBoxEmitter(irr::core::aabbox3df(-700, 100, -200, 700, 800, 20000),
 																			irr::core::vector3df(0, -0.1f, 0),
-																			50U, 100U,
+																			30U, 70U,
 																			irr::video::SColor(255, 255, 255, 255),
 																			irr::video::SColor(255, 255, 255, 255),
 																			8000U, 8000U, 0,

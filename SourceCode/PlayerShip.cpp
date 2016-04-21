@@ -192,6 +192,10 @@ void PlayerShip::addCamera(irr::scene::ICameraSceneNode* camera){
     this->camera = camera;
 }
 
+irr::scene::ICameraSceneNode *PlayerShip::getCamera(){
+	return camera;
+}
+
 unsigned short PlayerShip::getAmmo(){
     return ammo;
 }

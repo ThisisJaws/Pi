@@ -88,6 +88,8 @@ public:
 
     //adds a camera so it can be updated and controlled
     void addCamera(irr::scene::ICameraSceneNode *camera);
+	//Get the camera the player is using
+	irr::scene::ICameraSceneNode *getCamera();
 
     //getters and setters for ammo and score
     unsigned short getAmmo();
