@@ -10,9 +10,9 @@ void JungleWorld::loadPhase1(irr::IrrlichtDevice *device){
 	World::loadPhase1(device);
 
 	//Set up the snow particles
-	leafParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false, Game::getCurrentPlayer()->getSceneNode());
-	irr::scene::IParticleEmitter* em = leafParticleSystem->createBoxEmitter(irr::core::aabbox3df(-20, -20, -100, 20, 0, 0),
-																		   irr::core::vector3df(-0.1f, 0.2f, 0),
+	leafParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false, Game::getCurrentPlayer()->getCamera());
+	irr::scene::IParticleEmitter* em = leafParticleSystem->createBoxEmitter(irr::core::aabbox3df(-50, -30, 0, 50, -20, 50),
+																		   irr::core::vector3df(-0.1f, 0.1f, 0),
 																		   20U, 25U,
 																		   irr::video::SColor(255, 255, 255, 255),
 																		   irr::video::SColor(255, 255, 255, 255),
