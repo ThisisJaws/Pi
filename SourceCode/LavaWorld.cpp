@@ -11,12 +11,12 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 
 	//Set up the snow particles
 	ashParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false);
-	irr::scene::IParticleEmitter* em = ashParticleSystem->createBoxEmitter(irr::core::aabbox3df(-700, 600, -200, 700, 800, 20000),
+	irr::scene::IParticleEmitter* em = ashParticleSystem->createBoxEmitter(irr::core::aabbox3df(-700, 100, -200, 700, 800, 20000),
 																			irr::core::vector3df(0, -0.1f, 0),
-																			500U, 700U,
-																			irr::video::SColor(255, 0, 0, 0),
-																			irr::video::SColor(255, 0, 0, 0),
-																			4000U, 6000U, 0,
+																			50U, 100U,
+																			irr::video::SColor(255, 255, 255, 255),
+																			irr::video::SColor(255, 255, 255, 255),
+																			8000U, 8000U, 0,
 																			irr::core::dimension2df(5, 5),
 																			irr::core::dimension2df(15, 15));
 	ashParticleSystem->setEmitter(em);
@@ -24,7 +24,7 @@ void LavaWorld::loadPhase1(irr::IrrlichtDevice *device){
 	ashParticleSystem->setPosition(irr::core::vector3df(0, 0, 100));
 	ashParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	ashParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-	ashParticleSystem->setMaterialTexture(0, device->getSceneManager()->getVideoDriver()->getTexture("Assets/Particles/rsz_snow.png"));
+	ashParticleSystem->setMaterialTexture(0, device->getSceneManager()->getVideoDriver()->getTexture("Assets/Particles/rsz_ash.png"));
 	ashParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 }
 
