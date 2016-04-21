@@ -22,8 +22,9 @@ class Collectible : public Object{
 	 irr::scene::IParticleSystemSceneNode *ps;
 
 	 //pick up sound effect
-	 sf::SoundBuffer pickupBuff;
+	 static sf::SoundBuffer *pickupBuff;
 	 sf::Sound pickUp;
+	 static int buffCount;
 
 	 //So it doesnt activate more than once
 	 bool actionPefromed;
@@ -32,6 +33,8 @@ class Collectible : public Object{
 public:
     //constructor
     Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference);
+	//destructor
+	virtual ~Collectible();
 
     //tick function will check for collision
     virtual void tick(irr::f32 deltaTime) override;

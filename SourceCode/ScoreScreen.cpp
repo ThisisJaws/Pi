@@ -18,7 +18,7 @@ ScoreScreen::ScoreScreen(irr::gui::IGUIEnvironment *guiEnvironment){
 	//Init all gui elements
 	finalScore = guienv->addStaticText(L"Final Score: ERROR", irr::core::rect<irr::s32>(0, 10, 800, 40));
 	finalScore->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
-	instructionsText = guienv->addStaticText(L"Enter your name below then press ENTER", irr::core::rect<irr::s32>(0, 50, 800, 80));
+	instructionsText = guienv->addStaticText(L"Enter your name below then press ACCEPT", irr::core::rect<irr::s32>(0, 50, 800, 80));
 	instructionsText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
 
 	int x = 336, y = 100;

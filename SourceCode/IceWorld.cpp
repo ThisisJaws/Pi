@@ -13,7 +13,7 @@ void IceWorld::loadPhase1(irr::IrrlichtDevice *device){
 	snowParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false);
 	irr::scene::IParticleEmitter* em = snowParticleSystem->createBoxEmitter(irr::core::aabbox3df(500, -100, -200, 700, 800, 20000), 
 																			irr::core::vector3df(-0.25, -0.1f, 0), 
-																			1000U, 1500U, 
+																			400U, 800U, 
 																			irr::video::SColor(255, 255, 255, 255), 
 																			irr::video::SColor(255, 255, 255, 255),
 																			4000U, 6000U, 0, 

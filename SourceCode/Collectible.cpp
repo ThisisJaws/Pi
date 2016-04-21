@@ -2,6 +2,9 @@
 
 #include "Game.h"
 
+//static members
+sf::SoundBuffer *Collectible::pickupBuff;
+int Collectible::buffCount = 0;
 Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path &pathOfMesh, const irr::io::path &pathOfTexture, irr::scene::ISceneManager *sceneManagerReference)
         : Object(pathOfMesh, pathOfTexture, sceneManagerReference, spawnPosition, TYPE_COLLECTABLE, true){
 
@@ -33,10 +36,22 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 	ps->setParticlesAreGlobal(false);
 
 	//Set the aduio
-	pickupBuff.loadFromFile("Assets/Sound/PickUp/Pickup.wav");
-	pickUp.setBuffer(pickupBuff);
+	if(pickupBuff == NULL){
+		pickupBuff = new sf::SoundBuffer();
+		pickupBuff->loadFromFile("Assets/Sound/PickUp/Pickup.wav");
+	}
+	pickUp.setBuffer(*pickupBuff);
+	buffCount++;
 
 	actionPefromed = false;
+}
+
+Collectible::~Collectible(){
+	buffCount--;
+	if(buffCount <= 0){
+		delete pickupBuff;
+		pickupBuff = 0;
+	}
 }
 
 void Collectible::tick(irr::f32 deltaTime){
