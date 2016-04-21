@@ -6,7 +6,29 @@ JungleWorld::JungleWorld(PlayerShip *player)
 	: World(player, "Assets/LevelAssets/LevelMaps/JungleWorld.stm", "Assets/SkyDomes/JungleSkydome_small.jpg"){
 }
 
-void JungleWorld::loadPhase2(irr::IrrlichtDevice * device){
+void JungleWorld::loadPhase1(irr::IrrlichtDevice *device){
+	World::loadPhase1(device);
+
+	//Set up the snow particles
+	leafParticleSystem = device->getSceneManager()->addParticleSystemSceneNode(false, Game::getCurrentPlayer()->getSceneNode());
+	irr::scene::IParticleEmitter* em = leafParticleSystem->createBoxEmitter(irr::core::aabbox3df(-20, -20, -100, 20, 0, 0),
+																		   irr::core::vector3df(-0.1f, 0.2f, 0),
+																		   20U, 25U,
+																		   irr::video::SColor(255, 255, 255, 255),
+																		   irr::video::SColor(255, 255, 255, 255),
+																		   200U, 200U, 180,
+																		   irr::core::dimension2df(3, 3),
+																		   irr::core::dimension2df(5, 5));
+	leafParticleSystem->setEmitter(em);
+	em->drop();
+	leafParticleSystem->setPosition(irr::core::vector3df(0, 0, 100));
+	leafParticleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	leafParticleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
+	leafParticleSystem->setMaterialTexture(0, device->getSceneManager()->getVideoDriver()->getTexture("Assets/Particles/Leaf3Mid.png"));
+	leafParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+}
+
+void JungleWorld::loadPhase2(irr::IrrlichtDevice *device){
 	//Unload the terrains from the scene
 	clearTerrains();
 
@@ -59,4 +81,14 @@ void JungleWorld::loadPhase2(irr::IrrlichtDevice * device){
 	}
 
 	phase2Loaded = true;
+}
+
+
+void JungleWorld::clearTerrains(){
+	World::clearTerrains();
+
+	//Clear the particle system
+	if(leafParticleSystem != NULL){
+		//leafParticleSystem->remove();
+	}
 }
