@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
         }
 
         //Begin the scene
-        device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 100, 101, 140));
+        device->getVideoDriver()->beginScene(true, true, irr::video::SColor(255, 0, 0, 0));
 
 		//Wait on the start menu
 		if(gameState == startMenu){
