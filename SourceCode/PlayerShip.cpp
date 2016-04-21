@@ -135,6 +135,10 @@ void PlayerShip::tick(irr::f32 deltaTime){
 					Collectible *collectible = dynamic_cast<Collectible *>(collidedObject);
 					collectible->activate(this);
 					break;
+
+				case TYPE_SHIP_ENEMY:
+					dealDamage();
+					break;
 			}
 		}
 	}
