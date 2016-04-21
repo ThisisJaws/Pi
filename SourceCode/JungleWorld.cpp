@@ -89,6 +89,6 @@ void JungleWorld::clearTerrains(){
 
 	//Clear the particle system
 	if(leafParticleSystem != NULL){
-		//leafParticleSystem->remove();
+		leafParticleSystem->remove();
 	}
 }
