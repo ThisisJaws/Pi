@@ -6,8 +6,19 @@ EventReceiver::EventReceiver(){
         keyState[i] = Up;
     }
 
+	//Default to false
 	joyStickEventHappenedX = false;
 	joyStickEventHappenedY = false;
+
+	//Make sure eahc button key starts up
+	for(irr::u32 i = 0; i < 3; i++){
+		buttonKey[i] = Up;
+	}
+
+	//Make sure the stick directions all start Up
+	for(irr::u32 i = 0; i < 4; i++){
+		stickDirection[i] = Up;
+	}
 }
 
 //called by the engine if an event has happened
