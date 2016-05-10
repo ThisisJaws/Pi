@@ -10,7 +10,7 @@ To run and play Space Trip on a Pi machine do the following:
 		sudo apt-get install libgles1-mesa-dev
 		sudo apt-get install libgles2-mesa-dev
 	--Used to compile the game
-		sudo apt-get install gcc-4.7
+		sudo apt-get install g++-4.7
 	--SFML for the audio module
 		sudo apt-get install libsfml-dev
 2. Navigate to the irrlicht source directory (Irrlicht_1.9.0_OGL-ES/source/Irrlicht) and type 'make NDEBUG=1' to compile the engine
