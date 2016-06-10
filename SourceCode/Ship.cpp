@@ -56,11 +56,12 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 	//Move the system back slighty to line up with the engine
 	engineParticleSystem->setPosition(irr::core::vector3df(0, 0.5, -7));
 
-	//Set the audio
+	//Set up the audio buffers if this is the first ship that is loaded
 	if(shootBuff == NULL){
 		shootBuff = new sf::SoundBuffer();
 		shootBuff->loadFromFile("Assets/Sound/Shooting/Shooting.wav");
 	}
+	//Set the buffer for the sound variable
 	shootSFX.setBuffer(*shootBuff);
 	shootSFX.setVolume(50);
 
@@ -68,6 +69,7 @@ Ship::Ship(const irr::core::vector3df &spawnPosition, const float &movementSpeed
 		damageBuff = new sf::SoundBuffer();
 		damageBuff->loadFromFile("Assets/Sound/Taking Damage/Damage.wav");
 	}
+	//Set the buffer for the sound variable
 	damageSFX.setBuffer(*damageBuff);
 
 	//Increase the counter
@@ -79,11 +81,11 @@ Ship::~Ship(){
     smgr = 0;
     bullet = 0;
 
-	//Lower the counter
+	//Lower the counter of objects using the buffer
 	bufferCount--;
 	
 	if(bufferCount <= 0){
-		//Delete the buffers
+		//Delete the buffers if this is the last ship to be cleared from memory
 		delete shootBuff;
 		shootBuff = 0;
 		delete damageBuff;
