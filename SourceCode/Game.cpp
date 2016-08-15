@@ -83,13 +83,10 @@ void Game::load(irr::scene::ICameraSceneNode *camera){
 	levelMusic[currentWorld]->play();
 
     //Load in the sky dome's for the worlds
-	skyDome[0] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[0]->getSkydomeLocation()));
-	skyDome[1] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[1]->getSkydomeLocation()));
-	skyDome[2] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[2]->getSkydomeLocation()));
-	
-	skyDome[0]->setVisible(false);
-	skyDome[1]->setVisible(false);
-	skyDome[2]->setVisible(false);
+	for(int i = 0; i < NUM_WORLDS; i++){
+		skyDome[i] = smgr->addSkyDomeSceneNode(driver->getTexture(worlds[i]->getSkydomeLocation()));
+		skyDome[i]->setVisible(false);
+	}
 
 	skyDome[currentWorld]->setVisible(true);
 
@@ -173,7 +170,7 @@ bool Game::play(){
 			played = true;
 		}
 
-		//Wait for a period of time
+		//Wait for a period of time after the stage is completed
 		if(stageWaitPast > stageWaitTime){
 			//Reset the variables
 			stageWaitPast = 0;

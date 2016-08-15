@@ -35,11 +35,12 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 
 	ps->setParticlesAreGlobal(false);
 
-	//Set the aduio
+	//Set the aduio if this is the first collectible loaded
 	if(pickupBuff == NULL){
 		pickupBuff = new sf::SoundBuffer();
 		pickupBuff->loadFromFile("Assets/Sound/PickUp/Pickup.wav");
 	}
+	//Set the buffer for the sound variable
 	pickUp.setBuffer(*pickupBuff);
 	buffCount++;
 
@@ -47,8 +48,11 @@ Collectible::Collectible(irr::core::vector3df spawnPosition, const irr::io::path
 }
 
 Collectible::~Collectible(){
+	//Lower the count of objects using the buffer
 	buffCount--;
+
 	if(buffCount <= 0){
+		//Delete the buffer if this is the last collectible in memory
 		delete pickupBuff;
 		pickupBuff = 0;
 	}
