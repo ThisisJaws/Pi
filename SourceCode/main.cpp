@@ -1,10 +1,3 @@
-/*
- * Check the make file for the executable target name/directory
- * click build then run the executable from there
- *
- * make sure to include all source files in the makefile!!!
- */
-
 #include "irrlicht.h"
 #include "SFML/Audio.hpp"
 
